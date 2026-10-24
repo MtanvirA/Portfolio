@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Data;
 using Portfolio.Options;
@@ -11,12 +12,26 @@ builder.Services.Configure<PortfolioOptions>(
 builder.Services.Configure<ContactNotificationOptions>(
     builder.Configuration.GetSection(ContactNotificationOptions.SectionName));
 
-// Core MVC services
+// Reverse proxy header forwarding (crucial for accurate client IP rate-limiting and HTTPS detection on Render, MonsterASP, Cloudflare, Fly.io, etc.)
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
+// Core MVC and Antiforgery services with secure cookie policy
 builder.Services.AddControllersWithViews();
 builder.Services.AddAntiforgery(options =>
 {
     options.HeaderName = "X-CSRF-TOKEN";
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.Cookie.HttpOnly = true;
 });
+
+// Production Health Checks endpoint
+builder.Services.AddHealthChecks();
 
 // Application services registration
 builder.Services.AddSingleton<IRateLimitService, MemoryRateLimitService>();
@@ -44,6 +59,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 var app = builder.Build();
+
+// Forwarded headers from reverse proxies (Render, MonsterASP, Cloudflare, etc.)
+app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
@@ -75,6 +93,9 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+
+// Health check endpoint for container orchestrators and cloud host monitors
+app.MapHealthChecks("/health");
 
 app.MapControllerRoute(
     name: "project-detail",

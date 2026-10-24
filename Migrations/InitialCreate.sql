@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
     `MigrationId` varchar(150) NOT NULL,
     `ProductVersion` varchar(32) NOT NULL,
     PRIMARY KEY (`MigrationId`)
@@ -14,6 +14,9 @@ CREATE TABLE `contact_messages` (
     `CreatedAtUtc` datetime(6) NOT NULL,
     `Status` varchar(50) NOT NULL DEFAULT 'New',
     `ClientIpHash` varchar(100) NULL,
+    `NotificationStatus` varchar(50) NOT NULL DEFAULT 'NotConfigured',
+    `NotificationSentAtUtc` datetime(6) NULL,
+    `NotificationError` varchar(500) NULL,
     PRIMARY KEY (`Id`)
 );
 
@@ -23,6 +26,9 @@ CREATE INDEX `ix_contact_messages_email` ON `contact_messages` (`Email`);
 
 INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
 VALUES ('20261024075230_InitialCreate', '10.0.12');
+
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20261024091943_AddNotificationTracking', '10.0.12');
 
 COMMIT;
 

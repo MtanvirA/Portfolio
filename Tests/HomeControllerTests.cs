@@ -149,7 +149,7 @@ public class HomeControllerTests
         var redirect = Assert.IsType<RedirectToActionResult>(result);
         Assert.Equal("Index", redirect.ActionName);
         Assert.Equal("contact", redirect.Fragment);
-        Assert.Equal("Message delivered.", controller.TempData["FeedbackMessage"]);
+        Assert.Equal("Message received.", controller.TempData["FeedbackMessage"]);
         Assert.Equal(true, controller.TempData["FeedbackSuccess"]);
     }
 
@@ -160,7 +160,7 @@ public class HomeControllerTests
             return Task.FromResult(new ContactSubmissionResult
             {
                 Success = true,
-                Message = "Message delivered."
+                Message = "Message received."
             });
         }
     }

@@ -445,7 +445,7 @@ After setting your Google App Password in User Secrets:
 
 ---
 
-## 7. Replacing the Profile Placeholder
+## 8. Replacing the Profile Placeholder
 
 A predictable placeholder location is configured:
 * Placeholder image: `wwwroot/images/profile-placeholder.svg` (editorial monogram visual)
@@ -457,47 +457,98 @@ To use your real photograph:
 
 ---
 
-## 8. Deployment & Free-First Hosting Guide
+## 9. Deployment & Free-First Hosting Guide
 
-### Recommended Free-First Strategy
-To host this ASP.NET Core MVC application with MySQL without incurring surprise costs:
+### Hosting Options Analysis (ASP.NET Core + MySQL)
 
-1. **Option A: MonsterASP.NET (Free ASP.NET Core + MySQL)**
-   * Provides free ASP.NET Core and free MySQL database hosting with zero credit card required.
-   * Direct Git push or FTP deployment support.
+| Platform | Tier / Pricing | Sleep / Spin-Down Behavior | MySQL Strategy | Assessment for Portfolio |
+| :--- | :--- | :--- | :--- | :--- |
+| **MonsterASP.NET** | Free (No CC required) | **Always-On** (No spin-down sleep) | Built-in MySQL (1GB storage included) | **Recommended for Quick Start**: Native ASP.NET Core (.NET 10) + MySQL on Windows/IIS, instant setup, no cold starts. |
+| **Render.com** | Free Web Service ($0/mo) | **Spins down after 15m** (50-60s cold start) | External free MySQL required (Aiven or TiDB Cloud) | Viable for containerized deployments via `Dockerfile`. Sleep latency affects first visitor. Ephemeral container storage requires external DB. |
+| **Fly.io** | Pay-as-you-go / Free allowances | Scalable to 0 or always-on | External free MySQL (Aiven / TiDB) | Low latency, global Anycast edge routing. Good for Dockerized deployments. |
+| **Azure for Students** | Free $100 credit (PSTU email) | Always-On (B1 Linux App Service) | Azure Database for MySQL Flexible Server | Enterprise-grade, free for 12 months with verified university student email. |
 
-2. **Option B: Render.com / Fly.io + Managed Free MySQL**
-   * Containerize the ASP.NET Core app using a lightweight `mcr.microsoft.com/dotnet/aspnet:10.0-noble` Dockerfile.
-   * Connect to a free-tier external MySQL service (e.g. **Aiven**, **TiDB Cloud**, or **Railway** free trial).
+### Health Check Endpoint
+The application exposes a lightweight health check endpoint at:
+```http
+GET /health
+```
+Returns `200 OK` (`Healthy`). Designed for cloud orchestrators (Docker, Kubernetes, Render, AWS ECS, Azure) to verify liveness without triggering database queries or rendering MVC views.
 
-3. **Option C: Microsoft Azure for Students (If eligible)**
-   * Students with a university email (`@pstu.ac.bd`) can activate $100 annual cloud credits without a credit card.
-   * Free B1 Linux App Service + Azure Database for MySQL Flexible Server.
+### Reverse Proxy & Reverse Header Forwarding
+The application is pre-configured with `ForwardedHeadersOptions` (`ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto`). When hosted behind reverse proxies (Cloudflare, Render, Fly.io, MonsterASP, Nginx, or Traefik):
+* The visitor's real client IP is preserved for sliding-window rate limiting.
+* HTTPS redirection properly detects the proxy's TLS termination headers (`X-Forwarded-Proto: https`), preventing infinite 307 redirect loops.
 
 ### Required Environment Variables on Production Host
-* `ASPNETCORE_ENVIRONMENT`: `Production`
-* `ConnectionStrings__DefaultConnection`: `Server=...;Port=3306;Database=...;Uid=...;Pwd=...;`
-* `Portfolio__WhatsAppNumber`: Bangladesh phone number in international format (`+8801718...`)
-* `Portfolio__CanonicalDomain`: `https://mtanviranjum.tech`
+Set the following environment variables in your hosting provider's dashboard or container environment:
+
+```bash
+# ASP.NET Core Runtime
+ASPNETCORE_ENVIRONMENT=Production
+ASPNETCORE_HTTP_PORTS=8080
+
+# Relational Database Connection (scoped portfolio_user account)
+ConnectionStrings__DefaultConnection="Server=YOUR_PROD_HOST;Port=3306;Database=portfolio_db;Uid=portfolio_user;Pwd=YOUR_PROD_PASSWORD;CharSet=utf8mb4;"
+
+# Gmail SMTP Email Notifications
+ContactNotification__Enabled=true
+ContactNotification__SmtpHost=smtp.gmail.com
+ContactNotification__SmtpPort=587
+ContactNotification__UseTls=true
+ContactNotification__Username=tanviranjum201@gmail.com
+ContactNotification__Password=<YOUR_16_CHAR_GOOGLE_APP_PASSWORD>
+ContactNotification__SenderEmail=tanviranjum201@gmail.com
+ContactNotification__SenderName="Tanvir Anjum Portfolio"
+ContactNotification__OwnerEmail=tanviranjum201@gmail.com
+
+# Portfolio Configuration
+Portfolio__CanonicalDomain=https://mtanviranjum.tech
+Portfolio__WhatsAppNumber=+8801718659824
+```
+
+### Production Database Migration Strategy
+When deploying to a fresh production MySQL instance:
+1. **Option A (EF Core CLI)**:
+   ```powershell
+   dotnet ef database update --connection "Server=YOUR_HOST;Port=3306;Database=portfolio_db;Uid=portfolio_user;Pwd=...;"
+   ```
+2. **Option B (Idempotent SQL Script)**:
+   Generate and execute the complete idempotent migration script:
+   ```powershell
+   dotnet ef migrations script --idempotent --configuration Release -o Migrations/ProductionMigration.sql
+   ```
+   Apply `Migrations/ProductionMigration.sql` using MySQL Workbench or CLI against `portfolio_db`.
+
+### Pre-Deployment Checklist
+- [ ] Production MySQL database created with `utf8mb4` character set.
+- [ ] Dedicated `portfolio_user` account created with privileges granted strictly on `portfolio_db.*`.
+- [ ] Database migrations applied (`contact_messages` table with notification columns).
+- [ ] Google Account 2-Step Verification enabled and 16-character App Password generated.
+- [ ] Environment variables configured in hosting provider dashboard.
+- [ ] Domain DNS records (`A` / `CNAME` for `mtanviranjum.tech`) pointed to production host IP/CNAME.
+- [ ] Verified `/health` endpoint returns `200 OK`.
+- [ ] Verified SSL/TLS certificate is active on `https://mtanviranjum.tech`.
+- [ ] Executed synthetic contact submission test and confirmed email receipt in Gmail.
 
 ---
 
-## 9. Security & Secret Hygiene Architecture
+## 10. Security & Secret Hygiene Architecture
 
 * **Least-Privilege Database Access**: The web application never connects as MySQL `root`. It runs under a dedicated `portfolio_user` account with permissions strictly scoped to `portfolio_db.*` (`SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER`), preventing access to system catalogs or sibling project databases.
 * **Secret Hygiene & Isolation**:
-  * **Local Development**: Connection strings are managed exclusively via `.NET User Secrets` (`dotnet user-secrets`), stored outside the repository tree in `%APPDATA%\Microsoft\UserSecrets\`.
-  * **Production / CI**: Connection strings are provided via environment variables (`ConnectionStrings__DefaultConnection`).
+  * **Local Development**: Connection strings and SMTP passwords are managed exclusively via `.NET User Secrets` (`dotnet user-secrets`), stored outside the repository tree in `%APPDATA%\Microsoft\UserSecrets\`.
+  * **Production / CI**: Credentials are provided via environment variables (`ConnectionStrings__DefaultConnection`, `ContactNotification__Password`).
   * **Zero Committed Secrets**: Tracked settings files (`appsettings.json`, `appsettings.Example.json`) contain only non-sensitive placeholder templates.
 * **Credential Rotation Protocol**: If local development credentials are ever exposed, passwords can be rotated immediately in MySQL via `ALTER USER 'portfolio_user'@'localhost' IDENTIFIED BY '...'` and re-set locally in `.NET User Secrets` without altering project source code.
 * **Honeypot Trap**: Forms include a hidden `HoneyPotCompany` field that trips automated bots while remaining invisible to humans.
 * **Rate Limiting**: In-memory sliding-window limiter restricts submissions to 3 attempts per 5 minutes per IP address.
-* **Antiforgery Protection**: Server verifies ASP.NET Core antiforgery tokens on all POST requests (`[ValidateAntiForgeryToken]`).
+* **Antiforgery Protection**: Server verifies ASP.NET Core antiforgery tokens on all POST requests (`[ValidateAntiForgeryToken]`) with `SameSite=Strict`, `HttpOnly`, and `SecurePolicy=SameAsRequest`.
 * **Security Headers**: Middleware enforces `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, and `Permissions-Policy`.
 * **Zero Public Data Leakage**: No public API endpoint exists to read or list saved contact messages. Database exceptions are caught and sanitized to prevent stack trace or credential leaks.
 
 ---
 
-## 10. License
+## 11. License
 
 This project is licensed under the [MIT License](LICENSE).

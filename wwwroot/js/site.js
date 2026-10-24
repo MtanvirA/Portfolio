@@ -202,7 +202,7 @@ function initContactForm() {
                     feedbackBox.innerHTML = `
                         <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         <div>
-                            <p class="font-semibold text-emerald-200">Message Delivered</p>
+                            <p class="font-semibold text-emerald-200">Message Received</p>
                             <p class="mt-1">${escapeHtml(result.message)}</p>
                         </div>
                     `;
