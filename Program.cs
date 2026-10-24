@@ -12,12 +12,47 @@ builder.Services.Configure<PortfolioOptions>(
 builder.Services.Configure<ContactNotificationOptions>(
     builder.Configuration.GetSection(ContactNotificationOptions.SectionName));
 
-// Reverse proxy header forwarding (crucial for accurate client IP rate-limiting and HTTPS detection on Render, MonsterASP, Cloudflare, Fly.io, etc.)
+// Reverse proxy forwarded headers configuration with strict trust boundaries.
+// By default, ASP.NET Core safely trusts loopback proxies (127.0.0.1 and ::1).
+// Do NOT clear KnownProxies or KnownIPNetworks globally, as doing so allows untrusted
+// clients to trivially spoof X-Forwarded-For headers and bypass IP rate limiting.
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-    options.KnownIPNetworks.Clear();
-    options.KnownProxies.Clear();
+
+    var forwardLimit = builder.Configuration.GetValue<int?>("ForwardedHeaders:ForwardLimit");
+    if (forwardLimit.HasValue)
+    {
+        options.ForwardLimit = forwardLimit.Value;
+    }
+
+    // Bind additional trusted proxies from configuration or environment variables
+    // (e.g., ForwardedHeaders__KnownProxies__0="10.0.0.1")
+    var configuredProxies = builder.Configuration.GetSection("ForwardedHeaders:KnownProxies").Get<string[]>();
+    if (configuredProxies != null)
+    {
+        foreach (var proxy in configuredProxies)
+        {
+            if (System.Net.IPAddress.TryParse(proxy, out var ip))
+            {
+                options.KnownProxies.Add(ip);
+            }
+        }
+    }
+
+    // Bind additional trusted CIDR networks from configuration or environment variables
+    // (e.g., ForwardedHeaders__KnownNetworks__0="10.0.0.0/8")
+    var configuredNetworks = builder.Configuration.GetSection("ForwardedHeaders:KnownNetworks").Get<string[]>();
+    if (configuredNetworks != null)
+    {
+        foreach (var network in configuredNetworks)
+        {
+            if (System.Net.IPNetwork.TryParse(network, out var ipNetwork))
+            {
+                options.KnownIPNetworks.Add(ipNetwork);
+            }
+        }
+    }
 });
 
 // Core MVC and Antiforgery services with secure cookie policy

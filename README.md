@@ -4,7 +4,7 @@
 [![ASP.NET Core MVC](https://img.shields.io/badge/ASP.NET%20Core-MVC-512BD4?logo=dotnet)](https://learn.microsoft.com/aspnet/core)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![MySQL 8.0](https://img.shields.io/badge/Database-MySQL%208.0-4479A1?logo=mysql)](https://www.mysql.com/)
-[![Tests](https://img.shields.io/badge/Tests-52%20Passed-22c55e)](#automated-testing)
+[![Tests](https://img.shields.io/badge/Tests-56%20Passed-22c55e)](#automated-testing)
 
 A personal portfolio web application engineered for **Md. Tanvir Anjum**, an undergraduate Computer Science and Engineering student at **Patuakhali Science and Technology University (PSTU)**, Bangladesh.
 
@@ -281,7 +281,8 @@ When a user submits the contact form, the request flows through the following pi
 dotnet test
 ```
 
-### Test Suite Summary (52 Passing Tests):
+### Test Suite Summary (56 Passing Tests):
+* `ForwardedHeadersTests` (4 tests): Validated trusted proxy security boundary, rejection of spoofed `X-Forwarded-For` and `X-Forwarded-Proto` from untrusted direct connections, acceptance from loopback and configured CIDR networks, and rate limiter protection against header spoofing.
 * `ContactNotificationTests` (10 tests): Validated DB persistence ordering (notification not called on DB error), notification dispatched after persistence, graceful operation when provider is disabled/unconfigured, provider failure tolerance (saved message preserved, visitor still receives success), HTML encoding injection prevention, zero credential leakage in client responses, Gmail SMTP defaults, and configuration binding.
 * `ContactValidationTests` (7 tests): Validated `[Required]`, `[EmailAddress]`, and string length constraints.
 * `ContactServiceTests` (8 tests): Tested EF Core persistence, string normalization (lowercase emails, trimmed inputs), honeypot anti-spam trap detection, rate-limit blocking, and safe database exception handling without credential leaks.
@@ -461,12 +462,15 @@ To use your real photograph:
 
 ### Hosting Options Analysis (ASP.NET Core + MySQL)
 
-| Platform | Tier / Pricing | Sleep / Spin-Down Behavior | MySQL Strategy | Assessment for Portfolio |
-| :--- | :--- | :--- | :--- | :--- |
-| **MonsterASP.NET** | Free (No CC required) | **Always-On** (No spin-down sleep) | Built-in MySQL (1GB storage included) | **Recommended for Quick Start**: Native ASP.NET Core (.NET 10) + MySQL on Windows/IIS, instant setup, no cold starts. |
-| **Render.com** | Free Web Service ($0/mo) | **Spins down after 15m** (50-60s cold start) | External free MySQL required (Aiven or TiDB Cloud) | Viable for containerized deployments via `Dockerfile`. Sleep latency affects first visitor. Ephemeral container storage requires external DB. |
-| **Fly.io** | Pay-as-you-go / Free allowances | Scalable to 0 or always-on | External free MySQL (Aiven / TiDB) | Low latency, global Anycast edge routing. Good for Dockerized deployments. |
-| **Azure for Students** | Free $100 credit (PSTU email) | Always-On (B1 Linux App Service) | Azure Database for MySQL Flexible Server | Enterprise-grade, free for 12 months with verified university student email. |
+| Platform | Tier / Pricing | Sleep / Spin-Down Behavior | MySQL Strategy | Custom Domain & Trade-offs | Assessment for Portfolio |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **MonsterASP.NET Free** | Free ($0/mo, no CC) | **Always-On** (No spin-down sleep) | Built-in MySQL (1GB storage included) | **Subdomain only** (`*.monsterasp.net`). Does **not** support custom domains (`mtanviranjum.tech`) on free tier. | Excellent for free staging and testing. For custom domain on `mtanviranjum.tech`, upgrade to **MonsterASP.NET Premium** (~$3–$5/mo). |
+| **MonsterASP.NET Premium** | Paid (~$3–$5/mo) | Always-On | Built-in MySQL | Full custom domain + Let's Encrypt SSL included. | **Recommended for Production**: Native ASP.NET Core on Windows/IIS, automated SSL, single-dashboard MySQL, zero cold starts. |
+| **Render.com Free Web Service** | Free ($0/mo) | **Spins down after 15m** idle (50–60s cold start) | External free MySQL required (Aiven / TiDB) | Full custom domain (`mtanviranjum.tech`) + free TLS. | Viable via container [Dockerfile](file:///e:/Projects/Portfolio/Dockerfile). **Trade-offs**: 50s cold-start delays degrade recruiter experience; container disk is ephemeral so an external managed MySQL database is mandatory. |
+| **Fly.io** | Pay-as-you-go / Free allowances | Scalable to 0 or always-on | External free MySQL (Aiven / TiDB) | Full custom domain + Anycast edge TLS. Requires credit card registration. | Fast edge container hosting. Requires external managed database. |
+| **Azure for Students** | Free $100 credit (PSTU email) | Always-On (B1 Linux App Service) | Azure Database for MySQL Flexible Server | Full custom domain + managed TLS. Valid for 12 months with university email. | Enterprise-grade cloud architecture; free during student eligibility. |
+
+> **Production Hosting Principle**: Avoid assuming any hosting service is "permanently free without limitations." Free plans always enforce explicit trade-offs: either inactivity spin-down (cold starts), subdomain restrictions, ephemeral storage, or trial credit expirations.
 
 ### Health Check Endpoint
 The application exposes a lightweight health check endpoint at:
@@ -475,10 +479,16 @@ GET /health
 ```
 Returns `200 OK` (`Healthy`). Designed for cloud orchestrators (Docker, Kubernetes, Render, AWS ECS, Azure) to verify liveness without triggering database queries or rendering MVC views.
 
-### Reverse Proxy & Reverse Header Forwarding
-The application is pre-configured with `ForwardedHeadersOptions` (`ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto`). When hosted behind reverse proxies (Cloudflare, Render, Fly.io, MonsterASP, Nginx, or Traefik):
-* The visitor's real client IP is preserved for sliding-window rate limiting.
-* HTTPS redirection properly detects the proxy's TLS termination headers (`X-Forwarded-Proto: https`), preventing infinite 307 redirect loops.
+### Trusted Reverse Proxy & Header Forwarding Security
+The application is configured with `ForwardedHeadersOptions` adhering to a strict **least-privilege trust model**:
+* **Enabled Headers**: Only `ForwardedHeaders.XForwardedFor` and `ForwardedHeaders.XForwardedProto`.
+* **ForwardLimit**: Defaults to `1` (single reverse proxy hop).
+* **Safe Default Trust**: ASP.NET Core by default trusts only loopback proxies (`127.0.0.1` and `::1`).
+* **Anti-Spoofing Protection**: `KnownProxies` and `KnownIPNetworks` are **never cleared globally**. Direct connections from untrusted client IPs with spoofed `X-Forwarded-For` or `X-Forwarded-Proto` headers are strictly rejected by the middleware, ensuring `RemoteIpAddress` reflects the real client IP and protects `MemoryRateLimitService` against throttling bypass attacks.
+* **Environment-Specific Trusted Proxy Binding**: When deployed behind a specific cloud load balancer or container network, operators declare the trusted proxy IP or CIDR network via configuration or environment variables without code modifications:
+  * `ForwardedHeaders__KnownNetworks__0="172.17.0.0/16"` (e.g., Docker bridge network)
+  * `ForwardedHeaders__KnownProxies__0="10.0.0.1"` (e.g., dedicated reverse proxy)
+* **IIS Integration**: When hosted on IIS (e.g., MonsterASP.NET), the ASP.NET Core Module handles proxy routing internally on loopback or in-process, requiring no custom network CIDR configuration.
 
 ### Required Environment Variables on Production Host
 Set the following environment variables in your hosting provider's dashboard or container environment:
