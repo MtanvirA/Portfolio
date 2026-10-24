@@ -4,7 +4,7 @@
 [![ASP.NET Core MVC](https://img.shields.io/badge/ASP.NET%20Core-MVC-512BD4?logo=dotnet)](https://learn.microsoft.com/aspnet/core)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![MySQL 8.0](https://img.shields.io/badge/Database-MySQL%208.0-4479A1?logo=mysql)](https://www.mysql.com/)
-[![Tests](https://img.shields.io/badge/Tests-69%20Passed-22c55e)](#automated-testing)
+[![Tests](https://img.shields.io/badge/Tests-74%20Passed-22c55e)](#automated-testing)
 
 A personal portfolio web application engineered for **Md. Tanvir Anjum**, an undergraduate Computer Science and Engineering student at **Patuakhali Science and Technology University (PSTU)**, Bangladesh.
 
@@ -512,10 +512,14 @@ The portfolio is architected for a genuine **$0.00/month production deployment**
 ### Component Breakdown & Free-Tier Specifications
 
 #### 1. Web Hosting: Render Free Web Service
-* **Runtime**: Docker (Multi-stage build compiling Tailwind CSS v4 in SDK layer, publishing lean .NET 10 ASP.NET Core runtime).
+* **Runtime**: Docker 3-stage multi-stage build:
+  1. **Frontend Stage** (`node:22-alpine`): Installs dependencies with `npm ci` and compiles Tailwind CSS v4 assets into `wwwroot/css/site.min.css`.
+  2. **Build Stage** (`mcr.microsoft.com/dotnet/sdk:10.0`): Restores NuGet packages, copies compiled CSS from the frontend stage, and publishes Release binaries.
+  3. **Runtime Stage** (`mcr.microsoft.com/dotnet/aspnet:10.0`): Lean production runtime (zero Node.js or build tools in final image layer).
+* **Local Docker Build Status**: Docker is not installed on the local Windows development machine (`docker` command unavailable). Local container image verification is currently blocked, but the Dockerfile conforms strictly to Render's cloud Docker runtime specification.
 * **Port Binding**: Application dynamically binds to `http://0.0.0.0:${PORT}` where Render injects `PORT=10000`. Preserves local development URLs (`localhost:5159`) when run without Docker.
 * **Blueprint**: Declarative configuration provided via [`render.yaml`](file:///e:/Projects/Portfolio/render.yaml) (`plan: free`, `runtime: docker`, `healthCheckPath: /health`).
-* **Health Check**: Lightweight [`/health`](file:///e:/Projects/Portfolio/Program.cs#L133) endpoint returning `200 OK` (`Healthy`) without exposing database details or diagnostic secrets.
+* **Health Check**: Lightweight [`/health`](file:///e:/Projects/Portfolio/Program.cs#L151) endpoint returning `200 OK` (`Healthy`) without exposing database details or diagnostic secrets.
 * **Inactivity & Sleep**: Render Free spins down containers after 15 minutes of inactivity. Incoming visitor traffic wakes the container in ~50 seconds (cold start).
 * **Zero-Cost Safeguard**: No credit card required. If the monthly 750 free instance-hour quota is exhausted, the service temporarily suspends rather than incurring charges.
 
@@ -523,6 +527,14 @@ The portfolio is architected for a genuine **$0.00/month production deployment**
 * **Compatibility**: 100% wire-compatible with MySQL 8.0 and Oracle's `MySql.EntityFrameworkCore` 10.0.12 provider.
 * **Free Quota**: Permanent free tier providing **5 GiB row storage** and **50 Million Request Units (RUs)** per month.
 * **Security & TLS**: Enforces TLS/SSL over port 4000 (`SslMode=Required`).
+* **Dedicated Application Account (Least Privilege)**:
+  * Never use the cluster administrator account (`<prefix>.root`) as the routine application runtime identity!
+  * Create a dedicated application user with DML permissions restricted strictly to `portfolio_db.*`:
+    ```sql
+    CREATE USER 'portfolio_app'@'%' IDENTIFIED BY 'StrongRandomPassword!';
+    GRANT SELECT, INSERT, UPDATE, DELETE ON portfolio_db.* TO 'portfolio_app'@'%';
+    FLUSH PRIVILEGES;
+    ```
 * **Critical Isolation Policy**: The production TiDB cluster must be dedicated exclusively to Portfolio (`portfolio_db`). Sibling projects (`sharesync`, `campussync_db`, etc.) must never connect to or share credentials with this cluster.
 * **Zero-Cost Safeguard**: Do not enable consumption-based auto-billing or attach a credit card. Set the cluster spending limit strictly to `$0`. If quotas are reached, queries pause until the next monthly reset.
 
@@ -605,8 +617,19 @@ When deploying to Render, declare these environment variables in the Render Dash
    ```sql
    CREATE DATABASE portfolio_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
    ```
-4. Generate connection credentials for a dedicated user scoped to `portfolio_db`.
-5. Apply the initial schema from your local development machine using the idempotent migration script:
+4. Create the restricted application runtime account:
+   ```sql
+   CREATE USER 'portfolio_app'@'%' IDENTIFIED BY 'StrongRandomPassword!';
+   GRANT SELECT, INSERT, UPDATE, DELETE ON portfolio_db.* TO 'portfolio_app'@'%';
+   FLUSH PRIVILEGES;
+   ```
+5. Pre-migration verification:
+   Verify the target cluster and active user before applying migrations:
+   ```sql
+   SELECT DATABASE(), CURRENT_USER();
+   ```
+   Confirm the database is `portfolio_db` and the user is authorized. Never migrate or connect to sibling project databases.
+6. Apply the initial schema from your local development machine using the idempotent migration script:
    ```powershell
    # Generate SQL script
    dotnet ef migrations script --idempotent --configuration Release -o Migrations/ProductionMigration.sql
@@ -614,7 +637,7 @@ When deploying to Render, declare these environment variables in the Render Dash
    # Apply script to remote TiDB cluster via MySQL CLI or Workbench
    mysql --host=gateway01.<region>.prod.aws.tidbcloud.com --port=4000 --user=<user> --password=<pass> --ssl-mode=REQUIRED portfolio_db < Migrations/ProductionMigration.sql
    ```
-6. Verify schema creation:
+7. Verify schema creation:
    ```sql
    SHOW TABLES IN portfolio_db;
    DESCRIBE contact_messages;
@@ -633,7 +656,7 @@ When deploying to Render, declare these environment variables in the Render Dash
 2. Click **New** -> **Blueprint** -> Connect repository `MtanvirA/Portfolio`.
 3. Render reads [`render.yaml`](file:///e:/Projects/Portfolio/render.yaml) automatically.
 4. When prompted for manual secrets (marked `sync: false`), enter:
-   * `ConnectionStrings__DefaultConnection`: TiDB Cloud connection string.
+   * `ConnectionStrings__DefaultConnection`: TiDB Cloud connection string using `portfolio_app` credentials.
    * `ContactNotification__ResendApiKey`: Resend API key (`re_...`).
 5. Confirm the plan selected is **Free** ($0.00/month).
 6. Click **Apply Blueprint**. Render builds the Docker image and launches the service.
@@ -654,10 +677,17 @@ When deploying to Render, declare these environment variables in the Render Dash
 
 ## 10. Security & Secret Hygiene Architecture
 
-* **Least-Privilege Database Access**: The web application never connects as MySQL `root`. It runs under a dedicated `portfolio_user` account with permissions strictly scoped to `portfolio_db.*` (`SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER`), preventing access to system catalogs or sibling project databases.
+* **Removal of Insecure MySQL Root Fallback**:
+  * Previously, `Program.cs` contained a hardcoded fallback string referencing MySQL `root` with a blank password.
+  * This fallback has been completely eliminated.
+  * When running outside the `Testing` environment, the application requires a non-empty `ConnectionStrings:DefaultConnection`. If missing, startup fails fast with an actionable `InvalidOperationException` without disclosing connection details or credentials.
+  * `appsettings.json` explicitly commits an empty string (`"DefaultConnection": ""`), ensuring no root accounts or passwords appear in public source code.
+* **Least-Privilege Database Access**: The web application never connects as MySQL `root`.
+  * **Local Development**: Runs under a dedicated `portfolio_user` account with permissions strictly scoped to `portfolio_db.*`, preventing access to system catalogs or sibling project databases.
+  * **Production (TiDB Cloud)**: Runs under a dedicated `portfolio_app` account granted only DML privileges (`SELECT, INSERT, UPDATE, DELETE`) on `portfolio_db.*`.
 * **Secret Hygiene & Isolation**:
   * **Local Development**: Connection strings and SMTP passwords are managed exclusively via `.NET User Secrets` (`dotnet user-secrets`), stored outside the repository tree in `%APPDATA%\Microsoft\UserSecrets\`.
-  * **Production / CI**: Credentials are provided via environment variables (`ConnectionStrings__DefaultConnection`, `ContactNotification__Password`).
+  * **Production / CI**: Credentials are provided via environment variables (`ConnectionStrings__DefaultConnection`, `ContactNotification__ResendApiKey`).
   * **Zero Committed Secrets**: Tracked settings files (`appsettings.json`, `appsettings.Example.json`) contain only non-sensitive placeholder templates.
 * **Credential Rotation Protocol**: If local development credentials are ever exposed, passwords can be rotated immediately in MySQL via `ALTER USER 'portfolio_user'@'localhost' IDENTIFIED BY '...'` and re-set locally in `.NET User Secrets` without altering project source code.
 * **Honeypot Trap**: Forms include a hidden `HoneyPotCompany` field that trips automated bots while remaining invisible to humans.

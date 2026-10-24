@@ -113,7 +113,6 @@ builder.Services.AddScoped<IContactNotificationService>(sp =>
 builder.Services.AddScoped<IContactService, ContactService>();
 
 // Database context configuration
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var useInMemory = builder.Configuration.GetValue<bool>("UseInMemoryDatabase") 
     || builder.Environment.IsEnvironment("Testing");
 
@@ -125,7 +124,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     }
     else
     {
-        options.UseMySQL(connectionString ?? "Server=localhost;Port=3306;Database=portfolio_db;Uid=root;Pwd=;");
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException(
+                "A database connection string 'ConnectionStrings:DefaultConnection' must be configured. " +
+                "For local development, configure it using .NET User Secrets: " +
+                "dotnet user-secrets set \"ConnectionStrings:DefaultConnection\" \"Server=localhost;Port=3306;Database=portfolio_db;Uid=portfolio_user;Pwd=<password>;\". " +
+                "For production, configure the environment variable 'ConnectionStrings__DefaultConnection'.");
+        }
+
+        options.UseMySQL(connectionString);
     }
 });
 
