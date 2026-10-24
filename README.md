@@ -4,7 +4,7 @@
 [![ASP.NET Core MVC](https://img.shields.io/badge/ASP.NET%20Core-MVC-512BD4?logo=dotnet)](https://learn.microsoft.com/aspnet/core)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![MySQL 8.0](https://img.shields.io/badge/Database-MySQL%208.0-4479A1?logo=mysql)](https://www.mysql.com/)
-[![Tests](https://img.shields.io/badge/Tests-42%20Passed-22c55e)](#automated-testing)
+[![Tests](https://img.shields.io/badge/Tests-51%20Passed-22c55e)](#automated-testing)
 
 A personal portfolio web application engineered for **Md. Tanvir Anjum**, an undergraduate Computer Science and Engineering student at **Patuakhali Science and Technology University (PSTU)**, Bangladesh.
 
@@ -258,7 +258,11 @@ When a user submits the contact form, the request flows through the following pi
        │  6. Generates parameterized SQL INSERT query
        ▼
 [ MySQL 8.0 Database (portfolio_db.contact_messages) ]
-       │  7. Commits row to database table
+       │  7. Commits row to database table (primary persistence confirmed)
+       ▼
+[ Notification Service (SmtpContactNotificationService) ]
+       │  8. If enabled, dispatches notification email via SMTP relay (SMTP2GO)
+       │  9. Updates message entity with delivery outcome (Sent / Failed / NotConfigured)
        ▼
 [ Response to Browser ]
           Returns JSON { success: true, message: "..." } for AJAX
@@ -269,13 +273,22 @@ When a user submits the contact form, the request flows through the following pi
 
 #### Test Suite Distinction
 1. **Unit Tests**: Test individual classes, string normalization, GPA calculations, and rate limit algorithms in isolation with zero external dependencies.
-2. **In-Memory Tests (`Microsoft.EntityFrameworkCore.InMemory`)**: Test `ContactService` logic using an ephemeral in-memory database provider. *Note*: In-memory tests validate service logic, but do not test MySQL connection strings, user authentication, column collation, or network transport.
+2. **In-Memory Tests (`Microsoft.EntityFrameworkCore.InMemory`)**: Test `ContactService` and `ContactNotificationTests` logic using an ephemeral in-memory database provider and mock notification services. *Note*: In-memory tests validate service logic, but do not test MySQL connection strings, user authentication, column collation, or network transport.
 3. **Real MySQL Integration Verification**: Live end-to-end tests where the ASP.NET Core runtime connects over TCP port 3306 to MySQL 8.0, authenticates via `caching_sha2_password`, executes EF Core migrations, persists synthetic messages, and queries rows using SQL.
 
 #### Running the Test Suite
 ```powershell
 dotnet test
 ```
+
+### Test Suite Summary (51 Passing Tests):
+* `ContactNotificationTests` (9 tests): Validated DB persistence ordering (notification not called on DB error), notification dispatched after persistence, graceful operation when provider is disabled/unconfigured, provider failure tolerance (saved message preserved, visitor still receives success), HTML encoding injection prevention, and zero credential leakage in client responses.
+* `ContactValidationTests` (7 tests): Validated `[Required]`, `[EmailAddress]`, and string length constraints.
+* `ContactServiceTests` (8 tests): Tested EF Core persistence, string normalization (lowercase emails, trimmed inputs), honeypot anti-spam trap detection, rate-limit blocking, and safe database exception handling without credential leaks.
+* `RateLimitServiceTests` (5 tests): Tested sliding-window request throttling, threshold enforcement, and null IP safety.
+* `HomeControllerTests` (7 tests): Tested aggregate view model assembly, AJAX JSON responses, standard Post/Redirect/Get flow, and interactive terminal commands.
+* `ProjectServiceTests` (9 tests): Verified slug retrieval, case-insensitivity, category filtering, and neighbor navigation.
+* `EducationServiceTests` (6 tests): Verified PSTU transcript calculations, 3.820 CGPA, and course highlights.
 
 #### How to Submit and Verify a Real Test Message
 1. Start the application:
@@ -286,7 +299,7 @@ dotnet test
 3. In MySQL Workbench or CLI, query the persisted record:
    ```sql
    USE portfolio_db;
-   SELECT Id, Name, Email, Subject, Message, CreatedAtUtc, Status, ClientIpHash 
+   SELECT Id, Name, Email, Subject, Message, CreatedAtUtc, Status, NotificationStatus, ClientIpHash 
    FROM contact_messages 
    ORDER BY CreatedAtUtc DESC LIMIT 1;
    ```
@@ -294,11 +307,70 @@ dotnet test
    - Exactly one row exists with matching fields.
    - The email is trimmed and normalized to lowercase.
    - The status is `"New"`.
+   - The notification status reflects delivery (`"Sent"`, `"NotConfigured"`, or `"Failed"`).
    - The client IP is stored as a one-way cryptographic SHA-256 hash.
 5. If testing with a synthetic record, clean up after verification:
    ```sql
    DELETE FROM contact_messages WHERE Email = 'your-synthetic-email@example.com';
    ```
+
+---
+
+## 7. Contact Email Notifications Setup (SMTP2GO)
+
+The application includes an injectable email notification pipeline designed for **SMTP2GO** (or any standard RFC-compliant SMTP relay). When a visitor submits a contact message, the application persists the message to MySQL first and then sends a formatted notification email directly to the portfolio owner (`tanviranjum201@gmail.com`).
+
+### Security & Reliability Guarantees
+* **Database Primary**: The database remains the primary system of record. If database saving fails, no notification is attempted.
+* **Failure Isolation**: If email delivery fails, the visitor's submission is **never discarded or lost**. The visitor still receives a success confirmation, while the entity records `NotificationStatus = "Failed"` and logs the failure internally.
+* **No Plaintext Secrets**: SMTP credentials must never be committed to Git. They are managed exclusively through `.NET User Secrets` in development or environment variables in production.
+* **Safe HTML Encoding**: All submitted visitor text is sanitized with `HtmlEncoder.Default.Encode` before inclusion in email HTML bodies.
+* **Reply-To Safety**: The notification email is sent **From** the verified portfolio sender address and sets **Reply-To** to the visitor's email address, allowing one-click owner response while preventing spoofing.
+* **No Visitor Auto-Replies**: Notifications are delivered exclusively to the configured portfolio owner.
+
+### Free-Tier Provider Setup (SMTP2GO)
+SMTP2GO provides a permanent free plan offering **1,000 free emails per month** with zero surprise billing:
+
+1. **Sign Up**: Create a free account at [https://www.smtp2go.com](https://www.smtp2go.com).
+2. **Add Verified Sender Domain or Email**:
+   * Navigate to **Settings > Verified Senders**.
+   * Add your custom domain (e.g., `mtanviranjum.tech`) or a single sender email.
+3. **Configure DNS Records** (in your domain DNS provider):
+   * Add the 3 CNAME records generated by SMTP2GO for DKIM signature alignment.
+   * Add the TXT SPF record: `v=spf1 include:spf.smtp2go.com ~all`.
+4. **Create SMTP User Credentials**:
+   * Navigate to **Sending > SMTP Users**.
+   * Add a new SMTP user and set a strong, unique password.
+
+### Local Development Configuration (.NET User Secrets)
+By default, email notifications are **disabled** (`"Enabled": false`), allowing local development and testing to run cleanly without external dependencies.
+
+To enable live email notifications on your local machine:
+
+```powershell
+# In E:\Projects\Portfolio:
+dotnet user-secrets set "ContactNotification:Enabled" "true"
+dotnet user-secrets set "ContactNotification:SmtpHost" "mail.smtp2go.com"
+dotnet user-secrets set "ContactNotification:SmtpPort" "587"
+dotnet user-secrets set "ContactNotification:Username" "YOUR_SMTP2GO_USERNAME"
+dotnet user-secrets set "ContactNotification:Password" "YOUR_SMTP2GO_PASSWORD"
+dotnet user-secrets set "ContactNotification:UseTls" "true"
+dotnet user-secrets set "ContactNotification:SenderEmail" "notifications@mtanviranjum.tech"
+dotnet user-secrets set "ContactNotification:SenderName" "Tanvir Anjum Portfolio"
+dotnet user-secrets set "ContactNotification:OwnerEmail" "tanviranjum201@gmail.com"
+```
+
+### Production Environment Variables
+On your production hosting server (e.g. MonsterASP.NET or Linux container):
+* `ContactNotification__Enabled`: `true`
+* `ContactNotification__SmtpHost`: `mail.smtp2go.com`
+* `ContactNotification__SmtpPort`: `587`
+* `ContactNotification__Username`: `<YOUR_SMTP2GO_USERNAME>`
+* `ContactNotification__Password`: `<YOUR_SMTP2GO_PASSWORD>`
+* `ContactNotification__UseTls`: `true`
+* `ContactNotification__SenderEmail`: `notifications@mtanviranjum.tech`
+* `ContactNotification__SenderName`: `Tanvir Anjum Portfolio`
+* `ContactNotification__OwnerEmail`: `tanviranjum201@gmail.com`
 
 ---
 

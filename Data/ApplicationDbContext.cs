@@ -48,6 +48,16 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.CreatedAtUtc)
                 .IsRequired();
 
+            entity.Property(e => e.NotificationStatus)
+                .IsRequired()
+                .HasMaxLength(50)
+                .HasDefaultValue("NotConfigured");
+
+            entity.Property(e => e.NotificationSentAtUtc);
+
+            entity.Property(e => e.NotificationError)
+                .HasMaxLength(500);
+
             entity.HasIndex(e => e.CreatedAtUtc)
                 .HasDatabaseName("ix_contact_messages_created_at_utc");
 

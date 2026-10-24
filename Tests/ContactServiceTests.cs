@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
 using Portfolio.Data;
+using Portfolio.Models;
 using Portfolio.Options;
 using Portfolio.Services;
 using Portfolio.ViewModels;
@@ -19,12 +20,25 @@ public class ContactServiceTests
         return new ApplicationDbContext(options);
     }
 
+    private class NoOpNotificationService : IContactNotificationService
+    {
+        public Task<NotificationResult> SendNotificationAsync(ContactMessage message, CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(new NotificationResult
+            {
+                Success = true,
+                IsConfigured = false,
+                AttemptedAtUtc = DateTime.UtcNow
+            });
+        }
+    }
+
     [Fact]
     public async Task SubmitMessageAsync_ValidModel_PersistsMessageSuccessfully()
     {
         using var db = CreateInMemoryDbContext("TestDb_Success");
         var limiter = new MemoryRateLimitService();
-        var service = new ContactService(db, limiter, NullLogger<ContactService>.Instance);
+        var service = new ContactService(db, limiter, new NoOpNotificationService(), NullLogger<ContactService>.Instance);
 
         var model = new ContactFormViewModel
         {
@@ -55,7 +69,7 @@ public class ContactServiceTests
     {
         using var db = CreateInMemoryDbContext("TestDb_Normalize");
         var limiter = new MemoryRateLimitService();
-        var service = new ContactService(db, limiter, NullLogger<ContactService>.Instance);
+        var service = new ContactService(db, limiter, new NoOpNotificationService(), NullLogger<ContactService>.Instance);
 
         var model = new ContactFormViewModel
         {
@@ -78,7 +92,7 @@ public class ContactServiceTests
     {
         using var db = CreateInMemoryDbContext("TestDb_Honeypot");
         var limiter = new MemoryRateLimitService();
-        var service = new ContactService(db, limiter, NullLogger<ContactService>.Instance);
+        var service = new ContactService(db, limiter, new NoOpNotificationService(), NullLogger<ContactService>.Instance);
 
         var model = new ContactFormViewModel
         {
@@ -103,7 +117,7 @@ public class ContactServiceTests
     {
         using var db = CreateInMemoryDbContext("TestDb_RateLimit");
         var limiter = new MemoryRateLimitService();
-        var service = new ContactService(db, limiter, NullLogger<ContactService>.Instance);
+        var service = new ContactService(db, limiter, new NoOpNotificationService(), NullLogger<ContactService>.Instance);
 
         var ip = "192.168.10.50";
 
@@ -143,7 +157,7 @@ public class ContactServiceTests
 
         using var db = new FailingDbContext(options);
         var limiter = new MemoryRateLimitService();
-        var service = new ContactService(db, limiter, NullLogger<ContactService>.Instance);
+        var service = new ContactService(db, limiter, new NoOpNotificationService(), NullLogger<ContactService>.Instance);
 
         var model = new ContactFormViewModel
         {

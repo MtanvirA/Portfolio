@@ -30,4 +30,13 @@ public class ContactMessage
 
     [MaxLength(100)]
     public string? ClientIpHash { get; set; }
+
+    [MaxLength(50)]
+    public string NotificationStatus { get; set; } = "NotConfigured";
+
+    public DateTime? NotificationSentAtUtc { get; set; }
+
+    [MaxLength(500)]
+    public string? NotificationError { get; set; }
 }
+

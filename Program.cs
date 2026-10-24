@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Options configuration
 builder.Services.Configure<PortfolioOptions>(
     builder.Configuration.GetSection(PortfolioOptions.SectionName));
+builder.Services.Configure<ContactNotificationOptions>(
+    builder.Configuration.GetSection(ContactNotificationOptions.SectionName));
 
 // Core MVC services
 builder.Services.AddControllersWithViews();
@@ -21,6 +23,7 @@ builder.Services.AddSingleton<IRateLimitService, MemoryRateLimitService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IEducationService, EducationService>();
 builder.Services.AddScoped<ISkillService, SkillService>();
+builder.Services.AddScoped<IContactNotificationService, SmtpContactNotificationService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 
 // Database context configuration

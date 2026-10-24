@@ -15,6 +15,7 @@ public class ContactSubmissionResult
     public bool IsSpamRejected { get; set; }
     public bool IsDatabaseError { get; set; }
     public Guid? SavedMessageId { get; set; }
+    public string? NotificationStatus { get; set; }
 }
 
 public interface IContactService
@@ -26,15 +27,18 @@ public class ContactService : IContactService
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly IRateLimitService _rateLimitService;
+    private readonly IContactNotificationService _notificationService;
     private readonly ILogger<ContactService> _logger;
 
     public ContactService(
         ApplicationDbContext dbContext,
         IRateLimitService rateLimitService,
+        IContactNotificationService notificationService,
         ILogger<ContactService> logger)
     {
         _dbContext = dbContext;
         _rateLimitService = rateLimitService;
+        _notificationService = notificationService;
         _logger = logger;
     }
 
@@ -76,23 +80,17 @@ public class ContactService : IContactService
             Message = model.Message.Trim(),
             CreatedAtUtc = DateTime.UtcNow,
             Status = "New",
-            ClientIpHash = ipHash
+            ClientIpHash = ipHash,
+            NotificationStatus = "Pending"
         };
 
-        // 4. Database persistence
+        // 4. Database persistence (Primary step)
         try
         {
             _dbContext.ContactMessages.Add(messageEntity);
             await _dbContext.SaveChangesAsync();
 
             _logger.LogInformation("Contact message {MessageId} saved successfully for {Email}", messageEntity.Id, messageEntity.Email);
-
-            return new ContactSubmissionResult
-            {
-                Success = true,
-                SavedMessageId = messageEntity.Id,
-                Message = "Thank you! Your message has been received and saved. I will respond to your email as soon as possible."
-            };
         }
         catch (Exception ex)
         {
@@ -105,6 +103,46 @@ public class ContactService : IContactService
                 Message = "Your message could not be saved right now because the database server is currently unreachable. Please contact me directly via email at tanviranjum201@gmail.com or via WhatsApp."
             };
         }
+
+        // 5. Contact Email Notification (Secondary step, attempted only after confirmed DB persistence)
+        try
+        {
+            var notifResult = await _notificationService.SendNotificationAsync(messageEntity);
+            if (notifResult.Success && notifResult.IsConfigured)
+            {
+                messageEntity.NotificationStatus = "Sent";
+                messageEntity.NotificationSentAtUtc = notifResult.AttemptedAtUtc ?? DateTime.UtcNow;
+                messageEntity.NotificationError = null;
+            }
+            else if (!notifResult.IsConfigured)
+            {
+                messageEntity.NotificationStatus = "NotConfigured";
+                messageEntity.NotificationError = notifResult.ErrorMessage;
+            }
+            else
+            {
+                messageEntity.NotificationStatus = "Failed";
+                messageEntity.NotificationError = notifResult.ErrorMessage != null
+                    ? notifResult.ErrorMessage[..Math.Min(500, notifResult.ErrorMessage.Length)]
+                    : "Unknown delivery failure";
+            }
+
+            // Record notification delivery outcome back to database
+            await _dbContext.SaveChangesAsync();
+        }
+        catch (Exception notifEx)
+        {
+            _logger.LogWarning(notifEx, "Failed while delivering or recording notification status for message {MessageId}", messageEntity.Id);
+            // Do NOT fail the visitor's submission since the message was already safely saved to database
+        }
+
+        return new ContactSubmissionResult
+        {
+            Success = true,
+            SavedMessageId = messageEntity.Id,
+            NotificationStatus = messageEntity.NotificationStatus,
+            Message = "Thank you! Your message has been received and saved. I will respond to your email as soon as possible."
+        };
     }
 
     private static string HashClientIp(string ip)
