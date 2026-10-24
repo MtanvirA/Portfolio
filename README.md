@@ -4,7 +4,7 @@
 [![ASP.NET Core MVC](https://img.shields.io/badge/ASP.NET%20Core-MVC-512BD4?logo=dotnet)](https://learn.microsoft.com/aspnet/core)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![MySQL 8.0](https://img.shields.io/badge/Database-MySQL%208.0-4479A1?logo=mysql)](https://www.mysql.com/)
-[![Tests](https://img.shields.io/badge/Tests-56%20Passed-22c55e)](#automated-testing)
+[![Tests](https://img.shields.io/badge/Tests-69%20Passed-22c55e)](#automated-testing)
 
 A personal portfolio web application engineered for **Md. Tanvir Anjum**, an undergraduate Computer Science and Engineering student at **Patuakhali Science and Technology University (PSTU)**, Bangladesh.
 
@@ -472,75 +472,184 @@ To use your real photograph:
 
 > **Production Hosting Principle**: Avoid assuming any hosting service is "permanently free without limitations." Free plans always enforce explicit trade-offs: either inactivity spin-down (cold starts), subdomain restrictions, ephemeral storage, or trial credit expirations.
 
-### Health Check Endpoint
-The application exposes a lightweight health check endpoint at:
-```http
-GET /health
+### Zero-Cost Production Hosting Architecture ($0 Tier)
+
+The portfolio is architected for a genuine **$0.00/month production deployment** requiring **zero paid subscriptions, zero credit card attachments, and zero billing activation**.
+
 ```
-Returns `200 OK` (`Healthy`). Designed for cloud orchestrators (Docker, Kubernetes, Render, AWS ECS, Azure) to verify liveness without triggering database queries or rendering MVC views.
-
-### Trusted Reverse Proxy & Header Forwarding Security
-The application is configured with `ForwardedHeadersOptions` adhering to a strict **least-privilege trust model**:
-* **Enabled Headers**: Only `ForwardedHeaders.XForwardedFor` and `ForwardedHeaders.XForwardedProto`.
-* **ForwardLimit**: Defaults to `1` (single reverse proxy hop).
-* **Safe Default Trust**: ASP.NET Core by default trusts only loopback proxies (`127.0.0.1` and `::1`).
-* **Anti-Spoofing Protection**: `KnownProxies` and `KnownIPNetworks` are **never cleared globally**. Direct connections from untrusted client IPs with spoofed `X-Forwarded-For` or `X-Forwarded-Proto` headers are strictly rejected by the middleware, ensuring `RemoteIpAddress` reflects the real client IP and protects `MemoryRateLimitService` against throttling bypass attacks.
-* **Environment-Specific Trusted Proxy Binding**: When deployed behind a specific cloud load balancer or container network, operators declare the trusted proxy IP or CIDR network via configuration or environment variables without code modifications:
-  * `ForwardedHeaders__KnownNetworks__0="172.17.0.0/16"` (e.g., Docker bridge network)
-  * `ForwardedHeaders__KnownProxies__0="10.0.0.1"` (e.g., dedicated reverse proxy)
-* **IIS Integration**: When hosted on IIS (e.g., MonsterASP.NET), the ASP.NET Core Module handles proxy routing internally on loopback or in-process, requiring no custom network CIDR configuration.
-
-### Required Environment Variables on Production Host
-Set the following environment variables in your hosting provider's dashboard or container environment:
-
-```bash
-# ASP.NET Core Runtime
-ASPNETCORE_ENVIRONMENT=Production
-ASPNETCORE_HTTP_PORTS=8080
-
-# Relational Database Connection (scoped portfolio_user account)
-ConnectionStrings__DefaultConnection="Server=YOUR_PROD_HOST;Port=3306;Database=portfolio_db;Uid=portfolio_user;Pwd=YOUR_PROD_PASSWORD;CharSet=utf8mb4;"
-
-# Gmail SMTP Email Notifications
-ContactNotification__Enabled=true
-ContactNotification__SmtpHost=smtp.gmail.com
-ContactNotification__SmtpPort=587
-ContactNotification__UseTls=true
-ContactNotification__Username=tanviranjum201@gmail.com
-ContactNotification__Password=<YOUR_16_CHAR_GOOGLE_APP_PASSWORD>
-ContactNotification__SenderEmail=tanviranjum201@gmail.com
-ContactNotification__SenderName="Tanvir Anjum Portfolio"
-ContactNotification__OwnerEmail=tanviranjum201@gmail.com
-
-# Portfolio Configuration
-Portfolio__CanonicalDomain=https://mtanviranjum.tech
-Portfolio__WhatsAppNumber=+8801718659824
+                           [ Visitor Browser ]
+                                   │
+                                   ▼ HTTPS (443)
+                    ┌───────────────────────────────┐
+                    │  DNS Registrar / Cloudflare   │
+                    │      mtanviranjum.tech        │
+                    │   A Record -> Render Anycast  │
+                    │  CNAME www -> onrender.com    │
+                    └──────────────┬────────────────┘
+                                   │
+                                   ▼ TLS Terminated
+                    ┌───────────────────────────────┐
+                    │    Render Free Web Service    │
+                    │   - Dockerfile (.NET 10)      │
+                    │   - Bind 0.0.0.0:${PORT:-10000}│
+                    │   - Health Check: /health     │
+                    │   - Auto-sleep after 15m idle │
+                    └───────┬───────────────┬───────┘
+                            │               │
+       MySQL over TLS (4000)│               │HTTPS REST API (443)
+                            ▼               ▼
+         ┌─────────────────────┐   ┌────────────────────────┐
+         │  TiDB Cloud Starter │   │    Resend Free API     │
+         │ - 5 GiB Storage     │   │ - 100 emails / day     │
+         │ - 50M Request Units │   │ - 3,000 emails / month │
+         │ - Dedicated DB only │   │ - notifications@       │
+         │ - portfolio_db      │   │   mtanviranjum.tech    │
+         └─────────────────────┘   └────────────────────────┘
 ```
 
-### Production Database Migration Strategy
-When deploying to a fresh production MySQL instance:
-1. **Option A (EF Core CLI)**:
-   ```powershell
-   dotnet ef database update --connection "Server=YOUR_HOST;Port=3306;Database=portfolio_db;Uid=portfolio_user;Pwd=...;"
+---
+
+### Component Breakdown & Free-Tier Specifications
+
+#### 1. Web Hosting: Render Free Web Service
+* **Runtime**: Docker (Multi-stage build compiling Tailwind CSS v4 in SDK layer, publishing lean .NET 10 ASP.NET Core runtime).
+* **Port Binding**: Application dynamically binds to `http://0.0.0.0:${PORT}` where Render injects `PORT=10000`. Preserves local development URLs (`localhost:5159`) when run without Docker.
+* **Blueprint**: Declarative configuration provided via [`render.yaml`](file:///e:/Projects/Portfolio/render.yaml) (`plan: free`, `runtime: docker`, `healthCheckPath: /health`).
+* **Health Check**: Lightweight [`/health`](file:///e:/Projects/Portfolio/Program.cs#L133) endpoint returning `200 OK` (`Healthy`) without exposing database details or diagnostic secrets.
+* **Inactivity & Sleep**: Render Free spins down containers after 15 minutes of inactivity. Incoming visitor traffic wakes the container in ~50 seconds (cold start).
+* **Zero-Cost Safeguard**: No credit card required. If the monthly 750 free instance-hour quota is exhausted, the service temporarily suspends rather than incurring charges.
+
+#### 2. Database: TiDB Cloud Starter (Serverless)
+* **Compatibility**: 100% wire-compatible with MySQL 8.0 and Oracle's `MySql.EntityFrameworkCore` 10.0.12 provider.
+* **Free Quota**: Permanent free tier providing **5 GiB row storage** and **50 Million Request Units (RUs)** per month.
+* **Security & TLS**: Enforces TLS/SSL over port 4000 (`SslMode=Required`).
+* **Critical Isolation Policy**: The production TiDB cluster must be dedicated exclusively to Portfolio (`portfolio_db`). Sibling projects (`sharesync`, `campussync_db`, etc.) must never connect to or share credentials with this cluster.
+* **Zero-Cost Safeguard**: Do not enable consumption-based auto-billing or attach a credit card. Set the cluster spending limit strictly to `$0`. If quotas are reached, queries pause until the next monthly reset.
+
+#### 3. Hosted Email Notifications: Resend Free REST API
+* **Why Resend REST API**: Render Free explicitly blocks outgoing TCP ports **25, 465, and 587**. Traditional Gmail SMTP connections time out on Render Free. Resend sends email notifications via standard outbound HTTPS requests (`POST https://api.resend.com/emails`) on port 443, completely avoiding port blocks.
+* **Dual Provider Architecture**:
+  * `ContactNotification:Provider = "Smtp"`: MailKit-based Gmail SMTP relay for local offline development.
+  * `ContactNotification:Provider = "ResendApi"`: HTTP REST API via `HttpClient` for hosted production.
+* **Free Quota**: 100 emails/day, 3,000 emails/month.
+* **Sender Identity**: Verified custom domain address (`notifications@mtanviranjum.tech`).
+* **Owner Destination**: Delivered directly to `tanviranjum201@gmail.com`.
+* **Reply-To Header**: Set to the validated visitor's email address (`message.Email`) so replying in an email client reaches the sender directly.
+* **Resilience & Secret Hygiene**: All HTML payloads are strictly encoded with `HtmlEncoder.Default.Encode` to prevent injection. In accordance with database-first persistence, notification failures never discard saved database records or leak API tokens.
+
+#### 4. Custom Domain & DNS: `mtanviranjum.tech`
+* **Managed TLS**: Render automatically provisions and renews free Let's Encrypt certificates for `mtanviranjum.tech` and `www.mtanviranjum.tech`.
+* **DNS Records**:
+  * **Apex Domain** (`@` / `mtanviranjum.tech`): `A` record pointing to Render's dedicated Anycast IP address (displayed in Render dashboard).
+  * **Subdomain** (`www` / `www.mtanviranjum.tech`): `CNAME` record pointing to `<your-app-name>.onrender.com`.
+* **IPv6 / AAAA Record Caution**: Ensure any default registrar placeholder `AAAA` records are removed before DNS verification, as conflicting AAAA records can delay Render's Let's Encrypt certificate issuance.
+
+---
+
+### Trusted Reverse Proxy & HTTPS Hardening
+
+When running inside Render's private container network, TLS is terminated at Render's edge load balancer. The edge proxy forwards requests over RFC 1918 private IP space to the container.
+
+The application implements a hardened trust model in [`Program.cs`](file:///e:/Projects/Portfolio/Program.cs#L19-L56):
+```csharp
+// Program.cs
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.ForwardLimit = 1; // Trust only the immediate edge proxy hop
+
+    if (builder.Configuration.GetValue<bool>("ForwardedHeaders:TrustPrivateNetworks"))
+    {
+        // Trust RFC 1918 private networks used by Render's internal container routing
+        options.KnownIPNetworks.Add(new IPNetwork(IPAddress.Parse("10.0.0.0"), 8));
+        options.KnownIPNetworks.Add(new IPNetwork(IPAddress.Parse("172.16.0.0"), 12));
+        options.KnownIPNetworks.Add(new IPNetwork(IPAddress.Parse("192.168.0.0"), 16));
+        options.KnownIPNetworks.Add(new IPNetwork(IPAddress.Parse("fc00::"), 7));
+    }
+});
+```
+
+* **Anti-Spoofing Security**: We **never clear KnownProxies or KnownIPNetworks globally**. With `ForwardLimit = 1`, ASP.NET Core peels off only the single hop added by Render's trusted edge proxy. Even if an attacker injects fake `X-Forwarded-For` headers, the application only reads the verified socket IP, guaranteeing that `MemoryRateLimitService` cannot be bypassed.
+* **HTTPS Redirect Loop Prevention**: Because `X-Forwarded-Proto: https` is recognized, ASP.NET Core knows the connection is secure and does not issue an endless HTTP-to-HTTPS redirect loop.
+
+---
+
+### Production Environment Variables Reference
+
+When deploying to Render, declare these environment variables in the Render Dashboard (or via [`render.yaml`](file:///e:/Projects/Portfolio/render.yaml)):
+
+| Variable Name | Render Value / Source | Description |
+|---|---|---|
+| `ASPNETCORE_ENVIRONMENT` | `Production` | Activates production error handler and HSTS |
+| `PORT` | `10000` (auto-set by Render) | Container HTTP listener port |
+| `ConnectionStrings__DefaultConnection` | `Server=...;Port=4000;Database=portfolio_db;Uid=...;Pwd=...;SslMode=Required;` | Scoped TiDB Cloud connection string (**Secret**) |
+| `ContactNotification__Enabled` | `true` | Enables contact submission email alerts |
+| `ContactNotification__Provider` | `ResendApi` | Selects Resend REST API provider (bypasses SMTP block) |
+| `ContactNotification__SenderEmail` | `notifications@mtanviranjum.tech` | Verified custom domain sender address |
+| `ContactNotification__SenderName` | `Tanvir Anjum Portfolio` | Display name in outgoing email alerts |
+| `ContactNotification__OwnerEmail` | `tanviranjum201@gmail.com` | Destination inbox for notification alerts |
+| `ContactNotification__ResendApiKey` | `re_123456789...` | Resend API Bearer Token (**Secret**) |
+| `ForwardedHeaders__TrustPrivateNetworks` | `true` | Enables RFC 1918 private proxy IP trust for Render |
+| `ForwardedHeaders__ForwardLimit` | `1` | Enforces single-hop proxy peeling for anti-spoofing |
+| `Portfolio__CanonicalDomain` | `https://mtanviranjum.tech` | Canonical domain for Open Graph and metadata |
+| `Portfolio__WhatsAppNumber` | `+8801718659824` | WhatsApp contact link |
+
+---
+
+### Step-by-Step Manual Deployment Guide
+
+#### Phase 1: Database Setup (TiDB Cloud Starter)
+1. Sign up for a free account at [tidbcloud.com](https://tidbcloud.com) (no credit card required).
+2. Create a **Serverless / Starter** cluster (e.g. named `portfolio-db`) in your preferred region.
+3. In the TiDB Cloud Console, create a dedicated database:
+   ```sql
+   CREATE DATABASE portfolio_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
    ```
-2. **Option B (Idempotent SQL Script)**:
-   Generate and execute the complete idempotent migration script:
+4. Generate connection credentials for a dedicated user scoped to `portfolio_db`.
+5. Apply the initial schema from your local development machine using the idempotent migration script:
    ```powershell
+   # Generate SQL script
    dotnet ef migrations script --idempotent --configuration Release -o Migrations/ProductionMigration.sql
+   
+   # Apply script to remote TiDB cluster via MySQL CLI or Workbench
+   mysql --host=gateway01.<region>.prod.aws.tidbcloud.com --port=4000 --user=<user> --password=<pass> --ssl-mode=REQUIRED portfolio_db < Migrations/ProductionMigration.sql
    ```
-   Apply `Migrations/ProductionMigration.sql` using MySQL Workbench or CLI against `portfolio_db`.
+6. Verify schema creation:
+   ```sql
+   SHOW TABLES IN portfolio_db;
+   DESCRIBE contact_messages;
+   ```
 
-### Pre-Deployment Checklist
-- [ ] Production MySQL database created with `utf8mb4` character set.
-- [ ] Dedicated `portfolio_user` account created with privileges granted strictly on `portfolio_db.*`.
-- [ ] Database migrations applied (`contact_messages` table with notification columns).
-- [ ] Google Account 2-Step Verification enabled and 16-character App Password generated.
-- [ ] Environment variables configured in hosting provider dashboard.
-- [ ] Domain DNS records (`A` / `CNAME` for `mtanviranjum.tech`) pointed to production host IP/CNAME.
-- [ ] Verified `/health` endpoint returns `200 OK`.
-- [ ] Verified SSL/TLS certificate is active on `https://mtanviranjum.tech`.
-- [ ] Executed synthetic contact submission test and confirmed email receipt in Gmail.
+#### Phase 2: Hosted Email Setup (Resend)
+1. Sign up for a free account at [resend.com](https://resend.com).
+2. Navigate to **Domains** -> **Add Domain** -> Enter `mtanviranjum.tech`.
+3. Add the displayed DNS records (`MX`, `TXT` for SPF, and `TXT` for DKIM) at your domain DNS provider.
+4. Click **Verify Domain** in Resend and confirm status changes to `Verified`.
+5. Navigate to **API Keys** -> **Create API Key** -> Name it `portfolio-render-production` with sending permissions.
+6. Copy the generated key (`re_...`). Keep it safe; never commit it to source control.
 
+#### Phase 3: Web Service Deployment (Render)
+1. Sign in to [render.com](https://render.com) with GitHub.
+2. Click **New** -> **Blueprint** -> Connect repository `MtanvirA/Portfolio`.
+3. Render reads [`render.yaml`](file:///e:/Projects/Portfolio/render.yaml) automatically.
+4. When prompted for manual secrets (marked `sync: false`), enter:
+   * `ConnectionStrings__DefaultConnection`: TiDB Cloud connection string.
+   * `ContactNotification__ResendApiKey`: Resend API key (`re_...`).
+5. Confirm the plan selected is **Free** ($0.00/month).
+6. Click **Apply Blueprint**. Render builds the Docker image and launches the service.
+
+#### Phase 4: Custom Domain & DNS Verification
+1. In the Render Dashboard, open the `portfolio` service -> **Settings** -> **Custom Domains**.
+2. Add `mtanviranjum.tech` and `www.mtanviranjum.tech`.
+3. Render displays the required DNS records:
+   * `A` record for `mtanviranjum.tech` -> Render IP (e.g., `216.24.57.1`).
+   * `CNAME` record for `www` -> `portfolio-xxxx.onrender.com`.
+4. Log in to your domain registrar / DNS provider and configure these records.
+5. Wait for DNS propagation (typically 5–30 minutes). Render will automatically issue a free Let's Encrypt SSL/TLS certificate.
+6. Verify the live deployment:
+   * Visit `https://mtanviranjum.tech/health` -> Returns `200 OK` (`Healthy`).
+   * Visit `https://mtanviranjum.tech` -> Confirm complete portfolio styling and responsive layout.
+   * Submit a test contact message -> Verify record in TiDB `contact_messages` and verify email alert in `tanviranjum201@gmail.com`.
 ---
 
 ## 10. Security & Secret Hygiene Architecture

@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: portfolio
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        sync: false
+      - key: ContactNotification__Enabled
+        value: "true"
+      - key: ContactNotification__Provider
+        value: ResendApi
+      - key: ContactNotification__SenderEmail
+        value: notifications@mtanviranjum.tech
+      - key: ContactNotification__SenderName
+        value: Tanvir Anjum Portfolio
+      - key: ContactNotification__OwnerEmail
+        value: tanviranjum201@gmail.com
+      - key: ContactNotification__ResendApiKey
+        sync: false
+      - key: ForwardedHeaders__TrustPrivateNetworks
+        value: "true"
+      - key: ForwardedHeaders__ForwardLimit
+        value: "1"

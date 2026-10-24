@@ -46,6 +46,23 @@ public class ContactNotificationOptions
     public string SenderName { get; set; } = "Tanvir Anjum Portfolio";
 
     /// <summary>
+    /// Notification delivery provider: "Smtp" (default, for local development via Gmail/MailKit)
+    /// or "ResendApi" (for hosted cloud environments like Render where outbound SMTP ports are blocked).
+    /// </summary>
+    public string Provider { get; set; } = "Smtp";
+
+    /// <summary>
+    /// Resend REST API Key (e.g. "re_123456789"). Never commit to version control.
+    /// In production, supply via environment variable (ContactNotification__ResendApiKey).
+    /// </summary>
+    public string ResendApiKey { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Base URL for the Resend REST API. Defaults to https://api.resend.com/emails.
+    /// </summary>
+    public string ResendApiUrl { get; set; } = "https://api.resend.com/emails";
+
+    /// <summary>
     /// Destination email address where notifications will be delivered.
     /// Defaults to the portfolio owner's direct email.
     /// </summary>

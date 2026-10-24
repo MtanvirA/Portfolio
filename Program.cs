@@ -6,6 +6,15 @@ using Portfolio.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Cloud / Container Port Binding:
+// If the PORT environment variable is set (e.g. by Render, Cloud Run, or Docker),
+// bind to 0.0.0.0:{PORT}. Otherwise, preserve local development URLs (launchSettings.json).
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+
 // Options configuration
 builder.Services.Configure<PortfolioOptions>(
     builder.Configuration.GetSection(PortfolioOptions.SectionName));
@@ -24,6 +33,17 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     if (forwardLimit.HasValue)
     {
         options.ForwardLimit = forwardLimit.Value;
+    }
+
+    // Trust RFC 1918 private network ranges when enabled for container environments
+    // behind platform reverse proxies (Render, Kubernetes, Docker bridges).
+    var trustPrivateNetworks = builder.Configuration.GetValue<bool>("ForwardedHeaders:TrustPrivateNetworks");
+    if (trustPrivateNetworks)
+    {
+        options.KnownIPNetworks.Add(new System.Net.IPNetwork(System.Net.IPAddress.Parse("10.0.0.0"), 8));
+        options.KnownIPNetworks.Add(new System.Net.IPNetwork(System.Net.IPAddress.Parse("172.16.0.0"), 12));
+        options.KnownIPNetworks.Add(new System.Net.IPNetwork(System.Net.IPAddress.Parse("192.168.0.0"), 16));
+        options.KnownIPNetworks.Add(new System.Net.IPNetwork(System.Net.IPAddress.Parse("fc00::"), 7));
     }
 
     // Bind additional trusted proxies from configuration or environment variables
@@ -73,7 +93,23 @@ builder.Services.AddSingleton<IRateLimitService, MemoryRateLimitService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IEducationService, EducationService>();
 builder.Services.AddScoped<ISkillService, SkillService>();
-builder.Services.AddScoped<IContactNotificationService, SmtpContactNotificationService>();
+
+// Contact Notification Services: supports local Gmail SMTP and hosted Resend REST API
+builder.Services.AddHttpClient<ResendContactNotificationService>(client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(15);
+});
+builder.Services.AddScoped<SmtpContactNotificationService>();
+builder.Services.AddScoped<IContactNotificationService>(sp =>
+{
+    var options = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<ContactNotificationOptions>>().Value;
+    if (string.Equals(options.Provider, "ResendApi", StringComparison.OrdinalIgnoreCase))
+    {
+        return sp.GetRequiredService<ResendContactNotificationService>();
+    }
+    return sp.GetRequiredService<SmtpContactNotificationService>();
+});
+
 builder.Services.AddScoped<IContactService, ContactService>();
 
 // Database context configuration
