@@ -4,7 +4,7 @@
 [![ASP.NET Core MVC](https://img.shields.io/badge/ASP.NET%20Core-MVC-512BD4?logo=dotnet)](https://learn.microsoft.com/aspnet/core)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![MySQL 8.0](https://img.shields.io/badge/Database-MySQL%208.0-4479A1?logo=mysql)](https://www.mysql.com/)
-[![Tests](https://img.shields.io/badge/Tests-51%20Passed-22c55e)](#automated-testing)
+[![Tests](https://img.shields.io/badge/Tests-52%20Passed-22c55e)](#automated-testing)
 
 A personal portfolio web application engineered for **Md. Tanvir Anjum**, an undergraduate Computer Science and Engineering student at **Patuakhali Science and Technology University (PSTU)**, Bangladesh.
 
@@ -281,8 +281,8 @@ When a user submits the contact form, the request flows through the following pi
 dotnet test
 ```
 
-### Test Suite Summary (51 Passing Tests):
-* `ContactNotificationTests` (9 tests): Validated DB persistence ordering (notification not called on DB error), notification dispatched after persistence, graceful operation when provider is disabled/unconfigured, provider failure tolerance (saved message preserved, visitor still receives success), HTML encoding injection prevention, and zero credential leakage in client responses.
+### Test Suite Summary (52 Passing Tests):
+* `ContactNotificationTests` (10 tests): Validated DB persistence ordering (notification not called on DB error), notification dispatched after persistence, graceful operation when provider is disabled/unconfigured, provider failure tolerance (saved message preserved, visitor still receives success), HTML encoding injection prevention, zero credential leakage in client responses, Gmail SMTP defaults, and configuration binding.
 * `ContactValidationTests` (7 tests): Validated `[Required]`, `[EmailAddress]`, and string length constraints.
 * `ContactServiceTests` (8 tests): Tested EF Core persistence, string normalization (lowercase emails, trimmed inputs), honeypot anti-spam trap detection, rate-limit blocking, and safe database exception handling without credential leaks.
 * `RateLimitServiceTests` (5 tests): Tested sliding-window request throttling, threshold enforcement, and null IP safety.
@@ -316,61 +316,132 @@ dotnet test
 
 ---
 
-## 7. Contact Email Notifications Setup (SMTP2GO)
+## 7. Contact Email Notifications Setup (Gmail SMTP)
 
-The application includes an injectable email notification pipeline designed for **SMTP2GO** (or any standard RFC-compliant SMTP relay). When a visitor submits a contact message, the application persists the message to MySQL first and then sends a formatted notification email directly to the portfolio owner (`tanviranjum201@gmail.com`).
+The application includes an injectable email notification pipeline powered by **MailKit** and configured to use **Gmail SMTP Relay** (`smtp.gmail.com:587` with STARTTLS). When a visitor submits a contact message, the application persists the message to MySQL first and then sends a formatted notification email directly to the portfolio owner (`tanviranjum201@gmail.com`).
+
+### Notification Configuration Parameters
+* **Recipient (`OwnerEmail`)**: `tanviranjum201@gmail.com`
+* **Sender (`SenderEmail`)**: `tanviranjum201@gmail.com`
+* **Sender Display Name**: `Tanvir Anjum Portfolio`
+* **SMTP Host**: `smtp.gmail.com`
+* **SMTP Port**: `587`
+* **Security Protocol**: `STARTTLS` (`UseTls: true`)
+* **Authentication**: Gmail address + Google Account **App Password**
 
 ### Security & Reliability Guarantees
 * **Database Primary**: The database remains the primary system of record. If database saving fails, no notification is attempted.
-* **Failure Isolation**: If email delivery fails, the visitor's submission is **never discarded or lost**. The visitor still receives a success confirmation, while the entity records `NotificationStatus = "Failed"` and logs the failure internally.
-* **No Plaintext Secrets**: SMTP credentials must never be committed to Git. They are managed exclusively through `.NET User Secrets` in development or environment variables in production.
+* **Failure Isolation**: If email delivery fails (e.g., SMTP rate limit or incorrect app password), the visitor's submission is **never discarded or lost**. The visitor still receives a success confirmation, while the entity records `NotificationStatus = "Failed"` and logs the failure internally.
+* **No Plaintext Secrets**: Google App Passwords must never be committed to Git. They are managed exclusively through `.NET User Secrets` in development or environment variables in production.
 * **Safe HTML Encoding**: All submitted visitor text is sanitized with `HtmlEncoder.Default.Encode` before inclusion in email HTML bodies.
-* **Reply-To Safety**: The notification email is sent **From** the verified portfolio sender address and sets **Reply-To** to the visitor's email address, allowing one-click owner response while preventing spoofing.
+* **Reply-To Safety**: Outgoing email uses `tanviranjum201@gmail.com` as the authenticated `From` address, while setting `Reply-To` to the visitor's validated email address. This allows one-click owner response while preventing SPF/DKIM spoofing rejections.
 * **No Visitor Auto-Replies**: Notifications are delivered exclusively to the configured portfolio owner.
 
-### Free-Tier Provider Setup (SMTP2GO)
-SMTP2GO provides a permanent free plan offering **1,000 free emails per month** with zero surprise billing:
+---
 
-1. **Sign Up**: Create a free account at [https://www.smtp2go.com](https://www.smtp2go.com).
-2. **Add Verified Sender Domain or Email**:
-   * Navigate to **Settings > Verified Senders**.
-   * Add your custom domain (e.g., `mtanviranjum.tech`) or a single sender email.
-3. **Configure DNS Records** (in your domain DNS provider):
-   * Add the 3 CNAME records generated by SMTP2GO for DKIM signature alignment.
-   * Add the TXT SPF record: `v=spf1 include:spf.smtp2go.com ~all`.
-4. **Create SMTP User Credentials**:
-   * Navigate to **Sending > SMTP Users**.
-   * Add a new SMTP user and set a strong, unique password.
+### Google Account App Password Setup Process
+
+Standard Google account passwords cannot be used with third-party SMTP clients. You must generate a dedicated **16-character App Password**:
+
+1. **Enable 2-Step Verification**:
+   * Open your Google Account security dashboard: [https://myaccount.google.com/security](https://myaccount.google.com/security).
+   * Under **How you sign in to Google**, ensure **2-Step Verification** is turned **ON**.
+2. **Generate an App Password**:
+   * Visit the App Passwords page directly: [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)  
+     *(Official Google guide: [https://support.google.com/accounts/answer/185833](https://support.google.com/accounts/answer/185833))*.
+   * Under **App name**, enter a descriptive label, for example: `Portfolio Contact`.
+   * Click **Create**.
+   * Google displays a 16-character code (e.g. `xxxx xxxx xxxx xxxx`). Copy this code without spaces.
+3. **Store in .NET User Secrets**:
+   * Configure the secret locally using the CLI commands detailed below.
+   * **Security Rule**: Never share, commit, or print this app password.
+
+> **Blocker Note**: If the **App Passwords** page displays a message stating that the setting is unavailable for your account, check whether 2-Step Verification is enabled. If you are using an institutional Google Workspace account where the administrator has disabled 2-Step Verification or App Passwords, use a personal standard `@gmail.com` account or request policy adjustment from your administrator.
+
+---
 
 ### Local Development Configuration (.NET User Secrets)
+
 By default, email notifications are **disabled** (`"Enabled": false`), allowing local development and testing to run cleanly without external dependencies.
 
-To enable live email notifications on your local machine:
+To enable live email notifications on your local machine, execute the following commands in PowerShell from the project root (`E:\Projects\Portfolio`):
 
 ```powershell
-# In E:\Projects\Portfolio:
+# Navigate to the project root
+cd E:\Projects\Portfolio
+
+# Set Gmail SMTP configuration in .NET User Secrets
 dotnet user-secrets set "ContactNotification:Enabled" "true"
-dotnet user-secrets set "ContactNotification:SmtpHost" "mail.smtp2go.com"
+dotnet user-secrets set "ContactNotification:SmtpHost" "smtp.gmail.com"
 dotnet user-secrets set "ContactNotification:SmtpPort" "587"
-dotnet user-secrets set "ContactNotification:Username" "YOUR_SMTP2GO_USERNAME"
-dotnet user-secrets set "ContactNotification:Password" "YOUR_SMTP2GO_PASSWORD"
 dotnet user-secrets set "ContactNotification:UseTls" "true"
-dotnet user-secrets set "ContactNotification:SenderEmail" "notifications@mtanviranjum.tech"
+
+dotnet user-secrets set "ContactNotification:Username" "tanviranjum201@gmail.com"
+dotnet user-secrets set "ContactNotification:Password" "<YOUR_GOOGLE_APP_PASSWORD>"
+
+dotnet user-secrets set "ContactNotification:SenderEmail" "tanviranjum201@gmail.com"
 dotnet user-secrets set "ContactNotification:SenderName" "Tanvir Anjum Portfolio"
 dotnet user-secrets set "ContactNotification:OwnerEmail" "tanviranjum201@gmail.com"
 ```
 
+> **Security Warning**: Replace `<YOUR_GOOGLE_APP_PASSWORD>` with your 16-character generated app password. Do not print your secrets using `dotnet user-secrets list` in public terminals or logs.
+
+---
+
 ### Production Environment Variables
-On your production hosting server (e.g. MonsterASP.NET or Linux container):
-* `ContactNotification__Enabled`: `true`
-* `ContactNotification__SmtpHost`: `mail.smtp2go.com`
-* `ContactNotification__SmtpPort`: `587`
-* `ContactNotification__Username`: `<YOUR_SMTP2GO_USERNAME>`
-* `ContactNotification__Password`: `<YOUR_SMTP2GO_PASSWORD>`
-* `ContactNotification__UseTls`: `true`
-* `ContactNotification__SenderEmail`: `notifications@mtanviranjum.tech`
-* `ContactNotification__SenderName`: `Tanvir Anjum Portfolio`
-* `ContactNotification__OwnerEmail`: `tanviranjum201@gmail.com`
+
+On your production hosting server (e.g., MonsterASP.NET, Linux container, or cloud host), set the following environment variables:
+
+```bash
+ContactNotification__Enabled=true
+ContactNotification__SmtpHost=smtp.gmail.com
+ContactNotification__SmtpPort=587
+ContactNotification__UseTls=true
+ContactNotification__Username=tanviranjum201@gmail.com
+ContactNotification__Password=<YOUR_GOOGLE_APP_PASSWORD>
+ContactNotification__SenderEmail=tanviranjum201@gmail.com
+ContactNotification__SenderName=Tanvir Anjum Portfolio
+ContactNotification__OwnerEmail=tanviranjum201@gmail.com
+```
+
+---
+
+### Manual Test & Verification Procedure
+
+After setting your Google App Password in User Secrets:
+
+1. **Launch the Application**:
+   ```powershell
+   dotnet run
+   ```
+2. **Submit a Synthetic Message**:
+   * Open `http://localhost:5124#contact` in your browser.
+   * Enter a test submission:
+     * **Name**: `Test Visitor`
+     * **Email**: `synthetic-test@example.com`
+     * **Subject**: `Testing Gmail SMTP Notification`
+     * **Message**: `Verifying real-time email dispatch to portfolio owner via Gmail SMTP.`
+   * Click **Send Message**.
+3. **Verify Database Persistence**:
+   * Inspect the `contact_messages` table in MySQL (`portfolio_db`):
+     ```sql
+     USE portfolio_db;
+     SELECT Id, Name, Email, Subject, NotificationStatus, NotificationSentAtUtc, NotificationError 
+     FROM contact_messages 
+     ORDER BY CreatedAtUtc DESC LIMIT 1;
+     ```
+   * Confirm that:
+     * `NotificationStatus` is `'Sent'`.
+     * `NotificationSentAtUtc` contains the current UTC timestamp.
+     * `NotificationError` is `NULL`.
+4. **Confirm Inbox Delivery**:
+   * Open the inbox for `tanviranjum201@gmail.com`.
+   * Confirm receipt of the email with subject `[Portfolio Contact] Testing Gmail SMTP Notification (from Test Visitor)`.
+   * Verify that replying to the message addresses `synthetic-test@example.com` (via `Reply-To`).
+5. **Clean Up Synthetic Record**:
+   ```sql
+   DELETE FROM contact_messages WHERE Email = 'synthetic-test@example.com';
+   ```
 
 ---
 

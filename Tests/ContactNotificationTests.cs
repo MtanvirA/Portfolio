@@ -1,5 +1,6 @@
 using System.Text.Encodings.Web;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Portfolio.Data;
@@ -250,11 +251,46 @@ public class ContactNotificationTests
         var options = new ContactNotificationOptions();
 
         Assert.False(options.Enabled, "Notifications should be disabled by default for zero-friction local development.");
-        Assert.Equal("mail.smtp2go.com", options.SmtpHost);
+        Assert.Equal("smtp.gmail.com", options.SmtpHost);
         Assert.Equal(587, options.SmtpPort);
         Assert.Equal("tanviranjum201@gmail.com", options.OwnerEmail);
-        Assert.Empty(options.Username);
+        Assert.Equal("tanviranjum201@gmail.com", options.SenderEmail);
+        Assert.Equal("tanviranjum201@gmail.com", options.Username);
         Assert.Empty(options.Password);
+    }
+
+    [Fact]
+    public void NotificationOptions_CanBindFromConfiguration_WithGmailSettings()
+    {
+        var inMemorySettings = new Dictionary<string, string?>
+        {
+            { "ContactNotification:Enabled", "false" },
+            { "ContactNotification:SmtpHost", "smtp.gmail.com" },
+            { "ContactNotification:SmtpPort", "587" },
+            { "ContactNotification:Username", "tanviranjum201@gmail.com" },
+            { "ContactNotification:Password", "mock_app_password" },
+            { "ContactNotification:UseTls", "true" },
+            { "ContactNotification:SenderEmail", "tanviranjum201@gmail.com" },
+            { "ContactNotification:SenderName", "Tanvir Anjum Portfolio" },
+            { "ContactNotification:OwnerEmail", "tanviranjum201@gmail.com" }
+        };
+
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(inMemorySettings)
+            .Build();
+
+        var options = new ContactNotificationOptions();
+        configuration.GetSection(ContactNotificationOptions.SectionName).Bind(options);
+
+        Assert.False(options.Enabled);
+        Assert.Equal("smtp.gmail.com", options.SmtpHost);
+        Assert.Equal(587, options.SmtpPort);
+        Assert.Equal("tanviranjum201@gmail.com", options.Username);
+        Assert.Equal("mock_app_password", options.Password);
+        Assert.True(options.UseTls);
+        Assert.Equal("tanviranjum201@gmail.com", options.SenderEmail);
+        Assert.Equal("Tanvir Anjum Portfolio", options.SenderName);
+        Assert.Equal("tanviranjum201@gmail.com", options.OwnerEmail);
     }
 
     [Fact]

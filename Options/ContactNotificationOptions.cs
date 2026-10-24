@@ -11,23 +11,22 @@ public class ContactNotificationOptions
     public bool Enabled { get; set; } = false;
 
     /// <summary>
-    /// SMTP Relay Host (e.g. "mail.smtp2go.com").
+    /// SMTP Relay Host (e.g. "smtp.gmail.com").
     /// </summary>
-    public string SmtpHost { get; set; } = "mail.smtp2go.com";
+    public string SmtpHost { get; set; } = "smtp.gmail.com";
 
     /// <summary>
-    /// SMTP Relay Port (typically 587 or 2525 for TLS, or 465 for SSL).
+    /// SMTP Relay Port (typically 587 for STARTTLS, or 465 for SSL).
     /// </summary>
     public int SmtpPort { get; set; } = 587;
 
     /// <summary>
-    /// SMTP Authentication Username. Must be configured locally via .NET User Secrets
-    /// or in production via environment variables.
+    /// SMTP Authentication Username (your full Gmail address).
     /// </summary>
-    public string Username { get; set; } = string.Empty;
+    public string Username { get; set; } = "tanviranjum201@gmail.com";
 
     /// <summary>
-    /// SMTP Authentication Password. Never commit to version control.
+    /// SMTP Authentication Password (Google Account App Password). Never commit to version control.
     /// </summary>
     public string Password { get; set; } = string.Empty;
 
@@ -37,9 +36,9 @@ public class ContactNotificationOptions
     public bool UseTls { get; set; } = true;
 
     /// <summary>
-    /// Verified sender email address configured on the SMTP provider (e.g. notifications@mtanviranjum.tech).
+    /// Sender email address (tanviranjum201@gmail.com).
     /// </summary>
-    public string SenderEmail { get; set; } = "notifications@mtanviranjum.tech";
+    public string SenderEmail { get; set; } = "tanviranjum201@gmail.com";
 
     /// <summary>
     /// Display name for the sender.
