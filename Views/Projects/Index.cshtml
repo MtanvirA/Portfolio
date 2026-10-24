@@ -1,0 +1,95 @@
+@model IReadOnlyList<Portfolio.Models.ProjectItem>
+@{
+    ViewData["Title"] = "Engineering Projects Catalogue";
+    ViewData["Description"] = "Explore academic and engineering projects developed by Md. Tanvir Anjum using C#, ASP.NET Core, MySQL, and C++.";
+    var categories = ViewBag.Categories as IReadOnlyList<string> ?? new List<string>();
+    var selectedCategory = ViewBag.SelectedCategory as string ?? "all";
+}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+    
+    <!-- Header -->
+    <div class="max-w-3xl space-y-4">
+        <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+            // Full Catalogue
+        </div>
+        <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-white tracking-tight">
+            Engineering Projects &amp; Case Studies
+        </h1>
+        <p class="text-base text-slate-300 leading-relaxed">
+            A comprehensive look at software, embedded prototypes, and systems engineering projects. Each project represents hands-on exploration of algorithms, architectures, and relational data modeling.
+        </p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap items-center gap-2 pt-2 border-b border-[#212836] pb-6">
+        <a asp-controller="Projects" asp-action="Index" asp-route-category="all" 
+           class="px-4 py-2 rounded-lg text-xs font-mono-code transition-all @(selectedCategory == "all" ? "bg-[#d4ff3a] text-[#090a0f] font-bold" : "bg-[#141822] text-slate-400 border border-[#232a36] hover:text-white")">
+            All Projects (@Model.Count)
+        </a>
+        @foreach (var cat in categories)
+        {
+            <a asp-controller="Projects" asp-action="Index" asp-route-category="@cat" 
+               class="px-4 py-2 rounded-lg text-xs font-mono-code transition-all @(string.Equals(selectedCategory, cat, StringComparison.OrdinalIgnoreCase) ? "bg-[#d4ff3a] text-[#090a0f] font-bold" : "bg-[#141822] text-slate-400 border border-[#232a36] hover:text-white")">
+                @cat
+            </a>
+        }
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @foreach (var project in Model)
+        {
+            <article class="flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] hover:border-slate-500 overflow-hidden transition-all duration-300 group shadow-lg">
+                <div class="relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735] overflow-hidden">
+                    <img src="@project.ImageUrl" 
+                         alt="@project.Title overview" 
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                         loading="lazy" />
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
+                        @project.Status
+                    </div>
+                </div>
+
+                <div class="p-6 flex flex-col flex-grow space-y-4">
+                    <div>
+                        <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">@project.Category</span>
+                        <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                            @project.Title
+                        </h2>
+                        <p class="font-mono-code text-xs text-slate-400 mt-0.5">@project.Tagline</p>
+                    </div>
+
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        @project.ShortDescription
+                    </p>
+
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                        @foreach (var tech in project.Technologies.Take(4))
+                        {
+                            <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">
+                                @tech
+                            </span>
+                        }
+                    </div>
+
+                    <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                        <a asp-controller="Projects" asp-action="Details" asp-route-slug="@project.Slug" 
+                           class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline">
+                            <span>Read Case Study</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        @if (!string.IsNullOrEmpty(project.RepositoryUrl))
+                        {
+                            <a href="@project.RepositoryUrl" target="_blank" rel="noopener noreferrer" 
+                               class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                <span>Code &rarr;</span>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+
+</div>

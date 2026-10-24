@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Page Not Found";
+    var code = ViewBag.StatusCode as int? ?? 404;
+}
+
+<div class="min-h-[70vh] flex items-center justify-center px-4 py-24">
+    <div class="max-w-md w-full text-center space-y-6 p-8 rounded-2xl bg-[#10141d] border border-[#212836] shadow-2xl">
+        <div class="font-mono-code text-5xl font-extrabold text-[#d4ff3a]">
+            @code
+        </div>
+        <div class="space-y-2">
+            <h1 class="font-display font-bold text-2xl text-white">Resource Not Found</h1>
+            <p class="text-sm text-slate-400">
+                The page or project route you requested doesn't exist or may have been relocated.
+            </p>
+        </div>
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#d4ff3a] text-[#090a0f] font-bold text-xs uppercase tracking-wider transition-colors hover:bg-[#c2ed2c]">
+                Return Home
+            </a>
+            <a href="/projects" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#141822] text-slate-300 hover:text-white border border-[#232a36] text-xs font-mono-code transition-colors">
+                View Projects
+            </a>
+        </div>
+    </div>
+</div>

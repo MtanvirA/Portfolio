@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0e14" />
+      <stop offset="100%" stop-color="#141a24" />
+    </linearGradient>
+  </defs>
+
+  <!-- Frame Background -->
+  <rect width="800" height="500" rx="16" fill="url(#cBg)" />
+  <rect x="1" y="1" width="798" height="498" rx="15" fill="none" stroke="#222c3d" stroke-width="1.5" />
+
+  <!-- App Header -->
+  <rect x="0" y="0" width="800" height="48" rx="16" fill="#10151f" />
+  <circle cx="28" cy="24" r="6" fill="#ef4444" />
+  <circle cx="48" cy="24" r="6" fill="#f59e0b" />
+  <circle cx="68" cy="24" r="6" fill="#10b981" />
+  <text x="400" y="28" font-family="'JetBrains Mono', monospace" font-size="12" fill="#64748b" text-anchor="middle">CampusSync / PSTU CSE Schedule &amp; Lab Coordination Prototype</text>
+
+  <!-- Timetable Matrix View -->
+  <rect x="30" y="70" width="740" height="400" rx="12" fill="#0f141d" stroke="#1f2937" stroke-width="1.5" />
+
+  <!-- Matrix Header Days -->
+  <g transform="translate(50, 90)">
+    <text x="60" y="20" font-family="'JetBrains Mono', monospace" font-size="11" fill="#64748b">TIME / SLOT</text>
+    <text x="190" y="20" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#f8fafc">SUN</text>
+    <text x="310" y="20" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#f8fafc">MON</text>
+    <text x="430" y="20" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#f8fafc">TUE</text>
+    <text x="550" y="20" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#f8fafc">WED</text>
+    <text x="660" y="20" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#f8fafc">THU</text>
+    <line x1="0" y1="32" x2="700" y2="32" stroke="#223044" />
+  </g>
+
+  <!-- Slots -->
+  <!-- 09:00 - 10:30 -->
+  <g transform="translate(50, 140)">
+    <text x="10" y="30" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">09:00 - 10:30</text>
+    
+    <!-- Sun Slot: DSA -->
+    <rect x="150" y="0" width="105" height="55" rx="6" fill="#182333" stroke="#25354d" stroke-width="1" />
+    <text x="160" y="22" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#38bdf8">CSE-211 DSA</text>
+    <text x="160" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Room 302</text>
+
+    <!-- Mon Slot: OOP Lab -->
+    <rect x="270" y="0" width="105" height="55" rx="6" fill="rgba(20, 184, 166, 0.15)" stroke="#14b8a6" stroke-width="1" />
+    <text x="280" y="22" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#2dd4bf">OOP Lab</text>
+    <text x="280" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Software Lab 1</text>
+
+    <!-- Tue Slot: Math -->
+    <rect x="390" y="0" width="105" height="55" rx="6" fill="#182333" stroke="#25354d" stroke-width="1" />
+    <text x="400" y="22" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#e2e8f0">MATH-201</text>
+    <text x="400" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Room 304</text>
+
+    <!-- Wed Slot: Free -->
+    <rect x="510" y="0" width="105" height="55" rx="6" fill="#121721" stroke="#1d2633" stroke-dasharray="3 3" />
+    <text x="562" y="32" font-family="'JetBrains Mono', monospace" font-size="10" fill="#475569" text-anchor="middle">Open Slot</text>
+
+    <!-- Thu Slot: SE -->
+    <rect x="630" y="0" width="60" height="55" rx="6" fill="#182333" stroke="#25354d" stroke-width="1" />
+    <text x="640" y="22" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#d4ff3a">SE-215</text>
+    <text x="640" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Room 301</text>
+  </g>
+
+  <!-- 10:45 - 12:15 -->
+  <g transform="translate(50, 215)">
+    <text x="10" y="30" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">10:45 - 12:15</text>
+    
+    <rect x="150" y="0" width="105" height="55" rx="6" fill="#182333" stroke="#25354d" stroke-width="1" />
+    <text x="160" y="22" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#f8fafc">Discrete Math</text>
+    <text x="160" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Room 302</text>
+
+    <rect x="270" y="0" width="105" height="55" rx="6" fill="#182333" stroke="#25354d" stroke-width="1" />
+    <text x="280" y="22" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#38bdf8">DSA Theory</text>
+    <text x="280" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Room 302</text>
+
+    <!-- Conflict Detection Alert Banner Example -->
+    <rect x="390" y="0" width="225" height="55" rx="6" fill="rgba(212, 255, 58, 0.1)" stroke="#d4ff3a" stroke-width="1" />
+    <text x="405" y="22" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#d4ff3a">&check; ZERO LAB CONFLICTS</text>
+    <text x="405" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#cbd5e1">Validated: CSE-2023 Batch</text>
+
+    <rect x="630" y="0" width="60" height="55" rx="6" fill="#121721" stroke="#1d2633" stroke-dasharray="3 3" />
+    <text x="660" y="32" font-family="'JetBrains Mono', monospace" font-size="10" fill="#475569" text-anchor="middle">Open</text>
+  </g>
+
+  <!-- Prototype Banner Bottom -->
+  <g transform="translate(50, 310)">
+    <rect width="700" height="130" rx="8" fill="#141a24" stroke="#243144" stroke-width="1" />
+    <text x="20" y="30" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold" fill="#f1f5f9">Prototype Scope &amp; Architecture Notes</text>
+    <text x="20" y="55" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#94a3b8">&bull; Designed for PSTU CSE Department semester &amp; lab scheduling coordination</text>
+    <text x="20" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#94a3b8">&bull; Entity relationship schema linking Batches, Instructors, Labs, and Time Slots</text>
+    <text x="20" y="95" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#94a3b8">&bull; Current Status: Department Prototype / Conceptual Model. Under continuous design refinement.</text>
+    <rect x="520" y="20" width="160" height="28" rx="14" fill="#1e293b" />
+    <text x="600" y="38" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8" text-anchor="middle">STATUS: IN DESIGN</text>
+  </g>
+</svg>

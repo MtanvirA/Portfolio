@@ -1,0 +1,721 @@
+@model Portfolio.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Portfolio";
+    ViewData["Description"] = $"{Model.Options.FullName} — {Model.Options.RoleTitle} at Patuakhali Science and Technology University (PSTU).";
+}
+
+<div class="relative overflow-hidden">
+
+    <!-- ========================================================
+         HERO SECTION
+         ======================================================== -->
+    <section id="top" class="relative min-h-[calc(100vh-4.5rem)] flex items-center pt-8 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-grid-pattern">
+        
+        <!-- Ambient radial glow (subtle, restrained) -->
+        <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#d4ff3a]/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#14b8a6]/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full z-10">
+            
+            <!-- Hero Content -->
+            <div class="lg:col-span-7 space-y-6">
+                
+                <!-- Status pill -->
+                <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-[#141923] border border-[#232d3d] text-xs font-mono-code text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span>
+                    <span>CSE Undergraduate @@ PSTU &bull; Session 2023–2024</span>
+                </div>
+
+                <!-- Primary Headline -->
+                <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1]">
+                    Building useful software.<br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d4ff3a] via-[#86efac] to-[#38bdf8]">
+                        Solving problems.
+                    </span><br />
+                    Learning by doing.
+                </h1>
+
+                <!-- Supporting Description -->
+                <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+                    I'm <strong class="text-white font-semibold">@Model.Options.FullName</strong>, a Computer Science and Engineering student at <span class="text-slate-100 font-medium">Patuakhali Science and Technology University</span> working toward becoming a full-stack developer. I enjoy problem-solving, competitive programming, and turning ideas into practical software.
+                </p>
+
+                <!-- Action CTAs -->
+                <div class="pt-2 flex flex-wrap items-center gap-4">
+                    <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#d4ff3a] hover:bg-[#c2ed2c] text-[#090a0f] font-semibold text-sm transition-all duration-200 shadow-lg shadow-[#d4ff3a]/10 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a] focus:ring-offset-2 focus:ring-offset-[#090a0f]">
+                        <span>Explore my work</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                    </a>
+                    
+                    <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#141822] hover:bg-[#1a2130] text-slate-200 hover:text-white border border-[#232a36] hover:border-slate-600 font-semibold text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]">
+                        <span>Get in touch</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <!-- Direct WhatsApp Quick Connect -->
+                    <a href="@Model.Options.GetWhatsAppUrl()" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-[#0e241b] hover:bg-[#123326] text-[#4ade80] border border-[#1d4d38] font-medium text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                       title="Direct WhatsApp chat">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        <span>WhatsApp Connect</span>
+                    </a>
+                </div>
+
+                <!-- Academic Highlights Bar -->
+                <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-[#1b2230]">
+                    <div>
+                        <div class="font-mono-code text-xl font-bold text-white">3.820</div>
+                        <div class="text-xs text-slate-400 font-medium">Cumulative CGPA</div>
+                    </div>
+                    <div>
+                        <div class="font-mono-code text-xl font-bold text-white">3rd Sem</div>
+                        <div class="text-xs text-slate-400 font-medium">Completed at PSTU</div>
+                    </div>
+                    <div>
+                        <div class="font-mono-code text-xl font-bold text-white">Full-Stack</div>
+                        <div class="text-xs text-slate-400 font-medium">C# &bull; ASP.NET &bull; MySQL</div>
+                    </div>
+                    <div>
+                        <div class="font-mono-code text-xl font-bold text-white">Algorithms</div>
+                        <div class="text-xs text-slate-400 font-medium">C++ Problem Solving</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Hero Portrait Monogram Placeholder -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-sm sm:max-w-md">
+                    
+                    <!-- Decorative border frame -->
+                    <div class="absolute -inset-1.5 rounded-3xl bg-gradient-to-b from-[#232a36] via-[#161b24] to-[#d4ff3a]/20 opacity-70 blur-sm"></div>
+                    
+                    <div class="relative rounded-2xl bg-[#0f131a] border border-[#232a36] p-4 sm:p-5 shadow-2xl">
+                        
+                        <!-- Visual Image Container: Easily replaceable by placing profile.jpg in wwwroot/images/ -->
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-[#0a0c10] border border-[#1b2230] group">
+                            
+                            <!-- Profile placeholder illustration -->
+                            <img src="~/images/profile-placeholder.svg" 
+                                 alt="Md. Tanvir Anjum — Portfolio Monogram" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                                 id="heroProfileImg"
+                                 onerror="this.src='/images/profile-placeholder.svg'" />
+
+                            <!-- Bottom caption badge -->
+                            <div class="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-[#0b0e14]/90 backdrop-blur-md border border-[#232a36] flex items-center justify-between text-xs font-mono-code">
+                                <span class="text-slate-300">Md. Tanvir Anjum</span>
+                                <span class="text-[#d4ff3a] font-bold">PSTU CSE '23</span>
+                            </div>
+                        </div>
+
+                        <!-- Technical Card Footer -->
+                        <div class="mt-4 flex items-center justify-between text-xs font-mono-code text-slate-400">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-[#14b8a6]"></span>
+                                Active Learner
+                            </span>
+                            <span>@Model.Options.CanonicalDomain.Replace("https://", "")</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================================
+         ABOUT SECTION
+         ======================================================== -->
+    <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+        
+        <div class="max-w-3xl space-y-4 mb-16">
+            <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                // 01. About Me
+            </div>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                Engineering software with curiosity, discipline, and practical purpose.
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Left Editorial Text -->
+            <div class="lg:col-span-7 space-y-6 text-slate-300 text-base sm:text-lg leading-relaxed">
+                <p>
+                    I am an undergraduate Computer Science and Engineering student at <strong class="text-white font-medium">Patuakhali Science and Technology University (PSTU)</strong>, Bangladesh (session 2023–2024). My focus is on building practical full-stack web applications and strengthening algorithmic problem-solving skills.
+                </p>
+                <p>
+                    I view programming as both a creative craft and a disciplined engineering practice. On one side, I enjoy the intellectual rigor of competitive programming—dissecting graph theory, dynamic programming, and data structures in <strong class="text-white font-medium">C++</strong> on Codeforces and LeetCode. On the other, I enjoy architecting server-rendered web applications using <strong class="text-white font-medium">C# and ASP.NET Core MVC</strong>, backed by relational <strong class="text-white font-medium">MySQL</strong> databases.
+                </p>
+                <p>
+                    I believe the best way to master computing is through hands-on construction. Whether designing relational schemas and financial accounting logic for <strong class="text-white font-medium">ShareSync</strong>, prototyping embedded sensors on an <strong class="text-white font-medium">ESP32</strong>, or wireframing academic scheduling systems for our department, I value honest engineering decisions over hollow buzzwords.
+                </p>
+            </div>
+
+            <!-- Right Focus Pillars -->
+            <div class="lg:col-span-5 space-y-4">
+                
+                <div class="p-6 rounded-2xl bg-[#10141d] border border-[#212836] hover:border-slate-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-[#d4ff3a]/10 text-[#d4ff3a]">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-base text-white">Full-Stack Development</h3>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        Designing clean server architectures with ASP.NET Core, relational databases in MySQL, and modern responsive user interfaces with semantic HTML, Tailwind, and vanilla JavaScript.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-[#10141d] border border-[#212836] hover:border-slate-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-[#14b8a6]/10 text-[#14b8a6]">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-base text-white">Competitive Programming</h3>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        Regular problem solving in C++ across Codeforces and LeetCode to build speed, mathematical intuition, and robust algorithmic thinking under resource constraints.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-[#10141d] border border-[#212836] hover:border-slate-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-sky-500/10 text-sky-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h3 class="font-display font-bold text-base text-white">Academic Excellence</h3>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        Maintaining a strong 3.820 cumulative CGPA through 3 semesters at PSTU while balancing core theoretical foundations in computing and electronics.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================================
+         PROJECTS SECTION
+         ======================================================== -->
+    <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+                <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                    // 02. Verified Projects
+                </div>
+                <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight mt-1">
+                    Featured Engineering Work
+                </h2>
+                <p class="text-sm text-slate-400 mt-2 max-w-xl">
+                    Genuine academic and exploratory projects reflecting actual implementation details, verified technologies, and architecture notes.
+                </p>
+            </div>
+
+            <!-- Project Filters -->
+            <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Project category filter">
+                <button type="button" 
+                        class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code font-semibold transition-all bg-[#d4ff3a] text-[#090a0f] border border-[#d4ff3a]" 
+                        data-category="all"
+                        aria-pressed="true">
+                    All (3)
+                </button>
+                <button type="button" 
+                        class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500" 
+                        data-category="Full-Stack Web"
+                        aria-pressed="false">
+                    Full-Stack
+                </button>
+                <button type="button" 
+                        class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500" 
+                        data-category="IoT & Systems"
+                        aria-pressed="false">
+                    IoT / Embedded
+                </button>
+                <button type="button" 
+                        class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500" 
+                        data-category="Academic Systems"
+                        aria-pressed="false">
+                    Department Systems
+                </button>
+            </div>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            @foreach (var project in Model.Projects)
+            {
+                <article class="project-card flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] hover:border-slate-600 overflow-hidden transition-all duration-300 group shadow-lg"
+                         data-category="@project.Category">
+                    
+                    <!-- Visual Header / Schematic -->
+                    <div class="relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735] overflow-hidden">
+                        <img src="@project.ImageUrl" 
+                             alt="@project.Title Technical Overview" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             loading="lazy" />
+                        
+                        <!-- Status Badge -->
+                        <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
+                            @project.Status
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="p-6 flex flex-col flex-grow space-y-4">
+                        
+                        <div>
+                            <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">@project.Category</span>
+                            <h3 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                @project.Title
+                            </h3>
+                            <p class="font-mono-code text-xs text-slate-400 mt-0.5">@project.Tagline</p>
+                        </div>
+
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            @project.ShortDescription
+                        </p>
+
+                        <!-- Key Highlights -->
+                        <div class="space-y-1.5 pt-2 border-t border-[#1a212d]">
+                            <p class="font-mono-code text-[11px] text-slate-400 font-semibold uppercase">Architecture Highlights:</p>
+                            <ul class="space-y-1 text-xs text-slate-300">
+                                @foreach (var hl in project.Highlights.Take(2))
+                                {
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-[#d4ff3a] font-bold">&bull;</span>
+                                        <span>@hl</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
+                        <!-- Tech tags -->
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            @foreach (var tech in project.Technologies.Take(4))
+                            {
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">
+                                    @tech
+                                </span>
+                            }
+                            @if (project.Technologies.Count > 4)
+                            {
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] text-[11px] font-mono-code text-slate-500">
+                                    +@(project.Technologies.Count - 4)
+                                </span>
+                            }
+                        </div>
+
+                        <!-- Card Action Links -->
+                        <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                            <a asp-controller="Projects" asp-action="Details" asp-route-slug="@project.Slug" 
+                               class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline focus:outline-none focus:ring-1 focus:ring-[#d4ff3a] rounded py-1 px-2">
+                                <span>Read Case Study</span>
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+
+                            @if (!string.IsNullOrEmpty(project.RepositoryUrl))
+                            {
+                                <a href="@project.RepositoryUrl" target="_blank" rel="noopener noreferrer" 
+                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                    <span>Code</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            }
+                        </div>
+
+                    </div>
+
+                </article>
+            }
+        </div>
+
+    </section>
+
+    <!-- ========================================================
+         SKILLS SECTION
+         ======================================================== -->
+    <section id="skills" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+        
+        <div class="max-w-3xl space-y-4 mb-16">
+            <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                // 03. Technical Competencies
+            </div>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                Tools and technologies I actively use and learn.
+            </h2>
+            <p class="text-sm text-slate-400">
+                Categorized by actual practical familiarity. No misleading percentage bars—only verified roles and technologies.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @foreach (var category in Model.SkillCategories)
+            {
+                <div class="p-6 rounded-2xl bg-[#10141d] border border-[#212836] flex flex-col space-y-6">
+                    
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-white">@category.Title</h3>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">@category.Description</p>
+                    </div>
+
+                    <div class="space-y-4 flex-grow">
+                        @foreach (var skill in category.Skills)
+                        {
+                            <div class="p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-mono-code font-bold text-sm text-slate-100">@skill.Name</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border @skill.LevelBadgeClass">
+                                        @skill.LevelDisplay
+                                    </span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    @skill.RoleContext
+                                </p>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            }
+        </div>
+
+    </section>
+
+    <!-- ========================================================
+         EDUCATION SECTION
+         ======================================================== -->
+    <section id="education" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+        
+        <div class="max-w-3xl space-y-4 mb-16">
+            <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                // 04. Academic Records
+            </div>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                Education &amp; Provisional Transcript Standing
+            </h2>
+            <p class="text-sm text-slate-400">
+                Official provisional academic standing at Patuakhali Science and Technology University (PSTU). Degree is in active progress.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Overall Degree Summary Card -->
+            <div class="lg:col-span-5 p-8 rounded-2xl bg-[#10141d] border border-[#212836] space-y-6">
+                
+                <div class="space-y-1">
+                    <span class="font-mono-code text-xs text-[#d4ff3a] uppercase font-semibold">Undergraduate Program</span>
+                    <h3 class="font-display font-bold text-xl text-white">
+                        @Model.Education.Degree
+                    </h3>
+                    <p class="text-sm text-slate-300 font-medium">
+                        @Model.Education.Institution
+                    </p>
+                    <p class="font-mono-code text-xs text-slate-400">
+                        Academic Session: @Model.Education.AcademicSession
+                    </p>
+                </div>
+
+                <!-- Cumulative CGPA Highlight Box -->
+                <div class="p-5 rounded-xl bg-[#161c26] border border-[#252f3f] flex items-center justify-between">
+                    <div>
+                        <div class="text-xs font-mono-code text-slate-400 uppercase">Cumulative CGPA</div>
+                        <div class="text-xs text-slate-500">(Through 3rd Semester)</div>
+                    </div>
+                    <div class="font-display font-extrabold text-4xl text-[#d4ff3a]">
+                        @Model.Education.CumulativeCgpaThroughThirdSemester.ToString("0.000")
+                    </div>
+                </div>
+
+                <!-- Verified Course Highlights -->
+                <div class="space-y-2">
+                    <p class="font-mono-code text-xs text-slate-400 font-semibold uppercase">Completed Course Highlights:</p>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach (var course in Model.Education.HighlightedCourses)
+                        {
+                            <span class="px-2.5 py-1 rounded-md bg-[#141923] border border-[#212b3b] font-mono-code text-xs text-slate-300">
+                                @course
+                            </span>
+                        }
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-500 font-mono-code border-t border-slate-800/80 pt-4">
+                    @Model.Education.Note
+                </p>
+
+            </div>
+
+            <!-- Semester-by-Semester Table Breakdown -->
+            <div class="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#10141d] border border-[#212836] space-y-6">
+                
+                <div>
+                    <h4 class="font-display font-bold text-lg text-white">Semester GPA &amp; Cumulative CGPA Breakdown</h4>
+                    <p class="text-xs font-mono-code text-slate-400 mt-1">Official provisional semester calculations</p>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-[#212836] text-xs font-mono-code text-slate-400">
+                                <th class="py-3 px-4 font-semibold">Semester</th>
+                                <th class="py-3 px-4 font-semibold">Semester GPA</th>
+                                <th class="py-3 px-4 font-semibold">Cumulative CGPA</th>
+                                <th class="py-3 px-4 font-semibold hidden sm:table-cell">Academic Focus</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#1b2230] text-sm font-mono-code">
+                            @foreach (var sem in Model.Education.SemesterResults)
+                            {
+                                <tr class="hover:bg-[#141923]/60 transition-colors">
+                                    <td class="py-4 px-4 font-bold text-white">@sem.SemesterName</td>
+                                    <td class="py-4 px-4 text-[#38bdf8] font-semibold">@sem.SemesterGpa.ToString("0.000")</td>
+                                    <td class="py-4 px-4 text-[#d4ff3a] font-bold">@sem.CumulativeCgpa.ToString("0.000")</td>
+                                    <td class="py-4 px-4 text-xs text-slate-400 hidden sm:table-cell font-sans">
+                                        @sem.Remarks
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="p-4 rounded-xl bg-[#131720] border border-[#1f2735] text-xs text-slate-400 leading-relaxed">
+                    <strong class="text-slate-200">Integrity notice:</strong> Semester GPA and Cumulative CGPA are computed under PSTU's grading scale. Private transcript numbers, registration numbers, and roll IDs are omitted to safeguard privacy.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================================================
+         CODING PROFILES SECTION
+         ======================================================== -->
+    <section id="profiles" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+        
+        <div class="max-w-3xl space-y-4 mb-16">
+            <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                // 05. Developer Presence
+            </div>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                Coding Profiles &amp; Problem-Solving Hubs
+            </h2>
+            <p class="text-sm text-slate-400">
+                Explore real algorithmic submissions, contest histories, and open-source contributions.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach (var profile in Model.CodingProfiles)
+            {
+                <a href="@profile.Url" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="p-6 rounded-2xl bg-[#10141d] border border-[#212836] hover:border-[#d4ff3a] transition-all duration-300 group flex flex-col justify-between space-y-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]">
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-display font-bold text-lg text-white group-hover:text-[#d4ff3a] transition-colors">
+                                @profile.Platform
+                            </span>
+                            <span class="text-slate-500 group-hover:text-white transition-colors">&rarr;</span>
+                        </div>
+                        <div class="font-mono-code text-xs text-slate-300 bg-[#161c26] px-2 py-1 rounded inline-block">
+                            @profile.Handle
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            @profile.Description
+                        </p>
+                    </div>
+
+                    <div class="pt-3 border-t border-[#1b2230] text-[11px] font-mono-code text-[#38bdf8]">
+                        @profile.RoleOrFocus
+                    </div>
+
+                </a>
+            }
+        </div>
+
+    </section>
+
+    <!-- ========================================================
+         CONTACT SECTION
+         ======================================================== -->
+    <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 space-y-6">
+                
+                <div class="space-y-2">
+                    <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                        // 06. Communication
+                    </div>
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                        Let's connect and build together.
+                    </h2>
+                    <p class="text-sm text-slate-300 leading-relaxed pt-2">
+                        Whether you want to discuss full-stack software development, collaborate on open-source, or talk competitive programming, I'd love to hear from you.
+                    </p>
+                </div>
+
+                <!-- Channels List -->
+                <div class="space-y-4 pt-4">
+                    
+                    <!-- Email Direct -->
+                    <a href="mailto:@Model.Options.Email" class="flex items-center gap-4 p-4 rounded-xl bg-[#10141d] border border-[#212836] hover:border-slate-500 transition-colors group">
+                        <div class="p-3 rounded-lg bg-slate-800/80 text-[#d4ff3a]">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono-code text-slate-400 block">Direct Email</span>
+                            <span class="text-sm font-semibold text-white group-hover:text-[#d4ff3a] transition-colors">@Model.Options.Email</span>
+                        </div>
+                    </a>
+
+                    <!-- WhatsApp Direct (No visible phone number printed) -->
+                    <a href="@Model.Options.GetWhatsAppUrl()" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-xl bg-[#0c1f17] border border-[#1b4332] hover:border-[#2d6a4f] transition-colors group">
+                        <div class="p-3 rounded-lg bg-[#143d2c] text-[#4ade80]">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono-code text-emerald-400/80 block">Instant Chat</span>
+                            <span class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">Start WhatsApp Conversation</span>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="p-4 rounded-xl bg-[#10141d] border border-[#212836] text-xs font-mono-code text-slate-400 space-y-1">
+                    <div>Patuakhali Science and Technology University</div>
+                    <div>Dumki, Patuakhali-8602, Bangladesh</div>
+                    <div class="text-[#d4ff3a]">Timezone: Asia/Dhaka (GMT+6)</div>
+                </div>
+
+            </div>
+
+            <!-- Right: Server-Backed MySQL Contact Form -->
+            <div class="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#10141d] border border-[#212836] shadow-xl">
+                
+                <h3 class="font-display font-bold text-2xl text-white mb-2">Send a Message</h3>
+                <p class="text-xs text-slate-400 mb-6 font-mono-code">
+                    Persisted directly to MySQL via Entity Framework Core with server validation &amp; rate limiting.
+                </p>
+
+                <!-- Feedback Banner for PRG and non-JS clients -->
+                <div id="contactFeedback" class="@(Model.HasFeedback ? "" : "hidden") mb-6 p-4 rounded-xl text-sm flex items-start gap-3 @(Model.FeedbackIsSuccess ? "border border-emerald-500/40 bg-emerald-950/30 text-emerald-300" : "border border-amber-500/40 bg-amber-950/30 text-amber-300")">
+                    @if (Model.HasFeedback)
+                    {
+                        <svg class="w-5 h-5 shrink-0 mt-0.5 @(Model.FeedbackIsSuccess ? "text-emerald-400" : "text-amber-400")" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <p class="font-semibold">@(Model.FeedbackIsSuccess ? "Message Received" : "Notice")</p>
+                            <p class="mt-1">@Model.FeedbackMessage</p>
+                        </div>
+                    }
+                </div>
+
+                <form id="contactForm" asp-controller="Home" asp-action="SubmitContact" method="post" class="space-y-5" novalidate>
+                    @Html.AntiForgeryToken()
+
+                    <!-- Hidden Honeypot Anti-Spam Field -->
+                    <div class="hidden" aria-hidden="true">
+                        <label for="honeypot_field">Do not fill this field</label>
+                        <input type="text" id="honeypot_field" name="HoneyPotCompany" tabindex="-1" autocomplete="off" />
+                    </div>
+
+                    <!-- Name Field -->
+                    <div>
+                        <label asp-for="ContactForm.Name" class="block text-xs font-mono-code text-slate-300 uppercase mb-1">
+                            Your Name <span class="text-rose-400">*</span>
+                        </label>
+                        <input asp-for="ContactForm.Name" 
+                               name="Name"
+                               required 
+                               maxlength="100"
+                               placeholder="e.g. Alex Rahman"
+                               class="w-full px-4 py-3 rounded-xl bg-[#141822] border border-[#232a36] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[#d4ff3a] focus:ring-1 focus:ring-[#d4ff3a] transition-colors" />
+                        <span asp-validation-for="ContactForm.Name" class="error-feedback text-rose-400 text-xs mt-1 block font-mono-code">
+                            Please provide your name.
+                        </span>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <label asp-for="ContactForm.Email" class="block text-xs font-mono-code text-slate-300 uppercase">
+                                Email Address <span class="text-rose-400">*</span>
+                            </label>
+                            <span class="text-[11px] font-mono-code text-slate-500">I will reply here</span>
+                        </div>
+                        <input asp-for="ContactForm.Email" 
+                               name="Email"
+                               type="email"
+                               required 
+                               maxlength="150"
+                               placeholder="you@domain.com"
+                               class="w-full px-4 py-3 rounded-xl bg-[#141822] border border-[#232a36] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[#d4ff3a] focus:ring-1 focus:ring-[#d4ff3a] transition-colors" />
+                        <span asp-validation-for="ContactForm.Email" class="error-feedback text-rose-400 text-xs mt-1 block font-mono-code">
+                            Please provide a valid email address.
+                        </span>
+                    </div>
+
+                    <!-- Subject Field (Optional) -->
+                    <div>
+                        <label asp-for="ContactForm.Subject" class="block text-xs font-mono-code text-slate-300 uppercase mb-1">
+                            Subject <span class="text-slate-500 font-normal">(Optional)</span>
+                        </label>
+                        <input asp-for="ContactForm.Subject" 
+                               name="Subject"
+                               maxlength="200"
+                               placeholder="Project inquiry / Full-stack collaboration / Feedback"
+                               class="w-full px-4 py-3 rounded-xl bg-[#141822] border border-[#232a36] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[#d4ff3a] focus:ring-1 focus:ring-[#d4ff3a] transition-colors" />
+                    </div>
+
+                    <!-- Message Field -->
+                    <div>
+                        <label asp-for="ContactForm.Message" class="block text-xs font-mono-code text-slate-300 uppercase mb-1">
+                            Message <span class="text-rose-400">*</span>
+                        </label>
+                        <textarea asp-for="ContactForm.Message" 
+                                  name="Message"
+                                  rows="4" 
+                                  required 
+                                  minlength="10" 
+                                  maxlength="4000"
+                                  placeholder="Write your note, inquiry, or question here..."
+                                  class="w-full px-4 py-3 rounded-xl bg-[#141822] border border-[#232a36] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[#d4ff3a] focus:ring-1 focus:ring-[#d4ff3a] transition-colors resize-y"></textarea>
+                        <span asp-validation-for="ContactForm.Message" class="error-feedback text-rose-400 text-xs mt-1 block font-mono-code">
+                            Message must be at least 10 characters.
+                        </span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button id="submitBtn" 
+                            type="submit" 
+                            class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#d4ff3a] hover:bg-[#c2ed2c] text-[#090a0f] font-bold text-sm transition-all duration-200 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a] focus:ring-offset-2 focus:ring-offset-[#090a0f]">
+                        <svg id="btnSpinner" class="animate-spin -ml-1 mr-2 h-4 w-4 text-[#090a0f] hidden" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span id="btnText">Send Message</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

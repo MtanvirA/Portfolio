@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5124:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=portfolio_db;Uid=portfolio_user;Pwd=portfolio_pass;
+      - Portfolio__CanonicalDomain=https://mtanviranjum.tech
+      - Portfolio__WhatsAppNumber=+8801736780962
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secure_pass
+      MYSQL_DATABASE: portfolio_db
+      MYSQL_USER: portfolio_user
+      MYSQL_PASSWORD: portfolio_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./Migrations/InitialCreate.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_secure_pass"]
+      timeout: 10s
+      retries: 5
+
+volumes:
+  mysql_data:

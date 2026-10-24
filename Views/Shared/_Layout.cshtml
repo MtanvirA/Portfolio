@@ -1,0 +1,253 @@
+@inject Microsoft.Extensions.Options.IOptions<Portfolio.Options.PortfolioOptions> PortfolioConfig
+@{
+    var options = PortfolioConfig.Value;
+    var pageTitle = ViewData["Title"] != null 
+        ? $"{ViewData["Title"]} — {options.FullName}" 
+        : $"{options.FullName} — {options.RoleTitle}";
+    var metaDescription = ViewData["Description"] as string ?? 
+        "Md. Tanvir Anjum is an undergraduate Computer Science and Engineering student at PSTU, aspiring full-stack developer, and competitive programmer.";
+    var canonicalUrl = ViewData["CanonicalUrl"] as string ?? options.CanonicalDomain;
+}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@pageTitle</title>
+    <meta name="description" content="@metaDescription" />
+    <meta name="author" content="@options.FullName" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="@canonicalUrl" />
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@pageTitle" />
+    <meta property="og:description" content="@metaDescription" />
+    <meta property="og:url" content="@canonicalUrl" />
+    <meta property="og:image" content="@($"{options.CanonicalDomain}/images/og-card.svg")" />
+    <meta property="og:site_name" content="@options.FullName Portfolio" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@pageTitle" />
+    <meta name="twitter:description" content="@metaDescription" />
+    <meta name="twitter:image" content="@($"{options.CanonicalDomain}/images/og-card.svg")" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
+
+    <!-- Typography: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Compiled Tailwind CSS Pipeline -->
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</head>
+<body class="bg-[#090a0f] text-[#f8fafc] font-sans selection:bg-[#d4ff3a] selection:text-[#090a0f] min-h-screen flex flex-col">
+
+    <!-- Top Landmark: Accessible Skip Link -->
+    <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#d4ff3a] focus:text-[#090a0f] focus:font-bold focus:rounded-md focus:shadow-xl">
+        Skip to main content
+    </a>
+
+    <!-- Sticky Navigation Header -->
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-[#090a0f]/80 backdrop-blur-md border-b border-[#212836]/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+            
+            <!-- Brand / Wordmark -->
+            <a href="/#top" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#d4ff3a] rounded-lg p-1">
+                <div class="w-10 h-10 rounded-xl bg-[#141822] border border-[#232a36] group-hover:border-[#d4ff3a] flex items-center justify-center transition-colors">
+                    <span class="font-display font-extrabold text-sm text-[#d4ff3a]">TA</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-sm text-slate-100 tracking-tight group-hover:text-white transition-colors">
+                        @options.FullName
+                    </span>
+                    <span class="font-mono-code text-[11px] text-slate-400">
+                        CSE @@ PSTU
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
+                <a href="/#about" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">About</a>
+                <a href="/#projects" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Projects</a>
+                <a href="/#skills" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Skills</a>
+                <a href="/#education" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Education</a>
+                <a href="/#contact" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Header Action Controls -->
+            <div class="hidden sm:flex items-center gap-3">
+                <!-- Terminal Trigger Button -->
+                <button type="button" 
+                        class="open-terminal-btn flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#141822] border border-[#232a36] hover:border-slate-600 text-xs text-slate-300 font-mono-code transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]"
+                        aria-label="Open Command Terminal"
+                        title="Open interactive command palette (Ctrl+K)">
+                    <span class="text-[#d4ff3a] font-bold">&gt;_</span>
+                    <span>Terminal</span>
+                    <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-slate-400 border border-slate-700">Ctrl K</kbd>
+                </button>
+
+                <!-- GitHub Profile Link -->
+                <a href="@options.GitHubUrl" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="p-2 rounded-lg bg-[#141822] border border-[#232a36] hover:border-slate-600 text-slate-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]" 
+                   aria-label="Tanvir's GitHub Profile">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuToggle" 
+                    type="button" 
+                    class="md:hidden p-2 rounded-lg bg-[#141822] border border-[#232a36] text-slate-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]" 
+                    aria-expanded="false" 
+                    aria-controls="mobileMenu"
+                    aria-label="Toggle navigation menu">
+                <svg class="w-5 h-5 icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg class="w-5 h-5 icon-close hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="md:hidden hidden border-b border-[#212836] bg-[#0c0e14]/98 px-4 pt-2 pb-6 space-y-2">
+            <a href="/#about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">About</a>
+            <a href="/#projects" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Projects</a>
+            <a href="/#skills" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Skills</a>
+            <a href="/#education" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Education</a>
+            <a href="/#contact" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Contact</a>
+            
+            <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                <button type="button" class="open-terminal-btn flex items-center gap-2 px-3 py-2 rounded-lg bg-[#141822] border border-[#232a36] text-sm text-slate-300 font-mono-code">
+                    <span class="text-[#d4ff3a] font-bold">&gt;_</span>
+                    <span>Open Terminal (Ctrl+K)</span>
+                </button>
+                <a href="@options.GitHubUrl" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg bg-[#141822] border border-[#232a36] text-slate-300">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Landmark -->
+    <main id="mainContent" class="flex-grow pt-18">
+        @RenderBody()
+    </main>
+
+    <!-- Interactive Terminal Modal (Native Dialog with light-dismiss per modern-web-guidance) -->
+    <dialog id="terminalDialog" 
+            closedby="any" 
+            aria-labelledby="terminalTitle" 
+            class="m-auto rounded-2xl bg-[#0b0e14] border border-[#232a36] text-slate-200 shadow-2xl p-0 w-[92vw] max-w-2xl overflow-hidden backdrop:bg-[#090a0f]/80 backdrop:backdrop-blur-md">
+        <!-- Terminal Header -->
+        <div class="px-4 py-3 bg-[#111620] border-b border-[#212836] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                <h2 id="terminalTitle" class="ml-2 font-mono-code text-xs text-slate-400 font-semibold tracking-wide">
+                    tanvir@pstu: ~/portfolio (sh)
+                </h2>
+            </div>
+            <button id="closeTerminalBtn" type="button" class="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 text-xs font-mono-code focus:outline-none focus:ring-1 focus:ring-[#d4ff3a]">
+                [ESC] Close
+            </button>
+        </div>
+
+        <!-- Terminal Output Console -->
+        <div id="terminalOutput" class="p-4 max-h-[380px] min-h-[220px] overflow-y-auto space-y-1 font-mono-code text-xs sm:text-sm bg-[#090b10] border-b border-[#1b212d]">
+            <div class="text-slate-400">Welcome to Tanvir Anjum's Interactive Portfolio Console v1.0.0.</div>
+            <div class="text-slate-500 text-[11px]">Type <span class="text-[#d4ff3a]">help</span> to display available commands. Press [ESC] or click outside to dismiss.</div>
+            <div class="text-slate-600 border-b border-slate-800/60 pb-2">----------------------------------------------------------------</div>
+        </div>
+
+        <!-- Terminal Input Prompt -->
+        <div class="p-3 bg-[#10141d] flex items-center gap-2">
+            <span class="text-[#d4ff3a] font-mono-code font-bold text-sm shrink-0">&gt;</span>
+            <input id="terminalInput" 
+                   type="text" 
+                   class="w-full bg-transparent border-0 outline-none font-mono-code text-xs sm:text-sm text-slate-100 placeholder-slate-600 focus:ring-0" 
+                   placeholder="Type a command (help, about, projects, skills, education, links, clear)..."
+                   autocomplete="off" 
+                   autocorrect="off" 
+                   autocapitalize="off" 
+                   spellcheck="false" />
+        </div>
+    </dialog>
+
+    <!-- Floating Return to Top Button -->
+    <button id="backToTopBtn" 
+            type="button" 
+            class="fixed bottom-6 right-6 z-30 p-3 rounded-xl bg-[#141822]/90 border border-[#232a36] text-slate-300 hover:text-[#d4ff3a] hover:border-[#d4ff3a] shadow-xl backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-4 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]" 
+            aria-label="Return to top of page">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
+    </button>
+
+    <!-- Global Footer -->
+    <footer class="mt-24 border-t border-[#1b2230] bg-[#0c0e14] py-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                
+                <!-- Col 1: Bio -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-[#141822] border border-[#232a36] flex items-center justify-center">
+                            <span class="font-display font-bold text-sm text-[#d4ff3a]">TA</span>
+                        </div>
+                        <span class="font-display font-bold text-lg text-white">@options.FullName</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-md leading-relaxed">
+                        Undergraduate Computer Science and Engineering student at Patuakhali Science and Technology University (PSTU). 
+                        Building useful web applications, competing in algorithmic challenges, and engineering pragmatic software.
+                    </p>
+                    <div class="text-xs font-mono-code text-slate-500">
+                        Patuakhali, Bangladesh &bull; Session 2023–2024
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="space-y-3">
+                    <p class="font-mono-code text-xs text-slate-400 font-bold uppercase tracking-wider">Navigation</p>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="/#about" class="hover:text-[#d4ff3a] transition-colors">About</a></li>
+                        <li><a href="/#projects" class="hover:text-[#d4ff3a] transition-colors">Projects</a></li>
+                        <li><a href="/#skills" class="hover:text-[#d4ff3a] transition-colors">Skills</a></li>
+                        <li><a href="/#education" class="hover:text-[#d4ff3a] transition-colors">Education</a></li>
+                        <li><a href="/#contact" class="hover:text-[#d4ff3a] transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Coding Profiles -->
+                <div class="space-y-3">
+                    <p class="font-mono-code text-xs text-slate-400 font-bold uppercase tracking-wider">Verified Profiles</p>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="@options.GitHubUrl" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">GitHub &rarr;</a></li>
+                        <li><a href="@options.CodeforcesUrl" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">Codeforces &rarr;</a></li>
+                        <li><a href="@options.LeetCodeUrl" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">LeetCode &rarr;</a></li>
+                        <li><a href="@options.LinkedInUrl" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">LinkedIn &rarr;</a></li>
+                        <li><a href="@options.FacebookUrl" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">Facebook &rarr;</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Back-to-Top -->
+            <div class="mt-12 pt-8 border-t border-[#1a202c] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-code text-slate-500">
+                <p>&copy; @DateTime.UtcNow.Year @options.FullName. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <span class="text-slate-600">Built with ASP.NET Core &bull; MySQL &bull; Tailwind</span>
+                    <a href="#top" class="text-slate-400 hover:text-[#d4ff3a] transition-colors">Return to Top &uarr;</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
