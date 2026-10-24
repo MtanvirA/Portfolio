@@ -67,8 +67,10 @@ Portfolio/
 ├── Data/
 │   └── ApplicationDbContext.cs  # EF Core DbContext with MySQL table mappings and indexes
 ├── Migrations/
-│   ├── 20261024075230_InitialCreate.cs # EF Core migration for contact_messages table
-│   └── InitialCreate.sql        # Standalone SQL DDL script for manual MySQL execution
+│   ├── 20261024075230_InitialCreate.cs           # EF Core migration for contact_messages table
+│   ├── 20261024091943_AddNotificationTracking.cs # EF Core migration adding notification tracking
+│   ├── ProductionMigration.sql                  # Complete SQL migration script for TiDB Cloud Starter
+│   └── InitialCreate.sql                        # Standalone SQL DDL script for initial migration
 ├── Services/
 │   ├── IProjectService.cs       # Centralized project catalogue service
 │   ├── IEducationService.cs     # Centralized academic records service
