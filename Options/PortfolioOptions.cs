@@ -10,7 +10,7 @@ public class PortfolioOptions
     public string Email { get; set; } = "tanviranjum201@gmail.com";
     
     // Centralized WhatsApp configuration
-    public string WhatsAppNumber { get; set; } = "+8801736780962";
+    public string WhatsAppNumber { get; set; } = "+8801718659824";
     
     public string GitHubUrl { get; set; } = "https://github.com/MtanvirA";
     public string LinkedInUrl { get; set; } = "https://www.linkedin.com/in/md-tanvir-anjum-3642371aa/";

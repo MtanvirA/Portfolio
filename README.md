@@ -4,7 +4,7 @@
 [![ASP.NET Core MVC](https://img.shields.io/badge/ASP.NET%20Core-MVC-512BD4?logo=dotnet)](https://learn.microsoft.com/aspnet/core)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![MySQL 8.0](https://img.shields.io/badge/Database-MySQL%208.0-4479A1?logo=mysql)](https://www.mysql.com/)
-[![Tests](https://img.shields.io/badge/Tests-27%20Passed-22c55e)](#automated-testing)
+[![Tests](https://img.shields.io/badge/Tests-42%20Passed-22c55e)](#automated-testing)
 
 A personal portfolio web application engineered for **Md. Tanvir Anjum**, an undergraduate Computer Science and Engineering student at **Patuakhali Science and Technology University (PSTU)**, Bangladesh.
 
@@ -211,12 +211,13 @@ The solution includes automated unit and integration tests covering project cata
 dotnet test
 ```
 
-### Test Suite Summary:
+### Test Suite Summary (42 Passing Tests):
+* `ContactValidationTests`: Validated `[Required]`, `[EmailAddress]`, and string length constraints (10 to 4000 characters).
+* `ContactServiceTests`: Tested EF Core persistence, string normalization (lowercase emails, trimmed inputs), honeypot anti-spam trap detection, rate-limit blocking, and safe database exception handling without credential leaks.
+* `RateLimitServiceTests`: Tested sliding-window request throttling, threshold enforcement, and null IP safety.
+* `HomeControllerTests`: Tested aggregate view model assembly, AJAX JSON responses, standard Post/Redirect/Get flow, and interactive terminal commands.
 * `ProjectServiceTests`: Verified slug retrieval, case-insensitivity, category filtering, and neighbor navigation.
 * `EducationServiceTests`: Verified PSTU transcript calculations, 3.820 CGPA, and course highlights.
-* `RateLimitServiceTests`: Tested sliding-window request throttling, threshold enforcement, and null IP safety.
-* `ContactServiceTests`: Tested EF Core persistence, honeypot anti-spam trap detection, and rate limit blocking.
-* `HomeControllerTests`: Tested aggregate view model assembly and interactive terminal commands.
 
 ---
 
@@ -252,7 +253,7 @@ To host this ASP.NET Core MVC application with MySQL without incurring surprise 
 ### Required Environment Variables on Production Host
 * `ASPNETCORE_ENVIRONMENT`: `Production`
 * `ConnectionStrings__DefaultConnection`: `Server=...;Port=3306;Database=...;Uid=...;Pwd=...;`
-* `Portfolio__WhatsAppNumber`: Bangladesh phone number in international format (`+8801736...`)
+* `Portfolio__WhatsAppNumber`: Bangladesh phone number in international format (`+8801718...`)
 * `Portfolio__CanonicalDomain`: `https://mtanviranjum.tech`
 
 ---

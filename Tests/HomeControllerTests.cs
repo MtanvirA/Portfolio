@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Portfolio.Controllers;
@@ -11,15 +13,12 @@ namespace Portfolio.Tests;
 
 public class HomeControllerTests
 {
-    private HomeController CreateController()
+    private HomeController CreateController(IContactService? contactService = null, bool isAjax = false)
     {
         var projectService = new ProjectService();
         var educationService = new EducationService();
         var skillService = new SkillService();
-        var rateLimitService = new MemoryRateLimitService();
-        
-        // Mock contact service that returns success
-        var mockContactService = new MockContactService();
+        var effectiveContactService = contactService ?? new MockContactService();
 
         var options = Microsoft.Extensions.Options.Options.Create(new PortfolioOptions
         {
@@ -28,14 +27,25 @@ public class HomeControllerTests
             CanonicalDomain = "https://mtanviranjum.tech"
         });
 
-        return new HomeController(
+        var controller = new HomeController(
             projectService,
             educationService,
             skillService,
-            mockContactService,
+            effectiveContactService,
             options,
             NullLogger<HomeController>.Instance
         );
+
+        var httpContext = new DefaultHttpContext();
+        if (isAjax)
+        {
+            httpContext.Request.Headers["X-Requested-With"] = "XMLHttpRequest";
+        }
+
+        controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
+        controller.TempData = new TempDataDictionary(httpContext, new EmptyTempDataProvider());
+
+        return controller;
     }
 
     [Fact]
@@ -83,6 +93,66 @@ public class HomeControllerTests
         Assert.Equal(expectedType, typeVal);
     }
 
+    [Fact]
+    public async Task SubmitContact_InvalidModel_Ajax_ReturnsValidationJson()
+    {
+        var controller = CreateController(isAjax: true);
+        controller.ModelState.AddModelError("Name", "Name is required");
+
+        var invalidModel = new ContactFormViewModel();
+        var result = await controller.SubmitContact(invalidModel);
+
+        var jsonResult = Assert.IsType<JsonResult>(result);
+        Assert.NotNull(jsonResult.Value);
+
+        var successProp = jsonResult.Value.GetType().GetProperty("success");
+        Assert.NotNull(successProp);
+        Assert.False((bool)successProp.GetValue(jsonResult.Value)!);
+    }
+
+    [Fact]
+    public async Task SubmitContact_ValidModel_Ajax_ReturnsSuccessJson()
+    {
+        var controller = CreateController(isAjax: true);
+
+        var validModel = new ContactFormViewModel
+        {
+            Name = "Alice Visitor",
+            Email = "alice@example.com",
+            Message = "Valid message body greater than ten characters."
+        };
+
+        var result = await controller.SubmitContact(validModel);
+
+        var jsonResult = Assert.IsType<JsonResult>(result);
+        Assert.NotNull(jsonResult.Value);
+
+        var successProp = jsonResult.Value.GetType().GetProperty("success");
+        Assert.NotNull(successProp);
+        Assert.True((bool)successProp.GetValue(jsonResult.Value)!);
+    }
+
+    [Fact]
+    public async Task SubmitContact_ValidModel_FormPost_RedirectsToContactSection()
+    {
+        var controller = CreateController(isAjax: false);
+
+        var validModel = new ContactFormViewModel
+        {
+            Name = "Bob Visitor",
+            Email = "bob@example.com",
+            Message = "Valid message body greater than ten characters."
+        };
+
+        var result = await controller.SubmitContact(validModel);
+
+        var redirect = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("Index", redirect.ActionName);
+        Assert.Equal("contact", redirect.Fragment);
+        Assert.Equal("Message delivered.", controller.TempData["FeedbackMessage"]);
+        Assert.Equal(true, controller.TempData["FeedbackSuccess"]);
+    }
+
     private class MockContactService : IContactService
     {
         public Task<ContactSubmissionResult> SubmitMessageAsync(ContactFormViewModel model, string? clientIp)
@@ -93,5 +163,11 @@ public class HomeControllerTests
                 Message = "Message delivered."
             });
         }
+    }
+
+    private class EmptyTempDataProvider : ITempDataProvider
+    {
+        public IDictionary<string, object> LoadTempData(HttpContext context) => new Dictionary<string, object>();
+        public void SaveTempData(HttpContext context, IDictionary<string, object> values) { }
     }
 }

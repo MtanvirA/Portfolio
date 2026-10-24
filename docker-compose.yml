@@ -9,7 +9,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=portfolio_db;Uid=portfolio_user;Pwd=portfolio_pass;
       - Portfolio__CanonicalDomain=https://mtanviranjum.tech
-      - Portfolio__WhatsAppNumber=+8801736780962
+      - Portfolio__WhatsAppNumber=+8801718659824
     depends_on:
       db:
         condition: service_healthy
