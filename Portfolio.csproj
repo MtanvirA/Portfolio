@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <DefaultItemExcludes>$(DefaultItemExcludes);Tests\**;node_modules\**</DefaultItemExcludes>
+    <UserSecretsId>9b935fff-8bc6-4755-beda-b490ff221125</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -160,6 +160,7 @@ Portfolio/
 1. **.NET 10.0 SDK** (verify with `dotnet --version` &rarr; `10.0.x`)
 2. **Node.js** (v20+ or v24+ for Tailwind CLI compilation)
 3. **MySQL 8.0 Server** (running locally on `localhost:3306`)
+4. **EF Core CLI Tools** (install/update via `dotnet tool update --global dotnet-ef`)
 
 ### Step 1: Clone the Repository
 ```powershell
@@ -174,50 +175,130 @@ npm run build:css
 ```
 *(To run continuous live recompilation during CSS editing, use `npm run watch:css`)*
 
-### Step 3: Configure Database Connection
-Set your local MySQL connection string using an environment variable or via user secrets (never commit passwords to git):
+### Step 3: Configure Local MySQL Database & Dedicated User
+Log in to MySQL (via MySQL Workbench or `mysql -u root -p`) as administrator and execute the following SQL script to create the database and a dedicated application user with restricted database-scoped privileges:
 
-```powershell
-# In PowerShell:
-$env:ConnectionStrings__DefaultConnection = "Server=localhost;Port=3306;Database=portfolio_db;Uid=root;Pwd=YOUR_LOCAL_MYSQL_PASSWORD;"
+```sql
+-- 1. Create portfolio database with UTF8MB4 support
+CREATE DATABASE IF NOT EXISTS portfolio_db 
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_unicode_ci;
+
+-- 2. Create a dedicated application user (replace 'YOUR_LOCAL_PASSWORD' with a strong local secret)
+CREATE USER IF NOT EXISTS 'portfolio_user'@'localhost' 
+    IDENTIFIED BY 'YOUR_LOCAL_PASSWORD';
+
+-- 3. Grant database-scoped privileges strictly to portfolio_db.*
+-- (SELECT, INSERT, UPDATE, DELETE for runtime; CREATE, ALTER, INDEX, DROP, REFERENCES for EF migrations)
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, DROP, REFERENCES 
+    ON portfolio_db.* TO 'portfolio_user'@'localhost';
+
+FLUSH PRIVILEGES;
 ```
 
-Or update `appsettings.Development.json` (which is excluded from production commits).
+> **Security Note**: Granting privileges strictly on `portfolio_db.*` ensures the application user cannot access other databases or administrative system tables.
 
-### Step 4: Apply EF Core Database Migrations
-Create the database and `contact_messages` table:
+### Step 4: Configure Secrets Locally (.NET User Secrets)
+Store your connection string outside the repository using .NET User Secrets. This ensures passwords are never committed to version control:
+
+```powershell
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;Port=3306;Database=portfolio_db;Uid=portfolio_user;Pwd=YOUR_LOCAL_PASSWORD;"
+```
+
+Secrets are securely maintained by the .NET runtime in `%APPDATA%\Microsoft\UserSecrets\9b935fff-8bc6-4755-beda-b490ff221125\secrets.json`.
+
+*(Alternatively, in production or CI environments, set the environment variable `ConnectionStrings__DefaultConnection`)*.
+
+### Step 5: Apply EF Core Database Migrations
+Apply the existing migration to create the `contact_messages` table and migration history:
+
 ```powershell
 dotnet ef database update
 ```
 
-*Alternatively, execute the standalone SQL script directly in MySQL Workbench or mysql CLI:*
+*Alternatively, execute the standalone SQL script directly:*
 ```powershell
-& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p portfolio_db < Migrations/InitialCreate.sql
+& "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u portfolio_user -p portfolio_db < Migrations/InitialCreate.sql
 ```
 
-### Step 5: Run the Web Application
-```powershell
-dotnet run
+Verify that the table exists in MySQL:
+```sql
+USE portfolio_db;
+SHOW TABLES;
+DESCRIBE contact_messages;
 ```
-Navigate to: `http://localhost:5124` (or port specified in output).
+
+### Step 6: Run the Web Application
+```powershell
+dotnet run --launch-profile "http"
+```
+Navigate to: `http://localhost:5124` (or your configured port).
 
 ---
 
-## 6. Automated Testing
+## 6. Request Lifecycle & Testing
 
-The solution includes automated unit and integration tests covering project catalogues, education records, IP rate-limiting, and contact persistence:
+### ASP.NET Core Request Lifecycle Flow
+When a user submits the contact form, the request flows through the following pipeline:
 
+```
+[ Browser Client ]
+       │
+       ▼  HTTP POST /Home/SubmitContact (Form data + Anti-Forgery Token)
+[ MVC Controller (HomeController) ]
+       │  1. Verifies [ValidateAntiForgeryToken] cookie & token
+       │  2. Validates ModelState ([Required], [EmailAddress], length bounds)
+       ▼
+[ Contact Service (ContactService) ]
+       │  3. Honeypot check: Rejects immediately if HoneyPotCompany is filled
+       │  4. Rate limit check: Enforces max 3 submissions per 5 min per client IP
+       │  5. Normalization: Lowercases email, trims text, hashes IP for privacy
+       ▼
+[ Entity Framework Core (ApplicationDbContext) ]
+       │  6. Generates parameterized SQL INSERT query
+       ▼
+[ MySQL 8.0 Database (portfolio_db.contact_messages) ]
+       │  7. Commits row to database table
+       ▼
+[ Response to Browser ]
+          Returns JSON { success: true, message: "..." } for AJAX
+          OR Redirects with TempData flash message for standard POST
+```
+
+### Automated & Integration Testing
+
+#### Test Suite Distinction
+1. **Unit Tests**: Test individual classes, string normalization, GPA calculations, and rate limit algorithms in isolation with zero external dependencies.
+2. **In-Memory Tests (`Microsoft.EntityFrameworkCore.InMemory`)**: Test `ContactService` logic using an ephemeral in-memory database provider. *Note*: In-memory tests validate service logic, but do not test MySQL connection strings, user authentication, column collation, or network transport.
+3. **Real MySQL Integration Verification**: Live end-to-end tests where the ASP.NET Core runtime connects over TCP port 3306 to MySQL 8.0, authenticates via `caching_sha2_password`, executes EF Core migrations, persists synthetic messages, and queries rows using SQL.
+
+#### Running the Test Suite
 ```powershell
 dotnet test
 ```
 
-### Test Suite Summary (42 Passing Tests):
-* `ContactValidationTests`: Validated `[Required]`, `[EmailAddress]`, and string length constraints (10 to 4000 characters).
-* `ContactServiceTests`: Tested EF Core persistence, string normalization (lowercase emails, trimmed inputs), honeypot anti-spam trap detection, rate-limit blocking, and safe database exception handling without credential leaks.
-* `RateLimitServiceTests`: Tested sliding-window request throttling, threshold enforcement, and null IP safety.
-* `HomeControllerTests`: Tested aggregate view model assembly, AJAX JSON responses, standard Post/Redirect/Get flow, and interactive terminal commands.
-* `ProjectServiceTests`: Verified slug retrieval, case-insensitivity, category filtering, and neighbor navigation.
-* `EducationServiceTests`: Verified PSTU transcript calculations, 3.820 CGPA, and course highlights.
+#### How to Submit and Verify a Real Test Message
+1. Start the application:
+   ```powershell
+   dotnet run
+   ```
+2. In the browser, navigate to `#contact`, fill out the form, and click **Send Message**.
+3. In MySQL Workbench or CLI, query the persisted record:
+   ```sql
+   USE portfolio_db;
+   SELECT Id, Name, Email, Subject, Message, CreatedAtUtc, Status, ClientIpHash 
+   FROM contact_messages 
+   ORDER BY CreatedAtUtc DESC LIMIT 1;
+   ```
+4. Verify that:
+   - Exactly one row exists with matching fields.
+   - The email is trimmed and normalized to lowercase.
+   - The status is `"New"`.
+   - The client IP is stored as a one-way cryptographic SHA-256 hash.
+5. If testing with a synthetic record, clean up after verification:
+   ```sql
+   DELETE FROM contact_messages WHERE Email = 'your-synthetic-email@example.com';
+   ```
 
 ---
 
