@@ -339,14 +339,19 @@ To host this ASP.NET Core MVC application with MySQL without incurring surprise 
 
 ---
 
-## 9. Security & Anti-Spam Architecture
+## 9. Security & Secret Hygiene Architecture
 
-* **No Plaintext Passwords**: Database connection strings are read from environment variables (`ConnectionStrings__DefaultConnection`).
+* **Least-Privilege Database Access**: The web application never connects as MySQL `root`. It runs under a dedicated `portfolio_user` account with permissions strictly scoped to `portfolio_db.*` (`SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER`), preventing access to system catalogs or sibling project databases.
+* **Secret Hygiene & Isolation**:
+  * **Local Development**: Connection strings are managed exclusively via `.NET User Secrets` (`dotnet user-secrets`), stored outside the repository tree in `%APPDATA%\Microsoft\UserSecrets\`.
+  * **Production / CI**: Connection strings are provided via environment variables (`ConnectionStrings__DefaultConnection`).
+  * **Zero Committed Secrets**: Tracked settings files (`appsettings.json`, `appsettings.Example.json`) contain only non-sensitive placeholder templates.
+* **Credential Rotation Protocol**: If local development credentials are ever exposed, passwords can be rotated immediately in MySQL via `ALTER USER 'portfolio_user'@'localhost' IDENTIFIED BY '...'` and re-set locally in `.NET User Secrets` without altering project source code.
 * **Honeypot Trap**: Forms include a hidden `HoneyPotCompany` field that trips automated bots while remaining invisible to humans.
 * **Rate Limiting**: In-memory sliding-window limiter restricts submissions to 3 attempts per 5 minutes per IP address.
 * **Antiforgery Protection**: Server verifies ASP.NET Core antiforgery tokens on all POST requests (`[ValidateAntiForgeryToken]`).
 * **Security Headers**: Middleware enforces `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, and `Permissions-Policy`.
-* **Zero Public Data Leakage**: No public API endpoint exists to read or list saved contact messages.
+* **Zero Public Data Leakage**: No public API endpoint exists to read or list saved contact messages. Database exceptions are caught and sanitized to prevent stack trace or credential leaks.
 
 ---
 
