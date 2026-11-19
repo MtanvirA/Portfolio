@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0e14" />
+      <stop offset="50%" stop-color="#141923" />
+      <stop offset="100%" stop-color="#1b2230" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4ff3a" />
+      <stop offset="100%" stop-color="#14b8a6" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#d4ff3a" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#2a3547" stroke-width="0.75" stroke-opacity="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="400" rx="24" fill="url(#bgGrad)" />
+  <rect width="400" height="400" rx="24" fill="url(#grid)" />
+  <circle cx="200" cy="180" r="140" fill="url(#glow)" />
+
+  <!-- Outer Tech Ring -->
+  <circle cx="200" cy="180" r="110" fill="none" stroke="#253043" stroke-width="2" stroke-dasharray="8 6" />
+  <circle cx="200" cy="180" r="95" fill="#0f141d" stroke="#334155" stroke-width="1.5" />
+
+  <!-- Geometric Monogram "TA" -->
+  <!-- Letter T -->
+  <path d="M 140 135 L 220 135 L 220 152 L 190 152 L 190 225 L 170 225 L 170 152 L 140 152 Z" fill="url(#accentGrad)" />
+  <!-- Letter A -->
+  <path d="M 215 225 L 235 135 L 255 135 L 275 225 L 255 225 L 250 205 L 230 205 L 225 225 Z M 235 188 L 245 188 L 240 155 Z" fill="#f8fafc" />
+
+  <!-- Node Points -->
+  <circle cx="140" cy="135" r="4" fill="#d4ff3a" />
+  <circle cx="275" cy="225" r="4" fill="#14b8a6" />
+  <circle cx="200" cy="85" r="3" fill="#38bdf8" />
+  <circle cx="200" cy="275" r="3" fill="#a78bfa" />
+
+  <!-- Subtitle Badge -->
+  <rect x="70" y="320" width="260" height="36" rx="18" fill="#161e2b" stroke="#2a384e" stroke-width="1" />
+  <text x="200" y="343" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="middle" letter-spacing="1.5">MD. TANVIR ANJUM</text>
+  <circle cx="95" cy="338" r="4" fill="#22c55e" />
+</svg>

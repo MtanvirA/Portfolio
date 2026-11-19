@@ -1,0 +1,324 @@
+/**
+ * Engineering Canvas - Ambient Interaction System
+ * Inspired by circuit boards, computer networks, data visualization & developer tooling.
+ * Provides ambient cursor-following spotlight, interactive circuit grid nodes, card hover mechanics,
+ * and restrained monospace HUD micro-labels throughout negative spaces.
+ */
+
+:root {
+  --canvas-lime: #d4ff3a;
+  --canvas-teal: #14b8a6;
+  --canvas-blue: #38bdf8;
+  --canvas-trace: #222c3d;
+  --canvas-trace-active: #2dd4bf;
+}
+
+/* ========================================================
+   1. SECTION SPOTLIGHT (CURSOR FOLLOWER)
+   ======================================================== */
+.canvas-section {
+  position: relative;
+  /* Keep background contained while allowing layout elements full flow */
+}
+
+.canvas-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--spotlight-opacity, 0);
+  background: radial-gradient(
+    580px circle at var(--pointer-x, -9999px) var(--pointer-y, -9999px),
+    rgba(212, 255, 58, 0.07) 0%,
+    rgba(20, 184, 166, 0.04) 40%,
+    transparent 80%
+  );
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: background, opacity;
+}
+
+/* Ensure foreground content stacks above ambient canvas overlays */
+.canvas-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========================================================
+   2. CIRCUIT GRID & TECHNICAL BACKGROUND LAYER
+   ======================================================== */
+.circuit-canvas-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.circuit-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Circuit trace lines */
+.circuit-trace {
+  stroke: var(--canvas-trace);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  transition: stroke 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+  opacity: 0.45;
+}
+
+.circuit-trace.active {
+  stroke: var(--canvas-trace-active);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 4px rgba(45, 212, 191, 0.5));
+}
+
+/* Circuit geometric nodes */
+.circuit-node {
+  r: 3;
+  fill: #141822;
+  stroke: #334155;
+  stroke-width: 1.5;
+  opacity: 0.4;
+  transition: fill 0.25s ease, stroke 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+}
+
+.circuit-node.active {
+  fill: var(--canvas-lime);
+  stroke: var(--canvas-lime);
+  opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(212, 255, 58, 0.85));
+}
+
+.circuit-node-teal.active {
+  fill: var(--canvas-teal);
+  stroke: var(--canvas-teal);
+  opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(20, 184, 166, 0.85));
+}
+
+/* Signal junctions (square micro-pads) */
+.circuit-pad {
+  width: 5px;
+  height: 5px;
+  fill: #1a2230;
+  stroke: #334155;
+  stroke-width: 1;
+  opacity: 0.45;
+  transition: fill 0.25s ease, stroke 0.25s ease, opacity 0.25s ease;
+}
+
+.circuit-pad.active {
+  fill: var(--canvas-teal);
+  stroke: var(--canvas-lime);
+  opacity: 1;
+  filter: drop-shadow(0 0 5px rgba(20, 184, 166, 0.7));
+}
+
+/* Ambient subtle pulse on selected anchor nodes */
+@keyframes circuitPulse {
+  0%, 100% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 0px transparent);
+  }
+  50% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 6px rgba(212, 255, 58, 0.75));
+  }
+}
+
+.pulse-node {
+  animation: circuitPulse 3.8s ease-in-out infinite;
+}
+
+.pulse-node-offset {
+  animation: circuitPulse 4.4s ease-in-out 1.9s infinite;
+}
+
+/* ========================================================
+   3. SECTION-LEVEL HUD MICRO-INTERACTIONS
+   ======================================================== */
+.hud-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 0.375rem;
+  background-color: rgba(16, 20, 29, 0.75);
+  border: 1px solid rgba(35, 45, 61, 0.8);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem; /* ~11px */
+  letter-spacing: 0.06em;
+  color: #64748b;
+  user-select: none;
+  backdrop-blur: 4px;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.hud-badge:hover,
+.canvas-section:hover .hud-badge {
+  border-color: rgba(212, 255, 58, 0.3);
+  color: #94a3b8;
+}
+
+.hud-signal-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background-color: var(--canvas-lime);
+  box-shadow: 0 0 6px var(--canvas-lime);
+}
+
+.hud-signal-dot-teal {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background-color: var(--canvas-teal);
+  box-shadow: 0 0 6px var(--canvas-teal);
+}
+
+/* ========================================================
+   4. CARD HOVER EFFECTS & SCANLINE SWEEP
+   ======================================================== */
+.card-interactive {
+  position: relative;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s ease,
+              box-shadow 0.28s ease,
+              background-color 0.28s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-interactive:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 255, 58, 0.38) !important;
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.75),
+                0 0 24px -6px rgba(212, 255, 58, 0.12) !important;
+  }
+}
+
+/* Accessible focus states matching hover */
+.card-interactive:focus-within,
+.card-interactive:focus-visible {
+  border-color: var(--canvas-lime) !important;
+  box-shadow: 0 0 0 2px var(--canvas-lime), 0 16px 36px -12px rgba(0, 0, 0, 0.75);
+}
+
+/* Thin scanning-line sweep on project card hover */
+.scanline-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline-box::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(212, 255, 58, 0.08) 50%,
+    rgba(20, 184, 166, 0.12) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(0);
+}
+
+@keyframes scanlineSweep {
+  0% {
+    top: -60%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 140%;
+    opacity: 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-interactive:hover .scanline-box::before {
+    animation: scanlineSweep 2.4s ease-in-out infinite;
+  }
+}
+
+/* Arrow hover translation */
+.action-arrow {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-interactive:hover .action-arrow {
+  transform: translateX(4px);
+}
+
+/* ========================================================
+   5. SKILLS INTERACTIVITY
+   ======================================================== */
+.skill-card-interactive {
+  transition: transform 0.22s ease,
+              border-color 0.22s ease,
+              background-color 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skill-card-interactive:hover {
+    transform: translateY(-2px);
+    border-color: rgba(212, 255, 58, 0.45);
+    background-color: #171d28;
+  }
+
+  .skill-card-interactive:hover .skill-title {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(212, 255, 58, 0.3);
+  }
+}
+
+/* ========================================================
+   6. REDUCED MOTION & ACCESSIBILITY SAFEGUARDS
+   ======================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .canvas-spotlight {
+    display: none !important;
+  }
+
+  .pulse-node,
+  .pulse-node-offset {
+    animation: none !important;
+  }
+
+  .card-interactive:hover,
+  .skill-card-interactive:hover {
+    transform: none !important;
+  }
+
+  .scanline-box::before {
+    display: none !important;
+    animation: none !important;
+  }
+
+  .action-arrow,
+  .card-interactive:hover .action-arrow {
+    transform: none !important;
+  }
+
+  .circuit-trace,
+  .circuit-node,
+  .circuit-pad {
+    transition: none !important;
+  }
+}

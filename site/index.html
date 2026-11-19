@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Md. Tanvir Anjum — Aspiring Full-Stack Developer &amp; Competitive Programmer</title>
+    <meta name="description" content="Md. Tanvir Anjum is an undergraduate Computer Science and Engineering student at PSTU, aspiring full-stack developer, and competitive programmer." />
+    <meta name="author" content="Md. Tanvir Anjum" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mtanviranjum.tech/" />
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Md. Tanvir Anjum — Aspiring Full-Stack Developer &amp; Competitive Programmer" />
+    <meta property="og:description" content="Undergraduate CSE student at PSTU maintaining 3.820 CGPA. Building full-stack web applications and solving algorithmic challenges." />
+    <meta property="og:url" content="https://mtanviranjum.tech/" />
+    <meta property="og:image" content="https://mtanviranjum.tech/assets/images/og-card.svg" />
+    <meta property="og:site_name" content="Md. Tanvir Anjum Portfolio" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Md. Tanvir Anjum — Engineering Portfolio" />
+    <meta name="twitter:description" content="Undergraduate CSE student at PSTU maintaining 3.820 CGPA. Building full-stack web applications and solving algorithmic challenges." />
+    <meta name="twitter:image" content="https://mtanviranjum.tech/assets/images/og-card.svg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+
+    <!-- Google Fonts Typography: Plus Jakarta Sans, Outfit, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Compiled Tailwind CSS & Engineering Canvas Interactions -->
+    <link rel="stylesheet" href="/assets/css/site.min.css" />
+    <link rel="stylesheet" href="/assets/css/interactions.css" />
+</head>
+<body class="bg-[#090a0f] text-[#f8fafc] font-sans selection:bg-[#d4ff3a] selection:text-[#090a0f] min-h-screen flex flex-col">
+
+    <!-- Top Landmark: Accessible Skip Link -->
+    <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#d4ff3a] focus:text-[#090a0f] focus:font-bold focus:rounded-md focus:shadow-xl">
+        Skip to main content
+    </a>
+
+    <!-- Sticky Navigation Header -->
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-[#090a0f]/80 backdrop-blur-md border-b border-[#212836]/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+            
+            <!-- Brand / Wordmark -->
+            <a href="/#top" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#d4ff3a] rounded-lg p-1">
+                <div class="w-10 h-10 rounded-xl bg-[#141822] border border-[#232a36] group-hover:border-[#d4ff3a] flex items-center justify-center transition-colors">
+                    <span class="font-display font-extrabold text-sm text-[#d4ff3a]">TA</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-sm text-slate-100 tracking-tight group-hover:text-white transition-colors">
+                        Md. Tanvir Anjum
+                    </span>
+                    <span class="font-mono-code text-[11px] text-slate-400">
+                        CSE @ PSTU
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
+                <a href="/#about" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">About</a>
+                <a href="/#projects" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Projects</a>
+                <a href="/#skills" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Skills</a>
+                <a href="/#education" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Education</a>
+                <a href="/#contact" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Header Action Controls -->
+            <div class="hidden sm:flex items-center gap-3">
+                <!-- Terminal Trigger Button -->
+                <button type="button" 
+                        class="open-terminal-btn flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#141822] border border-[#232a36] hover:border-slate-600 text-xs text-slate-300 font-mono-code transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]"
+                        aria-label="Open Command Terminal"
+                        title="Open interactive command palette (Ctrl+K)">
+                    <span class="text-[#d4ff3a] font-bold">&gt;_</span>
+                    <span>Terminal</span>
+                    <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-slate-400 border border-slate-700">Ctrl K</kbd>
+                </button>
+
+                <!-- GitHub Profile Link -->
+                <a href="https://github.com/MtanvirA" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="p-2 rounded-lg bg-[#141822] border border-[#232a36] hover:border-slate-600 text-slate-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]" 
+                   aria-label="Tanvir's GitHub Profile">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuToggle" 
+                    type="button" 
+                    class="md:hidden p-2 rounded-lg bg-[#141822] border border-[#232a36] text-slate-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]" 
+                    aria-expanded="false" 
+                    aria-controls="mobileMenu"
+                    aria-label="Toggle navigation menu">
+                <svg class="w-5 h-5 icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg class="w-5 h-5 icon-close hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="md:hidden hidden border-b border-[#212836] bg-[#0c0e14]/98 px-4 pt-2 pb-6 space-y-2">
+            <a href="/#about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">About</a>
+            <a href="/#projects" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Projects</a>
+            <a href="/#skills" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Skills</a>
+            <a href="/#education" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Education</a>
+            <a href="/#contact" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Contact</a>
+            
+            <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                <button type="button" class="open-terminal-btn flex items-center gap-2 px-3 py-2 rounded-lg bg-[#141822] border border-[#232a36] text-sm text-slate-300 font-mono-code">
+                    <span class="text-[#d4ff3a] font-bold">&gt;_</span>
+                    <span>Open Terminal (Ctrl+K)</span>
+                </button>
+                <a href="https://github.com/MtanvirA" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg bg-[#141822] border border-[#232a36] text-slate-300" aria-label="Tanvir's GitHub Profile">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Landmark -->
+    <main id="mainContent" class="flex-grow pt-18">
+        
+        <!-- ========================================================
+             HERO SECTION (Engineering Canvas)
+             ======================================================== -->
+        <section id="top" class="canvas-section relative min-h-[calc(100vh-4.5rem)] flex items-center pt-8 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            
+            <!-- Cursor-Following Spotlight Overlay -->
+            <div class="canvas-spotlight" aria-hidden="true"></div>
+
+            <!-- Circuit Grid Background Layer -->
+            <div class="circuit-canvas-layer" aria-hidden="true">
+                <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 800">
+                    <defs>
+                        <pattern id="hero-fine-grid" width="36" height="36" patternUnits="userSpaceOnUse">
+                            <path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(255, 255, 255, 0.024)" stroke-width="1" />
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#hero-fine-grid)" />
+
+                    <!-- Ambient Circuit Traces -->
+                    <path class="circuit-trace" d="M 50 120 L 220 120 L 260 160 L 480 160" />
+                    <path class="circuit-trace" d="M 260 160 L 260 320 L 340 400" />
+                    <path class="circuit-trace" d="M 850 80 L 1000 80 L 1050 130 L 1150 130" />
+                    <path class="circuit-trace" d="M 1050 130 L 1050 300 L 980 370" />
+                    <path class="circuit-trace" d="M 720 620 L 880 620 L 940 680 L 1120 680" />
+                    <path class="circuit-trace" d="M 120 540 L 280 540 L 330 590 L 450 590" />
+
+                    <!-- Circuit Nodes & Signal Points -->
+                    <circle class="circuit-node pulse-node" cx="50" cy="120" r="3" />
+                    <circle class="circuit-node" cx="220" cy="120" r="3" />
+                    <circle class="circuit-node" cx="260" cy="160" r="3.5" />
+                    <circle class="circuit-node circuit-node-teal" cx="480" cy="160" r="3" />
+                    <circle class="circuit-node pulse-node-offset" cx="340" cy="400" r="3" />
+                    
+                    <circle class="circuit-node" cx="850" cy="80" r="3" />
+                    <circle class="circuit-node pulse-node" cx="1000" cy="80" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="1050" cy="130" r="3.5" />
+                    <circle class="circuit-node" cx="1150" cy="130" r="3" />
+                    <circle class="circuit-node" cx="980" cy="370" r="3" />
+
+                    <rect class="circuit-pad" x="718" y="618" width="5" height="5" />
+                    <circle class="circuit-node circuit-node-teal" cx="880" cy="620" r="3" />
+                    <circle class="circuit-node pulse-node" cx="940" cy="680" r="3.5" />
+                    <circle class="circuit-node" cx="1120" cy="680" r="3" />
+
+                    <rect class="circuit-pad" x="118" y="538" width="5" height="5" />
+                    <circle class="circuit-node pulse-node-offset" cx="280" cy="540" r="3" />
+                    <circle class="circuit-node" cx="330" cy="590" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="450" cy="590" r="3" />
+                </svg>
+            </div>
+
+            <!-- Section Foreground Content -->
+            <div class="canvas-content w-full">
+                
+                <!-- HUD Micro Badge in Section Negative Space -->
+                <div class="flex items-center justify-between pb-6">
+                    <div class="hud-badge">
+                        <span class="hud-signal-dot"></span>
+                        <span>SYS/01 &bull; KERNEL ONLINE &bull; PSTU_CSE</span>
+                    </div>
+                    <div class="hidden sm:flex hud-badge">
+                        <span>CANVAS // ACTIVE &bull; 60FPS</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
+                    
+                    <!-- Hero Content -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <!-- Status pill -->
+                        <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-[#141923] border border-[#232d3d] text-xs font-mono-code text-slate-300">
+                            <span class="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span>
+                            <span>CSE Undergraduate @ PSTU &bull; Session 2023–2024</span>
+                        </div>
+
+                        <!-- Primary Headline -->
+                        <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1]">
+                            Building useful software.<br />
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#d4ff3a] via-[#86efac] to-[#38bdf8]">
+                                Solving problems.
+                            </span><br />
+                            Learning by doing.
+                        </h1>
+
+                        <!-- Supporting Description -->
+                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+                            I'm <strong class="text-white font-semibold">Md. Tanvir Anjum</strong>, a Computer Science and Engineering student at <span class="text-slate-100 font-medium">Patuakhali Science and Technology University</span> working toward becoming a full-stack developer. I enjoy problem-solving, competitive programming, and turning ideas into practical software.
+                        </p>
+
+                        <!-- Action CTAs -->
+                        <div class="pt-2 flex flex-wrap items-center gap-4">
+                            <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#d4ff3a] hover:bg-[#c2ed2c] text-[#090a0f] font-semibold text-sm transition-all duration-200 shadow-lg shadow-[#d4ff3a]/10 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a] focus:ring-offset-2 focus:ring-offset-[#090a0f]">
+                                <span>Explore my work</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                            </a>
+                            
+                            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#141822] hover:bg-[#1a2130] text-slate-200 hover:text-white border border-[#232a36] hover:border-slate-600 font-semibold text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]">
+                                <span>Get in touch</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+
+                            <!-- Direct WhatsApp Quick Connect -->
+                            <a href="https://wa.me/8801718659824?text=Hi%20Tanvir%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%21" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-[#0e241b] hover:bg-[#123326] text-[#4ade80] border border-[#1d4d38] font-medium text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-[#4ade80]"
+                               title="Direct WhatsApp chat">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                                <span>WhatsApp Connect</span>
+                            </a>
+                        </div>
+
+                        <!-- Academic Highlights Bar -->
+                        <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-[#1b2230]">
+                            <div>
+                                <div class="font-mono-code text-xl font-bold text-white">3.820</div>
+                                <div class="text-xs text-slate-400 font-medium">Cumulative CGPA</div>
+                            </div>
+                            <div>
+                                <div class="font-mono-code text-xl font-bold text-white">3rd Sem</div>
+                                <div class="text-xs text-slate-400 font-medium">Completed at PSTU</div>
+                            </div>
+                            <div>
+                                <div class="font-mono-code text-xl font-bold text-white">Full-Stack</div>
+                                <div class="text-xs text-slate-400 font-medium">C# &bull; ASP.NET &bull; MySQL</div>
+                            </div>
+                            <div>
+                                <div class="font-mono-code text-xl font-bold text-white">Algorithms</div>
+                                <div class="text-xs text-slate-400 font-medium">C++ Problem Solving</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Hero Portrait Monogram Placeholder -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-sm sm:max-w-md">
+                            
+                            <!-- Decorative border frame -->
+                            <div class="absolute -inset-1.5 rounded-3xl bg-gradient-to-b from-[#232a36] via-[#161b24] to-[#d4ff3a]/20 opacity-70 blur-sm"></div>
+                            
+                            <div class="relative rounded-2xl bg-[#0f131a] border border-[#232a36] p-4 sm:p-5 shadow-2xl card-interactive">
+                                
+                                <!-- Visual Image Container -->
+                                <div class="relative aspect-square rounded-xl overflow-hidden bg-[#0a0c10] border border-[#1b2230] group scanline-box">
+                                    <img src="/assets/images/profile-placeholder.svg" 
+                                         alt="Md. Tanvir Anjum — Portfolio Monogram" 
+                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                                         id="heroProfileImg" />
+
+                                    <!-- Bottom caption badge -->
+                                    <div class="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-[#0b0e14]/90 backdrop-blur-md border border-[#232a36] flex items-center justify-between text-xs font-mono-code">
+                                        <span class="text-slate-300">Md. Tanvir Anjum</span>
+                                        <span class="text-[#d4ff3a] font-bold">PSTU CSE '23</span>
+                                    </div>
+                                </div>
+
+                                <!-- Technical Card Footer -->
+                                <div class="mt-4 flex items-center justify-between text-xs font-mono-code text-slate-400">
+                                    <span class="flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-[#14b8a6]"></span>
+                                        Active Learner
+                                    </span>
+                                    <span>mtanviranjum.tech</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             ABOUT SECTION (Engineering Canvas)
+             ======================================================== -->
+        <section id="about" class="canvas-section py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+            
+            <div class="canvas-spotlight" aria-hidden="true"></div>
+
+            <div class="circuit-canvas-layer" aria-hidden="true">
+                <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+                    <path class="circuit-trace" d="M 100 80 L 250 80 L 300 130 L 450 130" />
+                    <path class="circuit-trace" d="M 800 500 L 950 500 L 1020 430 L 1150 430" />
+                    <circle class="circuit-node pulse-node" cx="100" cy="80" r="3" />
+                    <circle class="circuit-node" cx="250" cy="80" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="300" cy="130" r="3.5" />
+                    <circle class="circuit-node" cx="450" cy="130" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="800" cy="500" r="3" />
+                    <circle class="circuit-node pulse-node-offset" cx="1020" cy="430" r="3.5" />
+                    <circle class="circuit-node" cx="1150" cy="430" r="3" />
+                </svg>
+            </div>
+
+            <div class="canvas-content">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                        // 01. About Me
+                    </div>
+                    <div class="hud-badge">
+                        <span class="hud-signal-dot"></span>
+                        <span>SYS/02 &bull; LOGIC // FOUNDATIONS</span>
+                    </div>
+                </div>
+
+                <div class="max-w-3xl space-y-4 mb-16">
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                        Engineering software with curiosity, discipline, and practical purpose.
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <!-- Left Editorial Text -->
+                    <div class="lg:col-span-7 space-y-6 text-slate-300 text-base sm:text-lg leading-relaxed">
+                        <p>
+                            I am an undergraduate Computer Science and Engineering student at <strong class="text-white font-medium">Patuakhali Science and Technology University (PSTU)</strong>, Bangladesh (session 2023–2024). My focus is on building practical full-stack web applications and strengthening algorithmic problem-solving skills.
+                        </p>
+                        <p>
+                            I view programming as both a creative craft and a disciplined engineering practice. On one side, I enjoy the intellectual rigor of competitive programming—dissecting graph theory, dynamic programming, and data structures in <strong class="text-white font-medium">C++</strong> on Codeforces and LeetCode. On the other, I enjoy architecting server-rendered web applications using <strong class="text-white font-medium">C# and ASP.NET Core MVC</strong>, backed by relational <strong class="text-white font-medium">MySQL</strong> databases.
+                        </p>
+                        <p>
+                            I believe the best way to master computing is through hands-on construction. Whether designing relational schemas and financial accounting logic for <strong class="text-white font-medium">ShareSync</strong>, prototyping embedded sensors on an <strong class="text-white font-medium">ESP32</strong>, or wireframing academic scheduling systems for our department, I value honest engineering decisions over hollow buzzwords.
+                        </p>
+                    </div>
+
+                    <!-- Right Focus Pillars -->
+                    <div class="lg:col-span-5 space-y-4">
+                        
+                        <div class="card-interactive p-6 rounded-2xl bg-[#10141d] border border-[#212836]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="p-2 rounded-lg bg-[#d4ff3a]/10 text-[#d4ff3a]">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                </div>
+                                <h3 class="font-display font-bold text-base text-white">Full-Stack Development</h3>
+                            </div>
+                            <p class="text-sm text-slate-400">
+                                Designing clean server architectures with ASP.NET Core, relational databases in MySQL, and modern responsive user interfaces with semantic HTML, Tailwind, and vanilla JavaScript.
+                            </p>
+                        </div>
+
+                        <div class="card-interactive p-6 rounded-2xl bg-[#10141d] border border-[#212836]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="p-2 rounded-lg bg-[#14b8a6]/10 text-[#14b8a6]">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                                </div>
+                                <h3 class="font-display font-bold text-base text-white">Competitive Programming</h3>
+                            </div>
+                            <p class="text-sm text-slate-400">
+                                Regular problem solving in C++ across Codeforces and LeetCode to build speed, mathematical intuition, and robust algorithmic thinking under resource constraints.
+                            </p>
+                        </div>
+
+                        <div class="card-interactive p-6 rounded-2xl bg-[#10141d] border border-[#212836]">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="p-2 rounded-lg bg-sky-500/10 text-sky-400">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                                </div>
+                                <h3 class="font-display font-bold text-base text-white">Academic Excellence</h3>
+                            </div>
+                            <p class="text-sm text-slate-400">
+                                Maintaining a strong 3.820 cumulative CGPA through 3 semesters at PSTU while balancing core theoretical foundations in computing and electronics.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             PROJECTS SECTION (Engineering Canvas)
+             ======================================================== -->
+        <section id="projects" class="canvas-section py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+            
+            <div class="canvas-spotlight" aria-hidden="true"></div>
+
+            <div class="circuit-canvas-layer" aria-hidden="true">
+                <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 700">
+                    <path class="circuit-trace" d="M 80 60 L 320 60 L 380 120 L 520 120" />
+                    <path class="circuit-trace" d="M 650 640 L 800 640 L 860 580 L 1100 580" />
+                    <circle class="circuit-node pulse-node" cx="80" cy="60" r="3" />
+                    <circle class="circuit-node" cx="320" cy="60" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="380" cy="120" r="3.5" />
+                    <circle class="circuit-node" cx="520" cy="120" r="3" />
+                    <rect class="circuit-pad" x="648" y="638" width="5" height="5" />
+                    <circle class="circuit-node pulse-node-offset" cx="860" cy="580" r="3.5" />
+                    <circle class="circuit-node" cx="1100" cy="580" r="3" />
+                </svg>
+            </div>
+
+            <div class="canvas-content">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                                // 02. Verified Projects
+                            </span>
+                            <span class="hud-badge">
+                                <span class="hud-signal-dot"></span>
+                                <span>SYS/03 &bull; WORKBENCH // 3 BUILDS</span>
+                            </span>
+                        </div>
+                        <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight mt-1">
+                            Featured Engineering Work
+                        </h2>
+                        <p class="text-sm text-slate-400 mt-2 max-w-xl">
+                            Genuine academic and exploratory projects reflecting actual implementation details, verified technologies, and architecture notes.
+                        </p>
+                    </div>
+
+                    <!-- Project Filters -->
+                    <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Project category filter">
+                        <button type="button" 
+                                class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code font-semibold transition-all bg-[#d4ff3a] text-[#090a0f] border border-[#d4ff3a]" 
+                                data-category="all"
+                                aria-pressed="true">
+                            All (3)
+                        </button>
+                        <button type="button" 
+                                class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500" 
+                                data-category="Full-Stack Web"
+                                aria-pressed="false">
+                            Full-Stack
+                        </button>
+                        <button type="button" 
+                                class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500" 
+                                data-category="IoT & Systems"
+                                aria-pressed="false">
+                            IoT / Embedded
+                        </button>
+                        <button type="button" 
+                                class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500" 
+                                data-category="Academic Systems"
+                                aria-pressed="false">
+                            Department Systems
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Cards Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- 1. ShareSync -->
+                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] overflow-hidden group shadow-lg"
+                             data-category="Full-Stack Web">
+                        
+                        <div class="scanline-box relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735]">
+                            <img src="/assets/images/projects/sharesync.svg" 
+                                 alt="ShareSync Technical Overview" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 loading="lazy" />
+                            
+                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
+                                Academic Project (In Active Development)
+                            </div>
+                        </div>
+
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <div>
+                                <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">Full-Stack Web</span>
+                                <h3 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                    ShareSync
+                                </h3>
+                                <p class="font-mono-code text-xs text-slate-400 mt-0.5">Academic Share-Market Portfolio Tracker</p>
+                            </div>
+
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                A full-stack investment portfolio and stock tracking web application built to explore relational database design, transaction history, and financial calculations.
+                            </p>
+
+                            <div class="space-y-1.5 pt-2 border-t border-[#1a212d]">
+                                <p class="font-mono-code text-[11px] text-slate-400 font-semibold uppercase">Architecture Highlights:</p>
+                                <ul class="space-y-1 text-xs text-slate-300">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-[#d4ff3a] font-bold">&bull;</span>
+                                        <span>Relational MySQL schema modeling portfolios, assets, and buy/sell transaction ledger</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-[#d4ff3a] font-bold">&bull;</span>
+                                        <span>Weighted average cost basis calculation and realized/unrealized P&amp;L reconciliation</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="flex flex-wrap gap-1.5 pt-2">
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">C#</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">ASP.NET Core MVC</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">MySQL</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">Entity Framework Core</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] text-[11px] font-mono-code text-slate-500">+3</span>
+                            </div>
+
+                            <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                                <a href="/projects/sharesync/" 
+                                   class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline focus:outline-none focus:ring-1 focus:ring-[#d4ff3a] rounded py-1 px-2">
+                                    <span>Read Case Study</span>
+                                    <svg class="w-3.5 h-3.5 action-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+
+                                <a href="https://github.com/MtanvirA/ShareSync" target="_blank" rel="noopener noreferrer" 
+                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                    <span>Code</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>
+
+                        </div>
+                    </article>
+
+                    <!-- 2. Smart Railway Track Health Monitoring -->
+                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] overflow-hidden group shadow-lg"
+                             data-category="IoT & Systems">
+                        
+                        <div class="scanline-box relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735]">
+                            <img src="/assets/images/projects/railway.svg" 
+                                 alt="Smart Railway Track Health Monitoring Technical Overview" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 loading="lazy" />
+                            
+                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
+                                Academic Hardware Prototype / Concept
+                            </div>
+                        </div>
+
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <div>
+                                <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">IoT &amp; Systems</span>
+                                <h3 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                    Smart Railway Track Health Monitoring
+                                </h3>
+                                <p class="font-mono-code text-xs text-slate-400 mt-0.5">ESP32-Based IoT Track Safety &amp; Signaling Prototype</p>
+                            </div>
+
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                An embedded IoT engineering prototype combining sensor telemetry, obstacle detection, train speed calculation, and automated signaling to explore railway safety concepts.
+                            </p>
+
+                            <div class="space-y-1.5 pt-2 border-t border-[#1a212d]">
+                                <p class="font-mono-code text-[11px] text-slate-400 font-semibold uppercase">Architecture Highlights:</p>
+                                <ul class="space-y-1 text-xs text-slate-300">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-[#d4ff3a] font-bold">&bull;</span>
+                                        <span>Real-time obstacle detection using calibrated ultrasonic sensor arrays</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-[#d4ff3a] font-bold">&bull;</span>
+                                        <span>Transit-time velocity calculation algorithm for approaching train models</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="flex flex-wrap gap-1.5 pt-2">
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">C/C++</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">ESP32</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">Ultrasonic Sensors</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">OLED Display</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] text-[11px] font-mono-code text-slate-500">+2</span>
+                            </div>
+
+                            <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                                <a href="/projects/railway-track-health-monitoring/" 
+                                   class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline focus:outline-none focus:ring-1 focus:ring-[#d4ff3a] rounded py-1 px-2">
+                                    <span>Read Case Study</span>
+                                    <svg class="w-3.5 h-3.5 action-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+
+                                <a href="https://github.com/MtanvirA/Smart-Railway-Track-Monitoring" target="_blank" rel="noopener noreferrer" 
+                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                    <span>Code</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>
+
+                        </div>
+                    </article>
+
+                    <!-- 3. CampusSync -->
+                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] overflow-hidden group shadow-lg"
+                             data-category="Academic Systems">
+                        
+                        <div class="scanline-box relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735]">
+                            <img src="/assets/images/projects/campussync.svg" 
+                                 alt="CampusSync Technical Overview" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 loading="lazy" />
+                            
+                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
+                                Department Prototype / In Design Phase
+                            </div>
+                        </div>
+
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <div>
+                                <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">Academic Systems</span>
+                                <h3 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                    CampusSync
+                                </h3>
+                                <p class="font-mono-code text-xs text-slate-400 mt-0.5">University Scheduling &amp; Coordination Platform</p>
+                            </div>
+
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                A centralized academic scheduling and resource coordination platform designed specifically for the PSTU Computer Science and Engineering Department.
+                            </p>
+
+                            <div class="space-y-1.5 pt-2 border-t border-[#1a212d]">
+                                <p class="font-mono-code text-[11px] text-slate-400 font-semibold uppercase">Architecture Highlights:</p>
+                                <ul class="space-y-1 text-xs text-slate-300">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-[#d4ff3a] font-bold">&bull;</span>
+                                        <span>Schedule matrix designed around PSTU CSE semester structure</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-[#d4ff3a] font-bold">&bull;</span>
+                                        <span>Conflict detection mechanism for laboratory room occupancy</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="flex flex-wrap gap-1.5 pt-2">
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">C#</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">ASP.NET Core</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">MySQL</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">Tailwind CSS</span>
+                                <span class="px-2 py-0.5 rounded bg-[#161c26] text-[11px] font-mono-code text-slate-500">+1</span>
+                            </div>
+
+                            <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                                <a href="/projects/campussync/" 
+                                   class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline focus:outline-none focus:ring-1 focus:ring-[#d4ff3a] rounded py-1 px-2">
+                                    <span>Read Case Study</span>
+                                    <svg class="w-3.5 h-3.5 action-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </a>
+
+                                <a href="https://github.com/MtanvirA/CampusSync" target="_blank" rel="noopener noreferrer" 
+                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                    <span>Code</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>
+
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Link to Full Catalogue -->
+                <div class="pt-12 text-center">
+                    <a href="/projects/" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#141822] hover:bg-[#1b2230] text-slate-200 hover:text-white border border-[#232a36] text-xs font-mono-code font-bold transition-colors">
+                        <span>Browse Complete Engineering Archive &rarr;</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             SKILLS SECTION (Engineering Canvas)
+             ======================================================== -->
+        <section id="skills" class="canvas-section py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+            
+            <div class="canvas-spotlight" aria-hidden="true"></div>
+
+            <div class="circuit-canvas-layer" aria-hidden="true">
+                <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 650">
+                    <path class="circuit-trace" d="M 60 400 L 220 400 L 280 340 L 460 340" />
+                    <path class="circuit-trace" d="M 850 120 L 980 120 L 1040 180 L 1140 180" />
+                    <circle class="circuit-node pulse-node" cx="60" cy="400" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="220" cy="400" r="3" />
+                    <circle class="circuit-node" cx="280" cy="340" r="3.5" />
+                    <circle class="circuit-node pulse-node-offset" cx="460" cy="340" r="3" />
+                    <circle class="circuit-node" cx="850" cy="120" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="980" cy="120" r="3" />
+                    <circle class="circuit-node pulse-node" cx="1040" cy="180" r="3.5" />
+                    <circle class="circuit-node" cx="1140" cy="180" r="3" />
+                </svg>
+            </div>
+
+            <div class="canvas-content">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                        // 03. Technical Competencies
+                    </div>
+                    <div class="hud-badge">
+                        <span class="hud-signal-dot"></span>
+                        <span>SYS/04 &bull; TOOLCHAIN // COMPILED</span>
+                    </div>
+                </div>
+
+                <div class="max-w-3xl space-y-4 mb-16">
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                        Tools and technologies I actively use and learn.
+                    </h2>
+                    <p class="text-sm text-slate-400">
+                        Categorized by actual practical familiarity. No misleading percentage bars—only verified roles and technologies.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Category 1 -->
+                    <div class="p-6 rounded-2xl bg-[#10141d] border border-[#212836] flex flex-col space-y-6">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">Programming &amp; Problem Solving</h3>
+                            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                                Core procedural and object-oriented languages used for competitive programming, algorithms, and backend systems.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 flex-grow">
+                            <!-- C -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">C</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Procedural systems foundations, memory management concepts, and initial academic computing.
+                                </p>
+                            </div>
+                            <!-- C++ -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">C++</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Primary language for competitive programming, STL data structures, and algorithmic problem-solving on Codeforces/LeetCode.
+                                </p>
+                            </div>
+                            <!-- JavaScript -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">JavaScript</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Client-side browser interactivity, DOM manipulation, asynchronous fetch requests, and accessible UI behavior.
+                                </p>
+                            </div>
+                            <!-- C# -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">C#</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Server-side enterprise application architecture, object-oriented design, LINQ, and backend business logic.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="p-6 rounded-2xl bg-[#10141d] border border-[#212836] flex flex-col space-y-6">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">Web Development</h3>
+                            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                                Full-stack frameworks and layout engines for engineering responsive, accessible web applications.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 flex-grow">
+                            <!-- ASP.NET Core MVC -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">ASP.NET Core MVC</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Server-rendered architecture, controllers, Razor views, dependency injection, and model validation.
+                                </p>
+                            </div>
+                            <!-- HTML5 -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">HTML5</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Semantic document structure, landmark elements, native dialogs, and web accessibility standards.
+                                </p>
+                            </div>
+                            <!-- CSS / Tailwind CSS -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">CSS / Tailwind CSS</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Modern layout systems (Flexbox, CSS Grid), compiled Tailwind CSS pipelines, design tokens, and responsive breakpoints.
+                                </p>
+                            </div>
+                            <!-- Bootstrap -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">Bootstrap</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-cyan-400/40 text-cyan-300 bg-cyan-400/10">Learning</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Component grids, responsive utility classes, and prototyping administrative and rapid interface layouts.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="p-6 rounded-2xl bg-[#10141d] border border-[#212836] flex flex-col space-y-6">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white">Database &amp; Development Tools</h3>
+                            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                                Data persistence layers, version control workflows, and developer productivity tooling.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 flex-grow">
+                            <!-- MySQL -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">MySQL</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Relational schema design, normalization, foreign key constraints, indexes, and EF Core migrations.
+                                </p>
+                            </div>
+                            <!-- Git & GitHub -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">Git &amp; GitHub</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Version control, feature branching, clean commit histories, remote synchronization, and repository maintenance.
+                                </p>
+                            </div>
+                            <!-- VS Code -->
+                            <div class="skill-card-interactive p-3.5 rounded-xl bg-[#141822] border border-[#1f2736] space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="skill-title font-mono-code font-bold text-sm text-slate-100">VS Code</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono-code border border-lime-400/40 text-lime-300 bg-lime-400/10">Working with</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-normal">
+                                    Primary code editing environment, debugging workflows, extensions, and integrated terminal tasks.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             EDUCATION SECTION (Engineering Canvas)
+             ======================================================== -->
+        <section id="education" class="canvas-section py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+            
+            <div class="canvas-spotlight" aria-hidden="true"></div>
+
+            <div class="circuit-canvas-layer" aria-hidden="true">
+                <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+                    <path class="circuit-trace" d="M 120 100 L 280 100 L 340 160 L 500 160" />
+                    <path class="circuit-trace" d="M 700 480 L 880 480 L 940 540 L 1100 540" />
+                    <circle class="circuit-node pulse-node" cx="120" cy="100" r="3" />
+                    <circle class="circuit-node" cx="280" cy="100" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="340" cy="160" r="3.5" />
+                    <circle class="circuit-node" cx="500" cy="160" r="3" />
+                    <rect class="circuit-pad" x="698" y="478" width="5" height="5" />
+                    <circle class="circuit-node pulse-node-offset" cx="940" cy="540" r="3.5" />
+                    <circle class="circuit-node" cx="1100" cy="540" r="3" />
+                </svg>
+            </div>
+
+            <div class="canvas-content">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                        // 04. Academic Records
+                    </div>
+                    <div class="hud-badge">
+                        <span class="hud-signal-dot"></span>
+                        <span>SYS/05 &bull; PSTU_CSE_SESSION_23-24</span>
+                    </div>
+                </div>
+
+                <div class="max-w-3xl space-y-4 mb-16">
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                        Education &amp; Provisional Transcript Standing
+                    </h2>
+                    <p class="text-sm text-slate-400">
+                        Official provisional academic standing at Patuakhali Science and Technology University (PSTU). Degree is in active progress.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Overall Degree Summary Card -->
+                    <div class="card-interactive lg:col-span-5 p-8 rounded-2xl bg-[#10141d] border border-[#212836] space-y-6 shadow-xl">
+                        
+                        <div class="space-y-1">
+                            <span class="font-mono-code text-xs text-[#d4ff3a] uppercase font-semibold">Undergraduate Program</span>
+                            <h3 class="font-display font-bold text-xl text-white">
+                                B.Sc. in Engineering, Computer Science and Engineering
+                            </h3>
+                            <p class="text-sm text-slate-300 font-medium">
+                                Patuakhali Science and Technology University (PSTU)
+                            </p>
+                            <p class="font-mono-code text-xs text-slate-400">
+                                Academic Session: 2023–2024
+                            </p>
+                        </div>
+
+                        <!-- Cumulative CGPA Highlight Box -->
+                        <div class="p-5 rounded-xl bg-[#161c26] border border-[#252f3f] flex items-center justify-between">
+                            <div>
+                                <div class="text-xs font-mono-code text-slate-400 uppercase">Cumulative CGPA</div>
+                                <div class="text-xs text-slate-500">(Through 3rd Semester)</div>
+                            </div>
+                            <div class="font-display font-extrabold text-4xl text-[#d4ff3a]">
+                                3.820
+                            </div>
+                        </div>
+
+                        <!-- Verified Course Highlights -->
+                        <div class="space-y-2">
+                            <p class="font-mono-code text-xs text-slate-400 font-semibold uppercase">Completed Course Highlights:</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-[#141923] border border-[#212b3b] font-mono-code text-xs text-slate-300">Programming Language</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#141923] border border-[#212b3b] font-mono-code text-xs text-slate-300">Object-Oriented Programming</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#141923] border border-[#212b3b] font-mono-code text-xs text-slate-300">Discrete Mathematics</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#141923] border border-[#212b3b] font-mono-code text-xs text-slate-300">Data Structures and Algorithms</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#141923] border border-[#212b3b] font-mono-code text-xs text-slate-300">Software Engineering</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#141923] border border-[#212b3b] font-mono-code text-xs text-slate-300">Mathematics</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#141923] border border-[#212b3b] font-mono-code text-xs text-slate-300">Electrical &amp; Electronic Engineering</span>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-500 font-mono-code border-t border-slate-800/80 pt-4">
+                            Academic results reflect official provisional records through the third semester. Degree is currently in progress.
+                        </p>
+
+                    </div>
+
+                    <!-- Semester-by-Semester Table Breakdown -->
+                    <div class="card-interactive lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#10141d] border border-[#212836] space-y-6 shadow-xl">
+                        
+                        <div>
+                            <h4 class="font-display font-bold text-lg text-white">Semester GPA &amp; Cumulative CGPA Breakdown</h4>
+                            <p class="text-xs font-mono-code text-slate-400 mt-1">Official provisional semester calculations</p>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-[#212836] text-xs font-mono-code text-slate-400">
+                                        <th class="py-3 px-4 font-semibold">Semester</th>
+                                        <th class="py-3 px-4 font-semibold">Semester GPA</th>
+                                        <th class="py-3 px-4 font-semibold">Cumulative CGPA</th>
+                                        <th class="py-3 px-4 font-semibold hidden sm:table-cell">Academic Focus</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-[#1b2230] text-sm font-mono-code">
+                                    <tr class="hover:bg-[#141923]/60 transition-colors">
+                                        <td class="py-4 px-4 font-bold text-white">First Semester</td>
+                                        <td class="py-4 px-4 text-[#38bdf8] font-semibold">3.870</td>
+                                        <td class="py-4 px-4 text-[#d4ff3a] font-bold">3.870</td>
+                                        <td class="py-4 px-4 text-xs text-slate-400 hidden sm:table-cell font-sans">
+                                            Strong foundation in fundamental computing, problem-solving, and mathematics.
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-[#141923]/60 transition-colors">
+                                        <td class="py-4 px-4 font-bold text-white">Second Semester</td>
+                                        <td class="py-4 px-4 text-[#38bdf8] font-semibold">3.771</td>
+                                        <td class="py-4 px-4 text-[#d4ff3a] font-bold">3.820</td>
+                                        <td class="py-4 px-4 text-xs text-slate-400 hidden sm:table-cell font-sans">
+                                            Focused on structured programming, object-oriented concepts, and engineering sciences.
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-[#141923]/60 transition-colors">
+                                        <td class="py-4 px-4 font-bold text-white">Third Semester</td>
+                                        <td class="py-4 px-4 text-[#38bdf8] font-semibold">3.821</td>
+                                        <td class="py-4 px-4 text-[#d4ff3a] font-bold">3.820</td>
+                                        <td class="py-4 px-4 text-xs text-slate-400 hidden sm:table-cell font-sans">
+                                            Advanced data structures, discrete algorithms, and software engineering principles.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-[#131720] border border-[#1f2735] text-xs text-slate-400 leading-relaxed">
+                            <strong class="text-slate-200">Integrity notice:</strong> Semester GPA and Cumulative CGPA are computed under PSTU's grading scale. Private transcript numbers, registration numbers, and roll IDs are omitted to safeguard privacy.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             CODING PROFILES SECTION (Engineering Canvas)
+             ======================================================== -->
+        <section id="profiles" class="canvas-section py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+            
+            <div class="canvas-spotlight" aria-hidden="true"></div>
+
+            <div class="circuit-canvas-layer" aria-hidden="true">
+                <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 500">
+                    <path class="circuit-trace" d="M 100 250 L 300 250 L 360 310 L 500 310" />
+                    <path class="circuit-trace" d="M 750 180 L 900 180 L 960 240 L 1100 240" />
+                    <circle class="circuit-node pulse-node" cx="100" cy="250" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="300" cy="250" r="3" />
+                    <circle class="circuit-node" cx="360" cy="310" r="3.5" />
+                    <circle class="circuit-node" cx="500" cy="310" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="750" cy="180" r="3" />
+                    <circle class="circuit-node pulse-node-offset" cx="960" cy="240" r="3.5" />
+                    <circle class="circuit-node" cx="1100" cy="240" r="3" />
+                </svg>
+            </div>
+
+            <div class="canvas-content">
+                
+                <div class="flex items-center justify-between mb-4">
+                    <div class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                        // 05. Developer Presence
+                    </div>
+                    <div class="hud-badge">
+                        <span class="hud-signal-dot"></span>
+                        <span>SYS/06 &bull; NETWORK // 4 HUBS CONNECTED</span>
+                    </div>
+                </div>
+
+                <div class="max-w-3xl space-y-4 mb-16">
+                    <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                        Coding Profiles &amp; Problem-Solving Hubs
+                    </h2>
+                    <p class="text-sm text-slate-400">
+                        Explore real algorithmic submissions, contest histories, and open-source contributions.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- GitHub -->
+                    <a href="https://github.com/MtanvirA" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="card-interactive p-6 rounded-2xl bg-[#10141d] border border-[#212836] group flex flex-col justify-between space-y-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-display font-bold text-lg text-white group-hover:text-[#d4ff3a] transition-colors">
+                                    GitHub
+                                </span>
+                                <span class="text-slate-500 group-hover:text-white transition-colors action-arrow">&rarr;</span>
+                            </div>
+                            <div class="font-mono-code text-xs text-slate-300 bg-[#161c26] px-2 py-1 rounded inline-block">
+                                @MtanvirA
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Home to full-stack projects, C#/ASP.NET Core source code, and university technical explorations.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-[#1b2230] text-[11px] font-mono-code text-[#38bdf8]">
+                            Open Source &amp; Web Repositories
+                        </div>
+                    </a>
+
+                    <!-- Codeforces -->
+                    <a href="https://codeforces.com/profile/MtanvirA" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="card-interactive p-6 rounded-2xl bg-[#10141d] border border-[#212836] group flex flex-col justify-between space-y-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-display font-bold text-lg text-white group-hover:text-[#d4ff3a] transition-colors">
+                                    Codeforces
+                                </span>
+                                <span class="text-slate-500 group-hover:text-white transition-colors action-arrow">&rarr;</span>
+                            </div>
+                            <div class="font-mono-code text-xs text-slate-300 bg-[#161c26] px-2 py-1 rounded inline-block">
+                                MtanvirA
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Regular participant in algorithmic contests, practicing data structures, dynamic programming, and math under time pressure.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-[#1b2230] text-[11px] font-mono-code text-[#38bdf8]">
+                            Competitive Programming
+                        </div>
+                    </a>
+
+                    <!-- LeetCode -->
+                    <a href="https://leetcode.com/u/MtanvirA/" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="card-interactive p-6 rounded-2xl bg-[#10141d] border border-[#212836] group flex flex-col justify-between space-y-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-display font-bold text-lg text-white group-hover:text-[#d4ff3a] transition-colors">
+                                    LeetCode
+                                </span>
+                                <span class="text-slate-500 group-hover:text-white transition-colors action-arrow">&rarr;</span>
+                            </div>
+                            <div class="font-mono-code text-xs text-slate-300 bg-[#161c26] px-2 py-1 rounded inline-block">
+                                MtanvirA
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Focused problem-solving practice covering trees, graphs, sorting algorithms, and system design fundamentals.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-[#1b2230] text-[11px] font-mono-code text-[#38bdf8]">
+                            Algorithms &amp; Data Structures
+                        </div>
+                    </a>
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/md-tanvir-anjum-3642371aa/" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="card-interactive p-6 rounded-2xl bg-[#10141d] border border-[#212836] group flex flex-col justify-between space-y-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-display font-bold text-lg text-white group-hover:text-[#d4ff3a] transition-colors">
+                                    LinkedIn
+                                </span>
+                                <span class="text-slate-500 group-hover:text-white transition-colors action-arrow">&rarr;</span>
+                            </div>
+                            <div class="font-mono-code text-xs text-slate-300 bg-[#161c26] px-2 py-1 rounded inline-block">
+                                md-tanvir-anjum
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Connecting with fellow engineers, academic peers, and technology communities.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-[#1b2230] text-[11px] font-mono-code text-[#38bdf8]">
+                            Professional Network
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             CONTACT SECTION (Netlify Forms & Engineering Canvas)
+             ======================================================== -->
+        <section id="contact" class="canvas-section py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1b2230]">
+            
+            <div class="canvas-spotlight" aria-hidden="true"></div>
+
+            <div class="circuit-canvas-layer" aria-hidden="true">
+                <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 650">
+                    <path class="circuit-trace" d="M 80 80 L 260 80 L 320 140 L 460 140" />
+                    <path class="circuit-trace" d="M 800 520 L 940 520 L 1000 460 L 1120 460" />
+                    <circle class="circuit-node pulse-node" cx="80" cy="80" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="260" cy="80" r="3" />
+                    <circle class="circuit-node" cx="320" cy="140" r="3.5" />
+                    <circle class="circuit-node" cx="460" cy="140" r="3" />
+                    <circle class="circuit-node circuit-node-teal" cx="800" cy="520" r="3" />
+                    <circle class="circuit-node pulse-node-offset" cx="1000" cy="460" r="3.5" />
+                    <circle class="circuit-node" cx="1120" cy="460" r="3" />
+                </svg>
+            </div>
+
+            <div class="canvas-content">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <!-- Left Info Panel -->
+                    <div class="lg:col-span-5 space-y-6">
+                        
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3">
+                                <span class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                                    // 06. Communication
+                                </span>
+                                <span class="hud-badge">
+                                    <span class="hud-signal-dot"></span>
+                                    <span>SYS/07 &bull; DISPATCH // READY</span>
+                                </span>
+                            </div>
+                            <h2 class="font-display font-bold text-3xl sm:text-4xl text-white tracking-tight">
+                                Let's connect and build together.
+                            </h2>
+                            <p class="text-sm text-slate-300 leading-relaxed pt-2">
+                                Whether you want to discuss full-stack software development, collaborate on open-source, or talk competitive programming, I'd love to hear from you.
+                            </p>
+                        </div>
+
+                        <!-- Channels List -->
+                        <div class="space-y-4 pt-4">
+                            
+                            <!-- Email Direct -->
+                            <a href="mailto:tanviranjum201@gmail.com" class="card-interactive flex items-center gap-4 p-4 rounded-xl bg-[#10141d] border border-[#212836] group">
+                                <div class="p-3 rounded-lg bg-slate-800/80 text-[#d4ff3a]">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-mono-code text-slate-400 block">Direct Email</span>
+                                    <span class="text-sm font-semibold text-white group-hover:text-[#d4ff3a] transition-colors">tanviranjum201@gmail.com</span>
+                                </div>
+                            </a>
+
+                            <!-- WhatsApp Direct (No visible phone number printed) -->
+                            <a href="https://wa.me/8801718659824?text=Hi%20Tanvir%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%21" target="_blank" rel="noopener noreferrer" class="card-interactive flex items-center gap-4 p-4 rounded-xl bg-[#0c1f17] border border-[#1b4332] group">
+                                <div class="p-3 rounded-lg bg-[#143d2c] text-[#4ade80]">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-mono-code text-emerald-400/80 block">Instant Chat</span>
+                                    <span class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">Start WhatsApp Conversation</span>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-[#10141d] border border-[#212836] text-xs font-mono-code text-slate-400 space-y-1">
+                            <div>Patuakhali Science and Technology University</div>
+                            <div>Dumki, Patuakhali-8602, Bangladesh</div>
+                            <div class="text-[#d4ff3a]">Timezone: Asia/Dhaka (GMT+6)</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right: Netlify Static Contact Form -->
+                    <div class="card-interactive lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#10141d] border border-[#212836] shadow-xl">
+                        
+                        <h3 class="font-display font-bold text-2xl text-white mb-2">Send a Message</h3>
+                        <p class="text-xs text-slate-400 mb-6 font-mono-code">
+                            Submitted securely via Netlify Forms with bot filtering &amp; direct delivery.
+                        </p>
+
+                        <!-- Semantic Netlify Form -->
+                        <form id="contactForm" 
+                              name="portfolio-contact" 
+                              method="POST" 
+                              action="/thank-you/"
+                              data-netlify="true" 
+                              netlify-honeypot="bot-field" 
+                              class="space-y-5" 
+                              novalidate>
+
+                            <!-- Hidden Form Name for Netlify Static Detection -->
+                            <input type="hidden" name="form-name" value="portfolio-contact" />
+
+                            <!-- Hidden Honeypot Anti-Spam Field -->
+                            <div class="hidden" aria-hidden="true">
+                                <label for="bot-field">Do not fill this field</label>
+                                <input type="text" id="bot-field" name="bot-field" tabindex="-1" autocomplete="off" />
+                            </div>
+
+                            <!-- Name Field -->
+                            <div>
+                                <label for="contact-name" class="block text-xs font-mono-code text-slate-300 uppercase mb-1">
+                                    Your Name <span class="text-rose-400">*</span>
+                                </label>
+                                <input id="contact-name" 
+                                       type="text" 
+                                       name="name" 
+                                       required 
+                                       maxlength="100" 
+                                       placeholder="e.g. Alex Rahman"
+                                       class="w-full px-4 py-3 rounded-xl bg-[#141822] border border-[#232a36] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[#d4ff3a] focus:ring-1 focus:ring-[#d4ff3a] transition-colors" />
+                                <span class="error-feedback text-rose-400 text-xs mt-1 block font-mono-code">
+                                    Please provide your name.
+                                </span>
+                            </div>
+
+                            <!-- Email Field -->
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <label for="contact-email" class="block text-xs font-mono-code text-slate-300 uppercase">
+                                        Email Address <span class="text-rose-400">*</span>
+                                    </label>
+                                    <span class="text-[11px] font-mono-code text-slate-500">I will reply here</span>
+                                </div>
+                                <input id="contact-email" 
+                                       type="email" 
+                                       name="email" 
+                                       required 
+                                       maxlength="150" 
+                                       placeholder="you@domain.com"
+                                       class="w-full px-4 py-3 rounded-xl bg-[#141822] border border-[#232a36] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[#d4ff3a] focus:ring-1 focus:ring-[#d4ff3a] transition-colors" />
+                                <span class="error-feedback text-rose-400 text-xs mt-1 block font-mono-code">
+                                    Please provide a valid email address.
+                                </span>
+                            </div>
+
+                            <!-- Subject Field (Optional) -->
+                            <div>
+                                <label for="contact-subject" class="block text-xs font-mono-code text-slate-300 uppercase mb-1">
+                                    Subject <span class="text-slate-500 font-normal">(Optional)</span>
+                                </label>
+                                <input id="contact-subject" 
+                                       type="text" 
+                                       name="subject" 
+                                       maxlength="200" 
+                                       placeholder="Project inquiry / Full-stack collaboration / Feedback"
+                                       class="w-full px-4 py-3 rounded-xl bg-[#141822] border border-[#232a36] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[#d4ff3a] focus:ring-1 focus:ring-[#d4ff3a] transition-colors" />
+                            </div>
+
+                            <!-- Message Field -->
+                            <div>
+                                <label for="contact-message" class="block text-xs font-mono-code text-slate-300 uppercase mb-1">
+                                    Message <span class="text-rose-400">*</span>
+                                </label>
+                                <textarea id="contact-message" 
+                                          name="message" 
+                                          rows="4" 
+                                          required 
+                                          minlength="10" 
+                                          maxlength="4000" 
+                                          placeholder="Write your note, inquiry, or question here..."
+                                          class="w-full px-4 py-3 rounded-xl bg-[#141822] border border-[#232a36] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[#d4ff3a] focus:ring-1 focus:ring-[#d4ff3a] transition-colors resize-y"></textarea>
+                                <span class="error-feedback text-rose-400 text-xs mt-1 block font-mono-code">
+                                    Message must be at least 10 characters.
+                                </span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button id="submitBtn" 
+                                    type="submit" 
+                                    class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#d4ff3a] hover:bg-[#c2ed2c] text-[#090a0f] font-bold text-sm transition-all duration-200 flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a] focus:ring-offset-2 focus:ring-offset-[#090a0f]">
+                                <svg id="btnSpinner" class="animate-spin -ml-1 mr-2 h-4 w-4 text-[#090a0f] hidden" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                <span id="btnText">Send Message</span>
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Interactive Terminal Modal (Native Dialog with light-dismiss per modern-web-guidance) -->
+    <dialog id="terminalDialog" 
+            closedby="any" 
+            aria-labelledby="terminalTitle" 
+            class="m-auto rounded-2xl bg-[#0b0e14] border border-[#232a36] text-slate-200 shadow-2xl p-0 w-[92vw] max-w-2xl overflow-hidden backdrop:bg-[#090a0f]/80 backdrop:backdrop-blur-md">
+        <!-- Terminal Header -->
+        <div class="px-4 py-3 bg-[#111620] border-b border-[#212836] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                <h2 id="terminalTitle" class="ml-2 font-mono-code text-xs text-slate-400 font-semibold tracking-wide">
+                    tanvir@pstu: ~/portfolio (sh)
+                </h2>
+            </div>
+            <button id="closeTerminalBtn" type="button" class="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 text-xs font-mono-code focus:outline-none focus:ring-1 focus:ring-[#d4ff3a]">
+                [ESC] Close
+            </button>
+        </div>
+
+        <!-- Terminal Output Console -->
+        <div id="terminalOutput" class="p-4 max-h-[380px] min-h-[220px] overflow-y-auto space-y-1 font-mono-code text-xs sm:text-sm bg-[#090b10] border-b border-[#1b212d]">
+            <div class="text-slate-400">Welcome to Tanvir Anjum's Interactive Portfolio Console v1.0.0.</div>
+            <div class="text-slate-500 text-[11px]">Type <span class="text-[#d4ff3a]">help</span> to display available commands. Press [ESC] or click outside to dismiss.</div>
+            <div class="text-slate-600 border-b border-slate-800/60 pb-2">----------------------------------------------------------------</div>
+        </div>
+
+        <!-- Terminal Input Prompt -->
+        <div class="p-3 bg-[#10141d] flex items-center gap-2">
+            <span class="text-[#d4ff3a] font-mono-code font-bold text-sm shrink-0">&gt;</span>
+            <input id="terminalInput" 
+                   type="text" 
+                   class="w-full bg-transparent border-0 outline-none font-mono-code text-xs sm:text-sm text-slate-100 placeholder-slate-600 focus:ring-0" 
+                   placeholder="Type a command (help, about, projects, skills, education, links, clear)..."
+                   autocomplete="off" 
+                   autocorrect="off" 
+                   autocapitalize="off" 
+                   spellcheck="false" />
+        </div>
+    </dialog>
+
+    <!-- Floating Return to Top Button -->
+    <button id="backToTopBtn" 
+            type="button" 
+            class="fixed bottom-6 right-6 z-30 p-3 rounded-xl bg-[#141822]/90 border border-[#232a36] text-slate-300 hover:text-[#d4ff3a] hover:border-[#d4ff3a] shadow-xl backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-4 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]" 
+            aria-label="Return to top of page">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
+    </button>
+
+    <!-- Global Footer -->
+    <footer class="mt-24 border-t border-[#1b2230] bg-[#0c0e14] py-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                
+                <!-- Col 1: Bio -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-[#141822] border border-[#232a36] flex items-center justify-center">
+                            <span class="font-display font-bold text-sm text-[#d4ff3a]">TA</span>
+                        </div>
+                        <span class="font-display font-bold text-lg text-white">Md. Tanvir Anjum</span>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-md leading-relaxed">
+                        Undergraduate Computer Science and Engineering student at Patuakhali Science and Technology University (PSTU). 
+                        Building useful web applications, competing in algorithmic challenges, and engineering pragmatic software.
+                    </p>
+                    <div class="text-xs font-mono-code text-slate-500">
+                        Patuakhali, Bangladesh &bull; Session 2023–2024
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="space-y-3">
+                    <p class="font-mono-code text-xs text-slate-400 font-bold uppercase tracking-wider">Navigation</p>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="/#about" class="hover:text-[#d4ff3a] transition-colors">About</a></li>
+                        <li><a href="/#projects" class="hover:text-[#d4ff3a] transition-colors">Projects</a></li>
+                        <li><a href="/#skills" class="hover:text-[#d4ff3a] transition-colors">Skills</a></li>
+                        <li><a href="/#education" class="hover:text-[#d4ff3a] transition-colors">Education</a></li>
+                        <li><a href="/#contact" class="hover:text-[#d4ff3a] transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Coding Profiles -->
+                <div class="space-y-3">
+                    <p class="font-mono-code text-xs text-slate-400 font-bold uppercase tracking-wider">Verified Profiles</p>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="https://github.com/MtanvirA" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">GitHub &rarr;</a></li>
+                        <li><a href="https://codeforces.com/profile/MtanvirA" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">Codeforces &rarr;</a></li>
+                        <li><a href="https://leetcode.com/u/MtanvirA/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">LeetCode &rarr;</a></li>
+                        <li><a href="https://www.linkedin.com/in/md-tanvir-anjum-3642371aa/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">LinkedIn &rarr;</a></li>
+                        <li><a href="https://www.facebook.com/mtanvira.uo/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">Facebook &rarr;</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Back-to-Top -->
+            <div class="mt-12 pt-8 border-t border-[#1a202c] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-code text-slate-500">
+                <p>&copy; 2026 Md. Tanvir Anjum. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <span class="text-slate-600">Static Production Portfolio &bull; Netlify Free</span>
+                    <a href="#top" class="text-slate-400 hover:text-[#d4ff3a] transition-colors">Return to Top &uarr;</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client-Side Scripts -->
+    <script src="/assets/js/site.js"></script>
+    <script src="/assets/js/terminal.js"></script>
+</body>
+</html>

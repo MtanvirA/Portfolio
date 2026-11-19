@@ -1,0 +1,52 @@
+# Netlify Configuration for Md. Tanvir Anjum Static Portfolio
+# Target: Netlify Free Tier ($0/month)
+# Publishes ONLY the static site/ directory.
+# The ASP.NET Core MVC application remains untouched in root for learning.
+
+[build]
+  command = "npm ci && npm run build:static-css"
+  publish = "site"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Security & Cache Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Clean directory-based URL handling
+[[redirects]]
+  from = "/projects"
+  to = "/projects/"
+  status = 301
+
+[[redirects]]
+  from = "/projects/sharesync"
+  to = "/projects/sharesync/"
+  status = 301
+
+[[redirects]]
+  from = "/projects/railway-track-health-monitoring"
+  to = "/projects/railway-track-health-monitoring/"
+  status = 301
+
+[[redirects]]
+  from = "/projects/campussync"
+  to = "/projects/campussync/"
+  status = 301
+
+# Custom 404 routing
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

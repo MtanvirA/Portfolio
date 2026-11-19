@@ -5,7 +5,9 @@
   "scripts": {
     "build:css": "tailwindcss -i ./Styles/site.css -o ./wwwroot/css/site.min.css --minify",
     "watch:css": "tailwindcss -i ./Styles/site.css -o ./wwwroot/css/site.min.css --watch",
-    "build": "npm run build:css"
+    "build:static-css": "tailwindcss -i ./site/styles/site.css -o ./site/assets/css/site.min.css --minify",
+    "watch:static-css": "tailwindcss -i ./site/styles/site.css -o ./site/assets/css/site.min.css --watch",
+    "build": "npm run build:css && npm run build:static-css"
   },
   "repository": {
     "type": "git",
