@@ -34,12 +34,12 @@ Crafting full-stack web applications with ASP.NET Core & C#, competitive program
         },
         research: {
             type: 'list',
-            text: `Research Interests & Exploration Areas:
-1. Machine Learning            - Statistical learning theory, regularized loss minimization & classification
-2. Deep Learning               - Neural representations, backpropagation & convolutional architectures
-3. Artificial Intelligence     - Heuristic search, constraint satisfaction & autonomous planning
-4. Robotics                    - Kinematics, feedback control loops & actuator coordination
-5. Intelligent Embedded Systems - Edge intelligence, low-power telemetry & sensor fusion on ESP32`
+            text: `Research Interests & Learning Directions:
+1. Machine Learning            - Research interest in statistical foundations and predictive modeling
+2. Deep Learning               - Learning direction in neural network representations and architectures
+3. Artificial Intelligence     - Research interest in algorithmic problem solving and intelligent systems
+4. Robotics                    - Learning direction in autonomous systems and physical computing
+5. Intelligent Embedded Systems - Research interest in microcontroller-driven edge devices (ESP32) and sensors`
         },
         cv: {
             type: 'info',
@@ -136,11 +136,11 @@ Progression:
 - 2nd Semester: 3.771
 - 3rd Semester: 3.821
 Selected 2nd-Semester Coursework (All 9 Verified Entries):
-- Physics-II: Grade A+ (4.00) | Physics-II Sessional: Grade A+ (4.00)
-- Mathematics-II: Grade A+ (4.00) | Discrete Mathematics: Grade A+ (4.00)
-- Communicative English: Grade A- (3.50)
-- Electronic Device and Circuits: Grade A (3.75) | EDC Sessional: Grade A+ (4.00)
-- Object Oriented Programming: Grade B (3.00) | OOP Sessional: Grade A+ (4.00)`
+- PHY-121: Physics-II: Grade A+ (4.00) | PHY-122: Physics-II Sessional: Grade A+ (4.00)
+- MAT-121: Mathematics-II: Grade A+ (4.00) | CIT-121: Discrete Mathematics: Grade A+ (4.00)
+- LCM-121: Communicative English: Grade A- (3.50)
+- EEE-121: Electronic Device and Circuits: Grade A (3.75) | EEE-122: Electronic Device and Circuits Sessional: Grade A+ (4.00)
+- CCE-121: Object Oriented Programming: Grade B (3.00) | CCE-122: Object Oriented Programming Sessional: Grade A+ (4.00)`
         },
         links: {
             type: 'links',

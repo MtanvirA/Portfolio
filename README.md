@@ -94,7 +94,7 @@ Every public-facing description across the homepage, project archive, case studi
 * **Problem Solving**: Data Structures and Algorithms, Competitive Programming (Codeforces, LeetCode)
 
 ### Additional Confirmed Practices
-* **Python**: Confirmed knowledge and practical problem solving (noted clearly as practice; not listed on Nov CV).
+* **Python**: Programming fundamentals, syntax, and practical scripting (confirmed familiarity; not listed on Nov CV).
 * **Tailwind CSS**: Utility-first CSS architecture utilized for compiling the static production portfolio stylesheet.
 
 ### Practical AI-Assisted Development (Software Workflow Skills)
@@ -118,26 +118,26 @@ Every public-facing description across the homepage, project archive, case studi
 * **Cumulative**: 3.820 CGPA
 
 ### Selected Second-Semester Coursework (All 9 Verified Transcript Entries)
-1. **Physics-II** — Grade A+ (4.00) &bull; Theory (3.00 Credits)
-2. **Physics-II Sessional** — Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
-3. **Mathematics-II** — Grade A+ (4.00) &bull; Theory (3.00 Credits)
-4. **Discrete Mathematics** — Grade A+ (4.00) &bull; Theory (3.00 Credits)
-5. **Communicative English** — Grade A- (3.50) &bull; Theory (2.00 Credits)
-6. **Electronic Device and Circuits** — Grade A (3.75) &bull; Theory (3.00 Credits)
-7. **Electronic Device and Circuits Sessional** — Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
-8. **Object Oriented Programming** — Grade B (3.00) &bull; Theory (3.00 Credits)
-9. **Object Oriented Programming Sessional** — Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
+1. **PHY-121** — Physics-II &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+2. **PHY-122** — Physics-II Sessional &bull; Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
+3. **MAT-121** — Mathematics-II &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+4. **CIT-121** — Discrete Mathematics &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+5. **LCM-121** — Communicative English &bull; Grade A- (3.50) &bull; Theory (2.00 Credits)
+6. **EEE-121** — Electronic Device and Circuits &bull; Grade A (3.75) &bull; Theory (3.00 Credits)
+7. **EEE-122** — Electronic Device and Circuits Sessional &bull; Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
+8. **CCE-121** — Object Oriented Programming &bull; Grade B (3.00) &bull; Theory (3.00 Credits)
+9. **CCE-122** — Object Oriented Programming Sessional &bull; Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
 
 ---
 
 ## 5. Research Interests & Exploration Areas
 
 The CV identifies five areas of keen academic interest that the user is eager to explore in advanced undergraduate studies and future graduate work:
-1. **Machine Learning** — Statistical learning foundations, regularized loss minimization, and classification models.
-2. **Deep Learning** — Representations in multilayer neural networks, backpropagation mechanics, activation functions, and convolutional extractors.
-3. **Artificial Intelligence** — State space search algorithms, heuristic evaluation (A*, minimax), constraint satisfaction, and deterministic planning.
-4. **Robotics** — Kinematics fundamentals, closed-loop actuator feedback, and real-time sensory data processing.
-5. **Intelligent Embedded Systems** — Microcontroller architectures (ESP32), deterministic sensory filtering, low-power telemetry, and hardware-software integration.
+1. **Machine Learning** — Academic research interest in statistical foundations and predictive modeling techniques.
+2. **Deep Learning** — Learning direction centered on neural representations and architecture optimization.
+3. **Artificial Intelligence** — Research interest in algorithmic problem solving, search heuristics, and intelligent systems.
+4. **Robotics** — Exploratory learning direction in physical computing, autonomous systems, and control dynamics.
+5. **Intelligent Embedded Systems** — Research interest bridging microcontroller platforms (ESP32) with sensory integration and embedded control.
 
 *Integrity note: These topics represent genuine areas of study and future exploration; the portfolio does not claim active research publications, proprietary model training, or commercial robotic deployments without documented evidence.*
 
