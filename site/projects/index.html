@@ -36,56 +36,65 @@
     <link rel="stylesheet" href="/assets/css/site.min.css" />
     <link rel="stylesheet" href="/assets/css/interactions.css" />
 </head>
-<body id="top" class="bg-[#090a0f] text-[#f8fafc] font-sans selection:bg-[#d4ff3a] selection:text-[#090a0f] min-h-screen flex flex-col">
+<body id="top" class="bg-[#0B0B0C] text-[#F5F5F2] font-sans selection:bg-[#E3343F] selection:text-[#FFFFFF] min-h-screen flex flex-col">
 
     <!-- Top Landmark: Accessible Skip Link -->
-    <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#d4ff3a] focus:text-[#090a0f] focus:font-bold focus:rounded-md focus:shadow-xl">
+    <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#E3343F] focus:text-white focus:font-bold focus:rounded-md focus:shadow-xl">
         Skip to main content
     </a>
 
     <!-- Sticky Navigation Header -->
-    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-[#090a0f]/80 backdrop-blur-md border-b border-[#212836]/60">
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-[#0B0B0C]/90 backdrop-blur-md border-b border-[#252528]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
 
             <!-- Brand / Wordmark -->
-            <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#d4ff3a] rounded-lg p-1">
-                <div class="w-10 h-10 rounded-xl bg-[#141822] border border-[#232a36] group-hover:border-[#d4ff3a] flex items-center justify-center transition-colors">
-                    <span class="font-display font-extrabold text-sm text-[#d4ff3a]">TA</span>
+            <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#E3343F] rounded-lg p-1">
+                <div class="w-10 h-10 rounded-xl bg-[#141416] border border-[#252528] group-hover:border-[#E3343F] flex items-center justify-center transition-colors">
+                    <span class="font-display font-extrabold text-sm text-[#E3343F]">TA</span>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-bold text-sm text-slate-100 tracking-tight group-hover:text-white transition-colors">
+                    <span class="font-display font-bold text-sm text-white tracking-tight group-hover:text-[#F5F5F2] transition-colors">
                         Md. Tanvir Anjum
                     </span>
-                    <span class="font-mono-code text-[11px] text-slate-400">
+                    <span class="font-mono text-[11px] text-[#858585]">
                         CSE @ PSTU
                     </span>
                 </div>
             </a>
 
             <!-- Desktop Navigation Menu -->
-            <nav class="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
-                <a href="/#about" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">About</a>
-                <a href="/projects/" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#d4ff3a] bg-slate-800/40 transition-colors">Projects</a>
-                <a href="/#skills" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Skills</a>
-                <a href="/#education" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Education</a>
-                <a href="/#contact" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Contact</a>
+            <nav class="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main Navigation">
+                <a href="/#about" class="nav-link px-3 py-1.5 rounded-lg text-sm font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">About</a>
+                <a href="/projects/" class="nav-link px-3 py-1.5 rounded-lg text-sm font-mono text-[#E3343F] font-semibold bg-[#141416] transition-colors">Projects</a>
+                <a href="/#research" class="nav-link px-3 py-1.5 rounded-lg text-sm font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">Research</a>
+                <a href="/#skills" class="nav-link px-3 py-1.5 rounded-lg text-sm font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">Toolkit</a>
+                <a href="/#education" class="nav-link px-3 py-1.5 rounded-lg text-sm font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">Academia</a>
+                <a href="/#contact" class="nav-link px-3 py-1.5 rounded-lg text-sm font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">Contact</a>
             </nav>
 
             <!-- Header Action Controls -->
             <div class="hidden sm:flex items-center gap-3">
+                <a href="/assets/documents/Tanvir-Anjum-CV.pdf"
+                   download="Tanvir-Anjum-CV.pdf"
+                   class="btn-cv-header inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E3343F] hover:bg-[#c92530] text-white font-mono text-xs font-semibold transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
+                   title="Download Official Curriculum Vitae (PDF)">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download CV</span>
+                </a>
+
                 <button type="button"
-                        class="open-terminal-btn flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#141822] border border-[#232a36] hover:border-slate-600 text-xs text-slate-300 font-mono-code transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]"
+                        class="open-terminal-btn flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#141416] border border-[#252528] hover:border-[#858585] text-xs text-[#F5F5F2] font-mono transition-colors focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
                         aria-label="Open Command Terminal"
                         title="Open interactive command palette (Ctrl+K)">
-                    <span class="text-[#d4ff3a] font-bold">&gt;_</span>
+                    <span class="text-[#E3343F] font-bold">&gt;_</span>
                     <span>Terminal</span>
-                    <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-slate-400 border border-slate-700">Ctrl K</kbd>
+                    <kbd class="px-1.5 py-0.5 rounded bg-[#1F1F22] text-[10px] text-[#858585] border border-[#252528]">Ctrl K</kbd>
                 </button>
 
                 <a href="https://github.com/MtanvirA"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="p-2 rounded-lg bg-[#141822] border border-[#232a36] hover:border-slate-600 text-slate-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]"
+                   class="p-2 rounded-lg bg-[#141416] border border-[#252528] hover:border-[#858585] text-[#F5F5F2] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
                    aria-label="Tanvir's GitHub Profile">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
                 </a>
@@ -94,7 +103,7 @@
             <!-- Mobile Menu Toggle Button -->
             <button id="mobileMenuToggle"
                     type="button"
-                    class="md:hidden p-2 rounded-lg bg-[#141822] border border-[#232a36] text-slate-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]"
+                    class="lg:hidden p-2 rounded-lg bg-[#141416] border border-[#252528] text-[#F5F5F2] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
                     aria-expanded="false"
                     aria-controls="mobileMenu"
                     aria-label="Toggle navigation menu">
@@ -104,21 +113,25 @@
         </div>
 
         <!-- Mobile Drawer Menu -->
-        <div id="mobileMenu" class="md:hidden hidden border-b border-[#212836] bg-[#0c0e14]/98 px-4 pt-2 pb-6 space-y-2">
-            <a href="/#about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">About</a>
-            <a href="/projects/" class="block px-3 py-2 rounded-lg text-base font-medium text-[#d4ff3a] hover:bg-slate-800/50">Projects</a>
-            <a href="/#skills" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Skills</a>
-            <a href="/#education" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Education</a>
-            <a href="/#contact" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Contact</a>
+        <div id="mobileMenu" class="lg:hidden hidden border-b border-[#252528] bg-[#0B0B0C]/98 px-4 pt-2 pb-6 space-y-2">
+            <a href="/#about" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">About</a>
+            <a href="/projects/" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#E3343F] hover:bg-[#141416]">Projects</a>
+            <a href="/#research" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">Research</a>
+            <a href="/#skills" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">Toolkit</a>
+            <a href="/#education" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">Academia</a>
+            <a href="/#contact" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">Contact</a>
 
-            <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                <button type="button" class="open-terminal-btn flex items-center gap-2 px-3 py-2 rounded-lg bg-[#141822] border border-[#232a36] text-sm text-slate-300 font-mono-code">
-                    <span class="text-[#d4ff3a] font-bold">&gt;_</span>
-                    <span>Open Terminal (Ctrl+K)</span>
-                </button>
-                <a href="https://github.com/MtanvirA" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg bg-[#141822] border border-[#232a36] text-slate-300" aria-label="Tanvir's GitHub Profile">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+            <div class="pt-4 border-t border-[#252528] flex flex-wrap items-center justify-between gap-2">
+                <a href="/assets/documents/Tanvir-Anjum-CV.pdf"
+                   download="Tanvir-Anjum-CV.pdf"
+                   class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#E3343F] text-white font-mono text-xs font-semibold">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download CV</span>
                 </a>
+                <button type="button" class="open-terminal-btn flex items-center gap-2 px-3 py-2 rounded-lg bg-[#141416] border border-[#252528] text-xs text-[#F5F5F2] font-mono">
+                    <span class="text-[#E3343F] font-bold">&gt;_</span>
+                    <span>Terminal (Ctrl+K)</span>
+                </button>
             </div>
         </div>
     </header>
@@ -131,73 +144,51 @@
             <!-- Spotlight Overlay -->
             <div class="canvas-spotlight" aria-hidden="true"></div>
 
-            <!-- Circuit Overlay -->
-            <div class="circuit-canvas-layer" aria-hidden="true">
-                <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 800">
-                    <path class="circuit-trace" d="M 60 100 L 240 100 L 300 160 L 520 160" />
-                    <path class="circuit-trace" d="M 750 700 L 900 700 L 980 620 L 1140 620" />
-                    <circle class="circuit-node pulse-node" cx="60" cy="100" r="3" />
-                    <circle class="circuit-node circuit-node-teal" cx="240" cy="100" r="3" />
-                    <circle class="circuit-node" cx="300" cy="160" r="3.5" />
-                    <circle class="circuit-node" cx="520" cy="160" r="3" />
-                    <rect class="circuit-pad" x="748" y="698" width="5" height="5" />
-                    <circle class="circuit-node pulse-node-offset" cx="980" cy="620" r="3.5" />
-                    <circle class="circuit-node" cx="1140" cy="620" r="3" />
-                </svg>
-            </div>
-
             <div class="canvas-content space-y-10">
 
                 <!-- Header -->
                 <div class="max-w-3xl space-y-4">
                     <div class="flex items-center gap-3">
-                        <span class="font-mono-code text-xs text-[#d4ff3a] uppercase tracking-wider font-semibold">
+                        <span class="font-mono text-xs text-[#E3343F] uppercase tracking-wider font-semibold">
                             // Full Catalogue
                         </span>
-                        <span class="hud-badge">
-                            <span class="hud-signal-dot"></span>
-                            <span>SCHEMATICS // 5 VERIFIED BUILDS</span>
+                        <span class="hud-badge text-xs font-mono text-[#858585]">
+                            <span>5 VERIFIED SYSTEMS &bull; OPEN REPOSITORIES</span>
                         </span>
                     </div>
                     <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-white tracking-tight">
                         Engineering Projects &amp; Case Studies
                     </h1>
-                    <p class="text-base text-slate-300 leading-relaxed">
+                    <p class="text-base text-[#F5F5F2] leading-relaxed">
                         A comprehensive look at software, embedded prototypes, and systems engineering projects. Each project represents hands-on exploration of algorithms, architectures, and relational data modeling.
                     </p>
                 </div>
 
                 <!-- Filter Buttons -->
-                <div class="flex flex-wrap items-center gap-2 pt-2 border-b border-[#212836] pb-6" role="group" aria-label="Project category filter">
+                <div class="flex flex-wrap items-center gap-2 pt-2 border-b border-[#252528] pb-6" role="group" aria-label="Project category filter">
                     <button type="button"
-                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code font-semibold transition-all bg-[#d4ff3a] text-[#090a0f] border border-[#d4ff3a]"
+                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-all bg-[#E3343F] text-white border border-[#E3343F]"
                             data-category="all"
                             aria-pressed="true">
                         All Projects (5)
                     </button>
                     <button type="button"
-                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500 hover:text-white"
+                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono transition-all bg-[#141416] text-[#858585] border border-[#252528] hover:border-[#858585] hover:text-white"
                             data-category="Full-Stack Web"
                             aria-pressed="false">
-                        Full-Stack Web
+                        Full-Stack Web (1)
                     </button>
                     <button type="button"
-                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500 hover:text-white"
+                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono transition-all bg-[#141416] text-[#858585] border border-[#252528] hover:border-[#858585] hover:text-white"
                             data-category="IoT & Systems"
                             aria-pressed="false">
-                        IoT &amp; Systems
+                        IoT &amp; Systems (2)
                     </button>
                     <button type="button"
-                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500 hover:text-white"
-                            data-category="Java / OOP"
-                            aria-pressed="false">
-                        Java / OOP
-                    </button>
-                    <button type="button"
-                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono-code transition-all bg-[#141822] text-[#94a3b8] border border-[#232a36] hover:border-slate-500 hover:text-white"
+                            class="project-filter-btn px-4 py-2 rounded-lg text-xs font-mono transition-all bg-[#141416] text-[#858585] border border-[#252528] hover:border-[#858585] hover:text-white"
                             data-category="Academic Systems"
                             aria-pressed="false">
-                        Academic Systems
+                        Academic &amp; OOP (2)
                     </button>
                 </div>
 
@@ -205,46 +196,46 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                     <!-- 1. ShareSync -->
-                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] overflow-hidden group shadow-lg"
+                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#141416] border border-[#252528] overflow-hidden group shadow-lg"
                              data-category="Full-Stack Web">
-                        <div class="scanline-box relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735]">
+                        <div class="scanline-box relative aspect-[16/10] bg-[#0B0B0C] border-b border-[#252528]">
                             <img src="/assets/images/projects/sharesync.svg"
                                  alt="ShareSync overview"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                  loading="lazy" />
-                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
-                                Academic Project (In Active Development)
+                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0B0B0C]/90 border border-[#252528] backdrop-blur-md font-mono text-[11px] text-[#E3343F]">
+                                Flagship Web Application
                             </div>
                         </div>
 
                         <div class="p-6 flex flex-col flex-grow space-y-4">
                             <div>
-                                <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">Full-Stack Web</span>
-                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                <span class="font-mono text-[11px] text-[#858585] uppercase tracking-wider">Full-Stack Web</span>
+                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#E3343F] transition-colors">
                                     ShareSync
                                 </h2>
-                                <p class="font-mono-code text-xs text-slate-400 mt-0.5">Academic Share-Market Portfolio Tracker</p>
+                                <p class="font-mono text-xs text-[#858585] mt-0.5">DSE Portfolio Tracker &amp; Analytics Platform</p>
                             </div>
 
-                            <p class="text-sm text-slate-300 leading-relaxed">
-                                A full-stack investment portfolio and stock tracking web application built to explore relational database design, transaction history, and financial calculations.
+                            <p class="text-sm text-[#F5F5F2] leading-relaxed">
+                                A full-stack investment portfolio and stock tracking web application built to explore relational database design, transaction history, and financial risk metrics (CAGR, volatility, drawdown).
                             </p>
 
                             <div class="flex flex-wrap gap-1.5 pt-2">
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">C#</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">ASP.NET Core MVC</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">MySQL</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">EF Core</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">C#</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">ASP.NET Core MVC</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">MySQL 8</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">EF Core</span>
                             </div>
 
-                            <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                            <div class="pt-4 mt-auto border-t border-[#252528] flex items-center justify-between">
                                 <a href="/projects/sharesync/"
-                                   class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline">
+                                   class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#E3343F] hover:underline">
                                     <span>Read Case Study</span>
                                     <svg class="w-3.5 h-3.5 action-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 </a>
                                 <a href="https://github.com/MtanvirA/ShareSync" target="_blank" rel="noopener noreferrer"
-                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                   class="text-xs font-mono text-[#858585] hover:text-white flex items-center gap-1">
                                     <span>Code &rarr;</span>
                                 </a>
                             </div>
@@ -252,46 +243,46 @@
                     </article>
 
                     <!-- 2. Smart Railway Track Health Monitoring -->
-                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] overflow-hidden group shadow-lg"
+                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#141416] border border-[#252528] overflow-hidden group shadow-lg"
                              data-category="IoT & Systems">
-                        <div class="scanline-box relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735]">
+                        <div class="scanline-box relative aspect-[16/10] bg-[#0B0B0C] border-b border-[#252528]">
                             <img src="/assets/images/projects/railway.svg"
                                  alt="Smart Railway Track Health Monitoring overview"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                  loading="lazy" />
-                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
-                                Academic Hardware Prototype / Concept
+                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0B0B0C]/90 border border-[#252528] backdrop-blur-md font-mono text-[11px] text-[#E3343F]">
+                                Academic Hardware Prototype
                             </div>
                         </div>
 
                         <div class="p-6 flex flex-col flex-grow space-y-4">
                             <div>
-                                <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">IoT &amp; Systems</span>
-                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                <span class="font-mono text-[11px] text-[#858585] uppercase tracking-wider">IoT &amp; Systems</span>
+                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#E3343F] transition-colors">
                                     Smart Railway Track Health Monitoring
                                 </h2>
-                                <p class="font-mono-code text-xs text-slate-400 mt-0.5">ESP32-Based IoT Track Safety &amp; Signaling Prototype</p>
+                                <p class="font-mono text-xs text-[#858585] mt-0.5">ESP32-Based IoT Track Safety &amp; Signaling Prototype</p>
                             </div>
 
-                            <p class="text-sm text-slate-300 leading-relaxed">
+                            <p class="text-sm text-[#F5F5F2] leading-relaxed">
                                 An embedded IoT engineering prototype combining sensor telemetry, obstacle detection, train speed calculation, and automated signaling to explore railway safety concepts.
                             </p>
 
                             <div class="flex flex-wrap gap-1.5 pt-2">
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">C/C++</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">ESP32</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">Ultrasonic Sensors</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">OLED Display</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">C++</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">ESP32</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">Ultrasonic</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#E3343F]">GSM/GPS</span>
                             </div>
 
-                            <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                            <div class="pt-4 mt-auto border-t border-[#252528] flex items-center justify-between">
                                 <a href="/projects/railway-track-health-monitoring/"
-                                   class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline">
+                                   class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#E3343F] hover:underline">
                                     <span>Read Case Study</span>
                                     <svg class="w-3.5 h-3.5 action-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 </a>
                                 <a href="https://github.com/MtanvirA/Smart-Railway-Track-Monitoring" target="_blank" rel="noopener noreferrer"
-                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                   class="text-xs font-mono text-[#858585] hover:text-white flex items-center gap-1">
                                     <span>Code &rarr;</span>
                                 </a>
                             </div>
@@ -299,46 +290,46 @@
                     </article>
 
                     <!-- 3. CampusSync -->
-                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] overflow-hidden group shadow-lg"
+                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#141416] border border-[#252528] overflow-hidden group shadow-lg"
                              data-category="Academic Systems">
-                        <div class="scanline-box relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735]">
+                        <div class="scanline-box relative aspect-[16/10] bg-[#0B0B0C] border-b border-[#252528]">
                             <img src="/assets/images/projects/campussync.svg"
                                  alt="CampusSync overview"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                  loading="lazy" />
-                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
-                                Department Prototype / In Design Phase
+                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0B0B0C]/90 border border-[#252528] backdrop-blur-md font-mono text-[11px] text-[#E3343F]">
+                                Department Coordination Prototype
                             </div>
                         </div>
 
                         <div class="p-6 flex flex-col flex-grow space-y-4">
                             <div>
-                                <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">Academic Systems</span>
-                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                <span class="font-mono text-[11px] text-[#858585] uppercase tracking-wider">Academic Systems</span>
+                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#E3343F] transition-colors">
                                     CampusSync
                                 </h2>
-                                <p class="font-mono-code text-xs text-slate-400 mt-0.5">University Scheduling &amp; Department Coordination Platform</p>
+                                <p class="font-mono text-xs text-[#858585] mt-0.5">Routine &amp; Laboratory Resource Coordination Platform</p>
                             </div>
 
-                            <p class="text-sm text-slate-300 leading-relaxed">
+                            <p class="text-sm text-[#F5F5F2] leading-relaxed">
                                 A centralized academic scheduling and resource coordination platform designed specifically for the PSTU Computer Science and Engineering Department.
                             </p>
 
                             <div class="flex flex-wrap gap-1.5 pt-2">
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">C#</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">ASP.NET Core</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">MySQL</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">Tailwind CSS</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">C#</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">ASP.NET Core</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">MySQL</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#858585]">Tailwind</span>
                             </div>
 
-                            <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                            <div class="pt-4 mt-auto border-t border-[#252528] flex items-center justify-between">
                                 <a href="/projects/campussync/"
-                                   class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline">
+                                   class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#E3343F] hover:underline">
                                     <span>Read Case Study</span>
                                     <svg class="w-3.5 h-3.5 action-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 </a>
                                 <a href="https://github.com/MtanvirA/CampusSync" target="_blank" rel="noopener noreferrer"
-                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                   class="text-xs font-mono text-[#858585] hover:text-white flex items-center gap-1">
                                     <span>Code &rarr;</span>
                                 </a>
                             </div>
@@ -346,46 +337,46 @@
                     </article>
 
                     <!-- 4. NAS Sync Mini Server -->
-                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] overflow-hidden group shadow-lg"
+                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#141416] border border-[#252528] overflow-hidden group shadow-lg"
                              data-category="IoT & Systems">
-                        <div class="scanline-box relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735]">
+                        <div class="scanline-box relative aspect-[16/10] bg-[#0B0B0C] border-b border-[#252528]">
                             <img src="/assets/images/projects/nas-sync.svg"
                                  alt="NAS Sync Mini Server overview"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                  loading="lazy" />
-                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
-                                Educational LAN Prototype
+                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0B0B0C]/90 border border-[#252528] backdrop-blur-md font-mono text-[11px] text-[#E3343F]">
+                                Educational LAN Storage
                             </div>
                         </div>
 
                         <div class="p-6 flex flex-col flex-grow space-y-4">
                             <div>
-                                <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">IoT / Embedded Systems</span>
-                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                <span class="font-mono text-[11px] text-[#858585] uppercase tracking-wider">IoT / Embedded Systems</span>
+                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#E3343F] transition-colors">
                                     NAS Sync Mini Server
                                 </h2>
-                                <p class="font-mono-code text-xs text-slate-400 mt-0.5">ESP32-Based Mini Network Storage &amp; Media Host</p>
+                                <p class="font-mono text-xs text-[#858585] mt-0.5">ESP32-Based Mini Network Storage &amp; Media Host</p>
                             </div>
 
-                            <p class="text-sm text-slate-300 leading-relaxed">
+                            <p class="text-sm text-[#F5F5F2] leading-relaxed">
                                 A low-power ESP32 web file host and media server featuring in-browser streaming, microSD file management, real-time OLED status, and DHT11 environmental telemetry.
                             </p>
 
                             <div class="flex flex-wrap gap-1.5 pt-2">
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">C/C++</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">ESP32</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">microSD SPI</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">OLED SSD1306</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">C++</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">ESP32</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">microSD SPI</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#E3343F]">OLED SSD1306</span>
                             </div>
 
-                            <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                            <div class="pt-4 mt-auto border-t border-[#252528] flex items-center justify-between">
                                 <a href="/projects/nas-sync-mini-server/"
-                                   class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline">
+                                   class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#E3343F] hover:underline">
                                     <span>Read Case Study</span>
                                     <svg class="w-3.5 h-3.5 action-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 </a>
                                 <a href="https://github.com/MtanvirA/NAS_Sync-Mini-Server" target="_blank" rel="noopener noreferrer"
-                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                   class="text-xs font-mono text-[#858585] hover:text-white flex items-center gap-1">
                                     <span>Code &rarr;</span>
                                 </a>
                             </div>
@@ -393,46 +384,46 @@
                     </article>
 
                     <!-- 5. Student Enrollment System Using Java -->
-                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#10141d] border border-[#212836] overflow-hidden group shadow-lg"
-                             data-category="Java / OOP">
-                        <div class="scanline-box relative aspect-[16/10] bg-[#0c0f16] border-b border-[#1f2735]">
+                    <article class="project-card card-interactive flex flex-col rounded-2xl bg-[#141416] border border-[#252528] overflow-hidden group shadow-lg"
+                             data-category="Academic Systems">
+                        <div class="scanline-box relative aspect-[16/10] bg-[#0B0B0C] border-b border-[#252528]">
                             <img src="/assets/images/projects/student-enrollment.svg"
                                  alt="Student Enrollment System Java Terminal and OOP Architecture"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                  loading="lazy" />
-                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#090b10]/90 border border-[#263345] backdrop-blur-md font-mono-code text-[11px] text-[#d4ff3a]">
-                                Academic Console Prototype
+                            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0B0B0C]/90 border border-[#252528] backdrop-blur-md font-mono text-[11px] text-[#E3343F]">
+                                Java 17+ OOP System
                             </div>
                         </div>
 
                         <div class="p-6 flex flex-col flex-grow space-y-4">
                             <div>
-                                <span class="font-mono-code text-[11px] text-[#38bdf8] uppercase tracking-wider">Java / OOP</span>
-                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#d4ff3a] transition-colors">
+                                <span class="font-mono text-[11px] text-[#858585] uppercase tracking-wider">Java / OOP</span>
+                                <h2 class="font-display font-bold text-xl text-white mt-1 group-hover:text-[#E3343F] transition-colors">
                                     Student Enrollment System
                                 </h2>
-                                <p class="font-mono-code text-xs text-slate-400 mt-0.5">Role-Based Enrollment &amp; Fee Management (Java)</p>
+                                <p class="font-mono text-xs text-[#858585] mt-0.5">Role-Based Enrollment &amp; Fee Management (Java)</p>
                             </div>
 
-                            <p class="text-sm text-slate-300 leading-relaxed">
-                                A console-based Java application built around object-oriented design, featuring role-based workflows (Student, Cashier, Admin), CGPA fee reductions, and CSV exports.
+                            <p class="text-sm text-[#F5F5F2] leading-relaxed">
+                                A console-based Java application built around object-oriented design, featuring role-based workflows (Student, Cashier, Admin), CGPA fee reductions, and file I/O persistence.
                             </p>
 
                             <div class="flex flex-wrap gap-1.5 pt-2">
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">Java 17+</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">OOP</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">Polymorphism</span>
-                                <span class="px-2 py-0.5 rounded bg-[#161c26] border border-[#232d3d] text-[11px] font-mono-code text-slate-400">File I/O</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">Java 17+</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#F5F5F2]">OOP</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#E3343F]">Polymorphism</span>
+                                <span class="px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-[11px] font-mono text-[#858585]">File I/O</span>
                             </div>
 
-                            <div class="pt-4 mt-auto border-t border-[#1a212d] flex items-center justify-between">
+                            <div class="pt-4 mt-auto border-t border-[#252528] flex items-center justify-between">
                                 <a href="/projects/student-enrollment-system/"
-                                   class="inline-flex items-center gap-1.5 text-xs font-mono-code font-bold text-[#d4ff3a] hover:underline">
+                                   class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#E3343F] hover:underline">
                                     <span>Read Case Study</span>
                                     <svg class="w-3.5 h-3.5 action-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 </a>
                                 <a href="https://github.com/MtanvirA/Student-Enrollment-System-Using-Java" target="_blank" rel="noopener noreferrer"
-                                   class="text-xs font-mono-code text-slate-400 hover:text-white flex items-center gap-1">
+                                   class="text-xs font-mono text-[#858585] hover:text-white flex items-center gap-1">
                                     <span>Code &rarr;</span>
                                 </a>
                             </div>
@@ -446,39 +437,36 @@
 
     </main>
 
-    <!-- Interactive Terminal Modal (Native Dialog with light-dismiss per modern-web-guidance) -->
+    <!-- Interactive Terminal Modal -->
     <dialog id="terminalDialog"
-            closedby="any"
-            aria-labelledby="terminalTitle"
-            class="m-auto rounded-2xl bg-[#0b0e14] border border-[#232a36] text-slate-200 shadow-2xl p-0 w-[92vw] max-w-2xl overflow-hidden backdrop:bg-[#090a0f]/80 backdrop:backdrop-blur-md">
+            class="m-auto rounded-2xl bg-[#141416] border border-[#252528] text-[#F5F5F2] shadow-2xl p-0 w-[92vw] max-w-2xl overflow-hidden backdrop:bg-[#0B0B0C]/85 backdrop:backdrop-blur-md">
         <!-- Terminal Header -->
-        <div class="px-4 py-3 bg-[#111620] border-b border-[#212836] flex items-center justify-between">
+        <div class="px-4 py-3 bg-[#1F1F22] border-b border-[#252528] flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-                <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                <h2 id="terminalTitle" class="ml-2 font-mono-code text-xs text-slate-400 font-semibold tracking-wide">
+                <span class="w-3 h-3 rounded-full bg-[#E3343F] inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-[#424242] inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-[#252528] inline-block"></span>
+                <span class="ml-2 font-mono text-xs text-[#858585] font-semibold tracking-wide">
                     tanvir@pstu: ~/portfolio (sh)
-                </h2>
+                </span>
             </div>
-            <button id="closeTerminalBtn" type="button" class="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 text-xs font-mono-code focus:outline-none focus:ring-1 focus:ring-[#d4ff3a]">
+            <button id="closeTerminalBtn" type="button" class="text-[#858585] hover:text-white p-1 rounded text-xs font-mono focus:outline-none focus:ring-1 focus:ring-[#E3343F]">
                 [ESC] Close
             </button>
         </div>
 
         <!-- Terminal Output Console -->
-        <div id="terminalOutput" class="p-4 max-h-[380px] min-h-[220px] overflow-y-auto space-y-1 font-mono-code text-xs sm:text-sm bg-[#090b10] border-b border-[#1b212d]">
-            <div class="text-slate-400">Welcome to Tanvir Anjum's Interactive Portfolio Console v1.0.0.</div>
-            <div class="text-slate-500 text-[11px]">Type <span class="text-[#d4ff3a]">help</span> to display available commands. Press [ESC] or click outside to dismiss.</div>
-            <div class="text-slate-600 border-b border-slate-800/60 pb-2">----------------------------------------------------------------</div>
+        <div id="terminalOutput" class="p-4 max-h-[380px] min-h-[220px] overflow-y-auto space-y-1 font-mono text-xs sm:text-sm bg-[#141416] border-b border-[#252528]">
+            <div class="text-[#858585]">Welcome to Tanvir Anjum's Interactive Portfolio Console v3.0.0.</div>
+            <div class="text-[#858585] text-[11px]">Type <span class="text-[#E3343F]">help</span> to display available commands. Press [ESC] or click outside to dismiss.</div>
         </div>
 
         <!-- Terminal Input Prompt -->
-        <div class="p-3 bg-[#10141d] flex items-center gap-2">
-            <span class="text-[#d4ff3a] font-mono-code font-bold text-sm shrink-0">&gt;</span>
+        <div class="p-3 bg-[#1F1F22] flex items-center gap-2">
+            <span class="text-[#E3343F] font-mono font-bold text-sm shrink-0">&gt;</span>
             <input id="terminalInput"
                    type="text"
-                   class="w-full bg-transparent border-0 outline-none font-mono-code text-xs sm:text-sm text-slate-100 placeholder-slate-600 focus:ring-0"
+                   class="w-full bg-transparent border-0 outline-none font-mono text-xs sm:text-sm text-white placeholder-[#858585] focus:ring-0"
                    placeholder="Type a command (help, about, projects, skills, education, links, clear)..."
                    autocomplete="off"
                    autocorrect="off"
@@ -487,62 +475,54 @@
         </div>
     </dialog>
 
-    <!-- Floating Return to Top Button -->
-    <button id="backToTopBtn"
-            type="button"
-            class="fixed bottom-6 right-6 z-30 p-3 rounded-xl bg-[#141822]/90 border border-[#232a36] text-slate-300 hover:text-[#d4ff3a] hover:border-[#d4ff3a] shadow-xl backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-4 focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]"
-            aria-label="Return to top of page">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
-    </button>
-
     <!-- Global Footer -->
-    <footer class="mt-24 border-t border-[#1b2230] bg-[#0c0e14] py-14">
+    <footer class="mt-24 border-t border-[#252528] bg-[#141416] py-14">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
                 <div class="md:col-span-2 space-y-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-[#141822] border border-[#232a36] flex items-center justify-center">
-                            <span class="font-display font-bold text-sm text-[#d4ff3a]">TA</span>
+                        <div class="w-9 h-9 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center">
+                            <span class="font-display font-bold text-sm text-[#E3343F]">TA</span>
                         </div>
                         <span class="font-display font-bold text-lg text-white">Md. Tanvir Anjum</span>
                     </div>
-                    <p class="text-sm text-slate-400 max-w-md leading-relaxed">
+                    <p class="text-sm text-[#858585] max-w-md leading-relaxed">
                         Undergraduate Computer Science and Engineering student at Patuakhali Science and Technology University (PSTU).
                         Building useful web applications, competing in algorithmic challenges, and engineering pragmatic software.
                     </p>
-                    <div class="text-xs font-mono-code text-slate-500">
+                    <div class="text-xs font-mono text-[#858585]">
                         Patuakhali, Bangladesh &bull; Session 2023–2024
                     </div>
                 </div>
 
                 <div class="space-y-3">
-                    <p class="font-mono-code text-xs text-slate-400 font-bold uppercase tracking-wider">Navigation</p>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="/#about" class="hover:text-[#d4ff3a] transition-colors">About</a></li>
-                        <li><a href="/projects/" class="hover:text-[#d4ff3a] transition-colors">Projects</a></li>
-                        <li><a href="/#skills" class="hover:text-[#d4ff3a] transition-colors">Skills</a></li>
-                        <li><a href="/#education" class="hover:text-[#d4ff3a] transition-colors">Education</a></li>
-                        <li><a href="/#contact" class="hover:text-[#d4ff3a] transition-colors">Contact</a></li>
+                    <p class="font-mono text-xs text-[#858585] font-bold uppercase tracking-wider">Navigation</p>
+                    <ul class="space-y-2 text-sm text-[#858585]">
+                        <li><a href="/#about" class="hover:text-[#E3343F] transition-colors">About</a></li>
+                        <li><a href="/projects/" class="text-white hover:text-[#E3343F] transition-colors">Projects</a></li>
+                        <li><a href="/#research" class="hover:text-[#E3343F] transition-colors">Research</a></li>
+                        <li><a href="/#skills" class="hover:text-[#E3343F] transition-colors">Toolkit</a></li>
+                        <li><a href="/#education" class="hover:text-[#E3343F] transition-colors">Academia</a></li>
+                        <li><a href="/#contact" class="hover:text-[#E3343F] transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="space-y-3">
-                    <p class="font-mono-code text-xs text-slate-400 font-bold uppercase tracking-wider">Verified Profiles</p>
-                    <ul class="space-y-2 text-sm text-slate-400">
+                    <p class="font-mono text-xs text-[#858585] font-bold uppercase tracking-wider">Verified Profiles</p>
+                    <ul class="space-y-2 text-sm text-[#858585]">
                         <li><a href="https://github.com/MtanvirA" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">GitHub &rarr;</a></li>
                         <li><a href="https://codeforces.com/profile/MtanvirA" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">Codeforces &rarr;</a></li>
                         <li><a href="https://leetcode.com/u/MtanvirA/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">LeetCode &rarr;</a></li>
                         <li><a href="https://www.linkedin.com/in/md-tanvir-anjum-3642371aa/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">LinkedIn &rarr;</a></li>
-                        <li><a href="https://www.facebook.com/mtanvira.uo/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">Facebook &rarr;</a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="mt-12 pt-8 border-t border-[#1a202c] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono-code text-slate-500">
+            <div class="mt-12 pt-8 border-t border-[#252528] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#858585]">
                 <p>&copy; 2026 Md. Tanvir Anjum. All rights reserved.</p>
                 <div class="flex items-center gap-6">
-                    <span class="text-slate-600">Static Production Portfolio &bull; Netlify Free</span>
-                    <a href="#top" class="text-slate-400 hover:text-[#d4ff3a] transition-colors">Return to Top &uarr;</a>
+                    <span class="text-[#858585]">Static Production Portfolio &bull; Netlify Free</span>
+                    <a href="#top" class="text-[#858585] hover:text-[#E3343F] transition-colors">Return to Top &uarr;</a>
                 </div>
             </div>
         </div>

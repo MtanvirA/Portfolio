@@ -1,90 +1,114 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0b0e14" />
-      <stop offset="100%" stop-color="#141a24" />
-    </linearGradient>
-    <linearGradient id="chartLine" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#14b8a6" />
-      <stop offset="50%" stop-color="#38bdf8" />
-      <stop offset="100%" stop-color="#d4ff3a" />
-    </linearGradient>
-    <linearGradient id="chartArea" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#d4ff3a" stop-opacity="0.25" />
-      <stop offset="100%" stop-color="#d4ff3a" stop-opacity="0.0" />
-    </linearGradient>
-  </defs>
-
-  <!-- Frame Background -->
-  <rect width="800" height="500" rx="16" fill="url(#bg)" />
-  <rect x="1" y="1" width="798" height="498" rx="15" fill="none" stroke="#222c3d" stroke-width="1.5" />
+  <!-- Frame Background (Editorial Monochrome) -->
+  <rect width="800" height="500" rx="12" fill="#0B0B0C" />
+  <rect x="1" y="1" width="798" height="498" rx="11" fill="none" stroke="#252528" stroke-width="1.5" />
 
   <!-- App Window Header -->
-  <rect x="0" y="0" width="800" height="48" rx="16" fill="#10151f" />
-  <circle cx="28" cy="24" r="6" fill="#ef4444" />
-  <circle cx="48" cy="24" r="6" fill="#f59e0b" />
-  <circle cx="68" cy="24" r="6" fill="#10b981" />
-  <text x="400" y="28" font-family="'JetBrains Mono', monospace" font-size="12" fill="#64748b" text-anchor="middle">ShareSync / Portfolio Tracker — ASP.NET Core &amp; MySQL</text>
+  <rect x="0" y="0" width="800" height="46" rx="12" fill="#141416" />
+  <line x1="0" y1="46" x2="800" y2="46" stroke="#252528" stroke-width="1" />
+  <circle cx="28" cy="23" r="5" fill="#E3343F" />
+  <circle cx="46" cy="23" r="5" fill="#424242" />
+  <circle cx="64" cy="23" r="5" fill="#252528" />
+  <text x="400" y="27" font-family="'JetBrains Mono', monospace" font-size="11" fill="#858585" text-anchor="middle" letter-spacing="0.5">SHARESYNC // DSE PORTFOLIO INTELLIGENCE &#8226; ASP.NET CORE &amp; MYSQL</text>
 
-  <!-- Left Sidebar / Stats -->
-  <rect x="24" y="68" width="220" height="408" rx="10" fill="#121822" stroke="#1e2736" stroke-width="1" />
-  <text x="44" y="104" font-family="'JetBrains Mono', monospace" font-size="11" fill="#64748b" letter-spacing="1">SIMULATED PORTFOLIO</text>
-  <text x="44" y="136" font-family="'Outfit', sans-serif" font-weight="700" font-size="24" fill="#f8fafc">BDT 142,500.00</text>
-  
-  <rect x="44" y="152" width="100" height="24" rx="12" fill="rgba(34, 197, 94, 0.15)" stroke="#22c55e" stroke-width="0.75" />
-  <text x="94" y="168" font-family="'JetBrains Mono', monospace" font-size="11" fill="#4ade80" text-anchor="middle">+14.28% P&amp;L</text>
+  <!-- Left Sidebar / Portfolio Summary -->
+  <rect x="24" y="66" width="220" height="410" rx="8" fill="#141416" stroke="#252528" stroke-width="1" />
+  <text x="42" y="96" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585" letter-spacing="1">DSE PORTFOLIO VALUATION</text>
+  <text x="42" y="126" font-family="'Outfit', sans-serif" font-weight="700" font-size="22" fill="#FFFFFF">&#2547; 1,428,500.00</text>
 
-  <!-- Ledger items -->
-  <g transform="translate(44, 200)">
-    <rect width="180" height="44" rx="6" fill="#18202d" />
-    <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold" fill="#f1f5f9">GP (Grameenphone)</text>
-    <text x="12" y="36" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">100 shares @@ 286.40</text>
-    <text x="168" y="28" font-family="'JetBrains Mono', monospace" font-size="11" fill="#4ade80" text-anchor="end">+8.4%</text>
+  <rect x="42" y="142" width="108" height="22" rx="4" fill="#1F1F22" stroke="#E3343F" stroke-width="1" />
+  <text x="96" y="157" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#E3343F" text-anchor="middle">+18.4% CAGR</text>
+
+  <!-- Key Risk Metrics -->
+  <g transform="translate(42, 180)">
+    <rect width="184" height="54" rx="6" fill="#0B0B0C" stroke="#252528" stroke-width="1" />
+    <text x="12" y="20" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">ANNUALIZED VOLATILITY</text>
+    <text x="12" y="40" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="bold" fill="#F5F5F2">12.8%</text>
+    <text x="100" y="20" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">MAX DRAWDOWN</text>
+    <text x="100" y="40" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="bold" fill="#E3343F">-8.4%</text>
   </g>
 
-  <g transform="translate(44, 254)">
-    <rect width="180" height="44" rx="6" fill="#18202d" />
-    <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold" fill="#f1f5f9">BATBC</text>
-    <text x="12" y="36" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">50 shares @@ 518.20</text>
-    <text x="168" y="28" font-family="'JetBrains Mono', monospace" font-size="11" fill="#4ade80" text-anchor="end">+12.1%</text>
+  <!-- Watchlist Items (400+ DSE Catalog) -->
+  <text x="42" y="260" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585" letter-spacing="1">ACTIVE WATCHLIST (400+ DSE)</text>
+
+  <g transform="translate(42, 274)">
+    <rect width="184" height="42" rx="6" fill="#1F1F22" stroke="#252528" stroke-width="1" />
+    <text x="12" y="20" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#FFFFFF">GP &#8226; Grameenphone</text>
+    <text x="12" y="34" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">1,200 shs @@ 286.40</text>
+    <text x="172" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#F5F5F2" text-anchor="end">+12.6%</text>
   </g>
 
-  <g transform="translate(44, 308)">
-    <rect width="180" height="44" rx="6" fill="#18202d" />
-    <text x="12" y="22" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold" fill="#f1f5f9">SQURPHARMA</text>
-    <text x="12" y="36" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">120 shares @@ 212.00</text>
-    <text x="168" y="28" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8" text-anchor="end">+4.5%</text>
+  <g transform="translate(42, 324)">
+    <rect width="184" height="42" rx="6" fill="#1F1F22" stroke="#252528" stroke-width="1" />
+    <text x="12" y="20" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#FFFFFF">BATBC &#8226; Br. Am. Tobacco</text>
+    <text x="12" y="34" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">500 shs @@ 518.20</text>
+    <text x="172" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#F5F5F2" text-anchor="end">+9.4%</text>
   </g>
 
-  <!-- Academic Badge -->
-  <rect x="44" y="420" width="180" height="36" rx="6" fill="#172233" stroke="#25354d" stroke-width="1" />
-  <text x="134" y="442" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="middle">Academic Simulation Model</text>
+  <g transform="translate(42, 374)">
+    <rect width="184" height="42" rx="6" fill="#1F1F22" stroke="#252528" stroke-width="1" />
+    <text x="12" y="20" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#FFFFFF">SQURPHARMA &#8226; Square</text>
+    <text x="12" y="34" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">850 shs @@ 216.50</text>
+    <text x="172" y="26" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#F5F5F2" text-anchor="end">+15.2%</text>
+  </g>
 
-  <!-- Right Chart Panel -->
-  <rect x="264" y="68" width="512" height="408" rx="10" fill="#121822" stroke="#1e2736" stroke-width="1" />
+  <g transform="translate(42, 424)">
+    <rect width="184" height="38" rx="6" fill="#0B0B0C" stroke="#252528" stroke-width="1" />
+    <text x="12" y="24" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585">DIVIDENDS YTD: &#2547; 42,600</text>
+  </g>
 
-  <!-- Grid lines -->
-  <line x1="290" y1="140" x2="750" y2="140" stroke="#1f2937" stroke-dasharray="4 4" />
-  <line x1="290" y1="220" x2="750" y2="220" stroke="#1f2937" stroke-dasharray="4 4" />
-  <line x1="290" y1="300" x2="750" y2="300" stroke="#1f2937" stroke-dasharray="4 4" />
-  <line x1="290" y1="380" x2="750" y2="380" stroke="#1f2937" stroke-dasharray="4 4" />
+  <!-- Main Chart Canvas (Right) -->
+  <rect x="260" y="66" width="516" height="410" rx="8" fill="#141416" stroke="#252528" stroke-width="1" />
 
-  <!-- Chart Fill & Curve -->
-  <path d="M 290 340 Q 350 310, 410 320 T 530 250 T 630 190 T 750 140 L 750 420 L 290 420 Z" fill="url(#chartArea)" />
-  <path d="M 290 340 Q 350 310, 410 320 T 530 250 T 630 190 T 750 140" fill="none" stroke="url(#chartLine)" stroke-width="3.5" />
+  <!-- Chart Header Controls -->
+  <text x="282" y="98" font-family="'JetBrains Mono', monospace" font-size="11" fill="#FFFFFF" font-weight="bold">HISTORICAL PERFORMANCE &#8226; BENCHMARK DSEX</text>
+  <text x="282" y="114" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">DAILY VALUATION OVER 365 TRADING SESSIONS</text>
 
-  <!-- Data point bubbles -->
-  <circle cx="530" cy="250" r="5" fill="#14b8a6" stroke="#f8fafc" stroke-width="2" />
-  <circle cx="630" cy="190" r="5" fill="#38bdf8" stroke="#f8fafc" stroke-width="2" />
-  <circle cx="750" cy="140" r="6" fill="#d4ff3a" stroke="#f8fafc" stroke-width="2" />
+  <!-- Filter tabs -->
+  <rect x="646" y="84" width="34" height="20" rx="3" fill="#1F1F22" />
+  <text x="663" y="98" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585" text-anchor="middle">1M</text>
+  <rect x="684" y="84" width="34" height="20" rx="3" fill="#1F1F22" />
+  <text x="701" y="98" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585" text-anchor="middle">6M</text>
+  <rect x="722" y="84" width="38" height="20" rx="3" fill="#E3343F" />
+  <text x="741" y="98" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">1Y</text>
 
-  <!-- Tech tags at bottom -->
-  <rect x="290" y="434" width="70" height="24" rx="4" fill="#1c2433" />
-  <text x="325" y="450" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="middle">.NET 10</text>
-  <rect x="370" y="434" width="70" height="24" rx="4" fill="#1c2433" />
-  <text x="405" y="450" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="middle">EF CORE</text>
-  <rect x="450" y="434" width="70" height="24" rx="4" fill="#1c2433" />
-  <text x="485" y="450" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="middle">MYSQL</text>
-  <rect x="530" y="434" width="70" height="24" rx="4" fill="#1c2433" />
-  <text x="565" y="450" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="middle">TAILWIND</text>
+  <!-- Chart Grid Lines -->
+  <line x1="282" y1="150" x2="756" y2="150" stroke="#1F1F22" stroke-width="1" stroke-dasharray="3 3" />
+  <text x="756" y="146" font-family="'JetBrains Mono', monospace" font-size="9" fill="#424242" text-anchor="end">&#2547; 1.50M</text>
+
+  <line x1="282" y1="210" x2="756" y2="210" stroke="#1F1F22" stroke-width="1" stroke-dasharray="3 3" />
+  <text x="756" y="206" font-family="'JetBrains Mono', monospace" font-size="9" fill="#424242" text-anchor="end">&#2547; 1.25M</text>
+
+  <line x1="282" y1="270" x2="756" y2="270" stroke="#1F1F22" stroke-width="1" stroke-dasharray="3 3" />
+  <text x="756" y="266" font-family="'JetBrains Mono', monospace" font-size="9" fill="#424242" text-anchor="end">&#2547; 1.00M</text>
+
+  <line x1="282" y1="330" x2="756" y2="330" stroke="#1F1F22" stroke-width="1" stroke-dasharray="3 3" />
+  <text x="756" y="326" font-family="'JetBrains Mono', monospace" font-size="9" fill="#424242" text-anchor="end">&#2547; 0.75M</text>
+
+  <!-- Benchmark Reference Line (Neutral Mid Gray) -->
+  <path d="M 290 320 Q 380 300 470 290 T 650 250 T 750 240" fill="none" stroke="#424242" stroke-width="1.5" stroke-dasharray="4 4" />
+  <text x="720" y="234" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">DSEX Benchmark</text>
+
+  <!-- Portfolio Line (Crimson Red #E3343F) -->
+  <path d="M 290 310 L 330 295 L 370 305 L 410 260 L 450 270 L 490 230 L 530 245 L 570 190 L 610 205 L 650 165 L 690 175 L 750 140"
+        fill="none" stroke="#E3343F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Data point highlight on recent valuation -->
+  <circle cx="750" cy="140" r="5" fill="#E3343F" stroke="#FFFFFF" stroke-width="2" />
+  <rect x="670" y="112" width="88" height="20" rx="3" fill="#0B0B0C" stroke="#E3343F" stroke-width="1" />
+  <text x="714" y="126" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">&#2547; 1,428,500</text>
+
+  <!-- Bottom Data Grid / Recent Transactions -->
+  <rect x="282" y="360" width="474" height="96" rx="6" fill="#0B0B0C" stroke="#252528" stroke-width="1" />
+  <text x="296" y="380" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">RECENT LEDGER TRANSACTIONS &#8226; REPOSITORY PATTERN PERSISTENCE</text>
+
+  <text x="296" y="402" font-family="'JetBrains Mono', monospace" font-size="10" fill="#FFFFFF">BUY &#8226; GP (Grameenphone Ltd.)</text>
+  <text x="560" y="402" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585">200 shs @@ &#2547; 286.40</text>
+  <text x="740" y="402" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#F5F5F2" text-anchor="end">SETTLED</text>
+
+  <line x1="296" y1="412" x2="740" y2="412" stroke="#1F1F22" stroke-width="1" />
+
+  <text x="296" y="432" font-family="'JetBrains Mono', monospace" font-size="10" fill="#FFFFFF">BUY &#8226; SQURPHARMA (Square Pharma)</text>
+  <text x="560" y="432" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585">150 shs @@ &#2547; 216.50</text>
+  <text x="740" y="432" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#F5F5F2" text-anchor="end">SETTLED</text>
 </svg>

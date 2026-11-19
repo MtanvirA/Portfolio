@@ -4,20 +4,22 @@
 
 @layer base {
   :root {
-    --bg-primary: #090a0f;
-    --bg-surface: #10131a;
-    --bg-surface-elevated: #161b24;
-    --bg-surface-hover: #1c2330;
-    --border-subtle: #212836;
-    --border-active: #323d52;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent: #d4ff3a;
-    --accent-hover: #beee25;
-    --accent-glow: rgba(212, 255, 58, 0.15);
-    --accent-teal: #14b8a6;
-    --accent-teal-glow: rgba(20, 184, 166, 0.15);
+    --bg-primary: #0B0B0C;
+    --bg-surface: #141416;
+    --bg-surface-elevated: #1F1F22;
+    --bg-surface-hover: #28282C;
+    --bg-light: #F5F5F2;
+    --bg-light-surface: #FFFFFF;
+    --border-subtle: #252528;
+    --border-active: #424242;
+    --border-light: #E0E0DC;
+    --text-primary: #FFFFFF;
+    --text-secondary: #A3A3A3;
+    --text-muted: #858585;
+    --accent: #E3343F;
+    --accent-hover: #C92A34;
+    --accent-muted: rgba(227, 52, 63, 0.12);
+    --accent-subtle: rgba(227, 52, 63, 0.08);
   }
 
   html {
@@ -46,17 +48,17 @@
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* Technical backgrounds */
+/* Technical backgrounds - Monochrome subtle grid */
 .bg-grid-pattern {
   background-size: 32px 32px;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
 }
 
 .bg-dot-pattern {
   background-size: 24px 24px;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
 }
 
 /* Form validation pseudo-classes */
@@ -64,15 +66,15 @@ input:user-invalid,
 textarea:user-invalid,
 input.user-invalid-fallback,
 textarea.user-invalid-fallback {
-  border-color: #ef4444 !important;
-  background-color: rgba(239, 68, 68, 0.08) !important;
+  border-color: #E3343F !important;
+  background-color: rgba(227, 52, 63, 0.08) !important;
 }
 
 input:user-valid:not(:placeholder-shown),
 textarea:user-valid:not(:placeholder-shown),
 input.user-valid-fallback,
 textarea.user-valid-fallback {
-  border-color: #22c55e;
+  border-color: #A3A3A3;
 }
 
 .error-feedback {
@@ -88,8 +90,8 @@ textarea.user-invalid-fallback + .error-feedback {
 
 /* Modal styling from modern-web-guidance */
 dialog::backdrop {
-  background-color: rgba(9, 10, 15, 0.82);
-  backdrop-filter: blur(8px);
+  background-color: rgba(11, 11, 12, 0.88);
+  backdrop-filter: blur(6px);
 }
 
 @media (prefers-reduced-motion: reduce) {

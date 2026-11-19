@@ -21,43 +21,51 @@
     <link rel="stylesheet" href="/assets/css/site.min.css" />
     <link rel="stylesheet" href="/assets/css/interactions.css" />
 </head>
-<body class="bg-[#090a0f] text-[#f8fafc] font-sans selection:bg-[#d4ff3a] selection:text-[#090a0f] min-h-screen flex flex-col">
+<body class="bg-[#0B0B0C] text-[#F5F5F2] font-sans selection:bg-[#E3343F] selection:text-[#FFFFFF] min-h-screen flex flex-col">
 
     <!-- Skip Link -->
-    <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#d4ff3a] focus:text-[#090a0f] focus:font-bold focus:rounded-md focus:shadow-xl">
+    <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#E3343F] focus:text-[#090a0f] focus:font-bold focus:rounded-md focus:shadow-xl">
         Skip to main content
     </a>
 
     <!-- Header -->
-    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-[#090a0f]/80 backdrop-blur-md border-b border-[#212836]/60">
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-[#0B0B0C]/80 backdrop-blur-md border-b border-[#252528]/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#d4ff3a] rounded-lg p-1">
-                <div class="w-10 h-10 rounded-xl bg-[#141822] border border-[#232a36] group-hover:border-[#d4ff3a] flex items-center justify-center transition-colors">
-                    <span class="font-display font-extrabold text-sm text-[#d4ff3a]">TA</span>
+            <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#E3343F] rounded-lg p-1">
+                <div class="w-10 h-10 rounded-xl bg-[#1F1F22] border border-[#252528] group-hover:border-[#E3343F] flex items-center justify-center transition-colors">
+                    <span class="font-display font-extrabold text-sm text-[#E3343F]">TA</span>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-bold text-sm text-slate-100 tracking-tight group-hover:text-white transition-colors">
+                    <span class="font-display font-bold text-sm text-white tracking-tight group-hover:text-white transition-colors">
                         Md. Tanvir Anjum
                     </span>
-                    <span class="font-mono-code text-[11px] text-slate-400">
+                    <span class="font-mono text-[11px] text-[#858585]">
                         CSE @ PSTU
                     </span>
                 </div>
             </a>
 
             <nav class="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
-                <a href="/#about" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">About</a>
-                <a href="/projects/" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Projects</a>
-                <a href="/#skills" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Skills</a>
-                <a href="/#education" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Education</a>
-                <a href="/#contact" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/40 transition-colors">Contact</a>
+                <a href="/#about" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">About</a>
+                <a href="/projects/" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">Projects</a>
+                <a href="/#skills" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">Skills</a>
+                <a href="/#education" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">Education</a>
+                <a href="/#contact" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">Contact</a>
             </nav>
 
             <div class="hidden sm:flex items-center gap-3">
-                <button type="button" class="open-terminal-btn flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#141822] border border-[#232a36] hover:border-slate-600 text-xs text-slate-300 font-mono-code transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4ff3a]">
-                    <span class="text-[#d4ff3a] font-bold">&gt;_</span>
+                <a href="/assets/documents/Tanvir-Anjum-CV.pdf"
+                   download="Tanvir-Anjum-CV.pdf"
+                   class="btn-cv-header inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E3343F] hover:bg-[#c92530] text-white font-mono text-xs font-semibold transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
+                   title="Download Official Curriculum Vitae (PDF)">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download CV</span>
+                </a>
+
+                <button type="button" class="open-terminal-btn flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#1F1F22] border border-[#252528] hover:border-slate-600 text-xs text-[#F5F5F2] font-mono transition-colors focus:outline-none focus:ring-2 focus:ring-[#E3343F]">
+                    <span class="text-[#E3343F] font-bold">&gt;_</span>
                     <span>Terminal</span>
-                    <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-slate-400 border border-slate-700">Ctrl K</kbd>
+                    <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-[#858585] border border-slate-700">Ctrl K</kbd>
                 </button>
             </div>
         </div>
@@ -67,7 +75,7 @@
         <div class="canvas-section relative w-full min-h-[70vh] flex items-center justify-center px-4 py-20">
             <div class="canvas-spotlight" aria-hidden="true"></div>
 
-            <div class="canvas-content max-w-md w-full text-center space-y-6 p-8 rounded-2xl bg-[#10141d] border border-emerald-500/30 shadow-2xl card-interactive">
+            <div class="canvas-content max-w-md w-full text-center space-y-6 p-8 rounded-2xl bg-[#141416] border border-emerald-500/30 shadow-2xl card-interactive">
                 <div class="w-14 h-14 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 </div>
@@ -78,22 +86,22 @@
                         <span>DISPATCH // DELIVERED</span>
                     </span>
                     <h1 class="font-display font-bold text-3xl text-white">Message Received</h1>
-                    <p class="text-sm text-slate-300 leading-relaxed">
+                    <p class="text-sm text-[#F5F5F2] leading-relaxed">
                         Thank you for reaching out! Your submission has been securely delivered to my inbox. I'll get back to you as soon as possible.
                     </p>
                 </div>
 
-                <div class="p-4 rounded-xl bg-[#141822] border border-[#232a36] text-xs font-mono-code text-slate-400 space-y-1 text-left">
+                <div class="p-4 rounded-xl bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#858585] space-y-1 text-left">
                     <div>Recipient: <span class="text-white">tanviranjum201@gmail.com</span></div>
                     <div>Location: <span class="text-white">Patuakhali, Bangladesh</span></div>
-                    <div>Status: <span class="text-[#d4ff3a]">Queued in Owner Inbox</span></div>
+                    <div>Status: <span class="text-[#E3343F]">Queued in Owner Inbox</span></div>
                 </div>
 
                 <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <a href="/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#d4ff3a] text-[#090a0f] font-bold text-xs uppercase tracking-wider transition-colors hover:bg-[#c2ed2c]">
+                    <a href="/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#E3343F] text-[#090a0f] font-bold text-xs uppercase tracking-wider transition-colors hover:bg-[#c92530]">
                         Return to Homepage
                     </a>
-                    <a href="/projects/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#141822] text-slate-300 hover:text-white border border-[#232a36] text-xs font-mono-code transition-colors">
+                    <a href="/projects/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#1F1F22] text-[#F5F5F2] hover:text-white border border-[#252528] text-xs font-mono transition-colors">
                         Explore Projects
                     </a>
                 </div>
@@ -102,28 +110,28 @@
     </main>
 
     <!-- Terminal Modal -->
-    <dialog id="terminalDialog" closedby="any" aria-labelledby="terminalTitle" class="m-auto rounded-2xl bg-[#0b0e14] border border-[#232a36] text-slate-200 shadow-2xl p-0 w-[92vw] max-w-2xl overflow-hidden backdrop:bg-[#090a0f]/80 backdrop:backdrop-blur-md">
-        <div class="px-4 py-3 bg-[#111620] border-b border-[#212836] flex items-center justify-between">
+    <dialog id="terminalDialog" closedby="any" aria-labelledby="terminalTitle" class="m-auto rounded-2xl bg-[#0B0B0C] border border-[#252528] text-[#F5F5F2] shadow-2xl p-0 w-[92vw] max-w-2xl overflow-hidden backdrop:bg-[#0B0B0C]/80 backdrop:backdrop-blur-md">
+        <div class="px-4 py-3 bg-[#1F1F22] border-b border-[#252528] flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
                 <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
                 <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                <h2 id="terminalTitle" class="ml-2 font-mono-code text-xs text-slate-400 font-semibold tracking-wide">tanvir@pstu: ~/portfolio (sh)</h2>
+                <h2 id="terminalTitle" class="ml-2 font-mono text-xs text-[#858585] font-semibold tracking-wide">tanvir@pstu: ~/portfolio (sh)</h2>
             </div>
-            <button id="closeTerminalBtn" type="button" class="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 text-xs font-mono-code focus:outline-none focus:ring-1 focus:ring-[#d4ff3a]">[ESC] Close</button>
+            <button id="closeTerminalBtn" type="button" class="text-[#858585] hover:text-white p-1 rounded hover:bg-slate-800 text-xs font-mono focus:outline-none focus:ring-1 focus:ring-[#E3343F]">[ESC] Close</button>
         </div>
-        <div id="terminalOutput" class="p-4 max-h-[380px] min-h-[220px] overflow-y-auto space-y-1 font-mono-code text-xs sm:text-sm bg-[#090b10] border-b border-[#1b212d]">
-            <div class="text-slate-400">Welcome to Tanvir Anjum's Interactive Portfolio Console v1.0.0.</div>
-            <div class="text-slate-500 text-[11px]">Type <span class="text-[#d4ff3a]">help</span> to display available commands. Press [ESC] or click outside to dismiss.</div>
+        <div id="terminalOutput" class="p-4 max-h-[380px] min-h-[220px] overflow-y-auto space-y-1 font-mono text-xs sm:text-sm bg-[#0B0B0C] border-b border-[#1b212d]">
+            <div class="text-[#858585]">Welcome to Tanvir Anjum's Interactive Portfolio Console v1.0.0.</div>
+            <div class="text-[#858585] text-[11px]">Type <span class="text-[#E3343F]">help</span> to display available commands. Press [ESC] or click outside to dismiss.</div>
         </div>
-        <div class="p-3 bg-[#10141d] flex items-center gap-2">
-            <span class="text-[#d4ff3a] font-mono-code font-bold text-sm shrink-0">&gt;</span>
-            <input id="terminalInput" type="text" class="w-full bg-transparent border-0 outline-none font-mono-code text-xs sm:text-sm text-slate-100 placeholder-slate-600 focus:ring-0" placeholder="Type a command..." autocomplete="off" />
+        <div class="p-3 bg-[#141416] flex items-center gap-2">
+            <span class="text-[#E3343F] font-mono font-bold text-sm shrink-0">&gt;</span>
+            <input id="terminalInput" type="text" class="w-full bg-transparent border-0 outline-none font-mono text-xs sm:text-sm text-white placeholder-slate-600 focus:ring-0" placeholder="Type a command..." autocomplete="off" />
         </div>
     </dialog>
 
-    <footer class="border-t border-[#1b2230] bg-[#0c0e14] py-8 text-center text-xs font-mono-code text-slate-500">
-        &copy; 2026 Md. Tanvir Anjum. All rights reserved. &bull; <a href="/" class="text-slate-400 hover:text-[#d4ff3a]">Return Home</a>
+    <footer class="border-t border-[#252528] bg-[#0B0B0C] py-8 text-center text-xs font-mono text-[#858585]">
+        &copy; 2026 Md. Tanvir Anjum. All rights reserved. &bull; <a href="/" class="text-[#858585] hover:text-[#E3343F]">Return Home</a>
     </footer>
 
     <script src="/assets/js/site.js"></script>

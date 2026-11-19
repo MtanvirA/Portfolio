@@ -1,5 +1,6 @@
 /**
- * Tanvir Anjum Portfolio - Production Static Site Interactions (Milestone 14)
+ * Tanvir Anjum Portfolio - Production Static Site Interactions (Milestone 15)
+ * Editorial Monochrome + Crimson Red Palette
  * Implements Editorial Navigation, Scroll Progress, Scroll-Triggered Reveals,
  * Hero Interactive Synthesis Console, Project Filtering, Accessible Motion Pause,
  * Netlify Form enhancements, and Engineering Canvas proximity tracking.
@@ -29,10 +30,10 @@ function initNavigation() {
 
     const handleScroll = () => {
         if (window.scrollY > 20) {
-            header?.classList.add('bg-[#090a0f]/92', 'backdrop-blur-md', 'border-b', 'border-[#212836]');
+            header?.classList.add('bg-[#0B0B0C]/95', 'backdrop-blur-md', 'border-b', 'border-[#252528]');
             header?.classList.remove('bg-transparent');
         } else {
-            header?.classList.remove('bg-[#090a0f]/92', 'backdrop-blur-md', 'border-b', 'border-[#212836]');
+            header?.classList.remove('bg-[#0B0B0C]/95', 'backdrop-blur-md', 'border-b', 'border-[#252528]');
             header?.classList.add('bg-transparent');
         }
     };
@@ -80,12 +81,12 @@ function initNavigation() {
 
                 if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                     navLinks.forEach(link => {
-                        link.classList.remove('text-[#d4ff3a]', 'font-semibold');
-                        link.classList.add('text-slate-400');
+                        link.classList.remove('text-[#E3343F]', 'font-semibold');
+                        link.classList.add('text-[#858585]');
                     });
                     matchingLinks.forEach(matchingLink => {
-                        matchingLink.classList.add('text-[#d4ff3a]', 'font-semibold');
-                        matchingLink.classList.remove('text-slate-400');
+                        matchingLink.classList.add('text-[#E3343F]', 'font-semibold');
+                        matchingLink.classList.remove('text-[#858585]');
                     });
                 }
             });
@@ -221,10 +222,10 @@ function initHeroSynthesisConsole() {
 
         nodeButtons.forEach(btn => {
             const isTarget = btn.getAttribute('data-node') === key;
-            btn.classList.toggle('border-[#d4ff3a]', isTarget);
-            btn.classList.toggle('bg-[#1a2333]', isTarget);
-            btn.classList.toggle('border-[#212836]', !isTarget);
-            btn.classList.toggle('bg-[#10141d]', !isTarget);
+            btn.classList.toggle('border-[#E3343F]', isTarget);
+            btn.classList.toggle('bg-[#1F1F22]', isTarget);
+            btn.classList.toggle('border-[#252528]', !isTarget);
+            btn.classList.toggle('bg-[#141416]', !isTarget);
             btn.setAttribute('aria-selected', String(isTarget));
         });
 
@@ -236,7 +237,7 @@ function initHeroSynthesisConsole() {
             stackEl.innerHTML = '';
             item.stack.forEach(tech => {
                 const badge = document.createElement('span');
-                badge.className = 'px-2 py-0.5 rounded bg-[#161c27] border border-[#263143] text-xs font-mono-code text-[#d4ff3a]';
+                badge.className = 'px-2 py-0.5 rounded bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#E3343F]';
                 badge.textContent = tech;
                 stackEl.appendChild(badge);
             });
@@ -269,12 +270,12 @@ function initProjectFilters() {
             const category = btn.getAttribute('data-category');
 
             filterButtons.forEach(b => {
-                b.classList.remove('bg-[#d4ff3a]', 'text-[#090a0f]', 'border-[#d4ff3a]');
-                b.classList.add('bg-[#141822]', 'text-[#94a3b8]', 'border-[#232a36]');
+                b.classList.remove('bg-[#E3343F]', 'text-white', 'border-[#E3343F]');
+                b.classList.add('bg-[#141416]', 'text-[#858585]', 'border-[#252528]');
                 b.setAttribute('aria-pressed', 'false');
             });
-            btn.classList.add('bg-[#d4ff3a]', 'text-[#090a0f]', 'border-[#d4ff3a]');
-            btn.classList.remove('bg-[#141822]', 'text-[#94a3b8]', 'border-[#232a36]');
+            btn.classList.add('bg-[#E3343F]', 'text-white', 'border-[#E3343F]');
+            btn.classList.remove('bg-[#141416]', 'text-[#858585]', 'border-[#252528]');
             btn.setAttribute('aria-pressed', 'true');
 
             projectCards.forEach(card => {

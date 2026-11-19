@@ -1,117 +1,108 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
-  <defs>
-    <linearGradient id="javaBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0b0e14" />
-      <stop offset="100%" stop-color="#141a24" />
-    </linearGradient>
-  </defs>
-
-  <!-- Frame Background -->
-  <rect width="800" height="500" rx="16" fill="url(#javaBg)" />
-  <rect x="1" y="1" width="798" height="498" rx="15" fill="none" stroke="#222c3d" stroke-width="1.5" />
+  <!-- Frame Background (Editorial Monochrome) -->
+  <rect width="800" height="500" rx="12" fill="#0B0B0C" />
+  <rect x="1" y="1" width="798" height="498" rx="11" fill="none" stroke="#252528" stroke-width="1.5" />
 
   <!-- App Header -->
-  <rect x="0" y="0" width="800" height="48" rx="16" fill="#10151f" />
-  <circle cx="28" cy="24" r="6" fill="#ef4444" />
-  <circle cx="48" cy="24" r="6" fill="#f59e0b" />
-  <circle cx="68" cy="24" r="6" fill="#10b981" />
-  <text x="400" y="28" font-family="'JetBrains Mono', monospace" font-size="12" fill="#64748b" text-anchor="middle">Student Enrollment &amp; Fee Management — Java OOP Console Prototype</text>
+  <rect x="0" y="0" width="800" height="46" rx="12" fill="#141416" />
+  <line x1="0" y1="46" x2="800" y2="46" stroke="#252528" stroke-width="1" />
+  <circle cx="28" cy="23" r="5" fill="#E3343F" />
+  <circle cx="46" cy="23" r="5" fill="#424242" />
+  <circle cx="64" cy="23" r="5" fill="#252528" />
+  <text x="400" y="27" font-family="'JetBrains Mono', monospace" font-size="11" fill="#858585" text-anchor="middle" letter-spacing="0.5">STUDENT ENROLLMENT &amp; FEE MANAGEMENT // JAVA 17+ OOP SYSTEM</text>
 
   <!-- Left: Authentic Java Terminal Simulation -->
-  <g transform="translate(30, 70)">
-    <rect width="420" height="400" rx="12" fill="#080c12" stroke="#223044" stroke-width="1.5" />
-    
+  <g transform="translate(32, 66)">
+    <rect width="410" height="404" rx="8" fill="#141416" stroke="#252528" stroke-width="1" />
+
     <!-- Terminal Titlebar -->
-    <rect x="1" y="1" width="418" height="32" rx="11" fill="#121822" />
-    <text x="14" y="21" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">&gt;_ bash — java -cp bin com.enrollment.Application</text>
+    <rect x="1" y="1" width="408" height="32" rx="7" fill="#1F1F22" />
+    <text x="14" y="21" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585">&gt;_ java -cp bin com.enrollment.Application</text>
 
     <!-- Terminal Output -->
-    <g transform="translate(16, 50)" font-family="'JetBrains Mono', monospace" font-size="10" fill="#cbd5e1">
-      <text y="0" fill="#64748b">===================================================</text>
-      <text y="16" font-weight="bold" fill="#38bdf8">  PSTU CSE STUDENT ENROLLMENT &amp; FEE SYSTEM (JAVA)  </text>
-      <text y="32" fill="#64748b">===================================================</text>
+    <g transform="translate(16, 48)" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">
+      <text y="14" fill="#858585">---------------------------------------------------</text>
+      <text y="28" font-weight="bold" fill="#FFFFFF">  PSTU CSE STUDENT ENROLLMENT &amp; FEE SYSTEM (JAVA)  </text>
+      <text y="42" fill="#858585">---------------------------------------------------</text>
 
-      <text y="54" fill="#d4ff3a">[AUTH] Select Access Role:</text>
-      <text y="70" fill="#e2e8f0">  1. Student Self-Service Portal</text>
-      <text y="86" fill="#e2e8f0">  2. Cashier Fee Clearance Desk</text>
-      <text y="102" fill="#e2e8f0">  3. System Administrator Console</text>
-      <text y="118" fill="#94a3b8">  0. Exit System</text>
-      <text y="138" fill="#38bdf8">&gt; Selected: [1] Student Portal</text>
+      <text y="64" fill="#FFFFFF">[AUTH] Select Access Role:</text>
+      <text y="80" fill="#F5F5F2">  1. Student Self-Service Portal</text>
+      <text y="96" fill="#F5F5F2">  2. Cashier Fee Clearance Desk</text>
+      <text y="112" fill="#F5F5F2">  3. System Administrator Console</text>
+      <text y="128" fill="#858585">  0. Exit System</text>
+      <text y="148" fill="#E3343F">&gt; Selected: [1] Student Portal</text>
 
       <!-- Student details section -->
-      <text y="160" fill="#64748b">---------------------------------------------------</text>
-      <text y="176" fill="#f8fafc">Student: Tanvir Anjum | ID: 2302042 | Sem: 3</text>
-      <text y="192" fill="#4ade80">Academic CGPA: 3.820 (Merit Waiver Tier 1: 25%)</text>
-      <text y="208" fill="#e2e8f0">Base Semester Fee:   BDT 12,000.00</text>
-      <text y="224" fill="#fbbf24">CGPA Waiver (-25%): -BDT  3,000.00</text>
-      <text y="240" font-weight="bold" fill="#d4ff3a">Net Payable Amount:  BDT  9,000.00</text>
-      <text y="256" fill="#64748b">---------------------------------------------------</text>
+      <text y="170" fill="#858585">---------------------------------------------------</text>
+      <text y="186" fill="#FFFFFF">Student: Tanvir Anjum | ID: 2302042 | Sem: 3</text>
+      <text y="202" fill="#E3343F">Academic CGPA: 3.820 (Dean's Merit Waiver Tier 1)</text>
+      <text y="218" fill="#F5F5F2">Base Semester Fee:   BDT 12,000.00</text>
+      <text y="234" fill="#858585">Merit Waiver (-25%): -BDT  3,000.00</text>
+      <text y="250" font-weight="bold" fill="#FFFFFF">Net Payable Amount:  BDT  9,000.00</text>
+      <text y="266" fill="#858585">---------------------------------------------------</text>
 
-      <text y="278" fill="#38bdf8">&gt; Requesting cashier clearance token...</text>
-      <text y="296" fill="#4ade80">&#10003; Transaction Record Generated: TXN-2026-8819</text>
-      <text y="314" fill="#94a3b8">Status: PENDING CASHIER APPROVAL &#8226; Receipt Ready</text>
-      
-      <!-- Blinking cursor -->
-      <text y="336" fill="#d4ff3a">&gt; Press [Enter] to continue... &#9608;</text>
+      <text y="288" fill="#E3343F">&gt; Requesting cashier clearance token...</text>
+      <text y="304" fill="#FFFFFF">[OK] Token Generated: #TXN-2024-8841-CLR</text>
+      <text y="320" fill="#858585">&gt; File write sync: ledger/transactions.dat [SAVED]</text>
     </g>
   </g>
 
-  <!-- Right: Architecture & OOP Model Visuals -->
-  <g transform="translate(470, 70)">
-    <rect width="300" height="400" rx="12" fill="#0f141d" stroke="#223044" stroke-width="1.5" />
+  <!-- Right: OOP Hierarchy & Class Diagram -->
+  <g transform="translate(460, 66)">
+    <rect width="308" height="404" rx="8" fill="#141416" stroke="#252528" stroke-width="1" />
+    <text x="16" y="28" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#FFFFFF">OOP CLASS ARCHITECTURE</text>
+    <text x="16" y="44" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">INHERITANCE, ENCAPSULATION &amp; POLYMORPHISM</text>
 
-    <!-- OOP Architecture Title -->
-    <g transform="translate(16, 18)">
-      <text x="0" y="16" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#38bdf8">OOP CLASS HIERARCHY</text>
-      <line x1="0" y1="26" x2="268" y2="26" stroke="#223044" stroke-width="1" />
+    <!-- Base Abstract Class: Person -->
+    <g transform="translate(16, 62)">
+      <rect width="276" height="66" rx="6" fill="#0B0B0C" stroke="#252528" stroke-width="1" />
+      <rect width="276" height="24" rx="6" fill="#1F1F22" />
+      <text x="138" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#FFFFFF" text-anchor="middle">&lt;&lt;abstract&gt;&gt; Person</text>
+      <text x="12" y="38" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">- id: String, - name: String, - email: String</text>
+      <text x="12" y="52" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">+ displayDetails(): void</text>
     </g>
 
-    <!-- Base Abstract Class -->
-    <g transform="translate(16, 56)">
-      <rect width="268" height="42" rx="6" fill="#151e2b" stroke="#38bdf8" stroke-width="1" />
-      <text x="12" y="18" font-family="'JetBrains Mono', monospace" font-size="9" fill="#38bdf8">&lt;&lt;abstract&gt;&gt;</text>
-      <text x="12" y="32" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#f8fafc">User (id, name, role)</text>
+    <!-- Branch lines -->
+    <line x1="84" y1="128" x2="84" y2="152" stroke="#424242" stroke-width="1" />
+    <line x1="220" y1="128" x2="220" y2="152" stroke="#424242" stroke-width="1" />
+    <line x1="84" y1="152" x2="220" y2="152" stroke="#424242" stroke-width="1" />
+    <line x1="154" y1="128" x2="154" y2="152" stroke="#424242" stroke-width="1" />
+
+    <!-- Subclass 1: Student -->
+    <g transform="translate(16, 160)">
+      <rect width="130" height="72" rx="4" fill="#0B0B0C" stroke="#E3343F" stroke-width="1" />
+      <rect width="130" height="20" rx="4" fill="#1F1F22" />
+      <text x="65" y="14" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold" fill="#E3343F" text-anchor="middle">Student</text>
+      <text x="8" y="34" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#858585">- cgpa: double</text>
+      <text x="8" y="46" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#858585">- semester: int</text>
+      <text x="8" y="58" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#FFFFFF">+ calculateFee()</text>
     </g>
 
-    <!-- Inheritance arrows -->
-    <path d="M 150 98 L 150 114 M 60 114 L 240 114 M 60 114 L 60 126 M 150 114 L 150 126 M 240 114 L 240 126" fill="none" stroke="#334155" stroke-width="1.5" />
-
-    <!-- Subclasses -->
-    <g transform="translate(16, 126)">
-      <!-- Student -->
-      <rect x="0" y="0" width="82" height="44" rx="4" fill="#161c27" stroke="#25354a" stroke-width="1" />
-      <text x="41" y="20" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#d4ff3a" text-anchor="middle">Student</text>
-      <text x="41" y="34" font-family="'JetBrains Mono', monospace" font-size="8" fill="#94a3b8" text-anchor="middle">FeeReq</text>
-
-      <!-- Cashier -->
-      <rect x="93" y="0" width="82" height="44" rx="4" fill="#161c27" stroke="#25354a" stroke-width="1" />
-      <text x="134" y="20" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#14b8a6" text-anchor="middle">Cashier</text>
-      <text x="134" y="34" font-family="'JetBrains Mono', monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Approve</text>
-
-      <!-- Admin -->
-      <rect x="186" y="0" width="82" height="44" rx="4" fill="#161c27" stroke="#25354a" stroke-width="1" />
-      <text x="227" y="20" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#38bdf8" text-anchor="middle">Admin</text>
-      <text x="227" y="34" font-family="'JetBrains Mono', monospace" font-size="8" fill="#94a3b8" text-anchor="middle">Manage</text>
+    <!-- Subclass 2: Admin -->
+    <g transform="translate(162, 160)">
+      <rect width="130" height="72" rx="4" fill="#0B0B0C" stroke="#252528" stroke-width="1" />
+      <rect width="130" height="20" rx="4" fill="#1F1F22" />
+      <text x="65" y="14" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Administrator</text>
+      <text x="8" y="34" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#858585">- department: String</text>
+      <text x="8" y="46" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#858585">- clearancePin: int</text>
+      <text x="8" y="58" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#FFFFFF">+ generateReceipt()</text>
     </g>
 
-    <!-- Services & Features Box -->
-    <g transform="translate(16, 186)">
-      <rect width="268" height="110" rx="8" fill="#131924" stroke="#222e40" stroke-width="1" />
-      <text x="12" y="20" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#f8fafc">SYSTEM CAPABILITIES</text>
-      <text x="12" y="38" font-family="'JetBrains Mono', monospace" font-size="9" fill="#cbd5e1">&#10003; CGPA-Based Fee Reductions</text>
-      <text x="12" y="54" font-family="'JetBrains Mono', monospace" font-size="9" fill="#cbd5e1">&#10003; Cashier Receipt Generation</text>
-      <text x="12" y="70" font-family="'JetBrains Mono', monospace" font-size="9" fill="#cbd5e1">&#10003; CSV Report Data Export</text>
-      <text x="12" y="86" font-family="'JetBrains Mono', monospace" font-size="9" fill="#cbd5e1">&#10003; Custom Exception Hierarchy</text>
-      <text x="12" y="102" font-family="'JetBrains Mono', monospace" font-size="8" fill="#64748b">Polymorphism &#8226; Encapsulation &#8226; Robust CLI</text>
+    <!-- Interface: FeePayable -->
+    <g transform="translate(16, 246)">
+      <rect width="276" height="56" rx="4" fill="#0B0B0C" stroke="#252528" stroke-width="1" />
+      <text x="138" y="18" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585" text-anchor="middle">&lt;&lt;interface&gt;&gt; FeePayable</text>
+      <text x="12" y="34" font-family="'JetBrains Mono', monospace" font-size="8" fill="#FFFFFF">+ computeTuitionWaiver(double cgpa): double</text>
+      <text x="12" y="46" font-family="'JetBrains Mono', monospace" font-size="8" fill="#FFFFFF">+ getOutstandingBalance(): double</text>
     </g>
 
-    <!-- Academic Prototype Notice -->
-    <g transform="translate(16, 310)">
-      <rect width="268" height="74" rx="6" fill="#10151f" stroke="#1d2636" stroke-width="1" />
-      <text x="12" y="18" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748b">PROTOTYPE SCOPE NOTICE</text>
-      <text x="12" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#94a3b8">Console-based academic Java project.</text>
-      <text x="12" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#94a3b8">Uses in-memory data structures &amp; CSV.</text>
-      <text x="12" y="66" font-family="'JetBrains Mono', monospace" font-size="9" fill="#d4ff3a">Java 17+ &#8226; Object-Oriented Design</text>
+    <!-- File I/O Persistence Box -->
+    <g transform="translate(16, 314)">
+      <rect width="276" height="74" rx="4" fill="#1F1F22" stroke="#252528" stroke-width="1" />
+      <text x="12" y="18" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold" fill="#FFFFFF">DATA PERSISTENCE &#8226; FILE I/O</text>
+      <text x="12" y="34" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">&#8226; Custom delimiter parsing for student records</text>
+      <text x="12" y="48" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">&#8226; BufferedReader &amp; BufferedWriter pipelines</text>
+      <text x="12" y="62" font-family="'JetBrains Mono', monospace" font-size="8" fill="#E3343F">&#8226; Robust exception handling for corrupted data</text>
     </g>
   </g>
 </svg>
