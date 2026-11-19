@@ -109,29 +109,37 @@ Every public-facing description across the homepage, project archive, case studi
 * **Degree**: B.Sc. Engineering in Computer Science and Engineering
 * **Session**: 2023–2024 | **Current Status**: 4th-semester undergraduate
 * **Cumulative CGPA**: **3.820 / 4.000** through the third semester
+* **Completed Credit Hours**: **62.00 Total Credits** across three semesters
 * **Honors**: Dean's Merit Award (Level 1); 1st merit position in the 3rd semester ("First among the students shown in the published third-semester result sheet")
 
-### Semester Breakdown
-* **First Semester**: 3.870 GPA
-* **Second Semester**: 3.771 GPA
-* **Third Semester**: 3.821 GPA (1st merit position)
-* **Cumulative**: 3.820 CGPA
+### Semester Breakdown & Official Marksheets
+* **First Semester**: **3.870 GPA** &bull; **20.25 Credits**
+* **Second Semester**: **3.771 GPA** &bull; **20.75 Credits**
+* **Third Semester**: **3.821 GPA** &bull; **21.00 Credits** (1st merit position)
+* **Cumulative**: **3.820 CGPA** &bull; **62.00 Total Credits Completed**
 
-### Selected CSE Coursework Across Three Semesters
-* **Semester 1 — Programming Foundations (GPA 3.870)**:
-  1. **CIT-111** — Programming Language &bull; Theory (3.00 Credits)
-  2. **CIT-112** — Programming Language Sessional &bull; Lab Sessional (1.50 Credits)
-* **Semester 2 — Mathematical & Object-Oriented Foundations (GPA 3.771)**:
+### Selected CSE & Engineering Coursework Across Three Semesters
+* **Semester 1 — Programming Foundations (GPA 3.870 &bull; 20.25 Credits)**:
+  1. **CIT-111** — Programming Language &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+  2. **CIT-112** — Programming Language Sessional &bull; Grade A+ (4.00) &bull; Lab Sessional (1.50 Credits)
+  3. **MAT-111** — Mathematics-I &bull; Grade A (3.75) &bull; Theory (3.00 Credits)
+  4. **EEE-111** — Basic Electrical Engineering &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+  5. **EEE-112** — Basic Electrical Engineering Sessional &bull; Grade A (3.75) &bull; Lab Sessional (1.50 Credits)
+* **Semester 2 — Mathematical & Object-Oriented Foundations (GPA 3.771 &bull; 20.75 Credits)**:
   1. **CIT-121** — Discrete Mathematics &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
   2. **CCE-121** — Object Oriented Programming &bull; Grade B (3.00) &bull; Theory (3.00 Credits)
   3. **CCE-122** — Object Oriented Programming Sessional &bull; Grade A+ (4.00) &bull; Lab Sessional (1.50 Credits)
-* **Semester 3 — Core Computer Science & Systems (GPA 3.821 &bull; 1st Merit Position)**:
-  1. **CIT-211** — Data Structure and Algorithms &bull; Theory (3.00 Credits)
-  2. **CIT-212** — Data Structure and Algorithms Sessional &bull; Lab Sessional (1.50 Credits)
-  3. **CIT-213** — Software Engineering &bull; Theory (3.00 Credits)
-  4. **CCE-211** — Data Communication and Engineering &bull; Theory (3.00 Credits)
-  5. **EEE-211** — Electrical Technology &bull; Theory (3.00 Credits)
-  6. **EEE-212** — Electrical Technology Sessional &bull; Lab Sessional (1.50 Credits)
+  4. **MAT-121** — Mathematics-II &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+  5. **EEE-121** — Electronic Device and Circuits &bull; Grade A (3.75) &bull; Theory (3.00 Credits)
+  6. **EEE-122** — Electronic Device and Circuits Sessional &bull; Grade A+ (4.00) &bull; Lab Sessional (1.50 Credits)
+* **Semester 3 — Core Computer Science & Systems (GPA 3.821 &bull; 21.00 Credits &bull; 1st Merit Position)**:
+  1. **CIT-211** — Data Structure and Algorithms &bull; Grade A- (3.50) &bull; Theory (3.00 Credits)
+  2. **CIT-212** — Data Structure and Algorithms Sessional &bull; Grade A+ (4.00) &bull; Lab Sessional (1.50 Credits)
+  3. **CIT-213** — Software Engineering &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+  4. **CCE-211** — Data Communication and Engineering &bull; Grade A- (3.50) &bull; Theory (3.00 Credits)
+  5. **MAT-211** — Mathematics-III &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+  6. **EEE-211** — Electrical Technology &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+  7. **EEE-212** — Electrical Technology Sessional &bull; Grade A+ (4.00) &bull; Lab Sessional (1.50 Credits)
 
 ---
 

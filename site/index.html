@@ -1306,16 +1306,17 @@
                 <!-- Verified Academic Telemetry Cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
 
-                    <!-- CGPA -->
+                    <!-- CGPA & Cumulative Credits -->
                     <div class="reveal-on-scroll stagger-1 p-6 rounded-2xl bg-[#141416] border border-[#252528] space-y-2 card-interactive">
                         <div class="text-[11px] font-mono text-[#858585] uppercase tracking-wider">
                             Cumulative Standing
                         </div>
-                        <div class="font-display font-extrabold text-4xl text-[#E3343F] tracking-tight">
-                            3.820
+                        <div class="flex items-baseline gap-2">
+                            <span class="font-display font-extrabold text-4xl text-[#E3343F] tracking-tight">3.820</span>
+                            <span class="font-mono text-xs text-[#858585]">/ 4.000</span>
                         </div>
                         <div class="text-xs text-[#F5F5F2]">
-                            CGPA through 3rd Semester (Out of 4.000)
+                            62.00 Completed Credits (3 Semesters)
                         </div>
                     </div>
 
@@ -1365,7 +1366,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                             <h3 class="font-display font-bold text-xl text-white">Semester GPA Progression</h3>
-                            <p class="text-xs text-[#858585]">Verified official semester results published by PSTU Examination Controller</p>
+                            <p class="text-xs text-[#858585]">Verified official PSTU marksheets &bull; 62.00 Total Completed Credits &bull; CGPA 3.820 / 4.000</p>
                         </div>
                         <div class="flex items-center gap-4 text-xs font-mono">
                             <span class="flex items-center gap-1.5 text-[#E3343F]">
@@ -1424,14 +1425,14 @@
                     </div>
                 </div>
 
-                <!-- Selected CSE Coursework Across Three Semesters -->
+                <!-- Selected CSE & Engineering Coursework Across Three Semesters -->
                 <div class="reveal-on-scroll space-y-6">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#252528]">
                         <div>
-                            <h3 class="font-display font-bold text-xl text-white">Selected CSE Coursework</h3>
-                            <p class="text-xs text-[#858585]">Core computing, mathematical foundations, software engineering, and electrical systems across three semesters.</p>
+                            <h3 class="font-display font-bold text-xl text-white">Selected CSE &amp; Engineering Coursework</h3>
+                            <p class="text-xs text-[#858585]">Selected computing, mathematical foundations, software engineering, and technical coursework across three semesters.</p>
                         </div>
-                        <span class="hud-badge text-[10px] font-mono text-[#858585]">3-SEMESTER CSE JOURNEY</span>
+                        <span class="hud-badge text-[10px] font-mono text-[#858585]">3 SEMESTERS &bull; 62.00 CREDITS</span>
                     </div>
 
                     <!-- 3 Connected Semester Panels -->
@@ -1445,8 +1446,11 @@
                                         <span class="font-mono text-xs text-[#E3343F] font-bold">01 // SEMESTER 1</span>
                                         <h4 class="font-display font-bold text-base text-white mt-0.5">Programming Foundations</h4>
                                     </div>
-                                    <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 1 Official GPA">
-                                        <span class="text-[#858585] font-normal mr-1">GPA</span>3.870
+                                    <div class="text-right">
+                                        <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 1 Official GPA">
+                                            <span class="text-[#858585] font-normal mr-1">GPA</span>3.870
+                                        </div>
+                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">20.25 Credits</div>
                                     </div>
                                 </div>
 
@@ -1455,24 +1459,56 @@
                                     <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-111</span>
-                                            <span class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Cr</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
                                         </div>
                                         <div class="font-semibold text-sm text-white">Programming Language</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
                                     <!-- CIT-112 -->
                                     <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-112</span>
-                                            <span class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Cr</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
                                         </div>
                                         <div class="font-semibold text-sm text-white">Programming Language Sessional</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
+                                    </div>
+
+                                    <!-- MAT-111 -->
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">MAT-111</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A (3.75)</span>
+                                        </div>
+                                        <div class="font-semibold text-sm text-white">Mathematics-I</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                    </div>
+
+                                    <!-- EEE-111 -->
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-111</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
+                                        </div>
+                                        <div class="font-semibold text-sm text-white">Basic Electrical Engineering</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                    </div>
+
+                                    <!-- EEE-112 -->
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-112</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A (3.75)</span>
+                                        </div>
+                                        <div class="font-semibold text-sm text-white">Basic Electrical Engineering Sessional</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585]">
-                                Focus: Structured programming in C, pointers, memory models &amp; procedural logic.
+                                Verified official marksheet: 20.25 credits; structured C, pointers, differential/integral calculus &amp; circuit analysis.
                             </div>
                         </div>
 
@@ -1484,8 +1520,11 @@
                                         <span class="font-mono text-xs text-[#E3343F] font-bold">02 // SEMESTER 2</span>
                                         <h4 class="font-display font-bold text-base text-white mt-0.5">Math &amp; OOP Foundations</h4>
                                     </div>
-                                    <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 2 Official GPA">
-                                        <span class="text-[#858585] font-normal mr-1">GPA</span>3.771
+                                    <div class="text-right">
+                                        <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 2 Official GPA">
+                                            <span class="text-[#858585] font-normal mr-1">GPA</span>3.771
+                                        </div>
+                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">20.75 Credits</div>
                                     </div>
                                 </div>
 
@@ -1519,11 +1558,41 @@
                                         <div class="font-semibold text-sm text-white">Object Oriented Programming Sessional</div>
                                         <div class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
                                     </div>
+
+                                    <!-- MAT-121 -->
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">MAT-121</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
+                                        </div>
+                                        <div class="font-semibold text-sm text-white">Mathematics-II</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                    </div>
+
+                                    <!-- EEE-121 -->
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-121</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A (3.75)</span>
+                                        </div>
+                                        <div class="font-semibold text-sm text-white">Electronic Device and Circuits</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                    </div>
+
+                                    <!-- EEE-122 -->
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-122</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
+                                        </div>
+                                        <div class="font-semibold text-sm text-white">Electronic Device and Circuits Sessional</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585]">
-                                Verified: Official transcript records; OOP design patterns, discrete structures &amp; Java.
+                                Verified official marksheet: 20.75 credits; OOP paradigms in Java, discrete structures, ODE/PDE &amp; semiconductor devices.
                             </div>
                         </div>
 
@@ -1533,63 +1602,91 @@
                                 <div class="flex items-center justify-between pb-3 border-b border-[#252528]">
                                     <div>
                                         <span class="font-mono text-xs text-[#E3343F] font-bold">03 // SEMESTER 3</span>
-                                        <h4 class="font-display font-bold text-base text-white mt-0.5">Core Computer Science &amp; Systems</h4>
+                                        <h4 class="font-display font-bold text-base text-white mt-0.5">Core CS &amp; Systems</h4>
                                     </div>
-                                    <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 3 Official GPA (1st Merit Position)">
-                                        <span class="text-[#858585] font-normal mr-1">GPA</span>3.821
+                                    <div class="text-right">
+                                        <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 3 Official GPA (1st Merit Position)">
+                                            <span class="text-[#858585] font-normal mr-1">GPA</span>3.821
+                                        </div>
+                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">21.00 Credits</div>
                                     </div>
                                 </div>
 
                                 <div class="space-y-2">
                                     <!-- CIT-211 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528]">
+                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-211</span>
-                                            <span class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Cr</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-[#F5F5F2] border border-[#252528] font-mono text-[11px] font-bold">Grade A- (3.50)</span>
                                         </div>
                                         <div class="font-semibold text-xs text-white">Data Structure and Algorithms</div>
+                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
                                     <!-- CIT-212 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528]">
+                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-212</span>
-                                            <span class="text-[11px] font-mono text-[#858585]">Lab &bull; 1.50 Cr</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
                                         </div>
                                         <div class="font-semibold text-xs text-white">Data Structure and Algorithms Sessional</div>
+                                        <div class="text-[10px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
                                     </div>
 
                                     <!-- CIT-213 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528]">
+                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-213</span>
-                                            <span class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Cr</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
                                         </div>
                                         <div class="font-semibold text-xs text-white">Software Engineering</div>
+                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
                                     <!-- CCE-211 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528]">
+                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CCE-211</span>
-                                            <span class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Cr</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-[#F5F5F2] border border-[#252528] font-mono text-[11px] font-bold">Grade A- (3.50)</span>
                                         </div>
                                         <div class="font-semibold text-xs text-white">Data Communication and Engineering</div>
+                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
-                                    <!-- EEE-211 & EEE-212 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528]">
+                                    <!-- MAT-211 -->
+                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
                                         <div class="flex items-center justify-between">
-                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-211 / 212</span>
-                                            <span class="text-[11px] font-mono text-[#858585]">Theory + Lab &bull; 4.50 Cr</span>
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">MAT-211</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
                                         </div>
-                                        <div class="font-semibold text-xs text-white">Electrical Technology &amp; Sessional</div>
+                                        <div class="font-semibold text-xs text-white">Mathematics-III</div>
+                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                    </div>
+
+                                    <!-- EEE-211 -->
+                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-211</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
+                                        </div>
+                                        <div class="font-semibold text-xs text-white">Electrical Technology</div>
+                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                    </div>
+
+                                    <!-- EEE-212 -->
+                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-212</span>
+                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
+                                        </div>
+                                        <div class="font-semibold text-xs text-white">Electrical Technology Sessional</div>
+                                        <div class="text-[10px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585]">
-                                Standing: 1st merit position on published 3rd-semester result sheet.
+                                Verified official marksheet: 21.00 credits; 1st merit position on published result sheet; DSA, SE, coms &amp; power.
                             </div>
                         </div>
 
