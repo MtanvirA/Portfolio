@@ -135,12 +135,10 @@ Progression:
 - 1st Semester: 3.870
 - 2nd Semester: 3.771
 - 3rd Semester: 3.821
-Selected 2nd-Semester Coursework (All 9 Verified Entries):
-- PHY-121: Physics-II: Grade A+ (4.00) | PHY-122: Physics-II Sessional: Grade A+ (4.00)
-- MAT-121: Mathematics-II: Grade A+ (4.00) | CIT-121: Discrete Mathematics: Grade A+ (4.00)
-- LCM-121: Communicative English: Grade A- (3.50)
-- EEE-121: Electronic Device and Circuits: Grade A (3.75) | EEE-122: Electronic Device and Circuits Sessional: Grade A+ (4.00)
-- CCE-121: Object Oriented Programming: Grade B (3.00) | CCE-122: Object Oriented Programming Sessional: Grade A+ (4.00)`
+Selected CSE Coursework Across Three Semesters:
+- Semester 1 (GPA 3.870): CIT-111 (Programming Language), CIT-112 (Programming Language Sessional)
+- Semester 2 (GPA 3.771): CIT-121 (Discrete Mathematics: Grade A+), CCE-121 (Object Oriented Programming: Grade B), CCE-122 (OOP Sessional: Grade A+)
+- Semester 3 (GPA 3.821): CIT-211 (Data Structure and Algorithms), CIT-212 (DSA Sessional), CIT-213 (Software Engineering), CCE-211 (Data Communication and Engineering), EEE-211/212 (Electrical Technology & Sessional)`
         },
         links: {
             type: 'links',

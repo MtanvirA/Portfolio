@@ -117,16 +117,21 @@ Every public-facing description across the homepage, project archive, case studi
 * **Third Semester**: 3.821 GPA (1st merit position)
 * **Cumulative**: 3.820 CGPA
 
-### Selected Second-Semester Coursework (All 9 Verified Transcript Entries)
-1. **PHY-121** — Physics-II &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
-2. **PHY-122** — Physics-II Sessional &bull; Grade A+ (4.00) &bull; Laboratory Sessional (0.75 Credits)
-3. **MAT-121** — Mathematics-II &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
-4. **CIT-121** — Discrete Mathematics &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
-5. **LCM-121** — Communicative English &bull; Grade A- (3.50) &bull; Theory (2.00 Credits)
-6. **EEE-121** — Electronic Device and Circuits &bull; Grade A (3.75) &bull; Theory (3.00 Credits)
-7. **EEE-122** — Electronic Device and Circuits Sessional &bull; Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
-8. **CCE-121** — Object Oriented Programming &bull; Grade B (3.00) &bull; Theory (3.00 Credits)
-9. **CCE-122** — Object Oriented Programming Sessional &bull; Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
+### Selected CSE Coursework Across Three Semesters
+* **Semester 1 — Programming Foundations (GPA 3.870)**:
+  1. **CIT-111** — Programming Language &bull; Theory (3.00 Credits)
+  2. **CIT-112** — Programming Language Sessional &bull; Lab Sessional (1.50 Credits)
+* **Semester 2 — Mathematical & Object-Oriented Foundations (GPA 3.771)**:
+  1. **CIT-121** — Discrete Mathematics &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
+  2. **CCE-121** — Object Oriented Programming &bull; Grade B (3.00) &bull; Theory (3.00 Credits)
+  3. **CCE-122** — Object Oriented Programming Sessional &bull; Grade A+ (4.00) &bull; Lab Sessional (1.50 Credits)
+* **Semester 3 — Core Computer Science & Systems (GPA 3.821 &bull; 1st Merit Position)**:
+  1. **CIT-211** — Data Structure and Algorithms &bull; Theory (3.00 Credits)
+  2. **CIT-212** — Data Structure and Algorithms Sessional &bull; Lab Sessional (1.50 Credits)
+  3. **CIT-213** — Software Engineering &bull; Theory (3.00 Credits)
+  4. **CCE-211** — Data Communication and Engineering &bull; Theory (3.00 Credits)
+  5. **EEE-211** — Electrical Technology &bull; Theory (3.00 Credits)
+  6. **EEE-212** — Electrical Technology Sessional &bull; Lab Sessional (1.50 Credits)
 
 ---
 

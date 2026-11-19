@@ -38,6 +38,15 @@
 </head>
 <body id="top" class="bg-[#0B0B0C] text-[#F5F5F2] font-sans selection:bg-[#E3343F] selection:text-[#FFFFFF] min-h-screen flex flex-col">
 
+    <!-- Editorial Tracking Reticle / Focus Ring (Milestone 16.3) -->
+    <div id="pointerReticle" class="pointer-reticle-container opacity-0" aria-hidden="true">
+        <div class="reticle-ring">
+            <div class="reticle-crosshair-h"></div>
+            <div class="reticle-crosshair-v"></div>
+            <div class="reticle-center-dot"></div>
+        </div>
+    </div>
+
     <!-- Accessible Skip Link -->
     <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#E3343F] focus:text-[#090a0f] focus:font-bold focus:rounded-md focus:shadow-xl">
         Skip to main content
@@ -356,9 +365,9 @@
             </div>
 
             <div class="mt-12 pt-8 border-t border-[#252528] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#858585]">
-                <p>&copy; 2026 Md. Tanvir Anjum. All rights reserved.</p>
+                <p>&copy; 2026 Md. Tanvir Anjum &middot; Built with curiosity and care.</p>
                 <div class="flex items-center gap-6">
-                    <span class="text-slate-600">Static Production Portfolio &bull; Netlify Free</span>
+                    <span>B.Sc. in CSE &bull; PSTU</span>
                     <a href="#top" class="text-[#858585] hover:text-[#E3343F] transition-colors">Return to Top &uarr;</a>
                 </div>
             </div>

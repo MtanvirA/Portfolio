@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initAriaValidationSync();
     initEngineeringCanvas();
+    initPointerReticle();
 });
 
 /* ========================================================
@@ -466,5 +467,70 @@ function initEngineeringCanvas() {
                 rafId = null;
             }
         });
+    });
+}
+
+/* ========================================================
+   10. EDITORIAL TRACKING RETICLE (Milestone 16.3)
+   ======================================================== */
+function initPointerReticle() {
+    const reticle = document.getElementById('pointerReticle');
+    if (!reticle) return;
+
+    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!hasFinePointer || prefersReducedMotion) {
+        reticle.style.display = 'none';
+        return;
+    }
+
+    let targetX = -100;
+    let targetY = -100;
+    let currentX = -100;
+    let currentY = -100;
+    let isVisible = false;
+    let rafId = null;
+
+    const render = () => {
+        const dx = targetX - currentX;
+        const dy = targetY - currentY;
+
+        currentX += dx * 0.18;
+        currentY += dy * 0.18;
+
+        reticle.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+        if (Math.abs(dx) > 0.15 || Math.abs(dy) > 0.15) {
+            rafId = requestAnimationFrame(render);
+        } else {
+            rafId = null;
+        }
+    };
+
+    window.addEventListener('pointermove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+
+        if (!isVisible) {
+            isVisible = true;
+            currentX = targetX;
+            currentY = targetY;
+            reticle.style.opacity = '1';
+        }
+
+        if (!rafId) {
+            rafId = requestAnimationFrame(render);
+        }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+        isVisible = false;
+        reticle.style.opacity = '0';
+    });
+
+    window.addEventListener('blur', () => {
+        isVisible = false;
+        reticle.style.opacity = '0';
     });
 }
