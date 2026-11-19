@@ -9,7 +9,7 @@
   --canvas-lime: #d4ff3a;
   --canvas-teal: #14b8a6;
   --canvas-blue: #38bdf8;
-  --canvas-trace: #222c3d;
+  --canvas-trace: #2a374c;
   --canvas-trace-active: #2dd4bf;
 }
 
@@ -28,9 +28,10 @@
   z-index: 1;
   opacity: var(--spotlight-opacity, 0);
   background: radial-gradient(
-    580px circle at var(--pointer-x, -9999px) var(--pointer-y, -9999px),
-    rgba(212, 255, 58, 0.07) 0%,
-    rgba(20, 184, 166, 0.04) 40%,
+    650px circle at var(--pointer-x, -9999px) var(--pointer-y, -9999px),
+    rgba(212, 255, 58, 0.12) 0%,
+    rgba(20, 184, 166, 0.08) 35%,
+    rgba(56, 189, 248, 0.035) 60%,
     transparent 80%
   );
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -63,27 +64,46 @@
 /* Circuit trace lines */
 .circuit-trace {
   stroke: var(--canvas-trace);
-  stroke-width: 1.25;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
   transition: stroke 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
-  opacity: 0.45;
+  opacity: 0.65;
 }
 
 .circuit-trace.active {
   stroke: var(--canvas-trace-active);
-  opacity: 0.9;
-  filter: drop-shadow(0 0 4px rgba(45, 212, 191, 0.5));
+  opacity: 1;
+  filter: drop-shadow(0 0 5px rgba(45, 212, 191, 0.65));
+}
+
+/* Animated signal flow along technical traces */
+.circuit-signal-trace {
+  stroke: #33435c;
+  stroke-width: 1.5;
+  stroke-dasharray: 6 16;
+  fill: none;
+  opacity: 0.8;
+  animation: signalFlow 8s linear infinite;
+}
+
+@keyframes signalFlow {
+  from {
+    stroke-dashoffset: 44;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Circuit geometric nodes */
 .circuit-node {
-  r: 3;
+  r: 3.5;
   fill: #141822;
-  stroke: #334155;
+  stroke: #475569;
   stroke-width: 1.5;
-  opacity: 0.4;
+  opacity: 0.65;
   transition: fill 0.25s ease, stroke 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
 }
 
@@ -91,24 +111,24 @@
   fill: var(--canvas-lime);
   stroke: var(--canvas-lime);
   opacity: 1;
-  filter: drop-shadow(0 0 6px rgba(212, 255, 58, 0.85));
+  filter: drop-shadow(0 0 8px rgba(212, 255, 58, 0.9));
 }
 
 .circuit-node-teal.active {
   fill: var(--canvas-teal);
   stroke: var(--canvas-teal);
   opacity: 1;
-  filter: drop-shadow(0 0 6px rgba(20, 184, 166, 0.85));
+  filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.9));
 }
 
 /* Signal junctions (square micro-pads) */
 .circuit-pad {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   fill: #1a2230;
-  stroke: #334155;
-  stroke-width: 1;
-  opacity: 0.45;
+  stroke: #475569;
+  stroke-width: 1.2;
+  opacity: 0.65;
   transition: fill 0.25s ease, stroke 0.25s ease, opacity 0.25s ease;
 }
 
@@ -116,27 +136,42 @@
   fill: var(--canvas-teal);
   stroke: var(--canvas-lime);
   opacity: 1;
-  filter: drop-shadow(0 0 5px rgba(20, 184, 166, 0.7));
+  filter: drop-shadow(0 0 6px rgba(20, 184, 166, 0.8));
 }
 
 /* Ambient subtle pulse on selected anchor nodes */
 @keyframes circuitPulse {
   0%, 100% {
-    opacity: 0.35;
+    opacity: 0.45;
     filter: drop-shadow(0 0 0px transparent);
   }
   50% {
-    opacity: 0.95;
-    filter: drop-shadow(0 0 6px rgba(212, 255, 58, 0.75));
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(212, 255, 58, 0.85));
   }
 }
 
 .pulse-node {
-  animation: circuitPulse 3.8s ease-in-out infinite;
+  animation: circuitPulse 3.5s ease-in-out infinite;
 }
 
 .pulse-node-offset {
-  animation: circuitPulse 4.4s ease-in-out 1.9s infinite;
+  animation: circuitPulse 4.2s ease-in-out 1.8s infinite;
+}
+
+.pulse-node-teal {
+  animation: circuitPulseTeal 3.8s ease-in-out 0.8s infinite;
+}
+
+@keyframes circuitPulseTeal {
+  0%, 100% {
+    opacity: 0.45;
+    filter: drop-shadow(0 0 0px transparent);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.85));
+  }
 }
 
 /* ========================================================
@@ -297,7 +332,12 @@
   }
 
   .pulse-node,
-  .pulse-node-offset {
+  .pulse-node-offset,
+  .pulse-node-teal {
+    animation: none !important;
+  }
+
+  .circuit-signal-trace {
     animation: none !important;
   }
 

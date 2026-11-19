@@ -215,7 +215,7 @@ function initEngineeringCanvas() {
 
     sections.forEach(section => {
         const nodes = section.querySelectorAll('.circuit-node, .circuit-pad');
-        const traces = section.querySelectorAll('.circuit-trace');
+        const traces = section.querySelectorAll('.circuit-trace, .circuit-signal-trace');
 
         let isPointerInside = false;
         let rafId = null;

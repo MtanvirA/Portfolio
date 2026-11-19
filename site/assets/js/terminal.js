@@ -28,11 +28,13 @@ Aspiring full-stack developer with a passion for algorithms, competitive program
         },
         projects: {
             type: 'list',
-            text: `Featured Projects:
-1. ShareSync       - Full-stack portfolio & stock tracking web app (ASP.NET Core + MySQL)
-2. Railway Monitor - ESP32 IoT track obstacle & velocity safety prototype
-3. CampusSync      - PSTU CSE department scheduling & coordination portal prototype
-Type 'project sharesync', 'project railway', or 'project campussync' for deep-dives, or visit /projects/ for complete case studies.`
+            text: `Featured Engineering Projects (5):
+1. ShareSync                  - Full-stack portfolio & stock tracking web app (ASP.NET Core + MySQL)
+2. Railway Track Monitoring   - ESP32 IoT track obstacle & velocity safety prototype
+3. CampusSync                 - PSTU CSE department scheduling & coordination portal prototype
+4. NAS Sync Mini Server       - ESP32 mini network storage, browser media streaming & DHT11 host
+5. Student Enrollment System  - Object-oriented academic fee & enrollment manager (Java 17+)
+Type 'project <name>' (e.g. 'project sharesync', 'project railway', 'project campussync', 'project nassync', 'project enrollment') or visit /projects/ for full case studies.`
         },
         'project sharesync': {
             type: 'info',
@@ -58,25 +60,63 @@ Details: Department routine and shared computer laboratory resource coordination
 Repo:    https://github.com/MtanvirA/CampusSync
 Route:   /projects/campussync/`
         },
+        'project nassync': {
+            type: 'info',
+            text: `Project: NAS Sync Mini Server (IoT / Embedded Systems)
+Stack:   C/C++ (Arduino/ESP-IDF), ESP32, microSD (SPI), SSD1306 OLED, DHT11 Sensor, ESPAsyncWebServer
+Details: Low-power ESP32 web file host and media server. Supports browser-based file management, media streaming, OLED status, and ambient temperature/humidity logging.
+Notice:  Educational/LAN prototype intended for trusted local networks.
+Repo:    https://github.com/MtanvirA/NAS_Sync-Mini-Server
+Route:   /projects/nas-sync-mini-server/`
+        },
+        'project nas-sync': {
+            type: 'info',
+            text: `Project: NAS Sync Mini Server (IoT / Embedded Systems)
+Stack:   C/C++ (Arduino/ESP-IDF), ESP32, microSD (SPI), SSD1306 OLED, DHT11 Sensor, ESPAsyncWebServer
+Details: Low-power ESP32 web file host and media server. Supports browser-based file management, media streaming, OLED status, and ambient temperature/humidity logging.
+Notice:  Educational/LAN prototype intended for trusted local networks.
+Repo:    https://github.com/MtanvirA/NAS_Sync-Mini-Server
+Route:   /projects/nas-sync-mini-server/`
+        },
+        'project enrollment': {
+            type: 'info',
+            text: `Project: Student Enrollment System Using Java (Java / OOP)
+Stack:   Java (JDK 17+), OOP Architecture, Collections, File I/O, Custom Exceptions
+Details: Console-based academic registration and fee management application with role-based workflows (Student, Cashier, Admin), CGPA fee reductions, clearance queues, and CSV reports.
+Notice:  Academic console prototype using in-memory data structures and CSV exports.
+Repo:    https://github.com/MtanvirA/Student-Enrollment-System-Using-Java
+Route:   /projects/student-enrollment-system/`
+        },
+        'project student-enrollment': {
+            type: 'info',
+            text: `Project: Student Enrollment System Using Java (Java / OOP)
+Stack:   Java (JDK 17+), OOP Architecture, Collections, File I/O, Custom Exceptions
+Details: Console-based academic registration and fee management application with role-based workflows (Student, Cashier, Admin), CGPA fee reductions, clearance queues, and CSV reports.
+Notice:  Academic console prototype using in-memory data structures and CSV exports.
+Repo:    https://github.com/MtanvirA/Student-Enrollment-System-Using-Java
+Route:   /projects/student-enrollment-system/`
+        },
         skills: {
             type: 'list',
             text: `Technical Competencies:
-- Languages: C++, C#, C, JavaScript
-- Backend:   ASP.NET Core MVC, Entity Framework Core
-- Database:  MySQL
-- Frontend:  HTML5, CSS, Tailwind CSS, Vanilla JS
-- Tooling:   Git, GitHub, VS Code`
+- Programming Languages: C, C++, Java, Python, C#, JavaScript
+- Web Development:       HTML5, CSS, Tailwind CSS, Bootstrap, ASP.NET Core MVC
+- Databases & Tooling:   MySQL, Git, GitHub, VS Code
+- AI-Assisted Dev:       Prompt engineering, task decomposition, AI-assisted coding & debugging, refactoring, technical documentation (Copilot, Antigravity, ChatGPT)`
         },
         education: {
             type: 'info',
             text: `Patuakhali Science and Technology University (PSTU)
-Degree: B.Sc. in Engineering, CSE
-Session: 2023–2024
+Degree: B.Sc. in Engineering, Computer Science and Engineering (Session: 2023–2024)
 Provisional Academic Standing:
-- 1st Semester: 3.870 | Cumulative: 3.870
-- 2nd Semester: 3.771 | Cumulative: 3.820
-- 3rd Semester: 3.821 | Cumulative: 3.820
-Overall Cumulative CGPA: 3.820 (Through 3rd Semester)`
+- 1st Semester: 3.870
+- 2nd Semester: 3.771
+- 3rd Semester: 3.821
+Overall Cumulative CGPA: 3.820 (Through 3rd Semester)
+Merit Standing: 1st position among students shown in published semester result sheet.
+Selected 2nd-Semester Grades:
+- Physics-II: A+ | Mathematics-II: A+ | Discrete Mathematics: A+
+- Electronic Device & Circuits: A | OOP Theory: B | OOP Sessional: A+`
         },
         links: {
             type: 'links',
@@ -224,6 +264,11 @@ Overall Cumulative CGPA: 3.820 (Through 3rd Semester)`
                     if (normalized === 'project' || normalized === 'case studies') {
                         match = COMMANDS.projects;
                     }
+                    if (normalized === 'sharesync') match = COMMANDS['project sharesync'];
+                    if (normalized === 'railway') match = COMMANDS['project railway'];
+                    if (normalized === 'campussync') match = COMMANDS['project campussync'];
+                    if (normalized === 'nas' || normalized === 'nassync') match = COMMANDS['project nassync'];
+                    if (normalized === 'enrollment' || normalized === 'java') match = COMMANDS['project enrollment'];
                 }
 
                 if (match) {
