@@ -196,10 +196,10 @@ function initHeroSynthesisConsole() {
             desc: "Approaching engineering challenges with rigorous complexity analysis and mathematical intuition. Active on Codeforces and LeetCode honing algorithmic problem-solving."
         },
         databases: {
-            title: "03 / RELATIONAL CLOUD DATABASES",
-            role: "DATA INTEGRITY & PERSISTENCE",
-            stack: ["TiDB Cloud (Distributed)", "MySQL", "EF Core", "ACID Transactions"],
-            desc: "Designing normalized schemas, indexing strategies, resilient connection retry policies, and clean repository data abstractions across cloud MySQL protocols."
+            title: "03 / RELATIONAL DATABASES & PERSISTENCE",
+            role: "DATA INTEGRITY & SCHEMA DESIGN",
+            stack: ["MySQL", "Entity Framework Core", "Schema Design", "ACID Transactions"],
+            desc: "Designing normalized schemas, relational models, indexing strategies, and clean repository data abstractions with MySQL and Entity Framework Core."
         },
         hardware: {
             title: "04 / EMBEDDED SYSTEMS & IOT",

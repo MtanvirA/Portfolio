@@ -113,10 +113,13 @@ Provisional Academic Standing:
 - 2nd Semester: 3.771
 - 3rd Semester: 3.821
 Overall Cumulative CGPA: 3.820 (Through 3rd Semester)
-Merit Standing: 1st position among students shown in published semester result sheet.
-Selected 2nd-Semester Grades:
-- Physics-II: A+ | Mathematics-II: A+ | Discrete Mathematics: A+
-- Electronic Device & Circuits: A | OOP Theory: B | OOP Sessional: A+`
+Merit Standing: 1st position among students shown in published 3rd-semester result sheet.
+Selected 2nd-Semester Grades (9 Courses):
+- Physics-II: A+ | Physics-II Sessional: A+
+- Mathematics-II: A+ | Discrete Mathematics: A+
+- Communicative English: A-
+- Electronic Device and Circuits: A | EDC Sessional: A+
+- Object Oriented Programming: B | OOP Sessional: A+`
         },
         links: {
             type: 'links',
@@ -152,7 +155,7 @@ Selected 2nd-Semester Grades:
     }
 
     function initTerminal() {
-        const dialog = document.getElementById('terminalDialog');
+        const dialog = document.getElementById('terminalDialog') || document.getElementById('terminalModal');
         const openBtns = document.querySelectorAll('.open-terminal-btn');
         const closeBtn = document.getElementById('closeTerminalBtn');
         const terminalInput = document.getElementById('terminalInput');
