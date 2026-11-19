@@ -1,24 +1,165 @@
 /**
- * Engineering Canvas - Ambient Interaction System
- * Inspired by circuit boards, computer networks, data visualization & developer tooling.
- * Provides ambient cursor-following spotlight, interactive circuit grid nodes, card hover mechanics,
- * and restrained monospace HUD micro-labels throughout negative spaces.
+ * Engineering Canvas & Editorial Interaction System (Milestone 14)
+ * Md. Tanvir Anjum Personal Engineering Portfolio
+ * Inspired by interactive engineering journals, digital laboratory consoles,
+ * and high-craft typography & motion rhythm.
  */
 
 :root {
   --canvas-lime: #d4ff3a;
+  --canvas-lime-glow: rgba(212, 255, 58, 0.18);
   --canvas-teal: #14b8a6;
+  --canvas-teal-glow: rgba(20, 184, 166, 0.16);
   --canvas-blue: #38bdf8;
-  --canvas-trace: #2a374c;
+  --canvas-trace: #212836;
   --canvas-trace-active: #2dd4bf;
+  --bg-dark: #090a0f;
+  --bg-card: #10141d;
+  --bg-card-elevated: #161c28;
+  --border-line: #1e2634;
+  --border-line-hover: #323d50;
+  --scroll-percent: 0%;
 }
 
 /* ========================================================
-   1. SECTION SPOTLIGHT (CURSOR FOLLOWER)
+   1. SCROLL PROGRESS INDICATOR
+   ======================================================== */
+#scrollProgressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, #d4ff3a 0%, #14b8a6 50%, #38bdf8 100%);
+  z-index: 100;
+  pointer-events: none;
+  transition: width 0.08s ease-out;
+  box-shadow: 0 0 10px rgba(212, 255, 58, 0.4);
+}
+
+/* ========================================================
+   2. EDITORIAL TYPOGRAPHY & CHAPTER IDENTIFIERS
+   ======================================================== */
+.label-mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.chapter-number {
+  color: var(--canvas-lime);
+  background: rgba(212, 255, 58, 0.08);
+  border: 1px solid rgba(212, 255, 58, 0.22);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ========================================================
+   3. ANIMATED ENGINEERING INTERESTS TICKER
+   ======================================================== */
+.ticker-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--border-line);
+  border-bottom: 1px solid var(--border-line);
+  background: rgba(12, 14, 20, 0.92);
+  backdrop-filter: blur(8px);
+  padding: 1.1rem 0;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+  animation: tickerFlow 36s linear infinite;
+}
+
+.ticker-wrap:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0 1.5rem;
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: -0.015em;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+  user-select: none;
+}
+
+.ticker-item:hover {
+  color: #ffffff;
+  text-shadow: 0 0 16px rgba(212, 255, 58, 0.35);
+}
+
+.ticker-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--canvas-lime);
+  opacity: 0.75;
+}
+
+@keyframes tickerFlow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ========================================================
+   4. SCROLL-TRIGGERED REVEALS (IntersectionObserver)
+   ======================================================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 80ms; }
+.stagger-2 { transition-delay: 160ms; }
+.stagger-3 { transition-delay: 240ms; }
+.stagger-4 { transition-delay: 320ms; }
+.stagger-5 { transition-delay: 400ms; }
+
+/* ========================================================
+   5. SECTION SPOTLIGHT & ENGINEERING CANVAS LAYER
    ======================================================== */
 .canvas-section {
   position: relative;
-  /* Keep background contained while allowing layout elements full flow */
 }
 
 .canvas-spotlight {
@@ -38,21 +179,17 @@
   will-change: background, opacity;
 }
 
-/* Ensure foreground content stacks above ambient canvas overlays */
 .canvas-content {
   position: relative;
   z-index: 2;
 }
 
-/* ========================================================
-   2. CIRCUIT GRID & TECHNICAL BACKGROUND LAYER
-   ======================================================== */
 .circuit-canvas-layer {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   overflow: hidden;
-  z-index: 1;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .circuit-svg {
@@ -61,189 +198,186 @@
   display: block;
 }
 
-/* Circuit trace lines */
 .circuit-trace {
   stroke: var(--canvas-trace);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-width: 1.25;
   fill: none;
-  transition: stroke 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
-  opacity: 0.65;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
 }
 
-.circuit-trace.active {
-  stroke: var(--canvas-trace-active);
-  opacity: 1;
-  filter: drop-shadow(0 0 5px rgba(45, 212, 191, 0.65));
-}
-
-/* Animated signal flow along technical traces */
 .circuit-signal-trace {
-  stroke: #33435c;
+  stroke: var(--canvas-trace);
   stroke-width: 1.5;
-  stroke-dasharray: 6 16;
+  stroke-dasharray: 6 18;
   fill: none;
-  opacity: 0.8;
-  animation: signalFlow 8s linear infinite;
+  animation: circuitPulse 6s linear infinite;
+  transition: stroke 0.3s ease;
 }
 
-@keyframes signalFlow {
-  from {
-    stroke-dashoffset: 44;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Circuit geometric nodes */
-.circuit-node {
-  r: 3.5;
-  fill: #141822;
-  stroke: #475569;
-  stroke-width: 1.5;
-  opacity: 0.65;
-  transition: fill 0.25s ease, stroke 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
-}
-
-.circuit-node.active {
-  fill: var(--canvas-lime);
-  stroke: var(--canvas-lime);
-  opacity: 1;
-  filter: drop-shadow(0 0 8px rgba(212, 255, 58, 0.9));
-}
-
-.circuit-node-teal.active {
-  fill: var(--canvas-teal);
-  stroke: var(--canvas-teal);
-  opacity: 1;
-  filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.9));
-}
-
-/* Signal junctions (square micro-pads) */
-.circuit-pad {
-  width: 6px;
-  height: 6px;
-  fill: #1a2230;
-  stroke: #475569;
-  stroke-width: 1.2;
-  opacity: 0.65;
-  transition: fill 0.25s ease, stroke 0.25s ease, opacity 0.25s ease;
-}
-
-.circuit-pad.active {
-  fill: var(--canvas-teal);
-  stroke: var(--canvas-lime);
-  opacity: 1;
-  filter: drop-shadow(0 0 6px rgba(20, 184, 166, 0.8));
-}
-
-/* Ambient subtle pulse on selected anchor nodes */
 @keyframes circuitPulse {
-  0%, 100% {
-    opacity: 0.45;
-    filter: drop-shadow(0 0 0px transparent);
+  to {
+    stroke-dashoffset: -96;
   }
-  50% {
-    opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(212, 255, 58, 0.85));
-  }
+}
+
+.circuit-node {
+  fill: var(--canvas-trace);
+  transition: fill 0.25s ease, r 0.25s ease, filter 0.25s ease;
+}
+
+.circuit-pad {
+  fill: var(--canvas-trace);
+  transition: fill 0.25s ease, filter 0.25s ease;
+}
+
+.circuit-node.node-lit {
+  fill: var(--canvas-lime);
+  filter: drop-shadow(0 0 6px rgba(212, 255, 58, 0.8));
+}
+
+.circuit-node.circuit-node-teal.node-lit {
+  fill: #2dd4bf;
+  filter: drop-shadow(0 0 6px rgba(45, 212, 191, 0.8));
+}
+
+.circuit-pad.pad-lit {
+  fill: var(--canvas-lime);
+  filter: drop-shadow(0 0 6px rgba(212, 255, 58, 0.6));
+}
+
+.circuit-trace.trace-lit,
+.circuit-signal-trace.trace-lit {
+  stroke: var(--canvas-trace-active);
+  stroke-width: 1.75;
+  filter: drop-shadow(0 0 3px rgba(45, 212, 191, 0.5));
 }
 
 .pulse-node {
-  animation: circuitPulse 3.5s ease-in-out infinite;
+  animation: nodeHeartbeat 3.2s ease-in-out infinite;
 }
 
 .pulse-node-offset {
-  animation: circuitPulse 4.2s ease-in-out 1.8s infinite;
+  animation: nodeHeartbeat 3.2s ease-in-out 1.6s infinite;
 }
 
 .pulse-node-teal {
-  animation: circuitPulseTeal 3.8s ease-in-out 0.8s infinite;
+  animation: nodeHeartbeatTeal 3.8s ease-in-out 0.8s infinite;
 }
 
-@keyframes circuitPulseTeal {
+@keyframes nodeHeartbeat {
   0%, 100% {
-    opacity: 0.45;
-    filter: drop-shadow(0 0 0px transparent);
+    fill: var(--canvas-trace);
+    opacity: 0.6;
   }
   50% {
+    fill: var(--canvas-lime);
     opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.85));
+    filter: drop-shadow(0 0 5px rgba(212, 255, 58, 0.7));
+  }
+}
+
+@keyframes nodeHeartbeatTeal {
+  0%, 100% {
+    fill: var(--canvas-trace);
+    opacity: 0.6;
+  }
+  50% {
+    fill: #2dd4bf;
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(45, 212, 191, 0.7));
   }
 }
 
 /* ========================================================
-   3. SECTION-LEVEL HUD MICRO-INTERACTIONS
+   6. HUD MICRO-INTERACTIONS
    ======================================================== */
 .hud-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 0.375rem;
-  background-color: rgba(16, 20, 29, 0.75);
-  border: 1px solid rgba(35, 45, 61, 0.8);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.6875rem; /* ~11px */
-  letter-spacing: 0.06em;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   color: #64748b;
+  text-transform: uppercase;
   user-select: none;
-  backdrop-blur: 4px;
-  transition: border-color 0.25s ease, color 0.25s ease;
-}
-
-.hud-badge:hover,
-.canvas-section:hover .hud-badge {
-  border-color: rgba(212, 255, 58, 0.3);
-  color: #94a3b8;
 }
 
 .hud-signal-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 9999px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
   background-color: var(--canvas-lime);
   box-shadow: 0 0 6px var(--canvas-lime);
+  display: inline-block;
+  animation: hudDotBlink 2.4s ease-in-out infinite;
 }
 
-.hud-signal-dot-teal {
-  width: 5px;
-  height: 5px;
-  border-radius: 9999px;
-  background-color: var(--canvas-teal);
-  box-shadow: 0 0 6px var(--canvas-teal);
+@keyframes hudDotBlink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 
 /* ========================================================
-   4. CARD HOVER EFFECTS & SCANLINE SWEEP
+   7. HERO INTERACTIVE SYNTHESIS CONSOLE
+   ======================================================== */
+.hero-matrix-console {
+  background: rgba(15, 19, 27, 0.94);
+  border: 1px solid var(--border-line);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+.hero-console-header {
+  background: #0b0e14;
+  border-bottom: 1px solid var(--border-line);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-node-item {
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.hero-node-item:hover,
+.hero-node-item.is-active {
+  background-color: rgba(212, 255, 58, 0.07);
+  border-color: rgba(212, 255, 58, 0.4);
+}
+
+.hero-node-item:hover .node-dot,
+.hero-node-item.is-active .node-dot {
+  background-color: var(--canvas-lime);
+  box-shadow: 0 0 10px var(--canvas-lime);
+}
+
+/* ========================================================
+   8. CARD HOVER EFFECTS & SCANLINE SWEEP
    ======================================================== */
 .card-interactive {
-  position: relative;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.28s ease,
-              box-shadow 0.28s ease,
-              background-color 0.28s ease;
+              border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, border-color, box-shadow;
+  position: relative;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .card-interactive:hover {
     transform: translateY(-4px);
-    border-color: rgba(212, 255, 58, 0.38) !important;
-    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.75),
-                0 0 24px -6px rgba(212, 255, 58, 0.12) !important;
+    border-color: rgba(212, 255, 58, 0.38);
+    box-shadow: 0 18px 36px -12px rgba(0, 0, 0, 0.6),
+                0 0 20px -4px rgba(212, 255, 58, 0.12);
   }
 }
 
-/* Accessible focus states matching hover */
-.card-interactive:focus-within,
-.card-interactive:focus-visible {
-  border-color: var(--canvas-lime) !important;
-  box-shadow: 0 0 0 2px var(--canvas-lime), 0 16px 36px -12px rgba(0, 0, 0, 0.75);
-}
-
-/* Thin scanning-line sweep on project card hover */
 .scanline-box {
   position: relative;
   overflow: hidden;
@@ -292,7 +426,6 @@
   }
 }
 
-/* Arrow hover translation */
 .action-arrow {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -302,7 +435,7 @@
 }
 
 /* ========================================================
-   5. SKILLS INTERACTIVITY
+   9. SKILLS & CONSTELLATION INTERACTIVITY
    ======================================================== */
 .skill-card-interactive {
   transition: transform 0.22s ease,
@@ -324,11 +457,72 @@
 }
 
 /* ========================================================
-   6. REDUCED MOTION & ACCESSIBILITY SAFEGUARDS
+   10. UNDER THE HOOD LAB JOURNAL STYLES
    ======================================================== */
+.journal-card {
+  position: relative;
+  border-radius: 1rem;
+  background: #10141d;
+  border: 1px solid var(--border-line);
+  padding: 1.75rem;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journal-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.75rem;
+  width: 42px;
+  height: 2px;
+  background: var(--canvas-lime);
+  opacity: 0.6;
+  transition: width 0.25s ease, opacity 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .journal-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(212, 255, 58, 0.35);
+    background: #141924;
+  }
+  .journal-card:hover::before {
+    width: 68px;
+    opacity: 1;
+  }
+}
+
+/* ========================================================
+   11. MANUAL MOTION PAUSE & ACCESSIBILITY SAFEGUARDS
+   ======================================================== */
+body.motion-paused .ticker-track,
+body.motion-paused .pulse-node,
+body.motion-paused .pulse-node-offset,
+body.motion-paused .pulse-node-teal,
+body.motion-paused .circuit-signal-trace,
+body.motion-paused .scanline-box::before,
+body.motion-paused .hud-signal-dot {
+  animation-play-state: paused !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  #scrollProgressBar {
+    display: none !important;
+  }
+
   .canvas-spotlight {
     display: none !important;
+  }
+
+  .ticker-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
   .pulse-node,
@@ -342,7 +536,8 @@
   }
 
   .card-interactive:hover,
-  .skill-card-interactive:hover {
+  .skill-card-interactive:hover,
+  .journal-card:hover {
     transform: none !important;
   }
 

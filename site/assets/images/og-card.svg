@@ -29,7 +29,7 @@
   <text x="90" y="325" font-family="'Outfit', sans-serif" font-weight="600" font-size="32" fill="#d4ff3a">Aspiring Full-Stack Developer &amp; Competitive Programmer</text>
 
   <!-- Subtitle -->
-  <text x="90" y="390" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" fill="#94a3b8">Building useful software &bull; Solving problems &bull; Learning by doing</text>
+  <text x="90" y="390" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" fill="#94a3b8">Building useful software &#8226; Solving problems &#8226; Learning by doing</text>
 
   <!-- Tags -->
   <g transform="translate(90, 470)">

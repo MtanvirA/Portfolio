@@ -1,11 +1,16 @@
 /**
- * Tanvir Anjum Portfolio - Production Static Site Interactions
- * Implements Navigation, Netlify Form enhancements, Project Filtering, Return-to-Top,
- * and the "Engineering Canvas" ambient spotlight & circuit node proximity tracker.
+ * Tanvir Anjum Portfolio - Production Static Site Interactions (Milestone 14)
+ * Implements Editorial Navigation, Scroll Progress, Scroll-Triggered Reveals,
+ * Hero Interactive Synthesis Console, Project Filtering, Accessible Motion Pause,
+ * Netlify Form enhancements, and Engineering Canvas proximity tracking.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
+    initScrollProgressBar();
+    initMotionToggle();
+    initRevealOnScroll();
+    initHeroSynthesisConsole();
     initProjectFilters();
     initContactForm();
     initBackToTop();
@@ -14,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================================
-   1. NAVIGATION & MOBILE MENU
+   1. NAVIGATION & EDITORIAL SCROLLSPY
    ======================================================== */
 function initNavigation() {
     const header = document.getElementById('mainHeader');
@@ -24,10 +29,10 @@ function initNavigation() {
 
     const handleScroll = () => {
         if (window.scrollY > 20) {
-            header?.classList.add('bg-[#090a0f]/90', 'backdrop-blur-md', 'border-b', 'border-[#212836]');
+            header?.classList.add('bg-[#090a0f]/92', 'backdrop-blur-md', 'border-b', 'border-[#212836]');
             header?.classList.remove('bg-transparent');
         } else {
-            header?.classList.remove('bg-[#090a0f]/90', 'backdrop-blur-md', 'border-b', 'border-[#212836]');
+            header?.classList.remove('bg-[#090a0f]/92', 'backdrop-blur-md', 'border-b', 'border-[#212836]');
             header?.classList.add('bg-transparent');
         }
     };
@@ -62,31 +67,196 @@ function initNavigation() {
         });
     }
 
-    // Scrollspy for active navigation items on home
+    // Scrollspy for active navigation items on home page
     const sections = document.querySelectorAll('section[id]');
     if (sections.length && navLinks.length) {
         const onScrollSpy = () => {
             const scrollY = window.scrollY;
             sections.forEach(current => {
                 const sectionHeight = current.offsetHeight;
-                const sectionTop = current.offsetTop - 120;
+                const sectionTop = current.offsetTop - 140;
                 const sectionId = current.getAttribute('id');
-                const matchingLink = document.querySelector(`.nav-link[href*="#${sectionId}"]`);
+                const matchingLinks = document.querySelectorAll(`.nav-link[href*="#${sectionId}"]`);
 
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    navLinks.forEach(link => link.classList.remove('text-[#d4ff3a]', 'font-semibold'));
-                    if (matchingLink) {
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-[#d4ff3a]', 'font-semibold');
+                        link.classList.add('text-slate-400');
+                    });
+                    matchingLinks.forEach(matchingLink => {
                         matchingLink.classList.add('text-[#d4ff3a]', 'font-semibold');
-                    }
+                        matchingLink.classList.remove('text-slate-400');
+                    });
                 }
             });
         };
         window.addEventListener('scroll', onScrollSpy, { passive: true });
+        onScrollSpy();
     }
 }
 
 /* ========================================================
-   2. PROJECT FILTERING
+   2. SCROLL PROGRESS INDICATOR
+   ======================================================== */
+function initScrollProgressBar() {
+    const bar = document.getElementById('scrollProgressBar');
+    if (!bar) return;
+
+    const updateBar = () => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        if (maxScroll <= 0) {
+            bar.style.width = '0%';
+            return;
+        }
+        const pct = Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100));
+        bar.style.width = `${pct}%`;
+    };
+
+    window.addEventListener('scroll', updateBar, { passive: true });
+    window.addEventListener('resize', updateBar, { passive: true });
+    updateBar();
+}
+
+/* ========================================================
+   3. ACCESSIBLE MOTION TOGGLE
+   ======================================================== */
+function initMotionToggle() {
+    const btn = document.getElementById('motionToggle');
+    if (!btn) return;
+
+    // Check stored preference or system setting
+    const stored = localStorage.getItem('tanvir_motion');
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (stored === 'paused' || (!stored && prefersReduce)) {
+        document.body.classList.add('motion-paused');
+        btn.setAttribute('aria-pressed', 'true');
+        btn.setAttribute('title', 'Resume ambient motion');
+    }
+
+    btn.addEventListener('click', () => {
+        const isPaused = document.body.classList.toggle('motion-paused');
+        btn.setAttribute('aria-pressed', String(isPaused));
+        btn.setAttribute('title', isPaused ? 'Resume ambient motion' : 'Pause ambient motion');
+        localStorage.setItem('tanvir_motion', isPaused ? 'paused' : 'running');
+    });
+}
+
+/* ========================================================
+   4. SCROLL-TRIGGERED REVEALS (IntersectionObserver)
+   ======================================================== */
+function initRevealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal-on-scroll');
+    if (!reveals.length) return;
+
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(el => el.classList.add('is-revealed'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(el => observer.observe(el));
+}
+
+/* ========================================================
+   5. HERO INTERACTIVE SYNTHESIS CONSOLE
+   ======================================================== */
+function initHeroSynthesisConsole() {
+    const nodeButtons = document.querySelectorAll('.hero-console-node-btn');
+    const titleEl = document.getElementById('heroConsoleTitle');
+    const descEl = document.getElementById('heroConsoleDesc');
+    const stackEl = document.getElementById('heroConsoleStack');
+    const roleEl = document.getElementById('heroConsoleRole');
+
+    if (!nodeButtons.length || !titleEl) return;
+
+    const DATA = {
+        code: {
+            title: "01 / COMPILED & OBJECT-ORIENTED CODE",
+            role: "CORE PROGRAMMING & FOUNDATIONS",
+            stack: ["C / C++", "C# (ASP.NET)", "Java 17+", "Python"],
+            desc: "Writing strongly typed, high-efficiency compiled logic. Proficient with OOP hierarchies in Java/C#, memory models and pointer arithmetic in C/C++, and algorithmic clarity."
+        },
+        algorithms: {
+            title: "02 / ALGORITHMIC RIGOR & LOGIC",
+            role: "COMPETITIVE PROGRAMMING",
+            stack: ["Graphs (BFS/DFS)", "Dynamic Programming", "Greedy", "O(V+E) Analysis"],
+            desc: "Approaching engineering challenges with rigorous complexity analysis and mathematical intuition. Active on Codeforces and LeetCode honing algorithmic problem-solving."
+        },
+        databases: {
+            title: "03 / RELATIONAL CLOUD DATABASES",
+            role: "DATA INTEGRITY & PERSISTENCE",
+            stack: ["TiDB Cloud (Distributed)", "MySQL", "EF Core", "ACID Transactions"],
+            desc: "Designing normalized schemas, indexing strategies, resilient connection retry policies, and clean repository data abstractions across cloud MySQL protocols."
+        },
+        hardware: {
+            title: "04 / EMBEDDED SYSTEMS & IOT",
+            role: "PHYSICAL COMPUTING BRIDGES",
+            stack: ["ESP32 / ESP8266", "Ultrasonic & Vibration", "I2C OLED", "UART & GSM/GPS"],
+            desc: "Connecting physical sensors to micro-controllers. Engineered railway track obstacle detectors and WiFi mini network storage servers with hardware telemetry."
+        },
+        web: {
+            title: "05 / FULL-STACK WEB ARCHITECTURE",
+            role: "END-TO-END PRODUCTION APPS",
+            stack: ["ASP.NET Core MVC", "Tailwind CSS v4", "REST APIs", "Clean Architecture"],
+            desc: "Architecting multi-tier software with Clean Architecture separation, custom cookie authentication, responsive accessible UI, and seamless client-server integration."
+        }
+    };
+
+    const activateNode = (key) => {
+        const item = DATA[key];
+        if (!item) return;
+
+        nodeButtons.forEach(btn => {
+            const isTarget = btn.getAttribute('data-node') === key;
+            btn.classList.toggle('border-[#d4ff3a]', isTarget);
+            btn.classList.toggle('bg-[#1a2333]', isTarget);
+            btn.classList.toggle('border-[#212836]', !isTarget);
+            btn.classList.toggle('bg-[#10141d]', !isTarget);
+            btn.setAttribute('aria-selected', String(isTarget));
+        });
+
+        titleEl.textContent = item.title;
+        if (roleEl) roleEl.textContent = item.role;
+        if (descEl) descEl.textContent = item.desc;
+
+        if (stackEl) {
+            stackEl.innerHTML = '';
+            item.stack.forEach(tech => {
+                const badge = document.createElement('span');
+                badge.className = 'px-2 py-0.5 rounded bg-[#161c27] border border-[#263143] text-xs font-mono-code text-[#d4ff3a]';
+                badge.textContent = tech;
+                stackEl.appendChild(badge);
+            });
+        }
+    };
+
+    nodeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const key = btn.getAttribute('data-node');
+            activateNode(key);
+        });
+        btn.addEventListener('mouseenter', () => {
+            const key = btn.getAttribute('data-node');
+            activateNode(key);
+        });
+    });
+}
+
+/* ========================================================
+   6. PROJECT FILTERING
    ======================================================== */
 function initProjectFilters() {
     const filterButtons = document.querySelectorAll('.project-filter-btn');
@@ -127,7 +297,7 @@ function initProjectFilters() {
 }
 
 /* ========================================================
-   3. NETLIFY FORM CLIENT-SIDE ENHANCEMENT
+   7. NETLIFY FORM CLIENT-SIDE ENHANCEMENT
    ======================================================== */
 function initAriaValidationSync() {
     const syncAria = (el) => {
@@ -147,28 +317,31 @@ function initAriaValidationSync() {
 
 function initContactForm() {
     const form = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const btnText = document.getElementById('btnText');
-    const btnSpinner = document.getElementById('btnSpinner');
-
     if (!form) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const feedbackBanner = document.getElementById('contactFeedback');
+
+    if (urlParams.get('success') === 'true' && feedbackBanner) {
+        feedbackBanner.classList.remove('hidden');
+        feedbackBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
     form.addEventListener('submit', (e) => {
         if (!form.checkValidity()) {
             e.preventDefault();
-            form.reportValidity();
+            const firstInvalid = form.querySelector(':invalid');
+            if (firstInvalid) {
+                firstInvalid.focus();
+                firstInvalid.setAttribute('aria-invalid', 'true');
+            }
             return;
         }
 
-        // Check honeypot field
-        const honeypot = form.querySelector('input[name="bot-field"]');
-        if (honeypot && honeypot.value.trim() !== '') {
-            e.preventDefault();
-            window.location.href = '/thank-you/';
-            return;
-        }
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const btnText = submitBtn?.querySelector('.btn-text');
+        const btnSpinner = submitBtn?.querySelector('.btn-spinner');
 
-        // Show UI submitting feedback while submitting to action="/thank-you/"
         if (submitBtn) submitBtn.disabled = true;
         if (btnText) btnText.textContent = 'Submitting message...';
         if (btnSpinner) btnSpinner.classList.remove('hidden');
@@ -176,7 +349,7 @@ function initContactForm() {
 }
 
 /* ========================================================
-   4. RETURN TO TOP BUTTON
+   8. RETURN TO TOP BUTTON
    ======================================================== */
 function initBackToTop() {
     const btn = document.getElementById('backToTopBtn');
@@ -198,15 +371,13 @@ function initBackToTop() {
 }
 
 /* ========================================================
-   5. ENGINEERING CANVAS: SPOTLIGHT & CIRCUIT PROXIMITY
+   9. ENGINEERING CANVAS: SPOTLIGHT & CIRCUIT PROXIMITY
    ======================================================== */
 function initEngineeringCanvas() {
-    // Only activate fine pointer-tracking on devices that support hover pointer and no reduced motion
     const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!hasFinePointer || prefersReducedMotion) {
-        // Mobile or touchscreens: leave static restrained background; do not attach listeners
         return;
     }
 
@@ -235,7 +406,6 @@ function initEngineeringCanvas() {
             section.style.setProperty('--pointer-y', `${relY}px`);
             section.style.setProperty('--spotlight-opacity', '1');
 
-            // Check proximity to circuit nodes
             const threshold = 135;
             const thresholdSq = threshold * threshold;
 
@@ -249,13 +419,12 @@ function initEngineeringCanvas() {
                 const distSq = dx * dx + dy * dy;
 
                 if (distSq < thresholdSq) {
-                    node.classList.add('active');
+                    node.classList.add('node-lit');
                 } else {
-                    node.classList.remove('active');
+                    node.classList.remove('node-lit');
                 }
             });
 
-            // Check proximity to circuit traces
             traces.forEach(trace => {
                 const traceRect = trace.getBoundingClientRect();
                 const traceCenterX = traceRect.left + traceRect.width / 2;
@@ -266,9 +435,9 @@ function initEngineeringCanvas() {
                 const distSq = dx * dx + dy * dy;
 
                 if (distSq < thresholdSq * 1.4) {
-                    trace.classList.add('active');
+                    trace.classList.add('trace-lit');
                 } else {
-                    trace.classList.remove('active');
+                    trace.classList.remove('trace-lit');
                 }
             });
 
@@ -289,8 +458,8 @@ function initEngineeringCanvas() {
         section.addEventListener('pointerleave', () => {
             isPointerInside = false;
             section.style.setProperty('--spotlight-opacity', '0');
-            nodes.forEach(n => n.classList.remove('active'));
-            traces.forEach(t => t.classList.remove('active'));
+            nodes.forEach(n => n.classList.remove('node-lit'));
+            traces.forEach(t => t.classList.remove('trace-lit'));
             if (rafId) {
                 cancelAnimationFrame(rafId);
                 rafId = null;
