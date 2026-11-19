@@ -119,7 +119,7 @@ Every public-facing description across the homepage, project archive, case studi
 
 ### Selected Second-Semester Coursework (All 9 Verified Transcript Entries)
 1. **PHY-121** — Physics-II &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
-2. **PHY-122** — Physics-II Sessional &bull; Grade A+ (4.00) &bull; Laboratory Sessional (1.50 Credits)
+2. **PHY-122** — Physics-II Sessional &bull; Grade A+ (4.00) &bull; Laboratory Sessional (0.75 Credits)
 3. **MAT-121** — Mathematics-II &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
 4. **CIT-121** — Discrete Mathematics &bull; Grade A+ (4.00) &bull; Theory (3.00 Credits)
 5. **LCM-121** — Communicative English &bull; Grade A- (3.50) &bull; Theory (2.00 Credits)
