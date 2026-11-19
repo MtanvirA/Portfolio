@@ -9,7 +9,7 @@
   <circle cx="28" cy="23" r="5" fill="#E3343F" />
   <circle cx="46" cy="23" r="5" fill="#424242" />
   <circle cx="64" cy="23" r="5" fill="#252528" />
-  <text x="400" y="27" font-family="'JetBrains Mono', monospace" font-size="11" fill="#858585" text-anchor="middle" letter-spacing="0.5">STUDENT ENROLLMENT &amp; FEE MANAGEMENT // JAVA 17+ OOP SYSTEM</text>
+  <text x="400" y="27" font-family="'JetBrains Mono', monospace" font-size="11" fill="#858585" text-anchor="middle" letter-spacing="0.5">STUDENT ENROLLMENT &amp; FEE MANAGEMENT // JAVA OOP CONSOLE SYSTEM</text>
 
   <!-- Left: Authentic Java Terminal Simulation -->
   <g transform="translate(32, 66)">
@@ -17,7 +17,7 @@
 
     <!-- Terminal Titlebar -->
     <rect x="1" y="1" width="408" height="32" rx="7" fill="#1F1F22" />
-    <text x="14" y="21" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585">&gt;_ java -cp bin com.enrollment.Application</text>
+    <text x="14" y="21" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585">&gt;_ java -cp out Main</text>
 
     <!-- Terminal Output -->
     <g transform="translate(16, 48)" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">
@@ -43,7 +43,7 @@
 
       <text y="288" fill="#E3343F">&gt; Requesting cashier clearance token...</text>
       <text y="304" fill="#FFFFFF">[OK] Token Generated: #TXN-2024-8841-CLR</text>
-      <text y="320" fill="#858585">&gt; File write sync: ledger/transactions.dat [SAVED]</text>
+      <text y="320" fill="#858585">&gt; Generated: reports/students_report.txt [EXPORTED]</text>
     </g>
   </g>
 
@@ -96,13 +96,13 @@
       <text x="12" y="46" font-family="'JetBrains Mono', monospace" font-size="8" fill="#FFFFFF">+ getOutstandingBalance(): double</text>
     </g>
 
-    <!-- File I/O Persistence Box -->
+    <!-- Report & CSV Export Box -->
     <g transform="translate(16, 314)">
       <rect width="276" height="74" rx="4" fill="#1F1F22" stroke="#252528" stroke-width="1" />
-      <text x="12" y="18" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold" fill="#FFFFFF">DATA PERSISTENCE &#8226; FILE I/O</text>
-      <text x="12" y="34" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">&#8226; Custom delimiter parsing for student records</text>
-      <text x="12" y="48" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">&#8226; BufferedReader &amp; BufferedWriter pipelines</text>
-      <text x="12" y="62" font-family="'JetBrains Mono', monospace" font-size="8" fill="#E3343F">&#8226; Robust exception handling for corrupted data</text>
+      <text x="12" y="18" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold" fill="#FFFFFF">REPORT &amp; RECEIPT GENERATION &#8226; CSV</text>
+      <text x="12" y="34" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">&#8226; Plain-text transaction receipts with unique IDs</text>
+      <text x="12" y="48" font-family="'JetBrains Mono', monospace" font-size="8" fill="#858585">&#8226; Student payment report generation</text>
+      <text x="12" y="62" font-family="'JetBrains Mono', monospace" font-size="8" fill="#E3343F">&#8226; Administrative student list CSV export</text>
     </g>
   </g>
 </svg>

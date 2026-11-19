@@ -26,9 +26,10 @@
         about: {
             type: 'info',
             text: `Md. Tanvir Anjum
-Undergraduate Computer Science & Engineering student at Patuakhali Science and Technology University (PSTU).
-Session: 2023–2024 | Cumulative CGPA: 3.820/4.000 (Through 3rd Semester)
-Recipient of the Dean's Merit Award (Level 1) and 1st merit position on the published 3rd semester result sheet.
+Computer Science and Engineering undergraduate at Patuakhali Science and Technology University (PSTU).
+Current Status: 4th-semester undergraduate | Session: 2023–2024
+Cumulative CGPA: 3.820 / 4.000 through the 3rd semester.
+Honors: Dean's Merit Award (Level 1); 1st merit position in the 3rd semester (First among the students shown in the published third-semester result sheet).
 Crafting full-stack web applications with ASP.NET Core & C#, competitive programming in C++, and exploring intelligent embedded systems.`
         },
         research: {
@@ -49,76 +50,77 @@ Download the verified official CV directly at: /assets/documents/Tanvir-Anjum-CV
             type: 'list',
             text: `Featured Engineering Projects (5):
 1. ShareSync                  - Full-stack DSE portfolio & stock analytics platform (ASP.NET Core + MySQL 8)
-2. Railway Track Monitoring   - ESP32 IoT track obstacle & velocity safety prototype
-3. CampusSync                 - PSTU CSE department routine & lab coordination portal prototype
+2. Smart Railway Monitoring   - ESP32 IoT railway safety prototype with speed & obstacle monitoring
+3. CampusSync                 - PSTU CSE department routine & coordination prototype (HTML, CSS, JS, SQL)
 4. NAS Sync Mini Server       - ESP32 mini network storage, browser media streaming & DHT11 host
-5. Student Enrollment System  - Object-oriented academic fee & enrollment manager (Java 17+)
+5. Student Enrollment System  - Console-based academic fee & enrollment manager (Java, OOP)
 Type 'project <name>' (e.g. 'project sharesync', 'project railway', 'project campussync', 'project nassync', 'project enrollment') or visit /projects/ for full case studies.`
         },
         'project sharesync': {
             type: 'info',
             text: `Project: ShareSync (Full-Stack Web)
-Stack:   C#, ASP.NET Core MVC, MySQL 8, EF Core, Bootstrap 5, Chart.js
-Details: Dhaka Stock Exchange (DSE) portfolio tracker and stock analytics platform. Implements Clean Architecture, buy/sell transaction logging, custom watchlists, dividend tracking, and portfolio valuation reports with CAGR, annualized volatility, and maximum drawdown metrics.
+Stack:   ASP.NET Core (C#), Entity Framework Core, MySQL 8, JavaScript, Bootstrap 5, Chart.js
+Details: Dhaka Stock Exchange (DSE) portfolio tracker and stock analytics platform. Implements Clean Architecture, holdings management, buy/sell transactions, watchlists, dividend tracking, and investment reports with CAGR, annualized volatility, and maximum drawdown metrics across 400+ DSE companies.
 Repo:    https://github.com/MtanvirA/ShareSync
 Route:   /projects/sharesync/`
         },
         'project railway': {
             type: 'info',
-            text: `Project: Smart Railway Track Health Monitoring (IoT & Systems)
-Stack:   C++ (ESP-IDF/Arduino), ESP32, Ultrasonic Sensors, Vibration Sensors, GSM/GPS
-Details: Autonomous safety prototype combining ultrasonic obstacle detection and vibration monitoring on railway lines. Delivers real-time GPS coordinates via GSM alert pipelines when track anomalies occur.
+            text: `Project: Smart Railway Track Health Monitoring (IoT Prototype)
+Stack:   ESP32, Sensors, OLED, Buzzer, Embedded Systems
+Details: Academic IoT railway-safety prototype combining train-speed monitoring, ultrasonic obstacle detection, automatic signaling relays, live OLED telemetry status, and audio buzzer alerts.
 Repo:    https://github.com/MtanvirA/Smart-Railway-Track-Monitoring
 Route:   /projects/railway-track-health-monitoring/`
         },
         'project campussync': {
             type: 'info',
-            text: `Project: CampusSync (Academic Systems)
-Stack:   C#, ASP.NET Core, MySQL, Tailwind CSS, JavaScript
-Details: PSTU CSE department routine and lab coordination portal prototype. Resolves multi-department scheduling conflicts, handles role-based teacher and student access, and prevents overlapping lab reservations.
+            text: `Project: CampusSync (Academic Systems Prototype)
+Stack:   HTML, CSS, JavaScript, SQL
+Details: Academic scheduling and coordination platform prototype for PSTU CSE. Features class confirmations, available timeslot verification, schedule-conflict checks, and an interactive demonstration driven by structured mock data.
 Repo:    https://github.com/MtanvirA/CampusSync
 Route:   /projects/campussync/`
         },
         'project nassync': {
             type: 'info',
             text: `Project: NAS Sync Mini Server (IoT / Embedded Systems)
-Stack:   C++ (Arduino/ESP-IDF), ESP32/ESP8266, microSD (SPI), SSD1306 OLED, DHT11 Sensor
-Details: Lightweight local network storage mini-server running on ESP8266/ESP32 hardware. Delivers browser-based media streaming, SD card file system navigation, and live DHT11 environmental metrics on an I2C OLED display.
+Stack:   C++, ESP32, microSD, OLED, DHT11, PlatformIO
+Details: ESP32-based network storage and media server designed for trusted local networks (LAN). Delivers browser-based file management, file upload/download, media playback, live hardware OLED status, and temperature/humidity monitoring via DHT11.
 Repo:    https://github.com/MtanvirA/NAS_Sync-Mini-Server
 Route:   /projects/nas-sync-mini-server/`
         },
         'project nas-sync': {
             type: 'info',
             text: `Project: NAS Sync Mini Server (IoT / Embedded Systems)
-Stack:   C++ (Arduino/ESP-IDF), ESP32/ESP8266, microSD (SPI), SSD1306 OLED, DHT11 Sensor
-Details: Lightweight local network storage mini-server running on ESP8266/ESP32 hardware. Delivers browser-based media streaming, SD card file system navigation, and live DHT11 environmental metrics on an I2C OLED display.
+Stack:   C++, ESP32, microSD, OLED, DHT11, PlatformIO
+Details: ESP32-based network storage and media server designed for trusted local networks (LAN). Delivers browser-based file management, file upload/download, media playback, live hardware OLED status, and temperature/humidity monitoring via DHT11.
 Repo:    https://github.com/MtanvirA/NAS_Sync-Mini-Server
 Route:   /projects/nas-sync-mini-server/`
         },
         'project enrollment': {
             type: 'info',
-            text: `Project: Student Enrollment System Using Java (Java / OOP)
-Stack:   Java (JDK 17+), OOP Architecture, Inheritance, Polymorphism, File I/O
-Details: Pure Java 17+ desktop enrollment and fee management system. Implements strict OOP principles including encapsulation, inheritance hierarchies, polymorphic fee calculation, and robust file I/O persistence.
+            text: `Project: PSTU Student Enrollment System (Java / OOP)
+Stack:   Java, Object-Oriented Programming (JDK 8+)
+Details: Menu-driven console-based enrollment and fee-management system. Implements role-based login (Student, Cashier, Administrator), CGPA-based fee reductions, cashier payment approval workflow, plain-text receipts, student records, and CSV report exports.
 Repo:    https://github.com/MtanvirA/Student-Enrollment-System-Using-Java
 Route:   /projects/student-enrollment-system/`
         },
         'project student-enrollment': {
             type: 'info',
-            text: `Project: Student Enrollment System Using Java (Java / OOP)
-Stack:   Java (JDK 17+), OOP Architecture, Inheritance, Polymorphism, File I/O
-Details: Pure Java 17+ desktop enrollment and fee management system. Implements strict OOP principles including encapsulation, inheritance hierarchies, polymorphic fee calculation, and robust file I/O persistence.
+            text: `Project: PSTU Student Enrollment System (Java / OOP)
+Stack:   Java, Object-Oriented Programming (JDK 8+)
+Details: Menu-driven console-based enrollment and fee-management system. Implements role-based login (Student, Cashier, Administrator), CGPA-based fee reductions, cashier payment approval workflow, plain-text receipts, student records, and CSV report exports.
 Repo:    https://github.com/MtanvirA/Student-Enrollment-System-Using-Java
 Route:   /projects/student-enrollment-system/`
         },
         skills: {
             type: 'list',
-            text: `Technical Competencies (Verified from CV):
-- Programming Languages: C, C++, Java, C#, Python, JavaScript, SQL
-- Frameworks & Web:      ASP.NET Core MVC, Entity Framework Core, HTML5, CSS3, Bootstrap 5, Tailwind CSS, Chart.js
-- Databases & Storage:   MySQL 8, Oracle Database, Relational Modeling, ACID
-- Embedded & Tooling:    ESP32, ESP8266, PlatformIO, Arduino IDE, Git, GitHub, VS Code, Visual Studio
-- CS Foundations:        Data Structures & Algorithms, Object-Oriented Programming, Database Systems, Competitive Programming`
+            text: `Technical Competencies (Verified from CV & Confirmed Practice):
+- Programming Languages: C, C++, Java, C#, JavaScript, SQL, Python
+- Web & Frameworks:      ASP.NET Core, Entity Framework Core, HTML5, CSS3, Bootstrap 5, Tailwind CSS, Chart.js
+- Databases:             MySQL, Oracle
+- Embedded & Tools:      ESP32, PlatformIO, Git, GitHub, Visual Studio Code
+- Problem Solving:       Data Structures & Algorithms, Competitive Programming (Codeforces, LeetCode)
+- AI-Assisted Dev:       ChatGPT, GitHub Copilot, Google Antigravity (Prompt Engineering, Task Decomposition, Code Explanation & Review, Debugging)`
         },
         education: {
             type: 'info',

@@ -187,8 +187,8 @@ function initHeroSynthesisConsole() {
         code: {
             title: "01 / COMPILED & OBJECT-ORIENTED CODE",
             role: "CORE PROGRAMMING & FOUNDATIONS",
-            stack: ["C / C++", "C# (ASP.NET)", "Java 17+", "Python"],
-            desc: "Writing strongly typed, high-efficiency compiled logic. Proficient with OOP hierarchies in Java/C#, memory models and pointer arithmetic in C/C++, and algorithmic clarity."
+            stack: ["C / C++", "C# (ASP.NET)", "Java", "Python"],
+            desc: "Writing strongly typed, high-efficiency compiled logic. Developing OOP hierarchies in Java/C#, memory models and pointer arithmetic in C/C++, and algorithmic clarity."
         },
         algorithms: {
             title: "02 / ALGORITHMIC RIGOR & LOGIC",
@@ -205,13 +205,13 @@ function initHeroSynthesisConsole() {
         hardware: {
             title: "04 / EMBEDDED SYSTEMS & IOT",
             role: "PHYSICAL COMPUTING BRIDGES",
-            stack: ["ESP32 / ESP8266", "Ultrasonic & Vibration", "I2C OLED", "UART & GSM/GPS"],
-            desc: "Connecting physical sensors to micro-controllers. Engineered railway track obstacle detectors and WiFi mini network storage servers with hardware telemetry."
+            stack: ["ESP32", "Sensors & OLED", "microSD (SPI)", "PlatformIO"],
+            desc: "Connecting physical sensors to microcontrollers. Designed IoT railway safety prototypes with speed and obstacle monitoring, and local WiFi network storage servers with hardware telemetry."
         },
         web: {
             title: "05 / FULL-STACK WEB ARCHITECTURE",
             role: "END-TO-END PRODUCTION APPS",
-            stack: ["ASP.NET Core MVC", "Tailwind CSS v4", "REST APIs", "Clean Architecture"],
+            stack: ["ASP.NET Core MVC", "Bootstrap / Tailwind", "REST APIs", "Clean Architecture"],
             desc: "Architecting multi-tier software with Clean Architecture separation, custom cookie authentication, responsive accessible UI, and seamless client-server integration."
         }
     };

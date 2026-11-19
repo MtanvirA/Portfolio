@@ -9,12 +9,12 @@
   <circle cx="28" cy="23" r="5" fill="#E3343F" />
   <circle cx="46" cy="23" r="5" fill="#424242" />
   <circle cx="64" cy="23" r="5" fill="#252528" />
-  <text x="400" y="27" font-family="'JetBrains Mono', monospace" font-size="11" fill="#858585" text-anchor="middle" letter-spacing="0.5">SMART RAILWAY TRACK HEALTH &amp; SIGNALING // ESP32 ARCHITECTURE</text>
+  <text x="400" y="27" font-family="'JetBrains Mono', monospace" font-size="11" fill="#858585" text-anchor="middle" letter-spacing="0.5">SMART RAILWAY TRACK SAFETY PROTOTYPE // ESP32 EMBEDDED SYSTEM</text>
 
   <!-- Left: ESP32 Microcontroller Node -->
   <rect x="36" y="70" width="280" height="400" rx="8" fill="#141416" stroke="#252528" stroke-width="1" />
   <rect x="52" y="88" width="248" height="36" rx="6" fill="#1F1F22" stroke="#252528" stroke-width="1" />
-  <text x="176" y="111" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">ESP32 &#8226; TELEMETRY NODE</text>
+  <text x="176" y="111" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">ESP32 &#8226; PROTOTYPE NODE</text>
 
   <!-- Ultrasonic Sensor Module -->
   <g transform="translate(52, 138)">
@@ -29,17 +29,17 @@
   <!-- Telemetry OLED Display -->
   <g transform="translate(52, 212)">
     <rect width="248" height="82" rx="6" fill="#0B0B0C" stroke="#424242" stroke-width="1" />
-    <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585">TRACK: KM-142.8 &#8226; NORTHBOUND</text>
-    <text x="14" y="46" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="bold" fill="#FFFFFF">STATUS: OBSTACLE DETECTED</text>
-    <text x="14" y="68" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#E3343F">RANGE: 1.84m &#8226; BRAKE ACTIVE</text>
+    <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="10" fill="#858585">OLED STATUS DISPLAY &#8226; LIVE</text>
+    <text x="14" y="46" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="bold" fill="#FFFFFF">SPEED: 48 km/h &#8226; OBSTACLE</text>
+    <text x="14" y="68" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#E3343F">RANGE: 1.84m &#8226; BRAKE SIGNAL</text>
   </g>
 
-  <!-- GSM & GPS Transmission Module -->
+  <!-- Automatic Signaling & Buzzer Module -->
   <g transform="translate(52, 308)">
     <rect width="248" height="68" rx="6" fill="#0B0B0C" stroke="#252528" stroke-width="1" />
-    <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#FFFFFF">SIM800L GSM / GPS UNIT</text>
-    <text x="14" y="42" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">Lat 22.3592&#176; N, Lon 90.3804&#176; E</text>
-    <text x="14" y="58" font-family="'JetBrains Mono', monospace" font-size="9" fill="#E3343F">SMS Alert Dispatched &#8226; Control Room</text>
+    <text x="14" y="24" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#FFFFFF">SIGNALING &amp; BUZZER ALERT</text>
+    <text x="14" y="42" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">Audio Alert: Active Buzzer Triggered</text>
+    <text x="14" y="58" font-family="'JetBrains Mono', monospace" font-size="9" fill="#E3343F">Track Signal: Red / Halt Relay Closed</text>
   </g>
 
   <!-- Power & Diagnostics Footer -->
@@ -49,8 +49,8 @@
 
   <!-- Right: Schematic Rail & Sensor Array Diagram -->
   <rect x="332" y="70" width="432" height="400" rx="8" fill="#141416" stroke="#252528" stroke-width="1" />
-  <text x="354" y="100" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#FFFFFF">PHYSICAL TRACK SENSING MATRIX &#8226; SCHEMATIC</text>
-  <text x="354" y="118" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">VIBRATION PIEZO SENSOR + DUAL OPTICAL BEAMS</text>
+  <text x="354" y="100" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="bold" fill="#FFFFFF">SPEED MONITORING &amp; OBSTACLE SENSING &#8226; SCHEMATIC</text>
+  <text x="354" y="118" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585">OPTICAL SPEED GATES + ULTRASONIC RANGEFINDER</text>
 
   <!-- Dual Railway Tracks (Monochrome) -->
   <g transform="translate(354, 150)">
@@ -67,10 +67,10 @@
     <!-- Right Rail -->
     <rect x="290" y="10" width="16" height="250" rx="2" fill="#252528" stroke="#424242" stroke-width="1" />
 
-    <!-- Vibration Sensor Point on Left Rail -->
+    <!-- Speed Gate A on Left Rail -->
     <circle cx="98" cy="90" r="8" fill="#141416" stroke="#FFFFFF" stroke-width="2" />
     <circle cx="98" cy="90" r="4" fill="#E3343F" />
-    <text x="98" y="75" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585" text-anchor="middle">Piezo Sensor A</text>
+    <text x="98" y="75" font-family="'JetBrains Mono', monospace" font-size="9" fill="#858585" text-anchor="middle">Speed Gate A</text>
 
     <!-- Ultrasonic Sensing Beam (Red Cone) -->
     <polygon points="198,10 120,180 276,180" fill="#E3343F" opacity="0.15" />
@@ -87,6 +87,6 @@
   <g transform="translate(354, 430)">
     <rect width="390" height="28" rx="4" fill="#0B0B0C" stroke="#252528" stroke-width="1" />
     <circle cx="16" cy="14" r="4" fill="#E3343F" />
-    <text x="28" y="18" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5F5F2">LATENCY: 18ms &#8226; ALARM SIGNAL LEVEL: CRITICAL &#8226; RELAY: TRIPPED</text>
+    <text x="28" y="18" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5F5F2">LATENCY: 18ms &#8226; ALARM SIGNAL LEVEL: CRITICAL &#8226; BUZZER: ACTIVE</text>
   </g>
 </svg>
