@@ -24,36 +24,56 @@
 <body class="bg-[#0B0B0C] text-[#F5F5F2] font-sans selection:bg-[#E3343F] selection:text-[#FFFFFF] min-h-screen flex flex-col">
 
     <!-- Skip Link -->
-    <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#E3343F] focus:text-[#090a0f] focus:font-bold focus:rounded-md focus:shadow-xl">
+    <a href="#mainContent" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#E3343F] focus:text-white focus:font-bold focus:rounded-md focus:shadow-xl">
         Skip to main content
     </a>
 
     <!-- Header -->
-    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-[#0B0B0C]/80 backdrop-blur-md border-b border-[#252528]/60">
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-[#0B0B0C]/90 backdrop-blur-md border-b border-[#252528]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#E3343F] rounded-lg p-1">
-                <div class="w-10 h-10 rounded-xl bg-[#1F1F22] border border-[#252528] group-hover:border-[#E3343F] flex items-center justify-center transition-colors">
+
+            <!-- Brand / Wordmark -->
+            <a href="/#top" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#E3343F] rounded-lg p-1">
+                <div class="w-10 h-10 rounded-xl bg-[#141416] border border-[#252528] group-hover:border-[#E3343F] flex items-center justify-center transition-colors">
                     <span class="font-display font-extrabold text-sm text-[#E3343F]">TA</span>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-display font-bold text-sm text-white tracking-tight group-hover:text-white transition-colors">
+                    <span class="font-display font-bold text-sm text-white tracking-tight group-hover:text-[#F5F5F2] transition-colors">
                         Md. Tanvir Anjum
                     </span>
                     <span class="font-mono text-[11px] text-[#858585]">
-                        CSE @ PSTU
+                        CSE @ PSTU &bull; '23–'24
                     </span>
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
-                <a href="/#about" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">About</a>
-                <a href="/projects/" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">Projects</a>
-                <a href="/#skills" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">Skills</a>
-                <a href="/#education" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">Education</a>
-                <a href="/#contact" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-[#858585] hover:text-white hover:bg-slate-800/40 transition-colors">Contact</a>
+            <!-- Desktop Navigation Menu (Numbered Chapters) -->
+            <nav class="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main Navigation">
+                <a href="/#projects" class="nav-link px-2.5 py-1.5 rounded-lg text-xs font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">
+                    <span class="text-[#E3343F] mr-1">01</span>WORK
+                </a>
+                <a href="/#research" class="nav-link px-2.5 py-1.5 rounded-lg text-xs font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">
+                    <span class="text-[#E3343F] mr-1">02</span>RESEARCH
+                </a>
+                <a href="/#skills" class="nav-link px-2.5 py-1.5 rounded-lg text-xs font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">
+                    <span class="text-[#E3343F] mr-1">03</span>TOOLKIT
+                </a>
+                <a href="/#education" class="nav-link px-2.5 py-1.5 rounded-lg text-xs font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">
+                    <span class="text-[#E3343F] mr-1">04</span>ACADEMIA
+                </a>
+                <a href="/#how-i-build" class="nav-link px-2.5 py-1.5 rounded-lg text-xs font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">
+                    <span class="text-[#E3343F] mr-1">05</span>HOW I BUILD
+                </a>
+                <a href="/#about" class="nav-link px-2.5 py-1.5 rounded-lg text-xs font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">
+                    <span class="text-[#E3343F] mr-1">06</span>ABOUT
+                </a>
+                <a href="/#contact" class="nav-link px-2.5 py-1.5 rounded-lg text-xs font-mono text-[#858585] hover:text-white hover:bg-[#141416] transition-colors">
+                    <span class="text-[#E3343F] mr-1">07</span>CONTACT
+                </a>
             </nav>
 
-            <div class="hidden sm:flex items-center gap-3">
+            <!-- Header Action Controls -->
+            <div class="hidden sm:flex items-center gap-2.5">
                 <a href="/assets/documents/Tanvir-Anjum-CV.pdf"
                    download="Tanvir-Anjum-CV.pdf"
                    class="btn-cv-header inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#E3343F] hover:bg-[#c92530] text-white font-mono text-xs font-semibold transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
@@ -62,10 +82,80 @@
                     <span>Download CV</span>
                 </a>
 
-                <button type="button" class="open-terminal-btn flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#1F1F22] border border-[#252528] hover:border-slate-600 text-xs text-[#F5F5F2] font-mono transition-colors focus:outline-none focus:ring-2 focus:ring-[#E3343F]">
+                <button type="button"
+                        id="motionToggle"
+                        class="p-2 rounded-lg bg-[#141416] border border-[#252528] hover:border-[#858585] text-[#858585] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
+                        aria-label="Pause ambient animation motion"
+                        title="Pause ambient animation motion"
+                        aria-pressed="false">
+                    <svg class="w-4 h-4 icon-pause" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1" stroke-width="2"></rect><rect x="14" y="4" width="4" height="16" rx="1" stroke-width="2"></rect></svg>
+                    <svg class="w-4 h-4 icon-play hidden" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"></polygon></svg>
+                </button>
+
+                <button type="button"
+                        class="open-terminal-btn flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#141416] border border-[#252528] hover:border-[#858585] text-xs text-[#F5F5F2] font-mono transition-colors focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
+                        aria-label="Open Command Terminal"
+                        title="Open interactive command palette (Ctrl+K)">
                     <span class="text-[#E3343F] font-bold">&gt;_</span>
                     <span>Terminal</span>
-                    <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] text-[#858585] border border-slate-700">Ctrl K</kbd>
+                    <kbd class="px-1.5 py-0.5 rounded bg-[#1F1F22] text-[10px] text-[#858585] border border-[#252528]">Ctrl K</kbd>
+                </button>
+
+                <a href="https://github.com/MtanvirA"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="p-2 rounded-lg bg-[#141416] border border-[#252528] hover:border-[#858585] text-[#F5F5F2] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
+                   aria-label="Tanvir's GitHub Profile">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuToggle"
+                    type="button"
+                    class="lg:hidden p-2 rounded-lg bg-[#141416] border border-[#252528] text-[#F5F5F2] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#E3343F]"
+                    aria-expanded="false"
+                    aria-controls="mobileMenu"
+                    aria-label="Toggle navigation menu">
+                <svg class="w-5 h-5 icon-open" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg class="w-5 h-5 icon-close hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="lg:hidden hidden border-b border-[#252528] bg-[#0B0B0C]/98 px-4 pt-2 pb-6 space-y-2">
+            <a href="/#projects" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">
+                <span class="text-[#E3343F] mr-2">01</span>SELECTED WORK
+            </a>
+            <a href="/#research" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">
+                <span class="text-[#E3343F] mr-2">02</span>RESEARCH &amp; EXPLORATION
+            </a>
+            <a href="/#skills" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">
+                <span class="text-[#E3343F] mr-2">03</span>ENGINEERING TOOLKIT
+            </a>
+            <a href="/#education" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">
+                <span class="text-[#E3343F] mr-2">04</span>ACADEMIC JOURNEY
+            </a>
+            <a href="/#how-i-build" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">
+                <span class="text-[#E3343F] mr-2">05</span>HOW I BUILD
+            </a>
+            <a href="/#about" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">
+                <span class="text-[#E3343F] mr-2">06</span>ABOUT TANVIR
+            </a>
+            <a href="/#contact" class="block px-3 py-2 rounded-lg text-sm font-mono text-[#F5F5F2] hover:text-white hover:bg-[#141416]">
+                <span class="text-[#E3343F] mr-2">07</span>CONTACT
+            </a>
+
+            <div class="pt-4 border-t border-[#252528] flex flex-wrap items-center justify-between gap-2">
+                <a href="/assets/documents/Tanvir-Anjum-CV.pdf"
+                   download="Tanvir-Anjum-CV.pdf"
+                   class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#E3343F] text-white font-mono text-xs font-semibold">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Download CV</span>
+                </a>
+                <button type="button" class="open-terminal-btn flex items-center gap-2 px-3 py-2 rounded-lg bg-[#141416] border border-[#252528] text-xs text-[#F5F5F2] font-mono">
+                    <span class="text-[#E3343F] font-bold">&gt;_</span>
+                    <span>Terminal (Ctrl+K)</span>
                 </button>
             </div>
         </div>
@@ -90,7 +180,7 @@
                     </p>
                 </div>
                 <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <a href="/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#E3343F] text-[#090a0f] font-bold text-xs uppercase tracking-wider transition-colors hover:bg-[#c92530]">
+                    <a href="/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#E3343F] text-white font-semibold text-xs uppercase tracking-wider transition-colors hover:bg-[#c92530]">
                         Return Home
                     </a>
                     <a href="/projects/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#1F1F22] text-[#F5F5F2] hover:text-white border border-[#252528] text-xs font-mono transition-colors">

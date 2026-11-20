@@ -21,27 +21,30 @@ This repository contains two completely isolated application paths:
          [ PATH A: PUBLIC SITE ]                         [ PATH B: LEARNING APP ]
          Static Production Portfolio                     ASP.NET Core MVC Architecture
          Location: site/                                 Location: Repository Root (Controllers, Views...)
-         Hosting: Netlify Free                           Target: Localhost / Academic Exploration
+         Hosting: Netlify Free ($0/mo)                   Target: Localhost / Academic Exploration
          Domain: https://mtanviranjum.tech               Stack: .NET 10, EF Core, MySQL, MailKit
-         Runtime: Static HTML5, CSS3, Vanilla JS,        Status: Complete standalone learning project;
-                  Netlify Forms, Responsive SVGs                 Kept intact for experimentation
+         Runtime: Static HTML5, CSS3, Vanilla JS,        Status: Standalone academic learning project;
+                  Netlify Forms, Responsive SVGs                 Preserved intact for experimentation
 ```
 
 ### Path A: Public Production Static Portfolio (`site/`)
-* **Live Domain**: [https://mtanviranjum.tech](https://mtanviranjum.tech)
-* **Hosting Platform**: **Netlify Free Tier**
-* **Publish Directory**: `site/` (Netlify serves only static files from this directory)
+* **Live Canonical Domain**: [https://mtanviranjum.tech](https://mtanviranjum.tech)
+* **Hosting Platform**: **Netlify Free Tier** ($0/month)
+* **Publish Directory**: `site` (Netlify serves only static assets from this directory)
 * **Build Command**: `npm ci && npm run build:static-css`
 * **Zero Database Dependencies**: The public website is a 100% static site. It does **not** connect to any database (no MySQL, no TiDB Cloud, no external relational database), requires no server runtime, and uses no server secrets.
-* **Visual Identity**: **Editorial Monochrome** (Black, White, Gray) paired with an intentional **Crimson Red (`#E3343F`)** accent for focus, badges, and active highlights.
+* **Visual Identity**: **Editorial Monochrome** (Black `#0B0B0C`, Charcoal `#141416`, Slate `#252528`, Gray `#858585`) paired with an intentional **Crimson Red (`#E3343F`)** accent.
 * **Key Features**:
-  * **5 Full Case Studies**: Dedicated technical breakdowns for all five portfolio projects with SVG architecture schematics.
+  * **5 Full Case Studies**: Dedicated technical breakdowns for all five portfolio projects with architectural schematics.
+  * **7 Standardized Chapters**: Unified navigation across all pages (`01 WORK`, `02 RESEARCH`, `03 TOOLKIT`, `04 ACADEMIA`, `05 HOW I BUILD`, `06 ABOUT`, `07 CONTACT`).
   * **Client-Side Terminal**: Offline interactive command palette (`Ctrl+K` or `>_ Terminal`) with command history and project aliases.
-  * **Netlify Forms**: Static contact form with automated spam protection and honeypot filtering (`name="contact"`).
-  * **Official CV Download**: Direct access to verified November 2026 Curriculum Vitae (`/assets/documents/Tanvir-Anjum-CV.pdf`).
+  * **Netlify Forms**: Static contact form with automated spam protection, honeypot filtering (`name="contact"`), and redirect to `/thank-you/`.
+  * **Official CV Download**: Direct access to verified Curriculum Vitae (`/assets/documents/Tanvir-Anjum-CV.pdf`).
+  * **1200×630 Open Graph Cards**: High-resolution PNG preview cards for social sharing across the homepage and all project pages.
 
 ### Path B: ASP.NET Core MVC Learning Application (Root)
-* **Status**: Complete full-stack ASP.NET Core MVC application preserved in the repository root for continued academic learning.
+* **Status**: Full-stack ASP.NET Core MVC application preserved in the repository root for continued academic learning.
+* **Legacy Configurations**: `Dockerfile`, `docker-compose.yml`, and `render.yaml` belong to previous ASP.NET container/Render deployment explorations. They are **not** used by the current Netlify static production deployment.
 * **Separation Policy**: The public static portfolio does **not** rely on the root ASP.NET application or its MySQL database. Both tracks remain strictly decoupled.
 
 ---
@@ -58,8 +61,8 @@ This repository contains two completely isolated application paths:
 * **Canonical Domain**: [https://mtanviranjum.tech](https://mtanviranjum.tech)
 * **Direct Email**: [tanviranjum201@gmail.com](mailto:tanviranjum201@gmail.com)
 * **Profile Assets**:
-  * Illustrated Pixel-Art Portrait (WebP): `site/assets/images/profile/tanvir-pixel-portrait.webp`
-  * Illustrated Pixel-Art Portrait (PNG Fallback): `site/assets/images/profile/tanvir-pixel-portrait.png`
+  * Illustrated Geometric Pixel-Art Portrait (WebP): `site/assets/images/profile/tanvir-pixel-portrait.webp`
+  * Illustrated Geometric Pixel-Art Portrait (PNG Fallback): `site/assets/images/profile/tanvir-pixel-portrait.png`
   * Authentic Photo Fallback (WebP): `site/assets/images/profile/tanvir-anjum.webp`
   * Authentic Photo Fallback (JPG): `site/assets/images/profile/tanvir-anjum.jpg`
   * Official CV: `site/assets/documents/Tanvir-Anjum-CV.pdf`
@@ -74,7 +77,7 @@ This repository contains two completely isolated application paths:
 
 ## 2. Verified Five-Project Catalogue
 
-Every public-facing description across the homepage, project archive, case studies, terminal, and diagrams has been audited against actual repository source code and the verified November 2026 CV.
+Every public-facing description across the homepage, project archive, case studies, terminal, and diagrams has been audited against actual repository source code and the verified marksheet/CV records.
 
 | Project | Category | Verified Technology Stack | Core Capabilities | Case Study Route | Repository |
 |---|---|---|---|---|---|
@@ -96,12 +99,12 @@ Every public-facing description across the homepage, project archive, case studi
 * **Problem Solving**: Data Structures and Algorithms, Competitive Programming (Codeforces, LeetCode)
 
 ### Additional Confirmed Practices
-* **Python**: Programming fundamentals, syntax, and practical scripting (confirmed familiarity; not listed on Nov CV).
+* **Python**: Practical scripting and automation (confirmed familiarity).
 * **Tailwind CSS**: Utility-first CSS architecture utilized for compiling the static production portfolio stylesheet.
 
-### Practical AI-Assisted Development (Software Workflow Skills)
+### Practical AI-Assisted Development
 * **Tooling**: ChatGPT, GitHub Copilot, Google Antigravity
-* **Engineering Workflow**: Prompt engineering, task decomposition, AI-assisted implementation, debugging assistance, code explanation and review, documentation assistance
+* **Engineering Workflow**: Prompt engineering, task decomposition, AI-assisted implementation, debugging assistance, code explanation and review, documentation assistance.
 * *Note: Described strictly as practical developer workflow skills. Clearly distinguished from academic machine learning and deep learning research interests; not listed on the November 2026 CV.*
 
 ---
@@ -139,30 +142,17 @@ Every public-facing description across the homepage, project archive, case studi
 
 ---
 
-## 5. Research Interests & Exploration Areas
-
-The CV identifies five areas of keen academic interest that the user is eager to explore in advanced undergraduate studies and future graduate work:
-1. **Machine Learning** — Academic research interest in statistical foundations and predictive modeling techniques.
-2. **Deep Learning** — Learning direction centered on neural representations and architecture optimization.
-3. **Artificial Intelligence** — Research interest in algorithmic problem solving, search heuristics, and intelligent systems.
-4. **Robotics** — Exploratory learning direction in physical computing, autonomous systems, and control dynamics.
-5. **Intelligent Embedded Systems** — Research interest bridging microcontroller platforms (ESP32) with sensory integration and embedded control.
-
-*Integrity note: These topics represent genuine areas of study and future exploration; the portfolio does not claim active research publications, proprietary model training, or commercial robotic deployments without documented evidence.*
-
----
-
-## 6. Directory Structure of `site/`
+## 5. Directory Structure of `site/`
 
 ```
 site/
-├── index.html                                 # Landing page (Hero, About, Projects, Toolkit, Academia, Research, Contact)
+├── index.html                                 # Landing page (7 chapters, contact form, pixel portrait)
 ├── 404.html                                   # Accessible custom 404 page
-├── robots.txt                                 # Search crawler directives
-├── sitemap.xml                                # XML search sitemap
+├── robots.txt                                 # Search crawler directives (disallows /thank-you/)
+├── sitemap.xml                                # XML search sitemap (7 canonical routes)
 ├── favicon.svg / favicon.ico                  # Vector and raster brand icons
 ├── thank-you/
-│   └── index.html                             # Form submission confirmation page
+│   └── index.html                             # Form submission confirmation page (noindex, follow)
 ├── projects/
 │   ├── index.html                             # 5-project catalogue with category filters
 │   ├── sharesync/
@@ -180,23 +170,24 @@ site/
 │   │   ├── site.min.css                       # Compiled, minified Tailwind CSS v4 stylesheet
 │   │   └── interactions.css                   # Editorial Monochrome & micro-interaction styles
 │   ├── documents/
-│   │   └── Tanvir-Anjum-CV.pdf                # Verified November 2026 Curriculum Vitae
+│   │   └── Tanvir-Anjum-CV.pdf                # Verified Curriculum Vitae
 │   ├── images/
-│   │   ├── og-card.svg                        # Open Graph social sharing card
+│   │   ├── og-card.png                        # 1200x630 Open Graph PNG social sharing card
+│   │   ├── og-card.svg                        # Vector Open Graph design source
 │   │   ├── profile-placeholder.svg            # Fallback profile graphic
 │   │   ├── profile/
 │   │   │   ├── tanvir-pixel-portrait.webp     # Illustrated geometric pixel-art portrait (WebP primary)
 │   │   │   ├── tanvir-pixel-portrait.png      # Illustrated geometric pixel-art portrait (PNG fallback)
 │   │   │   ├── tanvir-anjum.webp              # Authentic portrait photo (WebP preserved fallback)
 │   │   │   └── tanvir-anjum.jpg               # Authentic portrait photo (JPG preserved fallback)
-│   │   └── projects/                          # High-contrast technical SVG schematics
-│   │       ├── sharesync.svg
-│   │       ├── nas-sync.svg
-│   │       ├── campussync.svg
-│   │       ├── railway.svg
-│   │       └── student-enrollment.svg
+│   │   └── projects/                          # High-resolution PNG and SVG schematics
+│   │       ├── sharesync.png / sharesync.svg
+│   │       ├── nas-sync.png / nas-sync.svg
+│   │       ├── campussync.png / campussync.svg
+│   │       ├── railway.png / railway.svg
+│   │       └── student-enrollment.png / student-enrollment.svg
 │   └── js/
-│       ├── site.js                            # Navigation, spotlight tracking, form validation
+│       ├── site.js                            # Navigation, drawer, scrollspy, ticker, canvas physics
 │       └── terminal.js                        # Offline client-side interactive terminal modal
 └── styles/
     └── site.css                               # Tailwind CSS input configuration
@@ -204,7 +195,117 @@ site/
 
 ---
 
-## 7. Client-Side Interactive Terminal
+## 6. Local Development & Build
+
+### Prerequisites
+* **Node.js**: `v22.x` (LTS recommended)
+* **npm**: `v10.x` or higher
+* **Git**: Installed and available in PATH
+
+### Setup & Local Commands
+```powershell
+# 1. Clean installation of dependencies
+npm ci
+
+# 2. Build the production static stylesheet
+npm run build:static-css
+
+# 3. Optional: Watch mode for live CSS development
+npm run watch:static-css
+
+# 4. Local static preview (any static file server):
+npx serve site
+# or
+python -m http.server 3000 --directory site
+```
+Visit `http://localhost:3000/` to test the local static site.
+
+---
+
+## 7. Netlify Production Deployment Configuration
+
+The production static site is configured through `netlify.toml` in the repository root:
+
+* **GitHub Repository**: `MtanvirA/Portfolio`
+* **Production Branch**: `main`
+* **Base Directory**: Repository root (`.`)
+* **Build Command**: `npm ci && npm run build:static-css`
+* **Publish Directory**: `site`
+* **Node Version**: `22` (specified in `[build.environment]`)
+
+### Authoritative Response Headers (`netlify.toml`)
+* `X-Frame-Options: DENY` (prevents framing/clickjacking)
+* `X-Content-Type-Options: nosniff` (strict MIME sniffing prevention)
+* `Referrer-Policy: strict-origin-when-cross-origin`
+* `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+* `Content-Security-Policy-Report-Only`: Baseline CSP allowing `'self'`, Google Fonts (`fonts.googleapis.com`, `fonts.gstatic.com`), inline scripts/styles, and Netlify submission endpoints.
+* **Browser Caching Policy**:
+  * `/assets/*`: Configured with `Cache-Control: public, max-age=0, must-revalidate` so browsers revalidate assets with Netlify's edge CDN, avoiding stale cached stylesheets or scripts across atomic deploys.
+  * Netlify's built-in atomic deployments automatically manage CDN edge cache invalidation.
+
+---
+
+## 8. Netlify Forms Setup & Gmail Forwarding
+
+The homepage contact form (`site/index.html`) is structured natively for Netlify Forms:
+```html
+<form id="contactForm"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/thank-you/"
+      class="space-y-4">
+    <p class="hidden" aria-hidden="true">
+        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    ...
+</form>
+```
+
+> **Note on Static Forms**: During deployment, Netlify's build processor parses `<form data-netlify="true">`, strips the attribute, and injects its internal `form-name` hidden field. The static HTML does **not** include duplicate hidden inputs.
+
+### Post-Deployment Dashboard Checklist (Manual Steps)
+Because Netlify accounts require manual authentication, complete these steps in the Netlify UI after the initial deploy:
+1. Log into your [Netlify Dashboard](https://app.netlify.com/).
+2. Navigate to **Site configuration** &rarr; **Forms**.
+3. Ensure **Form detection** is enabled (toggle to **Active**).
+4. Trigger a new deploy (or push a commit) so Netlify crawls the static HTML.
+5. In the **Forms** tab, confirm that the `contact` form is detected.
+6. Click **Form notifications** &rarr; **Add notification** &rarr; **Email notification**.
+7. Enter notification email: `tanviranjum201@gmail.com`.
+8. Check your Gmail inbox for a Netlify verification email and confirm the subscription.
+9. Perform a test submission at `https://mtanviranjum.tech/#contact` and verify that:
+   - The submission redirects to `/thank-you/`.
+   - The message appears in Netlify Forms dashboard.
+   - You receive an email alert in Gmail.
+
+---
+
+## 9. Custom Domain Configuration (`mtanviranjum.tech`)
+
+To connect the custom domain `mtanviranjum.tech` to Netlify:
+1. In the Netlify Dashboard, navigate to **Site configuration** &rarr; **Domain management**.
+2. Click **Add custom domain** and enter `mtanviranjum.tech`.
+3. Select **Add domain** and set `mtanviranjum.tech` as the primary domain (with `www.mtanviranjum.tech` redirecting to apex).
+4. At your domain registrar (Namecheap, Porkbun, Cloudflare, etc.), configure DNS records:
+   * **Apex (`@`)**: Add an `A` record pointing to Netlify's load balancer IP (`75.2.60.5` or registrar ALIAS/ANAME record per Netlify dashboard prompt).
+   * **Subdomain (`www`)**: Add a `CNAME` record pointing to `<your-site-name>.netlify.app`.
+5. Under **HTTPS**, Netlify will automatically request and provision a free Let's Encrypt SSL/TLS certificate once DNS propagation completes.
+6. *Security Note*: Do **not** activate HTTP Strict Transport Security (HSTS) preload until custom domain TLS verification has fully resolved.
+
+---
+
+## 10. SEO, Sitemap & Crawler Directives
+
+* **Canonical Domain**: All pages declare canonical URLs referencing `https://mtanviranjum.tech/`.
+* **Sitemap (`site/sitemap.xml`)**: Lists all 7 canonical public routes (Home, Projects Archive, ShareSync, Smart Railway, CampusSync, NAS Sync, Student Enrollment). Non-canonical routes (`/thank-you/`, `/404.html`) are intentionally excluded.
+* **Robots (`site/robots.txt`)**: Allows search engine indexing across the site while explicitly disallowing `/thank-you/`.
+* **Social Previews**: All pages include Open Graph (`og:*`) and Twitter Card (`twitter:*`) metadata pointing to dedicated 1200×630 PNG images (`site/assets/images/og-card.png` and `site/assets/images/projects/*.png`).
+
+---
+
+## 11. Client-Side Interactive Terminal
 
 Accessible via `Ctrl+K` or the `>_ Terminal` button on every page. Operates **100% offline in client-side JavaScript**:
 * **Core Commands**: `help`, `about`, `projects`, `skills`, `education`, `research`, `cv`, `links`, `contact`, `whoami`, `date`, `clear`, `exit`.
@@ -214,34 +315,10 @@ Accessible via `Ctrl+K` or the `>_ Terminal` button on every page. Operates **10
   * `project campussync`
   * `project nassync` (or `project nas-sync`)
   * `project enrollment` (or `project student-enrollment`)
-* **Accessibility**: Native HTML5 `<dialog closedby="any">` with Escape-to-close behavior, backdrop click detection, and history cycling with Arrow keys.
+* **Accessibility**: Native HTML5 `<dialog>` with Escape-to-close behavior, outside backdrop click detection, and history cycling with Arrow keys.
 
 ---
 
-## 8. Netlify Forms & Static Deployment
-
-The contact form on `site/index.html` submits asynchronously via Netlify Forms:
-```html
-<form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you/">
-  <input type="hidden" name="form-name" value="contact" />
-  <p class="hidden">
-    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-  </p>
-  ...
-</form>
-```
-
-### Local Build Commands
-```powershell
-# Compile production static CSS
-npm run build:static-css
-
-# Watch and recompile static CSS during local development
-npm run watch:static-css
-```
-
----
-
-## 9. License
+## 12. License
 
 This repository is open-source under the [MIT License](LICENSE).
