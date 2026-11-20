@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initScrollProgressBar();
     initMotionToggle();
+    initInteractiveTicker();
     initRevealOnScroll();
     initHeroSynthesisConsole();
     initProjectFilters();
@@ -176,6 +177,228 @@ function initMotionToggle() {
             }
         });
     } catch (_) {}
+}
+
+/* ========================================================
+   3.1. INTERACTIVE TICKER (Auto-Marquee + Drag/Swipe/Wheel)
+   ======================================================== */
+function initInteractiveTicker() {
+    const tickerWrap = document.getElementById('ticker');
+    const track = tickerWrap?.querySelector('.ticker-track');
+    if (!tickerWrap || !track) return;
+
+    // Enable JS interactive mode (disables static CSS keyframe animation)
+    tickerWrap.classList.add('ticker-js-active');
+
+    // Accessibility configuration
+    tickerWrap.setAttribute('tabindex', '0');
+    tickerWrap.setAttribute('role', 'region');
+    tickerWrap.setAttribute('aria-label', 'Engineering focus areas marquee. Drag, swipe, or use left and right arrow keys to scroll manually.');
+
+    let currentX = 0;
+    let singleCycleWidth = 0;
+    let isPointerDown = false;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let dragStartX = 0;
+    let lastDragX = 0;
+    let lastDragTime = 0;
+    let velocity = 0;
+    let isDecelerating = false;
+    let isWheelActive = false;
+    let wheelTimeout = null;
+    let lastTimestamp = 0;
+    let rafId = null;
+
+    const SPEED = 58; // pixels per second (~36s for 2100px cycle)
+
+    const calculateMetrics = () => {
+        const items = track.querySelectorAll('.ticker-item');
+        if (items.length >= 16) {
+            // Find repeat cycle width: distance from item 0 to item (length / 3 or length / 2)
+            const setSize = Math.floor(items.length / 3) || Math.floor(items.length / 2) || 8;
+            if (items[setSize] && items[0]) {
+                singleCycleWidth = items[setSize].offsetLeft - items[0].offsetLeft;
+            }
+        }
+        if (!singleCycleWidth || singleCycleWidth <= 0) {
+            singleCycleWidth = track.scrollWidth / (items.length >= 24 ? 3 : 2);
+        }
+    };
+
+    const wrapPosition = () => {
+        if (singleCycleWidth > 0) {
+            while (currentX >= singleCycleWidth) {
+                currentX -= singleCycleWidth;
+            }
+            while (currentX < 0) {
+                currentX += singleCycleWidth;
+            }
+        }
+    };
+
+    const checkMotionPaused = () => {
+        const isBodyPaused = document.body.classList.contains('motion-paused');
+        const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        return isBodyPaused || prefersReduce;
+    };
+
+    const tick = (timestamp) => {
+        if (!lastTimestamp) lastTimestamp = timestamp;
+        const dt = Math.min((timestamp - lastTimestamp) * 0.001, 0.1);
+        lastTimestamp = timestamp;
+
+        const isPaused = checkMotionPaused();
+
+        if (isDecelerating) {
+            // Smooth inertial glide after release
+            currentX += velocity * dt * 60;
+            velocity *= 0.92;
+            if (Math.abs(velocity) < 0.05) {
+                isDecelerating = false;
+                velocity = 0;
+            }
+            wrapPosition();
+            track.style.transform = `translate3d(${-currentX.toFixed(2)}px, 0, 0)`;
+        } else if (!isDragging && !isWheelActive && !isPaused) {
+            // Continuous auto-scrolling
+            currentX += SPEED * dt;
+            wrapPosition();
+            track.style.transform = `translate3d(${-currentX.toFixed(2)}px, 0, 0)`;
+        }
+
+        rafId = requestAnimationFrame(tick);
+    };
+
+    calculateMetrics();
+    rafId = requestAnimationFrame(tick);
+
+    window.addEventListener('resize', () => {
+        calculateMetrics();
+        wrapPosition();
+    }, { passive: true });
+
+    // Pointer Dragging (Mouse & Touch)
+    tickerWrap.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0 && e.pointerType === 'mouse') return;
+
+        isPointerDown = true;
+        isDragging = false;
+        isDecelerating = false;
+        velocity = 0;
+
+        startX = e.clientX;
+        startY = e.clientY;
+        dragStartX = currentX;
+        lastDragX = e.clientX;
+        lastDragTime = performance.now();
+    });
+
+    window.addEventListener('pointermove', (e) => {
+        if (!isPointerDown) return;
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        if (!isDragging) {
+            // Distinguish horizontal swipe vs vertical page scroll
+            if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) {
+                isDragging = true;
+                tickerWrap.classList.add('is-dragging');
+                if (e.pointerType === 'mouse') {
+                    document.body.style.userSelect = 'none';
+                    try { window.getSelection()?.removeAllRanges(); } catch (_) {}
+                }
+                try {
+                    tickerWrap.setPointerCapture(e.pointerId);
+                } catch (_) {}
+            } else if (Math.abs(dy) > 6 && Math.abs(dy) > Math.abs(dx)) {
+                // Vertical intent: release and allow normal page scrolling
+                isPointerDown = false;
+                return;
+            }
+        }
+
+        if (isDragging) {
+            const now = performance.now();
+            const timeDelta = now - lastDragTime;
+            if (timeDelta > 0) {
+                const instantV = (lastDragX - e.clientX) / timeDelta * 16.67;
+                velocity = velocity * 0.35 + instantV * 0.65;
+                lastDragX = e.clientX;
+                lastDragTime = now;
+            }
+
+            currentX = dragStartX - dx;
+            wrapPosition();
+            track.style.transform = `translate3d(${-currentX.toFixed(2)}px, 0, 0)`;
+        }
+    }, { passive: true });
+
+    const handlePointerEnd = (e) => {
+        if (!isPointerDown) return;
+        isPointerDown = false;
+
+        if (isDragging) {
+            isDragging = false;
+            tickerWrap.classList.remove('is-dragging');
+            document.body.style.userSelect = '';
+
+            try {
+                if (e && tickerWrap.hasPointerCapture(e.pointerId)) {
+                    tickerWrap.releasePointerCapture(e.pointerId);
+                }
+            } catch (_) {}
+
+            if (Math.abs(velocity) > 1.2) {
+                isDecelerating = true;
+            }
+        }
+    };
+
+    window.addEventListener('pointerup', handlePointerEnd);
+    window.addEventListener('pointercancel', handlePointerEnd);
+
+    // Trackpad / Mouse Wheel Horizontal Scrolling
+    tickerWrap.addEventListener('wheel', (e) => {
+        const deltaX = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+
+        if (Math.abs(deltaX) > 1) {
+            // Horizontal wheel detected: consume and scroll ticker
+            e.preventDefault();
+
+            isWheelActive = true;
+            isDecelerating = false;
+            velocity = 0;
+
+            currentX += deltaX * 0.9;
+            wrapPosition();
+            track.style.transform = `translate3d(${-currentX.toFixed(2)}px, 0, 0)`;
+
+            clearTimeout(wheelTimeout);
+            wheelTimeout = setTimeout(() => {
+                isWheelActive = false;
+            }, 350);
+        }
+    }, { passive: false });
+
+    // Keyboard Arrow Navigation
+    tickerWrap.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            isDecelerating = false;
+            currentX += 120;
+            wrapPosition();
+            track.style.transform = `translate3d(${-currentX.toFixed(2)}px, 0, 0)`;
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            isDecelerating = false;
+            currentX -= 120;
+            wrapPosition();
+            track.style.transform = `translate3d(${-currentX.toFixed(2)}px, 0, 0)`;
+        }
+    });
 }
 
 /* ========================================================
