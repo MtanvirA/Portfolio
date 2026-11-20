@@ -287,12 +287,16 @@ Because Netlify accounts require manual authentication, complete these steps in 
 To connect the custom domain `mtanviranjum.tech` to Netlify:
 1. In the Netlify Dashboard, navigate to **Site configuration** &rarr; **Domain management**.
 2. Click **Add custom domain** and enter `mtanviranjum.tech`.
-3. Select **Add domain** and set `mtanviranjum.tech` as the primary domain (with `www.mtanviranjum.tech` redirecting to apex).
-4. At your domain registrar (Namecheap, Porkbun, Cloudflare, etc.), configure DNS records:
-   * **Apex (`@`)**: Add an `A` record pointing to Netlify's load balancer IP (`75.2.60.5` or registrar ALIAS/ANAME record per Netlify dashboard prompt).
-   * **Subdomain (`www`)**: Add a `CNAME` record pointing to `<your-site-name>.netlify.app`.
-5. Under **HTTPS**, Netlify will automatically request and provision a free Let's Encrypt SSL/TLS certificate once DNS propagation completes.
-6. *Security Note*: Do **not** activate HTTP Strict Transport Security (HSTS) preload until custom domain TLS verification has fully resolved.
+3. Select **Add domain** and designate `mtanviranjum.tech` as the primary domain (with `www.mtanviranjum.tech` redirecting automatically to apex, or vice versa based on your preferred canonical form).
+4. At your external domain registrar or DNS provider (Namecheap, Porkbun, Cloudflare, etc.), configure DNS records using the **exact values displayed in your Netlify Dashboard**:
+   * **Apex Domain (`@`)**:
+     * *Recommended (if supported by your DNS provider)*: Create an `ALIAS`, `ANAME`, or flattened `CNAME` record pointing to your Netlify site URL (e.g., `<your-site-name>.netlify.app`).
+     * *Standard A Record*: If your registrar only supports traditional A records at the apex, obtain Netlify's authoritative load balancer IP directly from the Netlify Domain Management instructions on screen and create an `A` record pointing to that designated IP. Do not hardcode arbitrary external IPs.
+   * **Subdomain (`www`)**:
+     * Create a standard `CNAME` record with host `www` pointing to `<your-site-name>.netlify.app` (or your apex domain per Netlify dashboard guidance).
+   * *Alternative (Netlify DNS)*: You may optionally delegate DNS management by pointing your registrar's nameservers to Netlify's managed NS records.
+5. Under **HTTPS & SSL/TLS**, Netlify will automatically request, issue, and renew a free Let's Encrypt SSL/TLS certificate once DNS propagation completes (typically within 10–30 minutes).
+6. *Security Note*: Keep the site on the standard Content-Security-Policy-Report-Only baseline initially. Do **not** enforce strict CSP or activate HTTP Strict Transport Security (HSTS) preload until custom domain TLS verification and form submission pathways have fully resolved and verified in production.
 
 ---
 

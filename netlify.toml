@@ -25,38 +25,8 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Clean directory-based URL handling
-[[redirects]]
-  from = "/projects"
-  to = "/projects/"
-  status = 301
-
-[[redirects]]
-  from = "/projects/sharesync"
-  to = "/projects/sharesync/"
-  status = 301
-
-[[redirects]]
-  from = "/projects/railway-track-health-monitoring"
-  to = "/projects/railway-track-health-monitoring/"
-  status = 301
-
-[[redirects]]
-  from = "/projects/campussync"
-  to = "/projects/campussync/"
-  status = 301
-
-[[redirects]]
-  from = "/projects/nas-sync-mini-server"
-  to = "/projects/nas-sync-mini-server/"
-  status = 301
-
-[[redirects]]
-  from = "/projects/student-enrollment-system"
-  to = "/projects/student-enrollment-system/"
-  status = 301
-
 # Custom 404 routing
+# Netlify native Pretty URLs handles directory trailing slashes (e.g. /projects -> /projects/)
 [[redirects]]
   from = "/*"
   to = "/404.html"

@@ -604,13 +604,13 @@ body.motion-paused .hud-signal-dot {
   padding: 0.625rem 1.25rem;
   min-height: 44px;
   border-radius: 0.75rem;
-  background-color: var(--color-crimson, #E3343F);
+  background-color: #C92530;
   color: #FFFFFF !important;
   font-family: var(--font-mono, 'JetBrains Mono', monospace);
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.25;
-  border: 1px solid var(--color-crimson, #E3343F);
+  border: 1px solid #C92530;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   text-decoration: none;
   cursor: pointer;
@@ -621,20 +621,20 @@ body.motion-paused .hud-signal-dot {
 }
 
 .btn-primary:hover {
-  background-color: #C92530;
-  border-color: #C92530;
+  background-color: #A81C26;
+  border-color: #A81C26;
   color: #FFFFFF !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(227, 52, 63, 0.25);
+  box-shadow: 0 4px 12px rgba(201, 37, 48, 0.3);
 }
 
 .btn-primary:active {
   transform: translateY(0);
-  background-color: #B51F29;
+  background-color: #931821;
 }
 
 .btn-primary:focus-visible {
-  outline: 2px solid var(--color-crimson, #E3343F);
+  outline: 2px solid #C92530;
   outline-offset: 2px;
 }
 

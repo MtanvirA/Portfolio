@@ -564,11 +564,11 @@ function initProjectFilters() {
             const category = btn.getAttribute('data-category');
 
             filterButtons.forEach(b => {
-                b.classList.remove('bg-[#E3343F]', 'text-white', 'border-[#E3343F]');
+                b.classList.remove('bg-[#C92530]', 'bg-[#E3343F]', 'text-white', 'border-[#C92530]', 'border-[#E3343F]');
                 b.classList.add('bg-[#141416]', 'text-[#858585]', 'border-[#252528]');
                 b.setAttribute('aria-pressed', 'false');
             });
-            btn.classList.add('bg-[#E3343F]', 'text-white', 'border-[#E3343F]');
+            btn.classList.add('bg-[#C92530]', 'text-white', 'border-[#C92530]');
             btn.classList.remove('bg-[#141416]', 'text-[#858585]', 'border-[#252528]');
             btn.setAttribute('aria-pressed', 'true');
 
