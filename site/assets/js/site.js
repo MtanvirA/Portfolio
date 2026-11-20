@@ -44,31 +44,67 @@ function initNavigation() {
     handleScroll();
 
     if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', String(!isExpanded));
-            mobileMenu.classList.toggle('hidden');
-
+        const closeMobileMenu = () => {
+            mobileMenu.classList.add('hidden');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('overflow-hidden');
             const iconOpen = menuToggle.querySelector('.icon-open');
             const iconClose = menuToggle.querySelector('.icon-close');
             if (iconOpen && iconClose) {
-                iconOpen.classList.toggle('hidden');
-                iconClose.classList.toggle('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            }
+        };
+
+        const openMobileMenu = () => {
+            mobileMenu.classList.remove('hidden');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('overflow-hidden');
+            const iconOpen = menuToggle.querySelector('.icon-open');
+            const iconClose = menuToggle.querySelector('.icon-close');
+            if (iconOpen && iconClose) {
+                iconOpen.classList.add('hidden');
+                iconClose.classList.remove('hidden');
+            }
+        };
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            if (isExpanded) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
             }
         });
 
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                const iconOpen = menuToggle.querySelector('.icon-open');
-                const iconClose = menuToggle.querySelector('.icon-close');
-                if (iconOpen && iconClose) {
-                    iconOpen.classList.remove('hidden');
-                    iconClose.classList.add('hidden');
-                }
+                closeMobileMenu();
             });
         });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                closeMobileMenu();
+                menuToggle.focus();
+            }
+        });
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.classList.contains('hidden') && header && !header.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // Close on window resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024 && !mobileMenu.classList.contains('hidden')) {
+                closeMobileMenu();
+            }
+        }, { passive: true });
     }
 
     // Scrollspy for active navigation items on home page
