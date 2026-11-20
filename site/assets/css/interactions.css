@@ -91,10 +91,7 @@
   animation: tickerFlow 36s linear infinite;
 }
 
-.ticker-wrap:hover .ticker-track {
-  animation-play-state: paused;
-}
-
+/* Milestone 16.6: Ticker moves continuously even when hovered */
 .ticker-item {
   display: inline-flex;
   align-items: center;
@@ -111,6 +108,11 @@
 
 .ticker-item:hover {
   color: #FFFFFF;
+}
+
+.ticker-item:hover .ticker-glyph {
+  transform: scale(1.2);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ticker-glyph {
@@ -355,6 +357,7 @@
   color: var(--color-text-muted);
   text-transform: uppercase;
   user-select: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .hud-signal-dot {
@@ -363,10 +366,161 @@
   border-radius: 50%;
   background-color: var(--color-crimson);
   display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* ========================================================
-   11. MANUAL MOTION PAUSE & ACCESSIBILITY SAFEGUARDS
+   11. CSE-THEMED MICRO-INTERACTION HIERARCHY (Milestone 16.6)
+   ======================================================== */
+
+/* Level 1: Typography & Text Micro-Interactions */
+.chapter-badge {
+  cursor: default;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chapter-badge:hover .chapter-number {
+  border-color: var(--color-crimson);
+  background: rgba(227, 52, 63, 0.16);
+  color: #FFFFFF;
+}
+
+.chapter-badge:hover span.h-px {
+  background-color: var(--color-crimson) !important;
+  width: 4.5rem;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+
+.section-heading-trace {
+  position: relative;
+  display: inline-block;
+  transition: color 0.25s ease;
+}
+
+.section-heading-trace::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-crimson);
+  transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.section-heading-trace:hover::after,
+.section-heading-trace:focus-visible::after {
+  width: 100%;
+}
+
+/* Subtle editorial paragraph interaction */
+.canvas-content p {
+  transition: color 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .canvas-content p:hover {
+    color: #C5C5C0;
+  }
+}
+
+/* Level 2: Technical Metadata, Skill Tags & Micro-Motifs */
+.card-interactive span.font-mono.rounded,
+#skills span.font-mono.rounded,
+#education span.font-mono.rounded,
+.tech-tag-interactive {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.18s ease,
+              color 0.18s ease,
+              background-color 0.18s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-interactive span.font-mono.rounded:hover,
+  #skills span.font-mono.rounded:hover,
+  #education span.font-mono.rounded:hover,
+  .tech-tag-interactive:hover,
+  .tech-tag-interactive:focus-visible {
+    transform: translateY(-1.5px);
+    border-color: rgba(227, 52, 63, 0.6) !important;
+    color: #FFFFFF !important;
+    background-color: #252528 !important;
+  }
+}
+
+/* Level 3: Cards, Panels & Technical Schematics */
+@media (hover: hover) and (pointer: fine) {
+  .card-interactive:hover {
+    transform: translateY(-2.5px);
+    border-color: rgba(227, 52, 63, 0.45) !important;
+    box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.7);
+  }
+
+  .research-card:hover {
+    transform: translateY(-2.5px);
+    border-color: var(--color-crimson) !important;
+    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.12);
+  }
+
+  /* CSE Schematic & Diagram Node Illumination on Card Hover */
+  .card-interactive:hover svg path[stroke="#E3343F"],
+  .card-interactive:hover svg line[stroke="#E3343F"],
+  .research-card:hover svg path[stroke="#E3343F"],
+  .research-card:hover svg line[stroke="#E3343F"] {
+    stroke-width: 2.2px;
+    filter: drop-shadow(0 0 3px rgba(227, 52, 63, 0.6));
+    transition: stroke-width 0.2s ease, filter 0.2s ease;
+  }
+
+  .card-interactive:hover svg circle[fill="#E3343F"],
+  .research-card:hover svg circle[fill="#E3343F"] {
+    r: 4.5px;
+    filter: drop-shadow(0 0 3px rgba(227, 52, 63, 0.6));
+    transition: r 0.2s ease, filter 0.2s ease;
+  }
+
+  .card-interactive:hover svg text[fill="#E3343F"],
+  .research-card:hover svg text[fill="#E3343F"] {
+    fill: #FF4A55 !important;
+    transition: fill 0.2s ease;
+  }
+}
+
+/* Level 4: Primary Actions (Buttons, CTAs & Links) */
+button,
+a.button,
+.project-filter-btn,
+.open-terminal-btn,
+#backToTopBtn,
+#motionToggle {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.15s ease,
+              border-color 0.15s ease,
+              color 0.15s ease,
+              box-shadow 0.15s ease;
+}
+
+button:active,
+a.button:active,
+.project-filter-btn:active,
+.open-terminal-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.action-arrow {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+a:hover .action-arrow {
+  transform: translateX(3px);
+}
+
+/* ========================================================
+   12. MANUAL MOTION PAUSE & ACCESSIBILITY SAFEGUARDS
    ======================================================== */
 body.motion-paused .ticker-track,
 body.motion-paused .scanline-box::before,
@@ -392,7 +546,11 @@ body.motion-paused .hud-signal-dot {
 
   .card-interactive:hover,
   .skill-card-interactive:hover,
-  .journal-card:hover {
+  .journal-card:hover,
+  .research-card:hover,
+  .card-interactive span.font-mono.rounded:hover,
+  #skills span.font-mono.rounded:hover,
+  #education span.font-mono.rounded:hover {
     transform: none !important;
   }
 
@@ -402,7 +560,11 @@ body.motion-paused .hud-signal-dot {
   }
 
   .action-arrow,
-  .card-interactive:hover .action-arrow {
+  a:hover .action-arrow {
     transform: none !important;
+  }
+
+  .section-heading-trace::after {
+    transition: none !important;
   }
 }

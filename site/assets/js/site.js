@@ -121,11 +121,34 @@ function initScrollProgressBar() {
 }
 
 /* ========================================================
-   3. ACCESSIBLE MOTION TOGGLE
+   3. ACCESSIBLE MOTION TOGGLE (Milestone 16.6)
    ======================================================== */
 function initMotionToggle() {
     const btn = document.getElementById('motionToggle');
     if (!btn) return;
+
+    const pauseIcon = btn.querySelector('.icon-pause');
+    const playIcon = btn.querySelector('.icon-play');
+
+    const updateButtonVisual = (isPaused) => {
+        btn.setAttribute('aria-pressed', String(isPaused));
+        btn.setAttribute('aria-label', isPaused ? 'Resume ambient animation motion' : 'Pause ambient animation motion');
+        btn.setAttribute('title', isPaused ? 'Resume ambient motion' : 'Pause ambient motion');
+
+        if (pauseIcon && playIcon) {
+            if (isPaused) {
+                pauseIcon.classList.add('hidden');
+                playIcon.classList.remove('hidden');
+                btn.classList.add('text-[#E3343F]', 'border-[#E3343F]/50');
+                btn.classList.remove('text-[#858585]');
+            } else {
+                pauseIcon.classList.remove('hidden');
+                playIcon.classList.add('hidden');
+                btn.classList.remove('text-[#E3343F]', 'border-[#E3343F]/50');
+                btn.classList.add('text-[#858585]');
+            }
+        }
+    };
 
     // Check stored preference or system setting
     const stored = localStorage.getItem('tanvir_motion');
@@ -133,16 +156,26 @@ function initMotionToggle() {
 
     if (stored === 'paused' || (!stored && prefersReduce)) {
         document.body.classList.add('motion-paused');
-        btn.setAttribute('aria-pressed', 'true');
-        btn.setAttribute('title', 'Resume ambient motion');
+        updateButtonVisual(true);
+    } else {
+        updateButtonVisual(false);
     }
 
     btn.addEventListener('click', () => {
         const isPaused = document.body.classList.toggle('motion-paused');
-        btn.setAttribute('aria-pressed', String(isPaused));
-        btn.setAttribute('title', isPaused ? 'Resume ambient motion' : 'Pause ambient motion');
+        updateButtonVisual(isPaused);
         localStorage.setItem('tanvir_motion', isPaused ? 'paused' : 'running');
     });
+
+    try {
+        window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
+            const hasStored = localStorage.getItem('tanvir_motion');
+            if (!hasStored) {
+                document.body.classList.toggle('motion-paused', e.matches);
+                updateButtonVisual(e.matches);
+            }
+        });
+    } catch (_) {}
 }
 
 /* ========================================================
@@ -502,6 +535,8 @@ function initPixelPortrait() {
     let targetMouseY = -1000;
     let currentMouseX = -1000;
     let currentMouseY = -1000;
+    let lastHoverMoveTime = 0;
+    const HOVER_IDLE_TIMEOUT = 1200; // Allow 1.2s of ripple settling when cursor rests inside portrait
     let rafId = null;
 
     const buildTileGrid = () => {
@@ -589,6 +624,8 @@ function initPixelPortrait() {
         const time = (timestamp || performance.now()) * 0.001;
         let hasActiveMotion = false;
 
+        const isHoverActive = isHovering && (performance.now() - lastHoverMoveTime < HOVER_IDLE_TIMEOUT);
+
         for (let i = 0; i < tiles.length; i++) {
             const tile = tiles[i];
 
@@ -598,7 +635,7 @@ function initPixelPortrait() {
             let targetHighlight = 0.0;
             let targetCrimson = 0.0;
 
-            if (isHovering) {
+            if (isHoverActive) {
                 const dx = tile.cx - currentMouseX;
                 const dy = tile.cy - currentMouseY;
                 const dist = Math.sqrt(dx * dx + dy * dy);
@@ -626,6 +663,26 @@ function initPixelPortrait() {
                     // Subtle crimson accent
                     if (tile.isCrimsonAccent && ease > 0.15) {
                         targetCrimson = ease * 0.45;
+                    }
+                }
+            } else if (isHovering) {
+                // Pointer is stationary inside portrait: maintain subtle displaced shape without running ripples
+                const dx = tile.cx - currentMouseX;
+                const dy = tile.cy - currentMouseY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < EFFECT_RADIUS) {
+                    const p = 1.0 - dist / EFFECT_RADIUS;
+                    const ease = p * p * (3 - 2 * p);
+                    const angle = Math.atan2(dy, dx);
+                    const push = ease * (MAX_DISPLACEMENT * 0.85);
+
+                    targetX = tile.ox + Math.cos(angle) * push;
+                    targetY = tile.oy + Math.sin(angle) * push;
+                    targetScale = 1.0 + 0.04 * ease;
+                    targetHighlight = ease * 0.12;
+                    if (tile.isCrimsonAccent && ease > 0.15) {
+                        targetCrimson = ease * 0.35;
                     }
                 }
             }
@@ -688,11 +745,13 @@ function initPixelPortrait() {
 
         ctx.restore();
 
-        if (isHovering || hasActiveMotion) {
+        if (isHoverActive || hasActiveMotion) {
             rafId = requestAnimationFrame(animate);
         } else {
             rafId = null;
-            renderPristineRest();
+            if (!isHovering) {
+                renderPristineRest();
+            }
         }
     };
 
@@ -722,6 +781,7 @@ function initPixelPortrait() {
             targetMouseY = e.clientY - rect.top;
             currentMouseX = targetMouseX;
             currentMouseY = targetMouseY;
+            lastHoverMoveTime = performance.now();
             isHovering = true;
             wakeUpLoop();
         });
@@ -730,6 +790,7 @@ function initPixelPortrait() {
             const rect = wrapper.getBoundingClientRect();
             targetMouseX = e.clientX - rect.left;
             targetMouseY = e.clientY - rect.top;
+            lastHoverMoveTime = performance.now();
             isHovering = true;
             wakeUpLoop();
         });
@@ -781,7 +842,8 @@ function initBackgroundPixelField() {
     let points = [];
     let mouseX = -1000;
     let mouseY = -1000;
-    let isPointerActive = false;
+    let lastPointerTime = 0;
+    const POINTER_IDLE_THRESHOLD = 180; // ms: pointer only treated as actively moving for 180ms after event
     let rafId = null;
 
     const buildGrid = () => {
@@ -811,6 +873,9 @@ function initBackgroundPixelField() {
     };
 
     const render = () => {
+        const now = performance.now();
+        const isMoving = (now - lastPointerTime) < POINTER_IDLE_THRESHOLD;
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
         ctx.scale(dpr, dpr);
@@ -820,7 +885,7 @@ function initBackgroundPixelField() {
         for (let i = 0; i < points.length; i++) {
             const pt = points[i];
 
-            if (isPointerActive) {
+            if (isMoving) {
                 const dx = pt.x - mouseX;
                 const dy = pt.y - mouseY;
                 const dist = Math.sqrt(dx * dx + dy * dy);
@@ -836,7 +901,7 @@ function initBackgroundPixelField() {
             if (pt.intensity > 0.01) {
                 hasActivePoints = true;
                 // Decay intensity smoothly
-                pt.intensity *= 0.92;
+                pt.intensity *= 0.90;
 
                 const baseSize = 1.5;
                 const activeSize = baseSize + pt.intensity * 2.0;
@@ -863,7 +928,8 @@ function initBackgroundPixelField() {
 
         ctx.restore();
 
-        if (hasActivePoints || isPointerActive) {
+        // Loop continues only while pointer is actively moving or points are still decaying
+        if (hasActivePoints || isMoving) {
             rafId = requestAnimationFrame(render);
         } else {
             rafId = null;
@@ -885,12 +951,12 @@ function initBackgroundPixelField() {
     window.addEventListener('pointermove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        isPointerActive = true;
+        lastPointerTime = performance.now();
         if (!rafId) rafId = requestAnimationFrame(render);
     }, { passive: true });
 
     document.addEventListener('mouseleave', () => {
-        isPointerActive = false;
+        lastPointerTime = 0;
         mouseX = -1000;
         mouseY = -1000;
         if (!rafId) rafId = requestAnimationFrame(render);

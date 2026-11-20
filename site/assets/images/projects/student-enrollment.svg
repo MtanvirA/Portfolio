@@ -34,7 +34,7 @@
 
       <!-- Student details section -->
       <text y="170" fill="#858585">---------------------------------------------------</text>
-      <text y="186" fill="#FFFFFF">Student: Tanvir Anjum | ID: 2302042 | Sem: 3</text>
+      <text y="186" fill="#FFFFFF">Student: Sample Student | ID: DEMO-001 | Sem: 3</text>
       <text y="202" fill="#E3343F">Academic CGPA: 3.820 (Dean's Merit Waiver Tier 1)</text>
       <text y="218" fill="#F5F5F2">Base Semester Fee:   BDT 12,000.00</text>
       <text y="234" fill="#858585">Merit Waiver (-25%): -BDT  3,000.00</text>
