@@ -136,28 +136,22 @@ Progression:
 - 1st Semester: 3.870 GPA (20.25 Credits)
 - 2nd Semester: 3.771 GPA (20.75 Credits)
 - 3rd Semester: 3.821 GPA (21.00 Credits)
-Selected CSE & Engineering Coursework Across Three Semesters:
-- Semester 1 (GPA 3.870 | 20.25 Credits):
+Selected CSE Theory Coursework Across Three Semesters:
+- Semester 1 (GPA 3.870 | 20.25 Credits Total):
   * CIT-111: Programming Language (3.00 Cr, Grade A+ / 4.00)
-  * CIT-112: Programming Language Sessional (1.50 Cr, Grade A+ / 4.00)
   * MAT-111: Mathematics-I (3.00 Cr, Grade A / 3.75)
   * EEE-111: Basic Electrical Engineering (3.00 Cr, Grade A+ / 4.00)
-  * EEE-112: Basic Electrical Engineering Sessional (1.50 Cr, Grade A / 3.75)
-- Semester 2 (GPA 3.771 | 20.75 Credits):
+- Semester 2 (GPA 3.771 | 20.75 Credits Total):
   * CIT-121: Discrete Mathematics (3.00 Cr, Grade A+ / 4.00)
   * CCE-121: Object Oriented Programming (3.00 Cr, Grade B / 3.00)
-  * CCE-122: Object Oriented Programming Sessional (1.50 Cr, Grade A+ / 4.00)
   * MAT-121: Mathematics-II (3.00 Cr, Grade A+ / 4.00)
   * EEE-121: Electronic Device and Circuits (3.00 Cr, Grade A / 3.75)
-  * EEE-122: Electronic Device and Circuits Sessional (1.50 Cr, Grade A+ / 4.00)
-- Semester 3 (GPA 3.821 | 21.00 Credits &bull; 1st Merit Position):
+- Semester 3 (GPA 3.821 | 21.00 Credits Total &bull; 1st Merit Position):
   * CIT-211: Data Structure and Algorithms (3.00 Cr, Grade A- / 3.50)
-  * CIT-212: Data Structure and Algorithms Sessional (1.50 Cr, Grade A+ / 4.00)
   * CIT-213: Software Engineering (3.00 Cr, Grade A+ / 4.00)
   * CCE-211: Data Communication and Engineering (3.00 Cr, Grade A- / 3.50)
   * MAT-211: Mathematics-III (3.00 Cr, Grade A+ / 4.00)
-  * EEE-211: Electrical Technology (3.00 Cr, Grade A+ / 4.00)
-  * EEE-212: Electrical Technology Sessional (1.50 Cr, Grade A+ / 4.00)`
+  * EEE-211: Electrical Technology (3.00 Cr, Grade A+ / 4.00)`
         },
         links: {
             type: 'links',

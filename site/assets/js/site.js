@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initAriaValidationSync();
     initEngineeringCanvas();
-    initPointerReticle();
+    initPixelPortrait();
+    initBackgroundPixelField();
 });
 
 /* ========================================================
@@ -471,66 +472,355 @@ function initEngineeringCanvas() {
 }
 
 /* ========================================================
-   10. EDITORIAL TRACKING RETICLE (Milestone 16.3)
+   10. INTERACTIVE PIXEL PORTRAIT (Milestone 16.4)
    ======================================================== */
-function initPointerReticle() {
-    const reticle = document.getElementById('pointerReticle');
-    if (!reticle) return;
+function initPixelPortrait() {
+    const wrapper = document.getElementById('portraitPixelWrapper');
+    const img = document.getElementById('portraitImg');
+    const canvas = document.getElementById('portraitPixelCanvas');
+    if (!wrapper || !img || !canvas) return;
+
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return;
 
     const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!hasFinePointer || prefersReducedMotion) {
-        reticle.style.display = 'none';
-        return;
-    }
+    const CELL_SIZE = 11; // 11 CSS px cells (well within 8-14px guideline)
+    const LENS_RADIUS = 85; // Proximity reveal radius in CSS px
+    const CORE_RADIUS = 42; // Fully clear reveal core in CSS px
 
-    let targetX = -100;
-    let targetY = -100;
-    let currentX = -100;
-    let currentY = -100;
-    let isVisible = false;
+    let width = 0;
+    let height = 0;
+    let cols = 0;
+    let rows = 0;
+    let dpr = 1;
+
+    let pixelColors = null; // Array of {r, g, b, a}
+    let isHovering = false;
+    let mouseX = -1000;
+    let mouseY = -1000;
+    let targetMouseX = -1000;
+    let targetMouseY = -1000;
+    let lensStrength = 0; // 0 = full pixel mosaic, 1 = active lens
     let rafId = null;
 
+    const sampleImage = () => {
+        width = wrapper.clientWidth;
+        height = wrapper.clientHeight;
+        if (!width || !height || !img.naturalWidth) return false;
+
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+
+        cols = Math.ceil(width / CELL_SIZE);
+        rows = Math.ceil(height / CELL_SIZE);
+
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = cols;
+        offCanvas.height = rows;
+        const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+        if (!offCtx) return false;
+
+        // Draw source image scaled down to grid dimensions
+        offCtx.drawImage(img, 0, 0, cols, rows);
+        const imgData = offCtx.getImageData(0, 0, cols, rows).data;
+
+        pixelColors = [];
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const idx = (r * cols + c) * 4;
+                pixelColors.push({
+                    r: imgData[idx],
+                    g: imgData[idx + 1],
+                    b: imgData[idx + 2],
+                    a: imgData[idx + 3] / 255
+                });
+            }
+        }
+        return true;
+    };
+
+    const drawFrame = () => {
+        if (!pixelColors || !cols || !rows) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(dpr, dpr);
+
+        // Smooth mouse position lerping
+        mouseX += (targetMouseX - mouseX) * 0.22;
+        mouseY += (targetMouseY - mouseY) * 0.22;
+
+        // Smooth lens strength transition
+        const targetStrength = isHovering ? 1 : 0;
+        lensStrength += (targetStrength - lensStrength) * 0.18;
+
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const p = pixelColors[r * cols + c];
+                if (!p || p.a === 0) continue;
+
+                const cellX = c * CELL_SIZE;
+                const cellY = r * CELL_SIZE;
+                const centerX = cellX + CELL_SIZE * 0.5;
+                const centerY = cellY + CELL_SIZE * 0.5;
+
+                let alpha = 1.0;
+                let brightnessShift = 0;
+
+                if (lensStrength > 0.01) {
+                    const dx = centerX - mouseX;
+                    const dy = centerY - mouseY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < LENS_RADIUS) {
+                        const localT = (dist - CORE_RADIUS) / (LENS_RADIUS - CORE_RADIUS);
+                        const clampedT = Math.max(0, Math.min(1, localT));
+                        // Reveal underlying photo by fading mosaic alpha to 0 in core
+                        alpha = 1.0 - (1.0 - clampedT) * lensStrength;
+                        // Slight brighten edge response for physical pixel sensation
+                        if (dist >= CORE_RADIUS && dist <= LENS_RADIUS) {
+                            brightnessShift = (1 - Math.abs(clampedT - 0.5) * 2) * 25 * lensStrength;
+                        }
+                    }
+                }
+
+                if (alpha > 0.02) {
+                    const red = Math.min(255, Math.max(0, Math.round(p.r + brightnessShift)));
+                    const green = Math.min(255, Math.max(0, Math.round(p.g + brightnessShift)));
+                    const blue = Math.min(255, Math.max(0, Math.round(p.b + brightnessShift)));
+
+                    ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${alpha.toFixed(3)})`;
+                    ctx.fillRect(cellX, cellY, CELL_SIZE, CELL_SIZE);
+                }
+            }
+        }
+
+        ctx.restore();
+
+        // Continue animation while hovering or smoothly restoring to resting mosaic
+        const needsMoreFrames = isHovering || lensStrength > 0.005 || Math.abs(targetMouseX - mouseX) > 0.5;
+        if (needsMoreFrames) {
+            rafId = requestAnimationFrame(drawFrame);
+        } else {
+            rafId = null;
+            renderRestingMosaic();
+        }
+    };
+
+    const renderRestingMosaic = () => {
+        if (!pixelColors || !cols || !rows) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(dpr, dpr);
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const p = pixelColors[r * cols + c];
+                if (!p || p.a === 0) continue;
+                ctx.fillStyle = `rgb(${p.r}, ${p.g}, ${p.b})`;
+                ctx.fillRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+            }
+        }
+        ctx.restore();
+    };
+
+    const init = () => {
+        if (!sampleImage()) {
+            setTimeout(init, 80);
+            return;
+        }
+
+        // On mobile or reduced motion: show a very subtle static mosaic or clear photo
+        if (!hasFinePointer || prefersReducedMotion) {
+            canvas.style.opacity = '0.2';
+            renderRestingMosaic();
+            return;
+        }
+
+        renderRestingMosaic();
+
+        wrapper.addEventListener('pointerenter', (e) => {
+            const rect = wrapper.getBoundingClientRect();
+            targetMouseX = e.clientX - rect.left;
+            targetMouseY = e.clientY - rect.top;
+            mouseX = targetMouseX;
+            mouseY = targetMouseY;
+            isHovering = true;
+            if (!rafId) rafId = requestAnimationFrame(drawFrame);
+        });
+
+        wrapper.addEventListener('pointermove', (e) => {
+            const rect = wrapper.getBoundingClientRect();
+            targetMouseX = e.clientX - rect.left;
+            targetMouseY = e.clientY - rect.top;
+            isHovering = true;
+            if (!rafId) rafId = requestAnimationFrame(drawFrame);
+        });
+
+        wrapper.addEventListener('pointerleave', () => {
+            isHovering = false;
+            if (!rafId) rafId = requestAnimationFrame(drawFrame);
+        });
+    };
+
+    if (img.complete && img.naturalWidth) {
+        init();
+    } else {
+        img.addEventListener('load', init);
+    }
+
+    window.addEventListener('resize', () => {
+        if (sampleImage()) renderRestingMosaic();
+    }, { passive: true });
+}
+
+/* ========================================================
+   11. EDITORIAL BACKGROUND PIXEL FIELD (Milestone 16.4)
+   ======================================================== */
+function initBackgroundPixelField() {
+    let canvas = document.getElementById('bgPixelCanvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'bgPixelCanvas';
+        canvas.className = 'bg-pixel-canvas fixed inset-0 pointer-events-none z-0';
+        canvas.setAttribute('aria-hidden', 'true');
+        document.body.prepend(canvas);
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const SPACING = 34; // 34px grid spacing (clean, sparse, unobtrusive)
+    const RADIUS = 110; // Proximity radius in CSS px
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let points = [];
+    let mouseX = -1000;
+    let mouseY = -1000;
+    let isPointerActive = false;
+    let rafId = null;
+
+    const buildGrid = () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+
+        points = [];
+        const cols = Math.ceil(width / SPACING);
+        const rows = Math.ceil(height / SPACING);
+
+        for (let r = 0; r <= rows; r++) {
+            for (let c = 0; c <= cols; c++) {
+                // Deterministic accent for ~5% of dots in crimson
+                const isAccent = ((c * 7 + r * 13) % 23) === 0;
+                points.push({
+                    x: c * SPACING,
+                    y: r * SPACING,
+                    isAccent: isAccent,
+                    intensity: 0
+                });
+            }
+        }
+    };
+
     const render = () => {
-        const dx = targetX - currentX;
-        const dy = targetY - currentY;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(dpr, dpr);
 
-        currentX += dx * 0.18;
-        currentY += dy * 0.18;
+        let hasActivePoints = false;
 
-        reticle.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+        for (let i = 0; i < points.length; i++) {
+            const pt = points[i];
 
-        if (Math.abs(dx) > 0.15 || Math.abs(dy) > 0.15) {
+            if (isPointerActive) {
+                const dx = pt.x - mouseX;
+                const dy = pt.y - mouseY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < RADIUS) {
+                    const targetIntensity = Math.pow(1 - dist / RADIUS, 1.5);
+                    if (targetIntensity > pt.intensity) {
+                        pt.intensity = targetIntensity;
+                    }
+                }
+            }
+
+            if (pt.intensity > 0.01) {
+                hasActivePoints = true;
+                // Decay intensity smoothly
+                pt.intensity *= 0.92;
+
+                const baseSize = 1.5;
+                const activeSize = baseSize + pt.intensity * 2.0;
+
+                if (pt.isAccent) {
+                    ctx.fillStyle = `rgba(227, 52, 63, ${(0.3 + pt.intensity * 0.7).toFixed(3)})`;
+                } else {
+                    const alpha = (0.25 + pt.intensity * 0.65).toFixed(3);
+                    ctx.fillStyle = pt.intensity > 0.4 ? `rgba(245, 245, 242, ${alpha})` : `rgba(133, 133, 133, ${alpha})`;
+                }
+                ctx.fillRect(pt.x - activeSize * 0.5, pt.y - activeSize * 0.5, activeSize, activeSize);
+            } else {
+                pt.intensity = 0;
+                // Subtle resting dot
+                const size = 1.5;
+                if (pt.isAccent) {
+                    ctx.fillStyle = 'rgba(227, 52, 63, 0.22)';
+                } else {
+                    ctx.fillStyle = 'rgba(66, 66, 66, 0.35)';
+                }
+                ctx.fillRect(pt.x - size * 0.5, pt.y - size * 0.5, size, size);
+            }
+        }
+
+        ctx.restore();
+
+        if (hasActivePoints || isPointerActive) {
             rafId = requestAnimationFrame(render);
         } else {
             rafId = null;
         }
     };
 
+    buildGrid();
+    render(); // Initial static frame
+
+    if (!hasFinePointer || prefersReducedMotion) {
+        // Mobile or reduced motion: static grid, no pointer tracking overhead
+        window.addEventListener('resize', () => {
+            buildGrid();
+            render();
+        }, { passive: true });
+        return;
+    }
+
     window.addEventListener('pointermove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-
-        if (!isVisible) {
-            isVisible = true;
-            currentX = targetX;
-            currentY = targetY;
-            reticle.style.opacity = '1';
-        }
-
-        if (!rafId) {
-            rafId = requestAnimationFrame(render);
-        }
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        isPointerActive = true;
+        if (!rafId) rafId = requestAnimationFrame(render);
     }, { passive: true });
 
     document.addEventListener('mouseleave', () => {
-        isVisible = false;
-        reticle.style.opacity = '0';
+        isPointerActive = false;
+        mouseX = -1000;
+        mouseY = -1000;
+        if (!rafId) rafId = requestAnimationFrame(render);
     });
 
-    window.addEventListener('blur', () => {
-        isVisible = false;
-        reticle.style.opacity = '0';
-    });
+    window.addEventListener('resize', () => {
+        buildGrid();
+        render();
+    }, { passive: true });
 }

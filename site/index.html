@@ -40,14 +40,8 @@
 </head>
 <body class="bg-[#0B0B0C] text-[#F5F5F2] font-sans selection:bg-[#E3343F] selection:text-[#FFFFFF] min-h-screen flex flex-col">
 
-    <!-- Editorial Tracking Reticle / Focus Ring (Milestone 16.3) -->
-    <div id="pointerReticle" class="pointer-reticle-container opacity-0" aria-hidden="true">
-        <div class="reticle-ring">
-            <div class="reticle-crosshair-h"></div>
-            <div class="reticle-crosshair-v"></div>
-            <div class="reticle-center-dot"></div>
-        </div>
-    </div>
+    <!-- Editorial Background Pixel Field (Milestone 16.4) -->
+    <canvas id="bgPixelCanvas" class="bg-pixel-canvas fixed inset-0 pointer-events-none z-0" aria-hidden="true"></canvas>
 
     <!-- Scroll Progress Indicator (Crimson Red Solid Bar) -->
     <div id="scrollProgressBar" style="width: 0%;" aria-hidden="true"></div>
@@ -293,25 +287,34 @@
                     </div>
 
                     <!-- Right Column: Prominent Real Portrait & Telemetry Card -->
+                    <!-- Right Column: Interactive Pixel Portrait (Milestone 16.4) & Telemetry Card -->
                     <div class="lg:col-span-5 flex flex-col items-center">
-                        <div class="w-full max-w-sm portrait-container">
-                            <!-- Natural Campus Portrait with WebP primary and JPG fallback -->
-                            <picture>
-                                <source srcset="/assets/images/profile/tanvir-anjum.webp" type="image/webp">
-                                <img src="/assets/images/profile/tanvir-anjum.jpg"
-                                     alt="Portrait of Md. Tanvir Anjum at the PSTU campus"
-                                     width="480"
-                                     height="600"
-                                     loading="eager"
-                                     decoding="async"
-                                     class="portrait-img w-full h-auto object-cover rounded-xl border border-[#252528] shadow-2xl filter contrast-105" />
-                            </picture>
+                        <div class="w-full max-w-sm">
+                            <!-- Interactive Pixel Portrait Frame -->
+                            <div id="portraitPixelWrapper" class="portrait-pixel-wrapper relative overflow-hidden rounded-xl border border-[#252528] shadow-2xl group select-none">
+                                <!-- Base Layer: Authentic High-Resolution Campus Photograph -->
+                                <picture>
+                                    <source srcset="/assets/images/profile/tanvir-anjum.webp" type="image/webp">
+                                    <img id="portraitImg"
+                                         src="/assets/images/profile/tanvir-anjum.jpg"
+                                         alt="Portrait of Md. Tanvir Anjum at the PSTU campus"
+                                         width="480"
+                                         height="600"
+                                         loading="eager"
+                                         decoding="async"
+                                         class="portrait-img block w-full h-auto object-cover filter contrast-105" />
+                                </picture>
 
-                            <!-- Subtle Red Corner Accent Marker -->
-                            <div class="portrait-tag">PSTU CAMPUS</div>
+                                <!-- Interactive Pixel Overlay Canvas (Decorative with proximity reveal lens) -->
+                                <canvas id="portraitPixelCanvas" class="portrait-pixel-canvas absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
+
+                                <!-- Subtle Crimson Framing Markers -->
+                                <div class="absolute top-2 left-2 w-3 h-3 border-t border-l border-[#E3343F]/60 pointer-events-none" aria-hidden="true"></div>
+                                <div class="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-[#E3343F]/60 pointer-events-none" aria-hidden="true"></div>
+                            </div>
 
                             <!-- Editorial Caption -->
-                            <div class="portrait-caption flex items-center justify-between text-xs font-mono text-[#858585]">
+                            <div class="portrait-caption flex items-center justify-between text-xs font-mono text-[#858585] mt-3 px-1">
                                 <span>Md. Tanvir Anjum</span>
                                 <span>Patuakhali, Bangladesh</span>
                             </div>
@@ -988,290 +991,273 @@
                     </div>
                 </div>
 
-                <!-- 6 Constellation Clusters Grid (2x3 on desktop) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Engineering Toolkit Atlas (3-Column Editorial Grid) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                    <!-- Cluster 1: Core Programming Languages -->
-                    <div class="reveal-on-scroll stagger-1 rounded-2xl bg-[#141416] border border-[#252528] p-6 sm:p-7 space-y-6 shadow-xl skill-card-interactive">
-                        <div class="flex items-center justify-between pb-4 border-b border-[#252528]">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
-                                    &lt;/&gt;
+                    <!-- Atlas 1: Programming Languages -->
+                    <div class="reveal-on-scroll stagger-1 p-6 rounded-2xl bg-[#141416] border border-[#252528] flex flex-col justify-between space-y-4 hover:border-[#858585]/50 transition-colors card-interactive">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center justify-between pb-3 border-b border-[#252528]">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
+                                        &lt;/&gt;
+                                    </div>
+                                    <div>
+                                        <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">01 // LANGUAGES</span>
+                                        <h3 class="font-display font-bold text-base text-white">Programming Languages</h3>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">01 // LANGUAGES</span>
-                                    <h3 class="font-display font-bold text-lg text-white">Programming Languages</h3>
-                                </div>
+                                <span class="hud-badge text-[10px] font-mono text-[#858585]">CORE</span>
                             </div>
-                            <span class="hud-badge text-[10px] font-mono text-[#858585]">CORE CODE</span>
+
+                            <!-- Mini Visual: Monospaced Syntax Fragment -->
+                            <div class="h-9 px-3 rounded-lg bg-[#0B0B0C] border border-[#252528] font-mono text-[11px] flex items-center justify-between text-[#858585]">
+                                <span><span class="text-[#E3343F]">template</span>&lt;<span class="text-white">typename</span> T&gt;</span>
+                                <span class="text-white font-semibold">void solve(T&amp; n)</span>
+                                <span class="text-[#858585] text-[10px]">C++ / STL</span>
+                            </div>
+
+                            <!-- Skills Tag Matrix -->
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">C</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">C++</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Java</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">C#</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">JavaScript</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">SQL</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Python</span>
+                            </div>
                         </div>
 
-                        <div class="space-y-2.5">
-                            <!-- C -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">C</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Pointers, memory management, low-level data structures, and algorithmic fundamentals.</div>
-                            </div>
-
-                            <!-- C++ -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">C++</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Standard Template Library (STL), competitive programming, and graph algorithms.</div>
-                            </div>
-
-                            <!-- Java -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Java</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Object-Oriented Programming, class hierarchies, interfaces, and collections framework.</div>
-                            </div>
-
-                            <!-- C# -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">C#</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Strongly typed application logic, LINQ data operations, and multi-tier backend architecture.</div>
-                            </div>
-
-                            <!-- JavaScript -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">JavaScript</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">ES6+ standard web APIs, DOM manipulation, and asynchronous event-driven flows.</div>
-                            </div>
-
-                            <!-- SQL -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">SQL</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Relational queries, schema constraints, joins, data aggregation, and structured views.</div>
-                            </div>
-
-                            <!-- Python -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Python</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Programming fundamentals, syntax, and practical scripting (confirmed familiarity).</div>
-                            </div>
+                        <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585] leading-relaxed">
+                            Pointers &amp; low-level memory in C, competitive STL in C++, OOP in Java/C#, web APIs, and query logic.
                         </div>
                     </div>
 
-                    <!-- Cluster 2: Frameworks & Web Stack -->
-                    <div class="reveal-on-scroll stagger-2 rounded-2xl bg-[#141416] border border-[#252528] p-6 sm:p-7 space-y-6 shadow-xl skill-card-interactive">
-                        <div class="flex items-center justify-between pb-4 border-b border-[#252528]">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
-                                    WEB
+                    <!-- Atlas 2: Web Architecture -->
+                    <div class="reveal-on-scroll stagger-2 p-6 rounded-2xl bg-[#141416] border border-[#252528] flex flex-col justify-between space-y-4 hover:border-[#858585]/50 transition-colors card-interactive">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center justify-between pb-3 border-b border-[#252528]">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
+                                        WEB
+                                    </div>
+                                    <div>
+                                        <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">02 // ARCHITECTURE</span>
+                                        <h3 class="font-display font-bold text-base text-white">Web Architecture</h3>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">02 // WEB ARCHITECTURE</span>
-                                    <h3 class="font-display font-bold text-lg text-white">Web &amp; Frameworks</h3>
-                                </div>
+                                <span class="hud-badge text-[10px] font-mono text-[#858585]">STACK</span>
                             </div>
-                            <span class="hud-badge text-[10px] font-mono text-[#858585]">WEB TIERS</span>
+
+                            <!-- Mini Visual: Compact Flow Diagram -->
+                            <div class="h-9 px-2 rounded-lg bg-[#0B0B0C] border border-[#252528] flex items-center justify-between text-[11px] font-mono text-[#858585]">
+                                <span class="text-[#F5F5F2]">Client UI</span>
+                                <span class="text-[#E3343F]">&rarr;</span>
+                                <span class="text-white font-medium">ASP.NET</span>
+                                <span class="text-[#E3343F]">&rarr;</span>
+                                <span class="text-white font-medium">EF Core</span>
+                                <span class="text-[#E3343F]">&rarr;</span>
+                                <span class="text-[#858585]">MySQL</span>
+                            </div>
+
+                            <!-- Skills Tag Matrix -->
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">ASP.NET Core</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Entity Framework Core</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">HTML5</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">CSS3</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Bootstrap 5</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Chart.js</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Tailwind CSS</span>
+                            </div>
                         </div>
 
-                        <div class="space-y-2.5">
-                            <!-- ASP.NET Core -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">ASP.NET Core</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Multi-tier web applications, MVC architecture, dependency injection, and middleware.</div>
-                            </div>
-
-                            <!-- Entity Framework Core -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Entity Framework Core</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Object-relational mapping, migrations, DbContext lifecycle, and LINQ data queries.</div>
-                            </div>
-
-                            <!-- HTML5 & CSS3 -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">HTML5 &amp; CSS3</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Semantic landmarks, modern flexbox and grid layouts, and accessible UI structure.</div>
-                            </div>
-
-                            <!-- Bootstrap 5 -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Bootstrap 5</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Responsive component design, grid systems, and utility-first UI styling.</div>
-                            </div>
-
-                            <!-- Chart.js -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Chart.js</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Interactive client-side data charts, financial valuation curves, and performance trends.</div>
-                            </div>
-
-                            <!-- Tailwind CSS -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Tailwind CSS</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Modern utility styling and design tokens utilized in the static portfolio build.</div>
-                            </div>
+                        <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585] leading-relaxed">
+                            Multi-tier MVC architectures, strongly typed LINQ pipelines, client data visualizations, and modern CSS.
                         </div>
                     </div>
 
-                    <!-- Cluster 3: Databases & Storage -->
-                    <div class="reveal-on-scroll stagger-3 rounded-2xl bg-[#141416] border border-[#252528] p-6 sm:p-7 space-y-6 shadow-xl skill-card-interactive">
-                        <div class="flex items-center justify-between pb-4 border-b border-[#252528]">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
-                                    DB
+                    <!-- Atlas 3: Data & Persistence -->
+                    <div class="reveal-on-scroll stagger-3 p-6 rounded-2xl bg-[#141416] border border-[#252528] flex flex-col justify-between space-y-4 hover:border-[#858585]/50 transition-colors card-interactive">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center justify-between pb-3 border-b border-[#252528]">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
+                                        DB
+                                    </div>
+                                    <div>
+                                        <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">03 // PERSISTENCE</span>
+                                        <h3 class="font-display font-bold text-base text-white">Data &amp; Persistence</h3>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">03 // PERSISTENCE</span>
-                                    <h3 class="font-display font-bold text-lg text-white">Databases</h3>
+                                <span class="hud-badge text-[10px] font-mono text-[#858585]">RDBMS</span>
+                            </div>
+
+                            <!-- Mini Visual: Relational Table Schema Illustration -->
+                            <div class="h-9 px-3 rounded-lg bg-[#0B0B0C] border border-[#252528] flex items-center justify-between text-[11px] font-mono">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="px-1 py-0.5 rounded bg-[#1F1F22] text-[#E3343F] border border-[#252528] text-[9px] font-bold">PK</span>
+                                    <span class="text-white">users</span>
+                                </div>
+                                <div class="flex items-center gap-1 text-[#E3343F] text-[10px]">
+                                    <span class="h-px w-5 bg-[#E3343F]/50"></span>
+                                    <span>1 : N</span>
+                                    <span class="h-px w-5 bg-[#E3343F]/50"></span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <span class="px-1 py-0.5 rounded bg-[#1F1F22] text-[#858585] border border-[#252528] text-[9px]">FK</span>
+                                    <span class="text-white">records</span>
                                 </div>
                             </div>
-                            <span class="hud-badge text-[10px] font-mono text-[#858585]">RDBMS</span>
+
+                            <!-- Skills Tag Matrix -->
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">MySQL</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Oracle</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Relational Modeling</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Normalization</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">SQL Queries</span>
+                            </div>
                         </div>
 
-                        <div class="space-y-2.5">
-                            <!-- MySQL -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">MySQL</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Normalized relational schema design, foreign keys, stored routines, and ACID transactions.</div>
-                            </div>
-
-                            <!-- Oracle -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Oracle</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Relational DBMS laboratory coursework, complex joins, subqueries, and view creation.</div>
-                            </div>
-
-                            <!-- Relational Modeling -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Relational Modeling</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">1NF/2NF/3NF normalization, referential integrity, cardinality, and ER diagramming.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cluster 4: Embedded & Development Tools -->
-                    <div class="reveal-on-scroll stagger-4 rounded-2xl bg-[#141416] border border-[#252528] p-6 sm:p-7 space-y-6 shadow-xl skill-card-interactive">
-                        <div class="flex items-center justify-between pb-4 border-b border-[#252528]">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
-                                    DEV
-                                </div>
-                                <div>
-                                    <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">04 // EMBEDDED &amp; TOOLING</span>
-                                    <h3 class="font-display font-bold text-lg text-white">Embedded &amp; Development Tools</h3>
-                                </div>
-                            </div>
-                            <span class="hud-badge text-[10px] font-mono text-[#858585]">TOOLING</span>
-                        </div>
-
-                        <div class="space-y-2.5">
-                            <!-- ESP32 -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">ESP32</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Dual-core 32-bit microcontroller, GPIO, I2C, SPI interfaces, and embedded HTTP services.</div>
-                            </div>
-
-                            <!-- PlatformIO -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">PlatformIO</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Embedded firmware build system, library dependency management, and serial monitoring.</div>
-                            </div>
-
-                            <!-- Hardware Peripherals -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">OLED, microSD &amp; DHT11</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">SSD1306 I2C display, SPI storage logging, and ambient temperature/humidity sensing.</div>
-                            </div>
-
-                            <!-- Git & GitHub -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Git &amp; GitHub</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Semantic commit discipline, branch management, and remote repository tracking.</div>
-                            </div>
-
-                            <!-- Visual Studio Code -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Visual Studio Code</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Integrated development environment, C# Dev Kit, embedded extensions, and terminal.</div>
-                            </div>
+                        <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585] leading-relaxed">
+                            Normalized relational schema design (1NF–3NF), referential constraints, complex joins, and ACID safety.
                         </div>
                     </div>
 
-                    <!-- Cluster 5: Problem Solving & Algorithms -->
-                    <div class="reveal-on-scroll stagger-5 rounded-2xl bg-[#141416] border border-[#252528] p-6 sm:p-7 space-y-6 shadow-xl skill-card-interactive">
-                        <div class="flex items-center justify-between pb-4 border-b border-[#252528]">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
-                                    DSA
+                    <!-- Atlas 4: Embedded Systems & Tools -->
+                    <div class="reveal-on-scroll stagger-4 p-6 rounded-2xl bg-[#141416] border border-[#252528] flex flex-col justify-between space-y-4 hover:border-[#858585]/50 transition-colors card-interactive">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center justify-between pb-3 border-b border-[#252528]">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
+                                        DEV
+                                    </div>
+                                    <div>
+                                        <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">04 // EMBEDDED &amp; TOOLS</span>
+                                        <h3 class="font-display font-bold text-base text-white">Embedded &amp; Tools</h3>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">05 // ALGORITHMIC RIGOR</span>
-                                    <h3 class="font-display font-bold text-lg text-white">Problem Solving</h3>
-                                </div>
+                                <span class="hud-badge text-[10px] font-mono text-[#858585]">HARDWARE</span>
                             </div>
-                            <span class="hud-badge text-[10px] font-mono text-[#858585]">ALGORITHMS</span>
+
+                            <!-- Mini Visual: Compact Embedded Schematic -->
+                            <div class="h-9 px-2.5 rounded-lg bg-[#0B0B0C] border border-[#252528] flex items-center justify-between text-[11px] font-mono text-[#858585]">
+                                <span class="text-white">Sensors</span>
+                                <span class="text-[#E3343F]">&rarr;</span>
+                                <span class="px-1.5 py-0.5 rounded bg-[#1F1F22] text-[#E3343F] border border-[#E3343F]/40 font-bold text-[10px]">ESP32</span>
+                                <span class="text-[#E3343F]">&rarr;</span>
+                                <span class="text-white">OLED / I2C</span>
+                            </div>
+
+                            <!-- Skills Tag Matrix -->
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">ESP32</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">PlatformIO</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">OLED</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">microSD</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">DHT11</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Git</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">GitHub</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">VS Code</span>
+                            </div>
                         </div>
 
-                        <div class="space-y-2.5">
-                            <!-- Data Structures and Algorithms -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Data Structures &amp; Algorithms</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Arrays, linked lists, stacks, queues, trees, graphs, sorting, searching, and DP.</div>
-                            </div>
-
-                            <!-- Competitive Programming -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Competitive Programming</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Time and space complexity optimization, mathematical proofs, and contest participation.</div>
-                            </div>
-
-                            <!-- Platforms: Codeforces & LeetCode -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Codeforces &amp; LeetCode</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Active problem-solving profiles practicing algorithmic speed and edge-case handling.</div>
-                            </div>
+                        <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585] leading-relaxed">
+                            Dual-core 32-bit microcontroller firmware, I2C/SPI sensor interfaces, serial telemetry, and Git workflow.
                         </div>
                     </div>
 
-                    <!-- Cluster 6: Practical AI-Assisted Development -->
-                    <div class="reveal-on-scroll stagger-6 rounded-2xl bg-[#141416] border border-[#252528] p-6 sm:p-7 space-y-6 shadow-xl skill-card-interactive">
-                        <div class="flex items-center justify-between pb-4 border-b border-[#252528]">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
-                                    AI
+                    <!-- Atlas 5: Algorithmic Problem Solving -->
+                    <div class="reveal-on-scroll stagger-5 p-6 rounded-2xl bg-[#141416] border border-[#252528] flex flex-col justify-between space-y-4 hover:border-[#858585]/50 transition-colors card-interactive">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center justify-between pb-3 border-b border-[#252528]">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
+                                        DSA
+                                    </div>
+                                    <div>
+                                        <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">05 // ALGORITHMIC RIGOR</span>
+                                        <h3 class="font-display font-bold text-base text-white">Problem Solving</h3>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">06 // WORKFLOW SKILLS</span>
-                                    <h3 class="font-display font-bold text-lg text-white">AI-Assisted Development</h3>
-                                </div>
+                                <span class="hud-badge text-[10px] font-mono text-[#858585]">MATH</span>
                             </div>
-                            <span class="hud-badge text-[10px] font-mono text-[#E3343F]">WORKFLOW</span>
+
+                            <!-- Mini Visual: Algorithmic Node/Edge Graph Illustration -->
+                            <div class="h-9 px-3 rounded-lg bg-[#0B0B0C] border border-[#252528] flex items-center justify-between">
+                                <span class="text-[11px] font-mono text-[#858585]">Shortest Path <span class="text-white font-bold">O(V+E)</span></span>
+                                <svg class="h-5 w-24" viewBox="0 0 96 20" fill="none">
+                                    <line x1="8" y1="10" x2="36" y2="10" stroke="#E3343F" stroke-width="2" />
+                                    <line x1="36" y1="10" x2="64" y2="10" stroke="#E3343F" stroke-width="2" />
+                                    <line x1="64" y1="10" x2="88" y2="10" stroke="#424242" stroke-width="1.5" stroke-dasharray="2 2" />
+                                    <circle cx="8" cy="10" r="3.5" fill="#0B0B0C" stroke="#E3343F" stroke-width="2" />
+                                    <circle cx="36" cy="10" r="3.5" fill="#0B0B0C" stroke="#E3343F" stroke-width="2" />
+                                    <circle cx="64" cy="10" r="3.5" fill="#E3343F" />
+                                    <circle cx="88" cy="10" r="2.5" fill="#0B0B0C" stroke="#858585" stroke-width="1.5" />
+                                </svg>
+                            </div>
+
+                            <!-- Skills Tag Matrix -->
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Data Structures &amp; Algorithms</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Competitive Programming</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Codeforces</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">LeetCode</span>
+                            </div>
                         </div>
 
-                        <div class="space-y-2.5">
-                            <!-- Tooling -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">ChatGPT, GitHub Copilot &amp; Antigravity</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">AI developer assistants utilized for implementation speed, scaffolding, and refactoring.</div>
+                        <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585] leading-relaxed">
+                            Time/space complexity optimization, graph traversals, dynamic programming, and competitive contest practice.
+                        </div>
+                    </div>
+
+                    <!-- Atlas 6: AI-Assisted Development (Cleaned, Note Removed) -->
+                    <div class="reveal-on-scroll stagger-6 p-6 rounded-2xl bg-[#141416] border border-[#252528] flex flex-col justify-between space-y-4 hover:border-[#858585]/50 transition-colors card-interactive">
+                        <div class="space-y-3.5">
+                            <div class="flex items-center justify-between pb-3 border-b border-[#252528]">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center text-[#E3343F] font-mono font-bold text-xs">
+                                        AI
+                                    </div>
+                                    <div>
+                                        <span class="font-mono text-[10px] text-[#E3343F] uppercase tracking-wider font-semibold">06 // WORKFLOW SKILLS</span>
+                                        <h3 class="font-display font-bold text-base text-white">AI-Assisted Development</h3>
+                                    </div>
+                                </div>
+                                <span class="hud-badge text-[10px] font-mono text-[#E3343F]">VELOCITY</span>
                             </div>
 
-                            <!-- Prompt Engineering & Task Decomposition -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Prompt Engineering &amp; Decomposition</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Breaking complex feature requirements into verifiable subtasks with targeted prompting.</div>
+                            <!-- Mini Visual: Compact Workflow Pipeline -->
+                            <div class="h-9 px-2 rounded-lg bg-[#0B0B0C] border border-[#252528] flex items-center justify-between text-[10px] font-mono text-[#858585]">
+                                <span class="text-white">Prompt</span>
+                                <span class="text-[#E3343F]">&rarr;</span>
+                                <span class="text-white">Implement</span>
+                                <span class="text-[#E3343F]">&rarr;</span>
+                                <span class="text-white">Debug</span>
+                                <span class="text-[#E3343F]">&rarr;</span>
+                                <span class="text-[#F5F5F2]">Review</span>
                             </div>
 
-                            <!-- Debugging & Documentation -->
-                            <div class="toolkit-row group p-3.5 rounded-xl bg-[#1F1F22] border border-[#252528] border-l-2 border-l-transparent hover:border-l-[#E3343F] hover:bg-[#252528] hover:translate-x-1 focus-visible:border-l-[#E3343F] focus-visible:bg-[#252528] focus-visible:translate-x-1 transition-all duration-200 outline-none cursor-default" tabindex="0">
-                                <div class="font-mono text-sm font-bold text-white group-hover:text-white transition-colors">Debugging &amp; Code Review Assistance</div>
-                                <div class="text-xs text-[#858585] mt-1 leading-relaxed">Error diagnosis, edge-case discovery, code explanation, and documentation generation.</div>
+                            <!-- Skills Tag Matrix -->
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">ChatGPT</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">GitHub Copilot</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Google Antigravity</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Prompt Engineering</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Task Decomposition</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Debugging Assistance</span>
+                                <span class="px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-xs font-mono text-[#F5F5F2] hover:border-[#E3343F]/60 hover:text-white transition-all cursor-default">Code Explanation &amp; Review</span>
                             </div>
                         </div>
 
-                        <!-- Clear Scope Distinction Callout -->
-                        <div class="pt-2">
-                            <p class="text-[11px] font-mono text-[#858585] leading-relaxed p-2.5 rounded-lg bg-[#0B0B0C] border border-[#252528]">
-                                <span class="text-[#E3343F] font-semibold">Note:</span> Practical software-development workflow skills for augmenting developer efficiency. Distinct from academic machine-learning research interests; not listed on the November 2026 CV.
-                            </p>
+                        <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585] leading-relaxed">
+                            Practical software development acceleration, subtask breakdown, error diagnostics, and code quality review.
                         </div>
                     </div>
 
                 </div>
-
-            </div>
-        </section>
 
             </div>
         </section>
@@ -1401,7 +1387,6 @@
 
                             <!-- Benchmark CGPA Line (Dashed Gray at Y=98 for CGPA 3.820) -->
                             <line x1="85" y1="98" x2="640" y2="98" stroke="#858585" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.65" />
-                            <text x="635" y="93" fill="#858585" font-size="9" font-family="monospace" text-anchor="end" opacity="0.75">CGPA 3.820 Reference</text>
 
                             <!-- GPA Line (Sem 1: 3.870 -> Sem 2: 3.771 -> Sem 3: 3.821) in Crimson Red -->
                             <polyline points="150,81 360,115 570,98" fill="none" stroke="#E3343F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
@@ -1435,7 +1420,7 @@
                         <span class="hud-badge text-[10px] font-mono text-[#858585]">3 SEMESTERS &bull; 62.00 CREDITS</span>
                     </div>
 
-                    <!-- 3 Connected Semester Panels -->
+                    <!-- 3 Connected Semester Panels (Theory Coursework Showcase) -->
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                         <!-- Stage 1: Semester 1 (Programming Foundations) -->
@@ -1450,7 +1435,7 @@
                                         <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 1 Official GPA">
                                             <span class="text-[#858585] font-normal mr-1">GPA</span>3.870
                                         </div>
-                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">20.25 Credits</div>
+                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">20.25 Credits Total</div>
                                     </div>
                                 </div>
 
@@ -1463,16 +1448,6 @@
                                         </div>
                                         <div class="font-semibold text-sm text-white">Programming Language</div>
                                         <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
-                                    </div>
-
-                                    <!-- CIT-112 -->
-                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
-                                        <div class="flex items-center justify-between">
-                                            <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-112</span>
-                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
-                                        </div>
-                                        <div class="font-semibold text-sm text-white">Programming Language Sessional</div>
-                                        <div class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
                                     </div>
 
                                     <!-- MAT-111 -->
@@ -1494,21 +1469,11 @@
                                         <div class="font-semibold text-sm text-white">Basic Electrical Engineering</div>
                                         <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
-
-                                    <!-- EEE-112 -->
-                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
-                                        <div class="flex items-center justify-between">
-                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-112</span>
-                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A (3.75)</span>
-                                        </div>
-                                        <div class="font-semibold text-sm text-white">Basic Electrical Engineering Sessional</div>
-                                        <div class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
-                                    </div>
                                 </div>
                             </div>
 
                             <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585]">
-                                Verified official marksheet: 20.25 credits; structured C, pointers, differential/integral calculus &amp; circuit analysis.
+                                Verified official marksheet: 20.25 total credits completed; structured C programming, differential/integral calculus &amp; circuit analysis.
                             </div>
                         </div>
 
@@ -1524,7 +1489,7 @@
                                         <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 2 Official GPA">
                                             <span class="text-[#858585] font-normal mr-1">GPA</span>3.771
                                         </div>
-                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">20.75 Credits</div>
+                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">20.75 Credits Total</div>
                                     </div>
                                 </div>
 
@@ -1549,16 +1514,6 @@
                                         <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
-                                    <!-- CCE-122 -->
-                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
-                                        <div class="flex items-center justify-between">
-                                            <span class="font-mono text-xs text-[#E3343F] font-bold">CCE-122</span>
-                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
-                                        </div>
-                                        <div class="font-semibold text-sm text-white">Object Oriented Programming Sessional</div>
-                                        <div class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
-                                    </div>
-
                                     <!-- MAT-121 -->
                                     <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
                                         <div class="flex items-center justify-between">
@@ -1578,21 +1533,11 @@
                                         <div class="font-semibold text-sm text-white">Electronic Device and Circuits</div>
                                         <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
-
-                                    <!-- EEE-122 -->
-                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
-                                        <div class="flex items-center justify-between">
-                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-122</span>
-                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
-                                        </div>
-                                        <div class="font-semibold text-sm text-white">Electronic Device and Circuits Sessional</div>
-                                        <div class="text-[11px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
-                                    </div>
                                 </div>
                             </div>
 
                             <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585]">
-                                Verified official marksheet: 20.75 credits; OOP paradigms in Java, discrete structures, ODE/PDE &amp; semiconductor devices.
+                                Verified official marksheet: 20.75 total credits completed; OOP paradigms in Java, discrete structures, ODE/PDE &amp; semiconductor devices.
                             </div>
                         </div>
 
@@ -1608,85 +1553,65 @@
                                         <div class="font-mono text-xs px-2.5 py-1 rounded-md bg-[#1F1F22] border border-[#252528] text-white font-bold" title="Semester 3 Official GPA (1st Merit Position)">
                                             <span class="text-[#858585] font-normal mr-1">GPA</span>3.821
                                         </div>
-                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">21.00 Credits</div>
+                                        <div class="text-[10px] font-mono text-[#858585] mt-0.5">21.00 Credits Total</div>
                                     </div>
                                 </div>
 
-                                <div class="space-y-2">
+                                <div class="space-y-2.5">
                                     <!-- CIT-211 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-211</span>
                                             <span class="px-2 py-0.5 rounded bg-[#141416] text-[#F5F5F2] border border-[#252528] font-mono text-[11px] font-bold">Grade A- (3.50)</span>
                                         </div>
-                                        <div class="font-semibold text-xs text-white">Data Structure and Algorithms</div>
-                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
-                                    </div>
-
-                                    <!-- CIT-212 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
-                                        <div class="flex items-center justify-between">
-                                            <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-212</span>
-                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
-                                        </div>
-                                        <div class="font-semibold text-xs text-white">Data Structure and Algorithms Sessional</div>
-                                        <div class="text-[10px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
+                                        <div class="font-semibold text-sm text-white">Data Structure and Algorithms</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
                                     <!-- CIT-213 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CIT-213</span>
                                             <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
                                         </div>
-                                        <div class="font-semibold text-xs text-white">Software Engineering</div>
-                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                        <div class="font-semibold text-sm text-white">Software Engineering</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
                                     <!-- CCE-211 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">CCE-211</span>
                                             <span class="px-2 py-0.5 rounded bg-[#141416] text-[#F5F5F2] border border-[#252528] font-mono text-[11px] font-bold">Grade A- (3.50)</span>
                                         </div>
-                                        <div class="font-semibold text-xs text-white">Data Communication and Engineering</div>
-                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                        <div class="font-semibold text-sm text-white">Data Communication and Engineering</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
                                     <!-- MAT-211 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">MAT-211</span>
                                             <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
                                         </div>
-                                        <div class="font-semibold text-xs text-white">Mathematics-III</div>
-                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
+                                        <div class="font-semibold text-sm text-white">Mathematics-III</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
 
                                     <!-- EEE-211 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
+                                    <div class="p-3 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-1">
                                         <div class="flex items-center justify-between">
                                             <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-211</span>
                                             <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
                                         </div>
-                                        <div class="font-semibold text-xs text-white">Electrical Technology</div>
-                                        <div class="text-[10px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
-                                    </div>
-
-                                    <!-- EEE-212 -->
-                                    <div class="p-2.5 rounded-xl bg-[#1F1F22] border border-[#252528] space-y-0.5">
-                                        <div class="flex items-center justify-between">
-                                            <span class="font-mono text-xs text-[#E3343F] font-bold">EEE-212</span>
-                                            <span class="px-2 py-0.5 rounded bg-[#141416] text-white border border-[#252528] font-mono text-[11px] font-bold">Grade A+ (4.00)</span>
-                                        </div>
-                                        <div class="font-semibold text-xs text-white">Electrical Technology Sessional</div>
-                                        <div class="text-[10px] font-mono text-[#858585]">Lab Sessional &bull; 1.50 Credits</div>
+                                        <div class="font-semibold text-sm text-white">Electrical Technology</div>
+                                        <div class="text-[11px] font-mono text-[#858585]">Theory &bull; 3.00 Credits</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="pt-3 border-t border-[#252528] text-[11px] font-mono text-[#858585]">
-                                Verified official marksheet: 21.00 credits; 1st merit position on published result sheet; DSA, SE, coms &amp; power.
+                                Verified official marksheet: 21.00 total credits completed; 1st merit position on published result sheet; DSA, SE, coms &amp; power systems.
                             </div>
                         </div>
 
@@ -2136,10 +2061,8 @@
                 <div>
                     &copy; 2026 Md. Tanvir Anjum &middot; Built with curiosity and care.
                 </div>
-                <div class="flex items-center gap-4">
-                    <span>B.Sc. in Computer Science and Engineering</span>
-                    <span>&bull;</span>
-                    <span>PSTU</span>
+                <div>
+                    <a href="#hero" class="text-[#858585] hover:text-[#E3343F] transition-colors">Return to Top &uarr;</a>
                 </div>
             </div>
 
