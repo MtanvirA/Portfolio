@@ -472,7 +472,7 @@ function initEngineeringCanvas() {
 }
 
 /* ========================================================
-   10. INTERACTIVE PIXEL PORTRAIT (Milestone 16.4)
+   10. ILLUSTRATED PIXEL PORTRAIT & TILE PHYSICS (Milestone 16.4)
    ======================================================== */
 function initPixelPortrait() {
     const wrapper = document.getElementById('portraitPixelWrapper');
@@ -480,15 +480,15 @@ function initPixelPortrait() {
     const canvas = document.getElementById('portraitPixelCanvas');
     if (!wrapper || !img || !canvas) return;
 
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const ctx = canvas.getContext('2d', { willReadFrequently: false });
     if (!ctx) return;
 
     const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const CELL_SIZE = 11; // 11 CSS px cells (well within 8-14px guideline)
-    const LENS_RADIUS = 85; // Proximity reveal radius in CSS px
-    const CORE_RADIUS = 42; // Fully clear reveal core in CSS px
+    const TARGET_TILE_SIZE = 15; // 15 CSS px cells (~24x32 grid on desktop)
+    const EFFECT_RADIUS = 100; // Proximity influence radius in CSS px
+    const MAX_DISPLACEMENT = 3.6; // Subtle 1-4px displacement range
 
     let width = 0;
     let height = 0;
@@ -496,16 +496,15 @@ function initPixelPortrait() {
     let rows = 0;
     let dpr = 1;
 
-    let pixelColors = null; // Array of {r, g, b, a}
+    let tiles = [];
     let isHovering = false;
-    let mouseX = -1000;
-    let mouseY = -1000;
     let targetMouseX = -1000;
     let targetMouseY = -1000;
-    let lensStrength = 0; // 0 = full pixel mosaic, 1 = active lens
+    let currentMouseX = -1000;
+    let currentMouseY = -1000;
     let rafId = null;
 
-    const sampleImage = () => {
+    const buildTileGrid = () => {
         width = wrapper.clientWidth;
         height = wrapper.clientHeight;
         if (!width || !height || !img.naturalWidth) return false;
@@ -514,141 +513,217 @@ function initPixelPortrait() {
         canvas.width = Math.floor(width * dpr);
         canvas.height = Math.floor(height * dpr);
 
-        cols = Math.ceil(width / CELL_SIZE);
-        rows = Math.ceil(height / CELL_SIZE);
+        cols = Math.round(width / TARGET_TILE_SIZE);
+        rows = Math.round(height / TARGET_TILE_SIZE);
 
-        const offCanvas = document.createElement('canvas');
-        offCanvas.width = cols;
-        offCanvas.height = rows;
-        const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
-        if (!offCtx) return false;
+        const tileW = width / cols;
+        const tileH = height / rows;
+        const srcTileW = img.naturalWidth / cols;
+        const srcTileH = img.naturalHeight / rows;
 
-        // Draw source image scaled down to grid dimensions
-        offCtx.drawImage(img, 0, 0, cols, rows);
-        const imgData = offCtx.getImageData(0, 0, cols, rows).data;
-
-        pixelColors = [];
+        tiles = [];
         for (let r = 0; r < rows; r++) {
             for (let c = 0; c < cols; c++) {
-                const idx = (r * cols + c) * 4;
-                pixelColors.push({
-                    r: imgData[idx],
-                    g: imgData[idx + 1],
-                    b: imgData[idx + 2],
-                    a: imgData[idx + 3] / 255
+                const ox = c * tileW;
+                const oy = r * tileH;
+                tiles.push({
+                    c, r,
+                    ox,
+                    oy,
+                    cx: ox + tileW * 0.5,
+                    cy: oy + tileH * 0.5,
+                    w: tileW,
+                    h: tileH,
+                    sx: c * srcTileW,
+                    sy: r * srcTileH,
+                    sw: srcTileW,
+                    sh: srcTileH,
+                    x: ox,
+                    y: oy,
+                    scale: 1.0,
+                    highlight: 0.0,
+                    crimsonAlpha: 0.0,
+                    // Deterministic ~10% crimson accent keys connecting to site palette (#E3343F)
+                    isCrimsonAccent: ((c * 7 + r * 13) % 11 === 0)
                 });
             }
         }
         return true;
     };
 
-    const drawFrame = () => {
-        if (!pixelColors || !cols || !rows) return;
+    const renderPristineRest = () => {
+        if (!tiles.length) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(dpr, dpr);
+
+        ctx.fillStyle = '#141416';
+        ctx.fillRect(0, 0, width, height);
+
+        for (let i = 0; i < tiles.length; i++) {
+            const t = tiles[i];
+            t.x = t.ox;
+            t.y = t.oy;
+            t.scale = 1.0;
+            t.highlight = 0.0;
+            t.crimsonAlpha = 0.0;
+            ctx.drawImage(img, t.sx, t.sy, t.sw, t.sh, t.ox, t.oy, t.w, t.h);
+        }
+        ctx.restore();
+    };
+
+    const animate = (timestamp) => {
+        if (!tiles.length) return;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
         ctx.scale(dpr, dpr);
 
-        // Smooth mouse position lerping
-        mouseX += (targetMouseX - mouseX) * 0.22;
-        mouseY += (targetMouseY - mouseY) * 0.22;
+        ctx.fillStyle = '#141416';
+        ctx.fillRect(0, 0, width, height);
 
-        // Smooth lens strength transition
-        const targetStrength = isHovering ? 1 : 0;
-        lensStrength += (targetStrength - lensStrength) * 0.18;
+        // Smooth cursor tracking interpolation
+        currentMouseX += (targetMouseX - currentMouseX) * 0.22;
+        currentMouseY += (targetMouseY - currentMouseY) * 0.22;
 
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-                const p = pixelColors[r * cols + c];
-                if (!p || p.a === 0) continue;
+        const time = (timestamp || performance.now()) * 0.001;
+        let hasActiveMotion = false;
 
-                const cellX = c * CELL_SIZE;
-                const cellY = r * CELL_SIZE;
-                const centerX = cellX + CELL_SIZE * 0.5;
-                const centerY = cellY + CELL_SIZE * 0.5;
+        for (let i = 0; i < tiles.length; i++) {
+            const tile = tiles[i];
 
-                let alpha = 1.0;
-                let brightnessShift = 0;
+            let targetX = tile.ox;
+            let targetY = tile.oy;
+            let targetScale = 1.0;
+            let targetHighlight = 0.0;
+            let targetCrimson = 0.0;
 
-                if (lensStrength > 0.01) {
-                    const dx = centerX - mouseX;
-                    const dy = centerY - mouseY;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+            if (isHovering) {
+                const dx = tile.cx - currentMouseX;
+                const dy = tile.cy - currentMouseY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < LENS_RADIUS) {
-                        const localT = (dist - CORE_RADIUS) / (LENS_RADIUS - CORE_RADIUS);
-                        const clampedT = Math.max(0, Math.min(1, localT));
-                        // Reveal underlying photo by fading mosaic alpha to 0 in core
-                        alpha = 1.0 - (1.0 - clampedT) * lensStrength;
-                        // Slight brighten edge response for physical pixel sensation
-                        if (dist >= CORE_RADIUS && dist <= LENS_RADIUS) {
-                            brightnessShift = (1 - Math.abs(clampedT - 0.5) * 2) * 25 * lensStrength;
-                        }
+                if (dist < EFFECT_RADIUS) {
+                    const p = 1.0 - dist / EFFECT_RADIUS;
+                    const ease = p * p * (3 - 2 * p); // Cubic smoothstep
+
+                    // Organic directional displacement away from pointer
+                    const angle = Math.atan2(dy, dx);
+                    const push = ease * MAX_DISPLACEMENT;
+
+                    // Restrained ripple wave propagating through adjacent tiles
+                    const ripple = Math.sin(dist * 0.12 - time * 4.8) * (0.85 * ease);
+
+                    targetX = tile.ox + Math.cos(angle) * (push + ripple);
+                    targetY = tile.oy + Math.sin(angle) * (push + ripple);
+
+                    // Small scale variation (1.0 to 1.055)
+                    targetScale = 1.0 + 0.055 * ease;
+
+                    // Subtle brightness highlight
+                    targetHighlight = ease * 0.18;
+
+                    // Subtle crimson accent
+                    if (tile.isCrimsonAccent && ease > 0.15) {
+                        targetCrimson = ease * 0.45;
                     }
                 }
+            }
 
-                if (alpha > 0.02) {
-                    const red = Math.min(255, Math.max(0, Math.round(p.r + brightnessShift)));
-                    const green = Math.min(255, Math.max(0, Math.round(p.g + brightnessShift)));
-                    const blue = Math.min(255, Math.max(0, Math.round(p.b + brightnessShift)));
+            // Spring interpolation towards target
+            const spring = 0.18;
+            tile.x += (targetX - tile.x) * spring;
+            tile.y += (targetY - tile.y) * spring;
+            tile.scale += (targetScale - tile.scale) * spring;
+            tile.highlight += (targetHighlight - tile.highlight) * spring;
+            tile.crimsonAlpha += (targetCrimson - tile.crimsonAlpha) * spring;
 
-                    ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${alpha.toFixed(3)})`;
-                    ctx.fillRect(cellX, cellY, CELL_SIZE, CELL_SIZE);
+            if (Math.abs(tile.x - targetX) > 0.02 ||
+                Math.abs(tile.y - targetY) > 0.02 ||
+                Math.abs(tile.scale - targetScale) > 0.004) {
+                hasActiveMotion = true;
+            }
+
+            const isDisplaced = tile.scale > 1.002 ||
+                                Math.abs(tile.x - tile.ox) > 0.04 ||
+                                Math.abs(tile.y - tile.oy) > 0.04 ||
+                                tile.highlight > 0.01;
+
+            if (!isDisplaced) {
+                ctx.drawImage(img, tile.sx, tile.sy, tile.sw, tile.sh, tile.ox, tile.oy, tile.w, tile.h);
+            } else {
+                const cx = tile.x + tile.w * 0.5;
+                const cy = tile.y + tile.h * 0.5;
+                ctx.save();
+                ctx.translate(cx, cy);
+                if (tile.scale !== 1.0) {
+                    ctx.scale(tile.scale, tile.scale);
                 }
+
+                ctx.drawImage(img, tile.sx, tile.sy, tile.sw, tile.sh, -tile.w * 0.5, -tile.h * 0.5, tile.w, tile.h);
+
+                // Subtle dark tile seam emphasizing physical geometric tiles
+                ctx.strokeStyle = 'rgba(11, 11, 12, 0.35)';
+                ctx.lineWidth = 0.8;
+                ctx.strokeRect(-tile.w * 0.5, -tile.h * 0.5, tile.w, tile.h);
+
+                // Subtle brightness
+                if (tile.highlight > 0.01) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${tile.highlight.toFixed(3)})`;
+                    ctx.fillRect(-tile.w * 0.5, -tile.h * 0.5, tile.w, tile.h);
+                }
+
+                // Subtle crimson accent (#E3343F)
+                if (tile.crimsonAlpha > 0.01) {
+                    ctx.fillStyle = `rgba(227, 52, 63, ${(tile.crimsonAlpha * 0.22).toFixed(3)})`;
+                    ctx.fillRect(-tile.w * 0.5, -tile.h * 0.5, tile.w, tile.h);
+                    ctx.strokeStyle = `rgba(227, 52, 63, ${(tile.crimsonAlpha * 0.6).toFixed(3)})`;
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(-tile.w * 0.5, -tile.h * 0.5, tile.w, tile.h);
+                }
+
+                ctx.restore();
             }
         }
 
         ctx.restore();
 
-        // Continue animation while hovering or smoothly restoring to resting mosaic
-        const needsMoreFrames = isHovering || lensStrength > 0.005 || Math.abs(targetMouseX - mouseX) > 0.5;
-        if (needsMoreFrames) {
-            rafId = requestAnimationFrame(drawFrame);
+        if (isHovering || hasActiveMotion) {
+            rafId = requestAnimationFrame(animate);
         } else {
             rafId = null;
-            renderRestingMosaic();
+            renderPristineRest();
         }
     };
 
-    const renderRestingMosaic = () => {
-        if (!pixelColors || !cols || !rows) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.save();
-        ctx.scale(dpr, dpr);
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-                const p = pixelColors[r * cols + c];
-                if (!p || p.a === 0) continue;
-                ctx.fillStyle = `rgb(${p.r}, ${p.g}, ${p.b})`;
-                ctx.fillRect(c * CELL_SIZE, r * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-            }
+    const wakeUpLoop = () => {
+        if (!rafId) {
+            rafId = requestAnimationFrame(animate);
         }
-        ctx.restore();
     };
 
     const init = () => {
-        if (!sampleImage()) {
+        if (!buildTileGrid()) {
             setTimeout(init, 80);
             return;
         }
 
-        // On mobile or reduced motion: show a very subtle static mosaic or clear photo
+        wrapper.classList.add('canvas-ready');
+        renderPristineRest();
+
+        // On touchscreens or reduced motion, retain static illustrated rendering
         if (!hasFinePointer || prefersReducedMotion) {
-            canvas.style.opacity = '0.2';
-            renderRestingMosaic();
             return;
         }
-
-        renderRestingMosaic();
 
         wrapper.addEventListener('pointerenter', (e) => {
             const rect = wrapper.getBoundingClientRect();
             targetMouseX = e.clientX - rect.left;
             targetMouseY = e.clientY - rect.top;
-            mouseX = targetMouseX;
-            mouseY = targetMouseY;
+            currentMouseX = targetMouseX;
+            currentMouseY = targetMouseY;
             isHovering = true;
-            if (!rafId) rafId = requestAnimationFrame(drawFrame);
+            wakeUpLoop();
         });
 
         wrapper.addEventListener('pointermove', (e) => {
@@ -656,12 +731,12 @@ function initPixelPortrait() {
             targetMouseX = e.clientX - rect.left;
             targetMouseY = e.clientY - rect.top;
             isHovering = true;
-            if (!rafId) rafId = requestAnimationFrame(drawFrame);
+            wakeUpLoop();
         });
 
         wrapper.addEventListener('pointerleave', () => {
             isHovering = false;
-            if (!rafId) rafId = requestAnimationFrame(drawFrame);
+            wakeUpLoop();
         });
     };
 
@@ -672,7 +747,9 @@ function initPixelPortrait() {
     }
 
     window.addEventListener('resize', () => {
-        if (sampleImage()) renderRestingMosaic();
+        if (buildTileGrid()) {
+            renderPristineRest();
+        }
     }, { passive: true });
 }
 

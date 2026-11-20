@@ -58,8 +58,10 @@ This repository contains two completely isolated application paths:
 * **Canonical Domain**: [https://mtanviranjum.tech](https://mtanviranjum.tech)
 * **Direct Email**: [tanviranjum201@gmail.com](mailto:tanviranjum201@gmail.com)
 * **Profile Assets**:
-  * WebP Photo: `site/assets/images/profile/tanvir-anjum.webp`
-  * JPG Fallback: `site/assets/images/profile/tanvir-anjum.jpg`
+  * Illustrated Pixel-Art Portrait (WebP): `site/assets/images/profile/tanvir-pixel-portrait.webp`
+  * Illustrated Pixel-Art Portrait (PNG Fallback): `site/assets/images/profile/tanvir-pixel-portrait.png`
+  * Authentic Photo Fallback (WebP): `site/assets/images/profile/tanvir-anjum.webp`
+  * Authentic Photo Fallback (JPG): `site/assets/images/profile/tanvir-anjum.jpg`
   * Official CV: `site/assets/documents/Tanvir-Anjum-CV.pdf`
 
 ### Verified Profiles
@@ -183,8 +185,10 @@ site/
 │   │   ├── og-card.svg                        # Open Graph social sharing card
 │   │   ├── profile-placeholder.svg            # Fallback profile graphic
 │   │   ├── profile/
-│   │   │   ├── tanvir-anjum.webp              # Authentic portrait photo (WebP optimized)
-│   │   │   └── tanvir-anjum.jpg               # Authentic portrait photo (JPG fallback)
+│   │   │   ├── tanvir-pixel-portrait.webp     # Illustrated geometric pixel-art portrait (WebP primary)
+│   │   │   ├── tanvir-pixel-portrait.png      # Illustrated geometric pixel-art portrait (PNG fallback)
+│   │   │   ├── tanvir-anjum.webp              # Authentic portrait photo (WebP preserved fallback)
+│   │   │   └── tanvir-anjum.jpg               # Authentic portrait photo (JPG preserved fallback)
 │   │   └── projects/                          # High-contrast technical SVG schematics
 │   │       ├── sharesync.svg
 │   │       ├── nas-sync.svg

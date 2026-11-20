@@ -121,20 +121,32 @@ dialog::backdrop {
   height: 100%;
   pointer-events: none;
   border-radius: inherit;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
   transition: opacity 0.3s ease;
 }
 
+.portrait-pixel-wrapper .portrait-img {
+  transition: opacity 0.25s ease;
+}
+
+.portrait-pixel-wrapper.canvas-ready .portrait-img {
+  opacity: 0;
+}
+
 @media (hover: none) or (pointer: coarse) {
+  .portrait-pixel-wrapper.canvas-ready .portrait-img {
+    opacity: 1 !important;
+  }
   .portrait-pixel-canvas {
-    opacity: 0.2;
+    display: none !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .portrait-pixel-wrapper.canvas-ready .portrait-img {
+    opacity: 1 !important;
+  }
   .portrait-pixel-canvas {
-    opacity: 0.2;
+    display: none !important;
   }
 }
 
