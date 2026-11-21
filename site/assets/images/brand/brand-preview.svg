@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+<rect width="1600" height="1100" fill="#F5F5F2"/>
+<rect x="72" y="72" width="48" height="8" rx="4" fill="#C92530"/>
+<text x="140" y="80" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="7" fill="#525252">PERSONAL BRAND IDENTITY</text>
+<line x1="72" y1="112" x2="1528" y2="112" stroke="#D2D2CE" stroke-width="2"/>
+<g transform="translate(90 185) scale(1.00)">
+ <g fill="#0B0B0C">
+    <path d="M34 22
+      C38 14 45 10 55 10
+      H205
+      C214 10 220 14 223 23
+      L230 42
+      C233 51 227 57 217 57
+      H140
+      L83 188
+      C79 198 71 203 60 203
+      H36
+      C26 203 21 196 25 186
+      L82 57
+      H30
+      C20 57 16 50 20 41
+      Z" />
+  </g>
+ <g fill="#C92530">
+    <path d="M151 87
+      C157 74 168 67 182 67
+      H242
+      C256 67 264 75 266 90
+      L276 185
+      C277 197 270 203 258 203
+      H235
+      C223 203 217 196 216 184
+      L211 132
+      H194
+      L161 185
+      C155 197 145 203 131 203
+      H108
+      C96 203 90 196 96 184
+      Z" />
+  </g>
+</g>
+<text x="440" y="300" font-family="Inter,Arial,sans-serif" font-size="84" font-weight="800" letter-spacing="-3" fill="#0B0B0C">Md. Tanvir <tspan fill="#C92530">Anjum</tspan></text>
+<text x="446" y="365" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="600" letter-spacing="6" fill="#525252">CSE  ·  DEVELOPER  ·  PROBLEM SOLVER</text>
+<line x1="72" y1="455" x2="1528" y2="455" stroke="#D2D2CE" stroke-width="2"/>
+<text x="86" y="510" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="5" fill="#525252">SYMBOL VARIATIONS</text>
+<rect x="85" y="550" width="360" height="300" rx="28" fill="#0B0B0C"/>
+<g transform="translate(130 590) scale(0.84)">
+ <g fill="#F5F5F2">
+    <path d="M34 22
+      C38 14 45 10 55 10
+      H205
+      C214 10 220 14 223 23
+      L230 42
+      C233 51 227 57 217 57
+      H140
+      L83 188
+      C79 198 71 203 60 203
+      H36
+      C26 203 21 196 25 186
+      L82 57
+      H30
+      C20 57 16 50 20 41
+      Z" />
+  </g>
+ <g fill="#C92530">
+    <path d="M151 87
+      C157 74 168 67 182 67
+      H242
+      C256 67 264 75 266 90
+      L276 185
+      C277 197 270 203 258 203
+      H235
+      C223 203 217 196 216 184
+      L211 132
+      H194
+      L161 185
+      C155 197 145 203 131 203
+      H108
+      C96 203 90 196 96 184
+      Z" />
+  </g>
+</g>
+<text x="265" y="890" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="4" fill="#525252">DARK BACKGROUND</text>
+<rect x="495" y="550" width="360" height="300" rx="28" fill="#FFFFFF" stroke="#D2D2CE" stroke-width="2"/>
+<g transform="translate(540 590) scale(0.84)">
+ <g fill="#0B0B0C">
+    <path d="M34 22
+      C38 14 45 10 55 10
+      H205
+      C214 10 220 14 223 23
+      L230 42
+      C233 51 227 57 217 57
+      H140
+      L83 188
+      C79 198 71 203 60 203
+      H36
+      C26 203 21 196 25 186
+      L82 57
+      H30
+      C20 57 16 50 20 41
+      Z" />
+  </g>
+ <g fill="#C92530">
+    <path d="M151 87
+      C157 74 168 67 182 67
+      H242
+      C256 67 264 75 266 90
+      L276 185
+      C277 197 270 203 258 203
+      H235
+      C223 203 217 196 216 184
+      L211 132
+      H194
+      L161 185
+      C155 197 145 203 131 203
+      H108
+      C96 203 90 196 96 184
+      Z" />
+  </g>
+</g>
+<text x="675" y="890" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="4" fill="#525252">LIGHT BACKGROUND</text>
+<line x1="930" y1="550" x2="930" y2="870" stroke="#D2D2CE" stroke-width="2"/>
+<text x="980" y="510" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="5" fill="#525252">COLOR SYSTEM</text>
+<rect x="980" y="565" width="86" height="58" rx="12" fill="#0B0B0C" stroke="#CFCFCB" stroke-width="1"/>
+<text x="1090" y="587" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="2" fill="#0B0B0C">NEAR BLACK</text>
+<text x="1090" y="613" font-family="Inter,Arial,sans-serif" font-size="18" fill="#525252">#0B0B0C</text><rect x="980" y="651" width="86" height="58" rx="12" fill="#C92530" stroke="#CFCFCB" stroke-width="1"/>
+<text x="1090" y="673" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="2" fill="#0B0B0C">CRIMSON</text>
+<text x="1090" y="699" font-family="Inter,Arial,sans-serif" font-size="18" fill="#525252">#C92530</text><rect x="980" y="737" width="86" height="58" rx="12" fill="#F5F5F2" stroke="#CFCFCB" stroke-width="1"/>
+<text x="1090" y="759" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="2" fill="#0B0B0C">PAPER WHITE</text>
+<text x="1090" y="785" font-family="Inter,Arial,sans-serif" font-size="18" fill="#525252">#F5F5F2</text><rect x="980" y="823" width="86" height="58" rx="12" fill="#525252" stroke="#CFCFCB" stroke-width="1"/>
+<text x="1090" y="845" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="2" fill="#0B0B0C">NEUTRAL GRAY</text>
+<text x="1090" y="871" font-family="Inter,Arial,sans-serif" font-size="18" fill="#525252">#525252</text>
+<line x1="72" y1="970" x2="1528" y2="970" stroke="#D2D2CE" stroke-width="2"/>
+<text x="82" y="1025" font-family="Inter,Arial,sans-serif" font-size="18" fill="#525252">A restrained personal identity built from one geometric monogram and a clear wordmark.</text>
+</svg>

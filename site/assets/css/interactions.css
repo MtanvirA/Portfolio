@@ -708,3 +708,75 @@ body.motion-paused .hud-signal-dot {
   align-items: center;
   gap: 0.875rem;
 }
+
+/* ========================================================
+   BRAND LOGO INTERACTIVE MARK & PHYSICS (Milestone 18.2)
+   ======================================================== */
+.ta-mark {
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.ta-mark .ta-t,
+.ta-mark #ta-t,
+.ta-mark #ta-t-header,
+.ta-mark #ta-t-footer,
+.ta-mark .ta-a,
+.ta-mark #ta-a,
+.ta-mark #ta-a-header,
+.ta-mark #ta-a-footer {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform;
+  transition: transform 0.16s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Smooth spring-like return when pointer leaves */
+.brand-link:not(:hover):not(.is-pressed) .ta-t,
+.brand-link:not(:hover):not(.is-pressed) #ta-t,
+.brand-link:not(:hover):not(.is-pressed) #ta-t-header,
+.brand-link:not(:hover):not(.is-pressed) #ta-t-footer,
+.brand-link:not(:hover):not(.is-pressed) .ta-a,
+.brand-link:not(:hover):not(.is-pressed) #ta-a,
+.brand-link:not(:hover):not(.is-pressed) #ta-a-header,
+.brand-link:not(:hover):not(.is-pressed) #ta-a-footer {
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Mechanical press state: slight separation & tactile compression */
+.brand-link.is-pressed .ta-t,
+.brand-link.is-pressed #ta-t,
+.brand-link.is-pressed #ta-t-header,
+.brand-link.is-pressed #ta-t-footer {
+  transform: translate3d(-2px, -1.2px, 0) rotate(-1.2deg) scale(0.97) !important;
+  transition: transform 0.08s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+.brand-link.is-pressed .ta-a,
+.brand-link.is-pressed #ta-a,
+.brand-link.is-pressed #ta-a-header,
+.brand-link.is-pressed #ta-a-footer {
+  transform: translate3d(2.4px, 1.4px, 0) rotate(1.4deg) scale(0.97) !important;
+  transition: transform 0.08s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+/* When motion is paused via toggle button */
+body.motion-paused .ta-mark .ta-t,
+body.motion-paused .ta-mark .ta-a,
+body.motion-paused .brand-link.is-pressed .ta-t,
+body.motion-paused .brand-link.is-pressed .ta-a {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Strict prefers-reduced-motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .ta-mark .ta-t,
+  .ta-mark .ta-a,
+  .brand-link.is-pressed .ta-t,
+  .brand-link.is-pressed .ta-a {
+    transform: none !important;
+    transition: none !important;
+  }
+}

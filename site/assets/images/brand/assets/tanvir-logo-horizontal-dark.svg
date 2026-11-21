@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="250" viewBox="0 0 1240 250" role="img" aria-labelledby="title desc">
+<title id="title">Md. Tanvir Anjum</title><desc id="desc">Personal logo with a geometric T/A monogram and CSE developer problem solver descriptor.</desc>
+<g id="ta-t" fill="#F5F5F2">
+    <path d="M34 22
+      C38 14 45 10 55 10
+      H205
+      C214 10 220 14 223 23
+      L230 42
+      C233 51 227 57 217 57
+      H140
+      L83 188
+      C79 198 71 203 60 203
+      H36
+      C26 203 21 196 25 186
+      L82 57
+      H30
+      C20 57 16 50 20 41
+      Z" />
+  </g>
+<g id="ta-a" fill="#C92530">
+    <path d="M151 87
+      C157 74 168 67 182 67
+      H242
+      C256 67 264 75 266 90
+      L276 185
+      C277 197 270 203 258 203
+      H235
+      C223 203 217 196 216 184
+      L211 132
+      H194
+      L161 185
+      C155 197 145 203 131 203
+      H108
+      C96 203 90 196 96 184
+      Z" />
+  </g>
+
+  <line x1="345" y1="54" x2="345" y2="194" stroke="#525252" stroke-width="2"/>
+  <text x="385" y="124" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="750"
+        letter-spacing="-2.5" fill="#F5F5F2">Md. Tanvir <tspan fill="#C92530">Anjum</tspan></text>
+  <text x="389" y="164" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="600"
+        letter-spacing="5.5" fill="#B8B8B8">CSE  ·  DEVELOPER  ·  PROBLEM SOLVER</text>
+
+</svg>

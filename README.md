@@ -1,5 +1,9 @@
 # Md. Tanvir Anjum — Personal Engineering Portfolio
 
+<p align="center">
+  <img src="site/assets/images/brand/assets/tanvir-logo-horizontal-light.svg" alt="Md. Tanvir Anjum — CSE · Developer · Problem Solver" width="480" />
+</p>
+
 [![Static Production Portfolio](https://img.shields.io/badge/Architecture-Static%20HTML5%2FCSS3%2FJS-E3343F?logo=html5)](https://mtanviranjum.tech)
 [![Netlify Status](https://img.shields.io/badge/Hosting-Netlify%20Free%20Tier-00C7B7?logo=netlify)](https://www.netlify.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)

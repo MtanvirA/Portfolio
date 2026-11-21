@@ -8,6 +8,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
+    initBrandLogos();
     initScrollProgressBar();
     initMotionToggle();
     initInteractiveTicker();
@@ -133,6 +134,83 @@ function initNavigation() {
         window.addEventListener('scroll', onScrollSpy, { passive: true });
         onScrollSpy();
     }
+}
+
+/* ========================================================
+   1B. BRAND LOGO INTERACTION & PHYSICS (Milestone 18.2)
+   ======================================================== */
+function initBrandLogos() {
+    const brandLinks = document.querySelectorAll('.brand-link');
+    if (!brandLinks.length) return;
+
+    brandLinks.forEach(brandLink => {
+        const badge = brandLink.querySelector('.brand-logo-badge') || brandLink;
+        const tGroup = brandLink.querySelector('.ta-t, #ta-t, #ta-t-header, #ta-t-footer');
+        const aGroup = brandLink.querySelector('.ta-a, #ta-a, #ta-a-header, #ta-a-footer');
+        if (!tGroup || !aGroup) return;
+
+        let isPressed = false;
+
+        // Press feedback for all pointer devices (including mobile touch)
+        const handlePressStart = () => {
+            if (document.body.classList.contains('motion-paused')) return;
+            isPressed = true;
+            brandLink.classList.add('is-pressed');
+        };
+
+        const handlePressEnd = () => {
+            if (!isPressed) return;
+            isPressed = false;
+            brandLink.classList.remove('is-pressed');
+        };
+
+        brandLink.addEventListener('pointerdown', handlePressStart, { passive: true });
+        window.addEventListener('pointerup', handlePressEnd, { passive: true });
+        window.addEventListener('pointercancel', handlePressEnd, { passive: true });
+
+        // Keyboard accessibility: press feedback on Enter or Space
+        brandLink.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                handlePressStart();
+            }
+        }, { passive: true });
+        brandLink.addEventListener('keyup', handlePressEnd, { passive: true });
+
+        // Magnetic pointer tracking: works on all mice, trackpads, and fine pointers (ignores touch drags)
+        brandLink.addEventListener('pointermove', (e) => {
+            if (e.pointerType === 'touch') return;
+            if (isPressed || document.body.classList.contains('motion-paused')) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const rect = badge.getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
+
+            // Normalized coordinates [-1.2, 1.2] relative to center of the badge
+            const relX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+            const relY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+
+            const nx = Math.max(-1.2, Math.min(1.2, relX));
+            const ny = Math.max(-1.2, Math.min(1.2, relY));
+
+            // Subtle magnetic translations (max ~2-3px) & small rotation (max ~2deg)
+            const tX = (nx * 1.8).toFixed(2);
+            const tY = (ny * 1.5).toFixed(2);
+            const tRot = (nx * 1.2).toFixed(2);
+
+            const aX = (nx * 2.4).toFixed(2);
+            const aY = (ny * 2.0).toFixed(2);
+            const aRot = (nx * -0.9).toFixed(2);
+
+            tGroup.style.transform = `translate3d(${tX}px, ${tY}px, 0) rotate(${tRot}deg)`;
+            aGroup.style.transform = `translate3d(${aX}px, ${aY}px, 0) rotate(${aRot}deg)`;
+        }, { passive: true });
+
+        brandLink.addEventListener('pointerleave', () => {
+            tGroup.style.transform = '';
+            aGroup.style.transform = '';
+            handlePressEnd();
+        }, { passive: true });
+    });
 }
 
 /* ========================================================
@@ -644,24 +722,43 @@ function initContactForm() {
 }
 
 /* ========================================================
-   8. RETURN TO TOP BUTTON
+   8. RETURN TO TOP BUTTON & LINKS (Milestone 18.2)
    ======================================================== */
 function initBackToTop() {
+    // 1. Floating return-to-top button
     const btn = document.getElementById('backToTopBtn');
-    if (!btn) return;
+    if (btn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                btn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                btn.classList.remove('opacity-100', 'translate-y-0');
+            }
+        }, { passive: true });
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) {
-            btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-            btn.classList.add('opacity-100', 'translate-y-0');
-        } else {
-            btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            btn.classList.remove('opacity-100', 'translate-y-0');
-        }
-    }, { passive: true });
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+        });
+    }
 
-    btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 2. Footer Return to Top anchor links (#page-top)
+    const topLinks = document.querySelectorAll('a[href="#page-top"], a[href="#top"], .return-to-top');
+    topLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href === '#page-top' || href === '#top' || link.classList.contains('return-to-top')) {
+                e.preventDefault();
+                const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+                if (history.pushState) {
+                    history.pushState(null, null, '#page-top');
+                }
+            }
+        });
     });
 }
 

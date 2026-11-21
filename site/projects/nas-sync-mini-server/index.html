@@ -26,9 +26,12 @@
     <meta name="twitter:description" content="Embedded ESP32 mini network storage and media server prototype with browser interface, microSD storage, OLED, and DHT11 telemetry." />
     <meta name="twitter:image" content="https://mtanviranjum.tech/assets/images/projects/nas-sync.png" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate icon" href="/favicon.ico" />
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/svg+xml" href="/assets/images/brand/assets/favicon.svg?v=18-2" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/brand/assets/favicon-32.png?v=18-2" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/brand/assets/favicon-16.png?v=18-2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/brand/assets/favicon-180.png?v=18-2" />
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico?v=18-2" />
 
     <!-- Google Fonts Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +42,7 @@
     <link rel="stylesheet" href="/assets/css/site.min.css" />
     <link rel="stylesheet" href="/assets/css/interactions.css" />
 </head>
-<body id="top" class="bg-[#0B0B0C] text-[#F5F5F2] font-sans selection:bg-[#E3343F] selection:text-[#FFFFFF] min-h-screen flex flex-col">
+<body id="page-top" class="bg-[#0B0B0C] text-[#F5F5F2] font-sans selection:bg-[#E3343F] selection:text-[#FFFFFF] min-h-screen flex flex-col">
 
     <!-- Editorial Background Pixel Field (Milestone 16.4) -->
     <canvas id="bgPixelCanvas" class="bg-pixel-canvas fixed inset-0 pointer-events-none z-0" aria-hidden="true"></canvas>
@@ -54,9 +57,16 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
 
             <!-- Brand / Wordmark -->
-            <a href="/#top" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#E3343F] rounded-lg p-1">
-                <div class="w-10 h-10 rounded-xl bg-[#141416] border border-[#252528] group-hover:border-[#E3343F] flex items-center justify-center transition-colors">
-                    <span class="font-display font-extrabold text-sm text-[#E3343F]">TA</span>
+            <a href="/#page-top" class="brand-link flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#C92530] rounded-lg p-1" aria-label="Md. Tanvir Anjum — Return to homepage">
+                <div class="brand-logo-badge w-10 h-10 rounded-xl bg-[#141416] border border-[#252528] group-hover:border-[#C92530] flex items-center justify-center transition-colors overflow-hidden shrink-0" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 220" class="ta-mark w-7 h-auto" focusable="false">
+                        <g class="ta-t" id="ta-t-header" fill="#F5F5F2">
+                            <path d="M34 22 C38 14 45 10 55 10 H205 C214 10 220 14 223 23 L230 42 C233 51 227 57 217 57 H140 L83 188 C79 198 71 203 60 203 H36 C26 203 21 196 25 186 L82 57 H30 C20 57 16 50 20 41 Z" />
+                        </g>
+                        <g class="ta-a" id="ta-a-header" fill="#C92530">
+                            <path d="M151 87 C157 74 168 67 182 67 H242 C256 67 264 75 266 90 L276 185 C277 197 270 203 258 203 H235 C223 203 217 196 216 184 L211 132 H194 L161 185 C155 197 145 203 131 203 H108 C96 203 90 196 96 184 Z" />
+                        </g>
+                    </svg>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-display font-bold text-sm text-white tracking-tight group-hover:text-[#F5F5F2] transition-colors">
@@ -403,10 +413,19 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
                 <div class="md:col-span-2 space-y-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-[#1F1F22] border border-[#252528] flex items-center justify-center">
-                            <span class="font-display font-bold text-sm text-[#E3343F]">TA</span>
-                        </div>
-                        <span class="font-display font-bold text-lg text-white">Md. Tanvir Anjum</span>
+                        <a href="/#page-top" class="brand-link group inline-flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#C92530] rounded-lg p-1" aria-label="Md. Tanvir Anjum — Return to homepage">
+                            <div class="brand-logo-badge w-9 h-9 rounded-xl bg-[#1F1F22] border border-[#252528] group-hover:border-[#C92530] flex items-center justify-center transition-colors overflow-hidden shrink-0" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 220" class="ta-mark w-6.5 h-auto" focusable="false">
+                                    <g class="ta-t" id="ta-t-footer" fill="#F5F5F2">
+                                        <path d="M34 22 C38 14 45 10 55 10 H205 C214 10 220 14 223 23 L230 42 C233 51 227 57 217 57 H140 L83 188 C79 198 71 203 60 203 H36 C26 203 21 196 25 186 L82 57 H30 C20 57 16 50 20 41 Z" />
+                                    </g>
+                                    <g class="ta-a" id="ta-a-footer" fill="#C92530">
+                                        <path d="M151 87 C157 74 168 67 182 67 H242 C256 67 264 75 266 90 L276 185 C277 197 270 203 258 203 H235 C223 203 217 196 216 184 L211 132 H194 L161 185 C155 197 145 203 131 203 H108 C96 203 90 196 96 184 Z" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <span class="font-display font-bold text-lg text-white group-hover:text-[#F5F5F2] transition-colors">Md. Tanvir Anjum</span>
+                        </a>
                     </div>
                     <p class="text-sm text-[#858585] max-w-md leading-relaxed">
                         Undergraduate Computer Science and Engineering student at Patuakhali Science and Technology University (PSTU).
@@ -443,7 +462,7 @@
             <div class="mt-12 pt-8 border-t border-[#252528] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#858585]">
                 <p>&copy; 2026 Md. Tanvir Anjum &middot; Built with curiosity and care.</p>
                 <div>
-                    <a href="#top" class="text-[#858585] hover:text-[#E3343F] transition-colors">Return to Top &uarr;</a>
+                    <a href="#page-top" class="return-to-top text-[#858585] hover:text-[#E3343F] transition-colors">Return to Top &uarr;</a>
                 </div>
             </div>
         </div>
